@@ -9,7 +9,11 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,42 +21,73 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class DriveSubsystem extends SubsystemBase {
-  // Robot swerve modules
+  private ShuffleboardTab swerveTab = Shuffleboard.getTab("SDS Swerve");
+  private ShuffleboardTab moduleTab = Shuffleboard.getTab("Module Info");
+
+  private NetworkTableEntry xSpeedEntry =
+      swerveTab.add("xBox xSpeed", 0)
+          .getEntry();
+
+  private NetworkTableEntry ySpeedEntry =
+      swerveTab.add("xBox ySpeed", 0)
+          .getEntry();
+
+  private NetworkTableEntry rotEntry =
+      swerveTab.add("xBox rot", 0)
+          .getEntry();
+
+  private NetworkTableEntry frontLeftStateEntry =
+      swerveTab.add("FL State v", 0)
+          .getEntry();
+
+  private NetworkTableEntry frontRightStateEntry =
+      swerveTab.add("FR State v", 0)
+          .getEntry();
+
+  private NetworkTableEntry gyroEntry =
+      swerveTab.add("Gyro Heading", 0)
+          .getEntry();
+
+
   private final SwerveModule m_frontLeft =
       new SwerveModule(
           DriveConstants.kFrontLeftDriveMotorPort,
           DriveConstants.kFrontLeftTurningMotorPort,
-          DriveConstants.kFrontLeftDriveEncoderPorts,
-          DriveConstants.kFrontLeftTurningEncoderPorts,
-          DriveConstants.kFrontLeftDriveEncoderReversed,
-          DriveConstants.kFrontLeftTurningEncoderReversed);
+          DriveConstants.kFrontLeftTurningEncoderPort,
+          DriveConstants.kFrontLeftAngleZero,
+          moduleTab.getLayout("Front Left Module", BuiltInLayouts.kList)
+              .withSize(2, 4)
+              .withPosition(0, 0));
 
   private final SwerveModule m_rearLeft =
       new SwerveModule(
           DriveConstants.kRearLeftDriveMotorPort,
           DriveConstants.kRearLeftTurningMotorPort,
-          DriveConstants.kRearLeftDriveEncoderPorts,
-          DriveConstants.kRearLeftTurningEncoderPorts,
-          DriveConstants.kRearLeftDriveEncoderReversed,
-          DriveConstants.kRearLeftTurningEncoderReversed);
+          DriveConstants.kRearLeftTurningEncoderPort,
+          DriveConstants.kRearLeftAngleZero,
+          moduleTab.getLayout("Rear Left Module", BuiltInLayouts.kList)
+              .withSize(2, 4)
+              .withPosition(2, 0));
 
   private final SwerveModule m_frontRight =
       new SwerveModule(
           DriveConstants.kFrontRightDriveMotorPort,
           DriveConstants.kFrontRightTurningMotorPort,
-          DriveConstants.kFrontRightDriveEncoderPorts,
-          DriveConstants.kFrontRightTurningEncoderPorts,
-          DriveConstants.kFrontRightDriveEncoderReversed,
-          DriveConstants.kFrontRightTurningEncoderReversed);
+          DriveConstants.kFrontRightTurningEncoderPort,
+          DriveConstants.kFrontRightAngleZero,
+          moduleTab.getLayout("Front Right Module", BuiltInLayouts.kList)
+              .withSize(2, 4)
+              .withPosition(4, 0));
 
   private final SwerveModule m_rearRight =
       new SwerveModule(
           DriveConstants.kRearRightDriveMotorPort,
           DriveConstants.kRearRightTurningMotorPort,
-          DriveConstants.kRearRightDriveEncoderPorts,
-          DriveConstants.kRearRightTurningEncoderPorts,
-          DriveConstants.kRearRightDriveEncoderReversed,
-          DriveConstants.kRearRightTurningEncoderReversed);
+          DriveConstants.kRearRightTurningEncoderPort,
+          DriveConstants.kRearRightAngleZero,
+          moduleTab.getLayout("Rear Right Module", BuiltInLayouts.kList)
+              .withSize(2, 4)
+              .withPosition(6, 0));
 
   // The gyro sensor
   private final Gyro m_gyro = new ADXRS450_Gyro();

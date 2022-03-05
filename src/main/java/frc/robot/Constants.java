@@ -28,29 +28,29 @@ public final class Constants {
     public static final int kFrontRightTurningMotorPort = 5;
     public static final int kRearRightTurningMotorPort = 7;
 
-    public static final int[] kFrontLeftTurningEncoderPorts = new int[] {0, 1};
-    public static final int[] kRearLeftTurningEncoderPorts = new int[] {2, 3};
-    public static final int[] kFrontRightTurningEncoderPorts = new int[] {4, 5};
-    public static final int[] kRearRightTurningEncoderPorts = new int[] {6, 7};
+    public static final int kFrontLeftTurningEncoderPort = 0;
+    public static final int kRearLeftTurningEncoderPort = 1;
+    public static final int kFrontRightTurningEncoderPort = 2;
+    public static final int kRearRightTurningEncoderPort = 4;
+
+    public static final double kFrontLeftAngleZero = 353.1; // FIXME: Add angle offset
+    public static final double kRearLeftAngleZero = 78.8; // FIXME: Add angle offset
+    public static final double kFrontRightAngleZero = 331.6; // FIXME: Add angle offset
+    public static final double kRearRightAngleZero = 323.7; // FIXME: Add angle offset
 
     public static final boolean kFrontLeftTurningEncoderReversed = false;
     public static final boolean kRearLeftTurningEncoderReversed = true;
     public static final boolean kFrontRightTurningEncoderReversed = false;
     public static final boolean kRearRightTurningEncoderReversed = true;
 
-    public static final int[] kFrontLeftDriveEncoderPorts = new int[] {8, 9};
-    public static final int[] kRearLeftDriveEncoderPorts = new int[] {10, 11};
-    public static final int[] kFrontRightDriveEncoderPorts = new int[] {12, 13};
-    public static final int[] kRearRightDriveEncoderPorts = new int[] {14, 15};
-
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = true;
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kRearRightDriveEncoderReversed = true;
 
-    public static final double kTrackWidth = 0.5;
+    public static final double kTrackWidth = 0.5; // FIXME
     // Distance between centers of right and left wheels on robot
-    public static final double kWheelBase = 0.7;
+    public static final double kWheelBase = 0.7; // FIXME
     // Distance between front and back wheels on robot
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
@@ -65,30 +65,41 @@ public final class Constants {
     // These characterization values MUST be determined either experimentally or theoretically
     // for *your* robot's drive.
     // The SysId tool provides a convenient method for obtaining these values for your robot.
-    public static final double ksVolts = 1;
-    public static final double kvVoltSecondsPerMeter = 0.8;
-    public static final double kaVoltSecondsSquaredPerMeter = 0.15;
+    public static final double ksVolts = 1; // FIXME with sysid
+    public static final double kvVoltSecondsPerMeter = 0.8; // FIXME with sysid
+    public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
+    public static final double kMaxSpeedMetersPerSecond = 2;
+    public static final double kMaxRotationalSpeedMetersPerSecond = 3;
 
-    public static final double kMaxSpeedMetersPerSecond = 3;
+
+    public static final double ksTurning = 0.742; // FIXME feedforward turning
+    public static final double kvTurning = 0.216;
+    public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
   }
 
   public static final class ModuleConstants {
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI;
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 2 * Math.PI;
+    // Drive motor -> FX Encoder (2048 units)
+    // Turning motor -> CTRE CANcoder (4096 units)
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI; // try 10 if going well
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 2 * Math.PI; // try 10 if going well
 
-    public static final int kEncoderCPR = 1024;
-    public static final double kWheelDiameterMeters = 0.15;
-    public static final double kDriveEncoderDistancePerPulse =
-        // Assumes the encoders are directly mounted on the wheel shafts
-        (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
+    public static final double kDriveGearRatio = 7.13; // FIXME, I think 7.13 is right tho...
+    public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary and/or 1.
 
-    public static final double kTurningEncoderDistancePerPulse =
-        // Assumes the encoders are on a 1:1 reduction with the module shaft.
-        (2 * Math.PI) / (double) kEncoderCPR;
+    public static final double kPModuleTurnController = 1; // TUNE
+    public static double kIModuleTurnController = 0;
+    public static final double kDModuleTurnController = 0; // TUNE
 
-    public static final double kPModuleTurningController = 1;
+    public static final double kPModuleDriveController = 1; // TUNE
+    public static double kIModuleDriveController = 0;
+    public static final double kDModuleDriveController = 0;
 
-    public static final double kPModuleDriveController = 1;
+
+    public static final int kDriveFXEncoderCPR = 2048;
+    public static final int kTurningCANcoderCPR = 4096;
+    public static final double kWheelDiameterMeters = 0.1016; // 4 inches
+    public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI; // C = D * pi
+    public static final double kDrivetoMetersPerSecond = (10 * kWheelCircumferenceMeters)/(kDriveGearRatio * 2048);
   }
 
   public static final class OIConstants {
