@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="added phoenix and rev as dependencies">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
-    </list>
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="made a lot of changes, mostly copying code from RedThunder7166" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -232,7 +226,7 @@
       <updated>1645203483233</updated>
       <workItem from="1645203487217" duration="4943000" />
       <workItem from="1646339277127" duration="2813000" />
-      <workItem from="1646456082887" duration="6339000" />
+      <workItem from="1646456082887" duration="6537000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -248,7 +242,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646458584096</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="made a lot of changes, mostly copying code from RedThunder7166">
+      <created>1646462959732</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1646462959732</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +269,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="mostly added comments and few super minor changes (most recommended by intelliJ)" />
     <MESSAGE value="added phoenix and rev as dependencies" />
-    <option name="LAST_COMMIT_MESSAGE" value="added phoenix and rev as dependencies" />
+    <MESSAGE value="made a lot of changes, mostly copying code from RedThunder7166" />
+    <option name="LAST_COMMIT_MESSAGE" value="made a lot of changes, mostly copying code from RedThunder7166" />
   </component>
 </project>
