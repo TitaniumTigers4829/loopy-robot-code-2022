@@ -26,7 +26,7 @@ public class DriveSubsystem extends SubsystemBase {
   private ShuffleboardTab swerveTab = Shuffleboard.getTab("SDS Swerve");
   private ShuffleboardTab moduleTab = Shuffleboard.getTab("Module Info");
 
-  // Don't really know why this is necessary
+   // Don't really know why this is necessary
 //  private NetworkTableEntry xSpeedEntry =
 //      swerveTab.add("xBox xSpeed", 0)
 //          .getEntry();

@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller).">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Added Shooter Subsystem">
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/ShooterManualControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Limelight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Limelight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -242,7 +242,7 @@
       <workItem from="1645203487217" duration="4943000" />
       <workItem from="1646339277127" duration="2813000" />
       <workItem from="1646456082887" duration="11888000" />
-      <workItem from="1646493368604" duration="13731000" />
+      <workItem from="1646493368604" duration="21779000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -293,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646498274607</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added Shooter Subsystem">
+      <created>1646512318831</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1646512318831</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,6 +325,7 @@
     <MESSAGE value="updated can IDs" />
     <MESSAGE value="changed some constants to try and get rid of chattering." />
     <MESSAGE value="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller)." />
+    <MESSAGE value="Added Shooter Subsystem" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Shooter Subsystem" />
   </component>
 </project>

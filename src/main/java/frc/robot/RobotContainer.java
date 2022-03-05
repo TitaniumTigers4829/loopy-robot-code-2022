@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import static frc.robot.Constants.OIConstants.kDriverControllerDeadband;
-
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -26,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
+import java.util.function.DoubleSupplier;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -43,27 +42,29 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings
+    // Configure the button bindings/joysticks
     configureButtonBindings();
 
     // Turn off the LEDs
     m_Limelight.turnOffLED();
 
-    // Configure default commands
+    // Default for drivetrain
     m_robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
         // Turning is controlled by the X axis of the right stick.
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    modifyAxis(m_driverController.getRawAxis(1)) // xAxis
+                    modifyAxis(()->m_driverController.getRawAxis(0)) // xAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(m_driverController.getRawAxis(0)) // yAxis
+                    modifyAxis(()->m_driverController.getRawAxis(1)*-1) // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(m_driverController.getRawAxis(2)) // rot
+                    modifyAxis(()->m_driverController.getRawAxis(2)*-1) // rot
                         * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
                     false),
             m_robotDrive));
+
+//    SmartDashboard.putNumber("getRawAxis(1)")
   }
 
   /**
@@ -72,7 +73,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling passing it to a
    * {@link JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    new JoystickButton(m_driverController, OIConstants.kDriverControllerZeroEncodersButton).whenPressed(m_robotDrive::resetEncoders);
+    new JoystickButton(m_driverController, OIConstants.kDriverControllerZeroHeadingButton).whenPressed(m_robotDrive::zeroHeading);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -136,7 +140,9 @@ public class RobotContainer {
     }
   }
 
-  private static double modifyAxis(double value) {
+  private static double modifyAxis(DoubleSupplier supplierValue) {
+    double value = supplierValue.getAsDouble();
+
     // Deadband
     value = deadband(value, OIConstants.kDriverControllerDeadband);
 

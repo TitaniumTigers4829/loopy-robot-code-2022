@@ -48,9 +48,9 @@ public final class Constants {
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kRearRightDriveEncoderReversed = true;
 
-    public static final double kTrackWidth = 0.5; // FIXME
+    public static final double kTrackWidth = 0.57785; // FIXME
     // Distance between centers of right and left wheels on robot
-    public static final double kWheelBase = 0.7; // FIXME
+    public static final double kWheelBase = 0.57785; // FIXME
     // Distance between front and back wheels on robot
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
@@ -68,29 +68,29 @@ public final class Constants {
     public static final double ksVolts = 1; // FIXME with sysid
     public static final double kvVoltSecondsPerMeter = 0.8; // FIXME with sysid
     public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
-    public static final double kMaxSpeedMetersPerSecond = 2;
-    public static final double kMaxRotationalSpeedMetersPerSecond = 3;
+    public static final double kMaxSpeedMetersPerSecond = 4.75;
+    public static final double kMaxRotationalSpeedMetersPerSecond = 4.75 * (3/2);
 
 
-    public static final double ksTurning = 0.742; // FIXME feedforward turning
-    public static final double kvTurning = 0.216;
+    public static final double ksTurning = 0; // FIXME feedforward turning
+    public static final double kvTurning = 0;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
   }
 
   public static final class ModuleConstants {
     // Drive motor -> FX Encoder (2048 units)
     // Turning motor -> CTRE CANcoder (4096 units)
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI; // try 10 if going well
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 2 * Math.PI; // try 10 if going well
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 5 * Math.PI; // try 10 if going well
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 5 * Math.PI; // try 10 if going well
 
     public static final double kDriveGearRatio = 7.13; // FIXME, I think 7.13 is right tho...
     public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary and/or 1.
 
-    public static final double kPModuleTurnController = 1; // TUNE
+    public static final double kPModuleTurnController = 0.01; // TUNE
     public static double kIModuleTurnController = 0;
     public static final double kDModuleTurnController = 0; // TUNE
 
-    public static final double kPModuleDriveController = 1; // TUNE
+    public static final double kPModuleDriveController = 0; // TUNE
     public static double kIModuleDriveController = 0;
     public static final double kDModuleDriveController = 0;
 
@@ -111,11 +111,13 @@ public final class Constants {
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final double kDriverControllerDeadband = 0.1;
+    public static final int kDriverControllerZeroEncodersButton = 8;
+    public static final int kDriverControllerZeroHeadingButton = 9;
   }
 
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3;
-    public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+    public static final double kMaxSpeedMetersPerSecond = 1;
+    public static final double kMaxAccelerationMetersPerSecondSquared = 1;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
 
@@ -123,7 +125,7 @@ public final class Constants {
     public static final double kPYController = 1;
     public static final double kPThetaController = 1;
 
-    // Constraint for the motion profilied robot angle controller
+    // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
