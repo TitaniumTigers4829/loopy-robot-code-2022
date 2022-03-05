@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="updated it for our gyro">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="updated can IDs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +103,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
+  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -212,8 +211,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.zuntue2022 [deploy]" />
         <item itemvalue="Gradle.zuntue2022 [build]" />
+        <item itemvalue="Gradle.zuntue2022 [deploy]" />
         <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
         <item itemvalue="Gradle.zuntue2022 [vendordep]" />
         <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
@@ -230,7 +229,7 @@
       <updated>1645203483233</updated>
       <workItem from="1645203487217" duration="4943000" />
       <workItem from="1646339277127" duration="2813000" />
-      <workItem from="1646456082887" duration="8257000" />
+      <workItem from="1646456082887" duration="9044000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -260,7 +259,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646463192150</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updated can IDs">
+      <created>1646464760658</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1646464760658</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -282,6 +288,7 @@
     <MESSAGE value="added phoenix and rev as dependencies" />
     <MESSAGE value="made a lot of changes, mostly copying code from RedThunder7166" />
     <MESSAGE value="updated it for our gyro" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated it for our gyro" />
+    <MESSAGE value="updated can IDs" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated can IDs" />
   </component>
 </project>

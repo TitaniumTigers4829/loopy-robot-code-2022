@@ -33,10 +33,10 @@ public final class Constants {
     public static final int kFrontRightTurningEncoderPort = 9;
     public static final int kRearRightTurningEncoderPort = 8;
 
-    public static final double kFrontLeftAngleZero = 353.1; // FIXME: Add angle offset
-    public static final double kRearLeftAngleZero = 78.8; // FIXME: Add angle offset
-    public static final double kFrontRightAngleZero = 331.6; // FIXME: Add angle offset
-    public static final double kRearRightAngleZero = 323.7; // FIXME: Add angle offset
+    public static final double kFrontLeftAngleZero = 0; // FIXME: Add angle offset
+    public static final double kRearLeftAngleZero = 0; // FIXME: Add angle offset
+    public static final double kFrontRightAngleZero = 0; // FIXME: Add angle offset
+    public static final double kRearRightAngleZero = 0; // FIXME: Add angle offset
 
     public static final boolean kFrontLeftTurningEncoderReversed = false;
     public static final boolean kRearLeftTurningEncoderReversed = true;
