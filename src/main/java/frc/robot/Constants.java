@@ -102,6 +102,12 @@ public final class Constants {
     public static final double kDrivetoMetersPerSecond = (10 * kWheelCircumferenceMeters)/(kDriveGearRatio * 2048);
   }
 
+  public static final class ShooterConstants {
+    public static final int kLeftShooterMotorPort = 19;
+    public static final int kRightShooterMotorPort = 20;
+  }
+
+
   public static final class OIConstants {
     public static final int kDriverControllerPort = 0;
     public static final double kDriverControllerDeadband = 0.1;

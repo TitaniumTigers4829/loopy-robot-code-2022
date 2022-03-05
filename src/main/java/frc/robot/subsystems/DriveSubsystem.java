@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -25,29 +26,30 @@ public class DriveSubsystem extends SubsystemBase {
   private ShuffleboardTab swerveTab = Shuffleboard.getTab("SDS Swerve");
   private ShuffleboardTab moduleTab = Shuffleboard.getTab("Module Info");
 
-  private NetworkTableEntry xSpeedEntry =
-      swerveTab.add("xBox xSpeed", 0)
-          .getEntry();
-
-  private NetworkTableEntry ySpeedEntry =
-      swerveTab.add("xBox ySpeed", 0)
-          .getEntry();
-
-  private NetworkTableEntry rotEntry =
-      swerveTab.add("xBox rot", 0)
-          .getEntry();
-
-  private NetworkTableEntry frontLeftStateEntry =
-      swerveTab.add("FL State v", 0)
-          .getEntry();
-
-  private NetworkTableEntry frontRightStateEntry =
-      swerveTab.add("FR State v", 0)
-          .getEntry();
-
-  private NetworkTableEntry gyroEntry =
-      swerveTab.add("Gyro Heading", 0)
-          .getEntry();
+  // Don't really know why this is necessary
+//  private NetworkTableEntry xSpeedEntry =
+//      swerveTab.add("xBox xSpeed", 0)
+//          .getEntry();
+//
+//  private NetworkTableEntry ySpeedEntry =
+//      swerveTab.add("xBox ySpeed", 0)
+//          .getEntry();
+//
+//  private NetworkTableEntry rotEntry =
+//      swerveTab.add("xBox rot", 0)
+//          .getEntry();
+//
+//  private NetworkTableEntry frontLeftStateEntry =
+//      swerveTab.add("FL State v", 0)
+//          .getEntry();
+//
+//  private NetworkTableEntry frontRightStateEntry =
+//      swerveTab.add("FR State v", 0)
+//          .getEntry();
+//
+//  private NetworkTableEntry gyroEntry =
+//      swerveTab.add("Gyro Heading", 0)
+//          .getEntry();
 
 
   private final SwerveModule m_frontLeft =
@@ -109,7 +111,12 @@ public class DriveSubsystem extends SubsystemBase {
         m_rearLeft.getState(),
         m_frontRight.getState(),
         m_rearRight.getState());
-  }
+
+    SmartDashboard.putString("m_frontLeft", m_frontLeft.getState().toString());
+    SmartDashboard.putString("m_rearLeft", m_rearLeft.getState().toString());
+    SmartDashboard.putString("m_frontRight", m_frontRight.getState().toString());
+    SmartDashboard.putString("m_rearRight", m_rearRight.getState().toString());
+    }
 
   /**
    * Returns the currently-estimated pose of the robot.
@@ -196,4 +203,5 @@ public class DriveSubsystem extends SubsystemBase {
   public double getTurnRate() {
     return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
+
 }

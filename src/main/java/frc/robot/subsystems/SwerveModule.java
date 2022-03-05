@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
@@ -43,7 +44,7 @@ public class SwerveModule {
           ModuleConstants.kDModuleDriveController // 0
       );
 
-  ShuffleboardTab PIDtab = Shuffleboard.getTab("PID Tuning");
+  // ShuffleboardTab PIDtab = Shuffleboard.getTab("PID Tuning");
 
 
   // Using a TrapezoidProfile PIDController to allow for smooth turning
@@ -69,6 +70,9 @@ public class SwerveModule {
   SimpleMotorFeedforward turnFeedForward = new SimpleMotorFeedforward(
       DriveConstants.ksTurning, DriveConstants.kvTurning);
 
+  // shuffleboard stuff
+  ShuffleboardLayout shuffleboardContainer;
+
   /**
    * Constructs a SwerveModule.
    *
@@ -87,6 +91,9 @@ public class SwerveModule {
     m_driveMotor = new WPI_TalonFX(driveMotorChannel);
     m_turningMotor = new WPI_TalonFX(turningMotorChannel);
 
+    // For testing, can be removed later
+    m_driveMotor.setNeutralMode(NeutralMode.Coast);
+    m_turningMotor.setNeutralMode(NeutralMode.Coast);
 
     // Configure the encoders for both motors
 
@@ -100,6 +107,9 @@ public class SwerveModule {
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.
     m_turnPIDController.enableContinuousInput(-Math.PI, Math.PI);
+
+    // Shuffleboard
+    this.shuffleboardContainer = container;
   }
 
 
@@ -162,11 +172,11 @@ public class SwerveModule {
     m_driveMotor.set(driveOutput);
     m_turningMotor.set(turnOutput);
 
-    SmartDashboard.putNumber("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
-    SmartDashboard.putNumber("PID driveOutput", driveOutput);
-    SmartDashboard.putNumber("PID turnOutput", turnOutput);
-    SmartDashboard.putNumber("Feedforward", driveFeedforward.calculate(desiredState.speedMetersPerSecond));
-    SmartDashboard.putNumber("PID Output", m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond));
+    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
+    this.shuffleboardContainer.add("PID driveOutput", driveOutput);
+    this.shuffleboardContainer.add("PID turnOutput", turnOutput);
+    this.shuffleboardContainer.add("Feedforward", driveFeedforward.calculate(desiredState.speedMetersPerSecond));
+    this.shuffleboardContainer.add("PID Output", m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond));
   }
 
   /** Zeros all the SwerveModule encoders. */

@@ -76,7 +76,7 @@ public class Limelight
    */
   private Limelight()
   {
-    table = NetworkTableInstance.getDefault().getTable("limelight");
+    table = NetworkTableInstance.getDefault().getTable("limelight-tigers");
     tx = table.getEntry("tx"); // Horizontal offset from crosshair to target (-29.8 to 29.8 degrees).
     ty = table.getEntry("ty"); // Vertical offset from crosshair to target (-24.85 to 24.85 degrees).
     tv = table.getEntry("tv"); // Whether the limelight has any valid targets (0 or 1).
