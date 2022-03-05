@@ -18,20 +18,20 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
  */
 public final class Constants {
   public static final class DriveConstants {
-    public static final int kFrontLeftDriveMotorPort = 0;
-    public static final int kRearLeftDriveMotorPort = 2;
+    public static final int kFrontLeftDriveMotorPort = 13;
+    public static final int kRearLeftDriveMotorPort = 6;
     public static final int kFrontRightDriveMotorPort = 4;
-    public static final int kRearRightDriveMotorPort = 6;
+    public static final int kRearRightDriveMotorPort = 23;
 
-    public static final int kFrontLeftTurningMotorPort = 1;
-    public static final int kRearLeftTurningMotorPort = 3;
-    public static final int kFrontRightTurningMotorPort = 5;
-    public static final int kRearRightTurningMotorPort = 7;
+    public static final int kFrontLeftTurningMotorPort = 21;
+    public static final int kRearLeftTurningMotorPort = 7;
+    public static final int kFrontRightTurningMotorPort = 3;
+    public static final int kRearRightTurningMotorPort = 12;
 
-    public static final int kFrontLeftTurningEncoderPort = 0;
-    public static final int kRearLeftTurningEncoderPort = 1;
-    public static final int kFrontRightTurningEncoderPort = 2;
-    public static final int kRearRightTurningEncoderPort = 4;
+    public static final int kFrontLeftTurningEncoderPort = 22;
+    public static final int kRearLeftTurningEncoderPort = 10;
+    public static final int kFrontRightTurningEncoderPort = 9;
+    public static final int kRearRightTurningEncoderPort = 8;
 
     public static final double kFrontLeftAngleZero = 353.1; // FIXME: Add angle offset
     public static final double kRearLeftAngleZero = 78.8; // FIXME: Add angle offset

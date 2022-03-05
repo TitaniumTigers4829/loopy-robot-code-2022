@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="made a lot of changes, mostly copying code from RedThunder7166" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="updated it for our gyro">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,7 +104,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
-  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
+  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -208,11 +212,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.zuntue2022 [deploy]" />
         <item itemvalue="Gradle.zuntue2022 [build]" />
         <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
         <item itemvalue="Gradle.zuntue2022 [vendordep]" />
         <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
-        <item itemvalue="Gradle.zuntue2022 [deploy]" />
       </list>
     </recent_temporary>
   </component>
@@ -226,7 +230,7 @@
       <updated>1645203483233</updated>
       <workItem from="1645203487217" duration="4943000" />
       <workItem from="1646339277127" duration="2813000" />
-      <workItem from="1646456082887" duration="6537000" />
+      <workItem from="1646456082887" duration="8257000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -249,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646462959732</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="updated it for our gyro">
+      <created>1646463192150</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1646463192150</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,6 +281,7 @@
     <MESSAGE value="mostly added comments and few super minor changes (most recommended by intelliJ)" />
     <MESSAGE value="added phoenix and rev as dependencies" />
     <MESSAGE value="made a lot of changes, mostly copying code from RedThunder7166" />
-    <option name="LAST_COMMIT_MESSAGE" value="made a lot of changes, mostly copying code from RedThunder7166" />
+    <MESSAGE value="updated it for our gyro" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated it for our gyro" />
   </component>
 </project>
