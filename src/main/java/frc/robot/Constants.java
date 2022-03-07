@@ -1,4 +1,4 @@
-// Copyright (c) FIRST and other WPILib contributors.
+ // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
@@ -72,21 +72,22 @@ public final class Constants {
     public static final double kMaxRotationalSpeedMetersPerSecond = 4.75 * (3/2);
 
 
-    public static final double ksTurning = 0; // FIXME feedforward turning
-    public static final double kvTurning = 0;
+    public static final double ksTurning = 1.0591; // FIXME feedforward turning
+    public static final double kvTurning = 1.3137;
+    public static final double kaTurning = 0.25475;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
   }
 
   public static final class ModuleConstants {
     // Drive motor -> FX Encoder (2048 units)
     // Turning motor -> CTRE CANcoder (4096 units)
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 5 * Math.PI; // try 10 if going well
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 5 * Math.PI; // try 10 if going well
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI; // try 10 if going well
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = Math.PI; // try 10 if going well
 
-    public static final double kDriveGearRatio = 7.13; // FIXME, I think 7.13 is right tho...
-    public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary and/or 1.
+    public static final double kDriveGearRatio = 7.13;
+    public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary, but nice to have
 
-    public static final double kPModuleTurnController = 0.01; // TUNE
+    public static final double kPModuleTurnController = 0; // TUNE
     public static double kIModuleTurnController = 0;
     public static final double kDModuleTurnController = 0; // TUNE
 

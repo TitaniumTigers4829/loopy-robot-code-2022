@@ -68,7 +68,7 @@ public class SwerveModule {
       DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter);
 
   SimpleMotorFeedforward turnFeedForward = new SimpleMotorFeedforward(
-      DriveConstants.ksTurning, DriveConstants.kvTurning);
+      DriveConstants.ksTurning, DriveConstants.kvTurning, DriveConstants.kaTurning);
 
   // shuffleboard stuff
   ShuffleboardLayout shuffleboardContainer;
@@ -164,7 +164,7 @@ public class SwerveModule {
             + driveFeedforward.calculate(state.speedMetersPerSecond);;
 
     // Calculate the turning motor output from the turning PID controller.
-    final var turnOutput =
+    final double turnOutput =
         m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians())
             + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
 
