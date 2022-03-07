@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="tuning first attempts">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -199,7 +199,7 @@
       <workItem from="1645203487217" duration="4943000" />
       <workItem from="1646339277127" duration="2813000" />
       <workItem from="1646456082887" duration="11888000" />
-      <workItem from="1646493368604" duration="38797000" />
+      <workItem from="1646493368604" duration="41709000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -264,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646521526569</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)">
+      <created>1646683949141</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1646683949141</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,6 +298,7 @@
     <MESSAGE value="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller)." />
     <MESSAGE value="Added Shooter Subsystem" />
     <MESSAGE value="tuning first attempts" />
-    <option name="LAST_COMMIT_MESSAGE" value="tuning first attempts" />
+    <MESSAGE value="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)" />
   </component>
 </project>

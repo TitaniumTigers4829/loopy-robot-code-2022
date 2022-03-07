@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class DriveSubsystem extends SubsystemBase {
-  private ShuffleboardTab swerveTab = Shuffleboard.getTab("SDS Swerve");
   private ShuffleboardTab moduleTab = Shuffleboard.getTab("Module Info");
 
    // Don't really know why this is necessary
@@ -59,7 +58,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontLeftTurningEncoderPort,
           DriveConstants.kFrontLeftAngleZero,
           moduleTab.getLayout("Front Left Module", BuiltInLayouts.kList)
-              .withSize(2, 4)
+              .withSize(4, 8)
               .withPosition(0, 0));
 
   private final SwerveModule m_rearLeft =
@@ -69,8 +68,8 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearLeftTurningEncoderPort,
           DriveConstants.kRearLeftAngleZero,
           moduleTab.getLayout("Rear Left Module", BuiltInLayouts.kList)
-              .withSize(2, 4)
-              .withPosition(2, 0));
+              .withSize(4, 8)
+              .withPosition(4, 0));
 
   private final SwerveModule m_frontRight =
       new SwerveModule(
@@ -79,8 +78,8 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontRightTurningEncoderPort,
           DriveConstants.kFrontRightAngleZero,
           moduleTab.getLayout("Front Right Module", BuiltInLayouts.kList)
-              .withSize(2, 4)
-              .withPosition(4, 0));
+              .withSize(4, 8)
+              .withPosition(8, 0));
 
   private final SwerveModule m_rearRight =
       new SwerveModule(
@@ -89,8 +88,8 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearRightTurningEncoderPort,
           DriveConstants.kRearRightAngleZero,
           moduleTab.getLayout("Rear Right Module", BuiltInLayouts.kList)
-              .withSize(2, 4)
-              .withPosition(6, 0));
+              .withSize(4, 8)
+              .withPosition(12, 0));
 
   // The gyro sensor
   private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
@@ -146,7 +145,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   @SuppressWarnings("ParameterName")
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-    var swerveModuleStates =
+    SwerveModuleState[] swerveModuleStates =
         DriveConstants.kDriveKinematics.toSwerveModuleStates(
             fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d())

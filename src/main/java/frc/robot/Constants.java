@@ -72,7 +72,7 @@ public final class Constants {
     public static final double kMaxRotationalSpeedMetersPerSecond = 4.75 * (3/2);
 
 
-    public static final double ksTurning = 1.0591; // FIXME feedforward turning
+    public static final double ksTurning = 1.0591; // FIXME feedforward turning once robot is fully assembled.
     public static final double kvTurning = 1.3137;
     public static final double kaTurning = 0.25475;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
