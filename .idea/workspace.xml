@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="improved logging">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -182,8 +183,8 @@
       <list>
         <item itemvalue="Gradle.zuntue2022 [deploy]" />
         <item itemvalue="Gradle.zuntue2022 [build]" />
-        <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
         <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
+        <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
         <item itemvalue="Gradle.zuntue2022 [vendordep]" />
       </list>
     </recent_temporary>
@@ -199,7 +200,8 @@
       <workItem from="1645203487217" duration="4943000" />
       <workItem from="1646339277127" duration="2813000" />
       <workItem from="1646456082887" duration="11888000" />
-      <workItem from="1646493368604" duration="41709000" />
+      <workItem from="1646493368604" duration="43411000" />
+      <workItem from="1646690712318" duration="7881000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -271,7 +273,14 @@
       <option name="project" value="LOCAL" />
       <updated>1646683949141</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="improved logging">
+      <created>1646686577773</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1646686577773</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -299,6 +308,7 @@
     <MESSAGE value="Added Shooter Subsystem" />
     <MESSAGE value="tuning first attempts" />
     <MESSAGE value="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)" />
+    <MESSAGE value="improved logging" />
+    <option name="LAST_COMMIT_MESSAGE" value="improved logging" />
   </component>
 </project>

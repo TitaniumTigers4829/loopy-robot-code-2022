@@ -82,7 +82,7 @@ public final class Constants {
     // Drive motor -> FX Encoder (2048 units)
     // Turning motor -> CTRE CANcoder (4096 units)
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI; // try 10 if going well
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = Math.PI; // try 10 if going well
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 0.002; // try 10 if going well
 
     public static final double kDriveGearRatio = 7.13;
     public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary, but nice to have
@@ -91,7 +91,7 @@ public final class Constants {
     public static double kIModuleTurnController = 0;
     public static final double kDModuleTurnController = 0; // TUNE
 
-    public static final double kPModuleDriveController = 0; // TUNE
+    public static final double kPModuleDriveController = 0.1; // TUNE
     public static double kIModuleDriveController = 0;
     public static final double kDModuleDriveController = 0;
 

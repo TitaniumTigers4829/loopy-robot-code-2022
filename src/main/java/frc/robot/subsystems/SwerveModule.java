@@ -70,6 +70,8 @@ public class SwerveModule {
   SimpleMotorFeedforward turnFeedForward = new SimpleMotorFeedforward(
       DriveConstants.ksTurning, DriveConstants.kvTurning, DriveConstants.kaTurning);
 
+  private boolean done = false;
+
   // shuffleboard stuff
   ShuffleboardLayout shuffleboardContainer;
 
@@ -92,8 +94,8 @@ public class SwerveModule {
     m_turningMotor = new WPI_TalonFX(turningMotorChannel);
 
     // For testing, can be removed later
-    m_driveMotor.setNeutralMode(NeutralMode.Coast);
-    m_turningMotor.setNeutralMode(NeutralMode.Coast);
+    m_driveMotor.setNeutralMode(NeutralMode.Brake);
+    m_turningMotor.setNeutralMode(NeutralMode.Brake);
 
     // Configure the encoders for both motors
 
@@ -101,7 +103,7 @@ public class SwerveModule {
     m_turnEncoder = new CANCoder(turningEncoderChannel);
     // Pretty sure this is to handle all the modules starting in the same position/orientation.
     m_turnEncoder.configMagnetOffset(-1 * angleZero);
-    m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+//    m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
 
 
     // Limit the PID Controller's input range between -pi and pi and set the input
@@ -110,6 +112,8 @@ public class SwerveModule {
 
     // Shuffleboard
     shuffleboardContainer = container;
+
+    resetEncoders();
   }
 
 
@@ -135,6 +139,11 @@ public class SwerveModule {
 
   /**
    * Sets the desired state for the module.
+   * <p>zuntooth meme op
+   * <p>trollface
+   * <p>never gonna give you up
+   * <p>never gonna let you down
+   * <p>trollface
    *
    * @param desiredState Desired state with speed and angle.
    */
@@ -157,23 +166,42 @@ public class SwerveModule {
 
     // Calculate the turning motor output from the turning PID controller.
     final double turnOutput =
-        m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians())
-            + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
+        m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()) + 0.1;
+//            + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
 
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " currentState (speedMetersPerSecond)", () -> getState().speedMetersPerSecond);
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " currentState: (degrees)", () -> getState().angle.getDegrees());
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " desiredState (speedMetersPerSecond)", () -> desiredState.speedMetersPerSecond);
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " desiredState: (degrees)", () -> desiredState.angle.getDegrees());
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " driveOutput (PID)", () -> m_drivePIDController.calculate(m_speedMetersPerSecond));
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " driveOutput (Feedforward)", () -> driveFeedforward.calculate(state.speedMetersPerSecond));
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " turnOutput (PID)", () -> m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()));
-    shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " turnOutput (Feedforward)", () -> turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity));
-    shuffleboardContainer.addNumber("turnPID Setpoint Velocity", () -> m_turnPIDController.getSetpoint().velocity);
-
+    if (done == false) {
+      shuffleboardContainer.addNumber(
+          shuffleboardContainer.getTitle() + " currentState (speedMetersPerSecond)",
+          () -> getState().speedMetersPerSecond);
+      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " currentState: (degrees)",
+          () -> getState().angle.getDegrees());
+      shuffleboardContainer.addNumber(
+          shuffleboardContainer.getTitle() + " desiredState (speedMetersPerSecond)",
+          () -> desiredState.speedMetersPerSecond);
+      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " desiredState: (degrees)",
+          () -> desiredState.angle.getDegrees());
+      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " driveOutput (PID)",
+          () -> m_drivePIDController.calculate(m_speedMetersPerSecond));
+      shuffleboardContainer.addNumber(
+          shuffleboardContainer.getTitle() + " driveOutput (Feedforward)",
+          () -> driveFeedforward.calculate(state.speedMetersPerSecond));
+      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " turnOutput (PID)",
+          () -> m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()));
+      shuffleboardContainer.addNumber(
+          shuffleboardContainer.getTitle() + " turnOutput (Feedforward)",
+          () -> turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity));
+      shuffleboardContainer.addNumber("turnPID Setpoint Velocity",
+          () -> m_turnPIDController.getSetpoint().velocity);
+      done = true;
+    }
+    /**
+     * feedforward no make sense for position only velocity stuff
+     *
+     */
 
     // Calculate the turning motor output from the turning PID controller.
-    m_driveMotor.set(driveOutput / 10);  // max out at 25% of speed for now until we figure out why its freaking out
-    m_turningMotor.set(turnOutput / 10);  // max out at 25% of speed for now until we figure out why its freaking out
+    m_driveMotor.set(driveOutput / 4);  // max out at 25% of speed for now until we figure out why its freaking out
+    m_turningMotor.set(turnOutput / 4);  // max out at 25% of speed for now until we figure out why its freaking out
 
 //    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
 //    this.shuffleboardContainer.add("PID driveOutput", driveOutput);
@@ -185,6 +213,7 @@ public class SwerveModule {
   /** Zeros all the SwerveModule encoders. */
   public void resetEncoders() {
     m_turnEncoder.setPosition(0);
+//    m_turningMotor.setSelectedSensorPosition(0);
     m_driveMotor.setSelectedSensorPosition(0);
   }
 }

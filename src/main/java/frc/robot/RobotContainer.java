@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 /*
@@ -43,9 +44,6 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the button bindings/joysticks
-    configureButtonBindings();
-
     // Turn off the LEDs
     m_Limelight.turnOffLED();
 
@@ -56,14 +54,16 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    modifyAxis(()->m_driverController.getRawAxis(0)) // xAxis
+                    modifyAxis(()->-m_driverController.getRawAxis(0)) // xAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(()->m_driverController.getRawAxis(1)*-1) // yAxis
+                    modifyAxis(()->m_driverController.getRawAxis(1)) // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(()->m_driverController.getRawAxis(2)*-1) // rot
                         * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
                     false),
             m_robotDrive));
+    // Configure the button bindings/joysticks
+    configureButtonBindings();
 
 //    SmartDashboard.putNumber("getRawAxis(1)")
   }
@@ -75,8 +75,12 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, OIConstants.kDriverControllerZeroEncodersButton).whenPressed(m_robotDrive::resetEncoders);
-    new JoystickButton(m_driverController, OIConstants.kDriverControllerZeroHeadingButton).whenPressed(m_robotDrive::zeroHeading);
+//    new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
+//    new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
+  }
+
+  public void resetDrivetrainEncoders(){
+    m_robotDrive.resetEncoders();
   }
 
   /**
