@@ -4,21 +4,21 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInLayouts;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants.DriveConstants;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.DriveConstants;
 
 
 
@@ -115,6 +115,11 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putString("m_rearLeft", m_rearLeft.getState().toString());
     SmartDashboard.putString("m_frontRight", m_frontRight.getState().toString());
     SmartDashboard.putString("m_rearRight", m_rearRight.getState().toString());
+    
+    SmartDashboard.putNumber("m_frontLeft deg", m_frontLeft.getCANCoder());
+    SmartDashboard.putNumber("m_rearLeft deg", m_rearLeft.getCANCoder());
+    SmartDashboard.putNumber("m_frontRight deg", m_frontRight.getCANCoder());
+    SmartDashboard.putNumber("m_rearRight deg", m_rearRight.getCANCoder());
     }
 
   /**

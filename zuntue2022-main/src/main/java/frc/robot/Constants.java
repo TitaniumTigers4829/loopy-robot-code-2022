@@ -48,10 +48,10 @@ public final class Constants {
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kRearRightDriveEncoderReversed = true;
 
-    public static final double kFrontLeftCANCoderOffset = -78.8;
-    public static final double kRearLeftCANCoderOffset = -121.28;
-    public static final double kFrontRightCANCoderOffset = 104.5;
-    public static final double kRearRightCANCoderOffset = 119.5;
+    public static final double kFrontLeftCANCoderOffset = -158.5546875;
+    public static final double kRearLeftCANCoderOffset = 117.861328125;
+    public static final double kFrontRightCANCoderOffset = -151.171875;
+    public static final double kRearRightCANCoderOffset = -122.5;
 
 
     public static final double kTrackWidth = 0.57785; // FIXME
