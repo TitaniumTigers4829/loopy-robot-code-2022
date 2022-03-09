@@ -59,7 +59,8 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontLeftCANCoderOffset,
           moduleTab.getLayout("Front Left Module", BuiltInLayouts.kList)
               .withSize(4, 8)
-              .withPosition(0, 0));
+              .withPosition(0, 0),
+          DriveConstants.kFrontLeftTurnMotorReversed);
 
   private final SwerveModule m_rearLeft =
       new SwerveModule(
@@ -69,7 +70,8 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearLeftCANCoderOffset,
           moduleTab.getLayout("Rear Left Module", BuiltInLayouts.kList)
               .withSize(4, 8)
-              .withPosition(4, 0));
+              .withPosition(4, 0),
+          DriveConstants.kRearLeftTurnMotorReversed);
 
   private final SwerveModule m_frontRight =
       new SwerveModule(
@@ -79,7 +81,8 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontRightCANCoderOffset,
           moduleTab.getLayout("Front Right Module", BuiltInLayouts.kList)
               .withSize(4, 8)
-              .withPosition(8, 0));
+              .withPosition(8, 0),
+          DriveConstants.kFrontRightTurnMotorReversed);
 
   private final SwerveModule m_rearRight =
       new SwerveModule(
@@ -89,7 +92,8 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearRightCANCoderOffset,
           moduleTab.getLayout("Rear Right Module", BuiltInLayouts.kList)
               .withSize(4, 8)
-              .withPosition(12, 0));
+              .withPosition(12, 0),
+          DriveConstants.kRearRightTurnMotorReversed);
 
   // The gyro sensor
   private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
@@ -120,6 +124,11 @@ public class DriveSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("m_rearLeft deg", m_rearLeft.getCANCoder());
     SmartDashboard.putNumber("m_frontRight deg", m_frontRight.getCANCoder());
     SmartDashboard.putNumber("m_rearRight deg", m_rearRight.getCANCoder());
+
+    SmartDashboard.putNumber("m_frontLeft deg abs", m_frontLeft.getCANCoderABS());
+    SmartDashboard.putNumber("m_rearLeft deg abs", m_rearLeft.getCANCoderABS());
+    SmartDashboard.putNumber("m_frontRight deg abs", m_frontRight.getCANCoderABS());
+    SmartDashboard.putNumber("m_rearRight deg abs", m_rearRight.getCANCoderABS());
     }
 
   /**
@@ -149,18 +158,23 @@ public class DriveSubsystem extends SubsystemBase {
    * @param fieldRelative Whether the provided x and y speeds are relative to the field.
    */
   @SuppressWarnings("ParameterName")
-  public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+  public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean toReset) {
     SwerveModuleState[] swerveModuleStates =
         DriveConstants.kDriveKinematics.toSwerveModuleStates(
             fieldRelative
                 ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d())
                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
-    SwerveDriveKinematics.desaturateWheelSpeeds(
-        swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
-    m_frontLeft.setDesiredState(swerveModuleStates[0]);
-    m_frontRight.setDesiredState(swerveModuleStates[1]);
-    m_rearLeft.setDesiredState(swerveModuleStates[2]);
-    m_rearRight.setDesiredState(swerveModuleStates[3]);
+    // this does the same thing lul
+    setModuleStates(swerveModuleStates);
+    // SwerveDriveKinematics.desaturateWheelSpeeds(
+    //     swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
+    // m_frontLeft.setDesiredState(swerveModuleStates[0]);
+    // m_frontRight.setDesiredState(swerveModuleStates[1]);
+    // m_rearLeft.setDesiredState(swerveModuleStates[2]);
+    // m_rearRight.setDesiredState(swerveModuleStates[3]);
+    if (toReset){
+      resetEncoders();
+    }
   }
 
   /**

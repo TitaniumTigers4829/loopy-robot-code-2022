@@ -18,6 +18,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 
@@ -71,10 +72,7 @@ public class SwerveModule {
     private boolean done = false;
     
     // shuffleboard stuff
-    ShuffleboardLayout shuffleboardContainer;
-    
-    private double cancoderOffset;
-    
+    ShuffleboardLayout shuffleboardContainer;    
     /**
     * Constructs a SwerveModule.
     *
@@ -86,10 +84,9 @@ public class SwerveModule {
     int turningMotorChannel,
     int turningEncoderChannel,
     double angleZero,
-    ShuffleboardLayout container
+    ShuffleboardLayout container,
+    boolean isTurnInverted
     ) {
-        
-        this.cancoderOffset = angleZero;
         // Initialize the motors
         m_driveMotor = new WPI_TalonFX(driveMotorChannel);
         m_turningMotor = new WPI_TalonFX(turningMotorChannel);
@@ -113,8 +110,6 @@ public class SwerveModule {
         
         // Shuffleboard
         shuffleboardContainer = container;
-        
-        resetEncoders();
     }
     
     
@@ -164,14 +159,14 @@ public class SwerveModule {
         SwerveModuleState.optimize(desiredState, new Rotation2d(m_turnRadians));
         
         // Calculate the drive output from the drive PID controller.
-        final double driveOutput =
+        double driveOutput =
         m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond)
         + driveFeedforward.calculate(state.speedMetersPerSecond);
         
         // Calculate the turning motor output from the turning PID controller.
-        final double turnOutput =
-        m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()) + 0.1;
-        //            + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
+        double turnOutput =
+        m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians())
+        + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
         
         // Would put this at top but this needs current/desired states 
         if (done == false) {
@@ -197,8 +192,10 @@ public class SwerveModule {
             () -> turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity));
             shuffleboardContainer.addNumber("turnPID Setpoint Velocity",
             () -> m_turnPIDController.getSetpoint().velocity);
-           done = true;
+            done = true;  
         }
+        SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " desired angle", desiredState.angle.getDegrees());
+        SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " turnOutput", turnOutput / 4);
         /**
         * feedforward no make sense for position only velocity stuff
         *
@@ -214,10 +211,14 @@ public class SwerveModule {
         //    this.shuffleboardContainer.add("Feedforward", driveFeedforward.calculate(desiredState.speedMetersPerSecond));
         //    this.shuffleboardContainer.add("PID Output", m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond));
     }
-
+    
     public double getCANCoder(){
         return m_turnEncoder.getPosition();
     }
+    public double getCANCoderABS(){
+        return m_turnEncoder.getAbsolutePosition();
+    }
+    
     
     /** Zeros all the SwerveModule encoders. */
     public void resetEncoders() {

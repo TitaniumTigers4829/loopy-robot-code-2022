@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 /*
@@ -52,13 +53,13 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    modifyAxis(()->-m_driverController.getRawAxis(0)) // xAxis
+                    modifyAxis(()->-m_driverController.getRawAxis(1)) // xAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(()->m_driverController.getRawAxis(1)) // yAxis
+                    modifyAxis(()->m_driverController.getRawAxis(0)) // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(()->m_driverController.getRawAxis(2)*-1) // rot
                         * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-                    false),
+                    false, modifyBool(()->m_driverController.getRawButton(9))),
             m_robotDrive));
     // Configure the button bindings/joysticks
     configureButtonBindings();
@@ -77,9 +78,9 @@ public class RobotContainer {
 //    new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
   }
 
-  public void resetDrivetrainEncoders(){
-    m_robotDrive.resetEncoders();
-  }
+  // public void resetDrivetrainEncoders(){
+  //   m_robotDrive.resetEncoders();
+  // }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -111,24 +112,25 @@ public class RobotContainer {
             AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    SwerveControllerCommand swerveControllerCommand =
-        new SwerveControllerCommand(
-            exampleTrajectory,
-            m_robotDrive::getPose, // Functional interface to feed supplier
-            DriveConstants.kDriveKinematics,
+    // SwerveControllerCommand swerveControllerCommand =
+    //     new SwerveControllerCommand(
+    //         exampleTrajectory,
+    //         m_robotDrive::getPose, // Functional interface to feed supplier
+    //         DriveConstants.kDriveKinematics,
 
-            // Position controllers
-            new PIDController(AutoConstants.kPXController, 0, 0),
-            new PIDController(AutoConstants.kPYController, 0, 0),
-            thetaController,
-            m_robotDrive::setModuleStates,
-            m_robotDrive);
+    //         // Position controllers
+    //         new PIDController(AutoConstants.kPXController, 0, 0),
+    //         new PIDController(AutoConstants.kPYController, 0, 0),
+    //         thetaController,
+    //         m_robotDrive::setModuleStates,
+    //         m_robotDrive);
 
     // Reset odometry to the starting pose of the trajectory.
     m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+    // return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+    return null;
   }
 
   private static double deadband(double value, double deadband) {
@@ -153,5 +155,9 @@ public class RobotContainer {
     value = Math.copySign(value * value, value);
 
     return value;
+  }
+
+  private static boolean modifyBool(BooleanSupplier sup){
+    return sup.getAsBoolean();
   }
 }

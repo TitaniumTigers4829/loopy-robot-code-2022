@@ -39,9 +39,14 @@ public final class Constants {
     public static final double kRearRightAngleZero = 0; // FIXME: Add angle offset
 
     public static final boolean kFrontLeftTurningEncoderReversed = false;
-    public static final boolean kRearLeftTurningEncoderReversed = true;
+    public static final boolean kRearLeftTurningEncoderReversed = false;
     public static final boolean kFrontRightTurningEncoderReversed = false;
-    public static final boolean kRearRightTurningEncoderReversed = true;
+    public static final boolean kRearRightTurningEncoderReversed = false;
+
+    public static final boolean kFrontLeftTurnMotorReversed = true;
+    public static final boolean kFrontRightTurnMotorReversed = true;
+    public static final boolean kRearLeftTurnMotorReversed = true;
+    public static final boolean kRearRightTurnMotorReversed = true;
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
     public static final boolean kRearLeftDriveEncoderReversed = true;
@@ -87,17 +92,17 @@ public final class Constants {
   public static final class ModuleConstants {
     // Drive motor -> FX Encoder (2048 units)
     // Turning motor -> CTRE CANcoder (4096 units)
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI; // try 10 if going well
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 0.002; // try 10 if going well
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI / 2; // try 10 if going well
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = kMaxModuleAngularSpeedRadiansPerSecond / 8; // try 10 if going well
 
     public static final double kDriveGearRatio = 7.13;
     public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary, but nice to have
 
-    public static final double kPModuleTurnController = 0; // TUNE
+    public static final double kPModuleTurnController = 0.1; // TUNE
     public static double kIModuleTurnController = 0;
     public static final double kDModuleTurnController = 0; // TUNE
 
-    public static final double kPModuleDriveController = 0.1; // TUNE
+    public static final double kPModuleDriveController = 0; // TUNE
     public static double kIModuleDriveController = 0;
     public static final double kDModuleDriveController = 0;
 
