@@ -75,6 +75,8 @@ public class SwerveModule {
   // shuffleboard stuff
   ShuffleboardLayout shuffleboardContainer;
 
+  private double cancoderOffset;
+
   /**
    * Constructs a SwerveModule.
    *
@@ -89,6 +91,7 @@ public class SwerveModule {
       ShuffleboardLayout container
       ) {
 
+    this.cancoderOffset = angleZero;
     // Initialize the motors
     m_driveMotor = new WPI_TalonFX(driveMotorChannel);
     m_turningMotor = new WPI_TalonFX(turningMotorChannel);
@@ -103,7 +106,7 @@ public class SwerveModule {
     m_turnEncoder = new CANCoder(turningEncoderChannel);
     // Pretty sure this is to handle all the modules starting in the same position/orientation.
     m_turnEncoder.configMagnetOffset(-1 * angleZero);
-//    m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+   m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
 
 
     // Limit the PID Controller's input range between -pi and pi and set the input
@@ -118,7 +121,12 @@ public class SwerveModule {
 
 
   public double getModuleHeading(){
-    return this.m_turnEncoder.getAbsolutePosition();
+    return (m_turnEncoder.getAbsolutePosition() % 180) - cancoderOffset;
+  }
+
+  public double getModuleRadians(){
+      return ((2*Math.PI)/360) * ((m_turnEncoder.getAbsolutePosition() % 180) - cancoderOffset);
+
   }
 
   /**
@@ -130,8 +138,7 @@ public class SwerveModule {
     double m_speedMetersPerSecond =
         ModuleConstants.kDrivetoMetersPerSecond * m_driveMotor.getSelectedSensorVelocity();
 
-    double m_turningRadians =
-        ((2*Math.PI)/360) * m_turnEncoder.getAbsolutePosition();
+    double m_turningRadians = getModuleRadians();
 
     return new SwerveModuleState(m_speedMetersPerSecond, new Rotation2d(m_turningRadians));
   }
@@ -151,8 +158,7 @@ public class SwerveModule {
     double m_speedMetersPerSecond =
         ModuleConstants.kDrivetoMetersPerSecond * m_driveMotor.getSelectedSensorVelocity();
 
-    double m_turnRadians =
-        ((2*Math.PI)/360) * m_turnEncoder.getAbsolutePosition();
+    double m_turnRadians = getModuleRadians();
 
 
     // Optimize the reference state to avoid spinning further than 90 degrees
