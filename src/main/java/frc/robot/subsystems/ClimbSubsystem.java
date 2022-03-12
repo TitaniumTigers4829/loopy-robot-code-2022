@@ -140,12 +140,30 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   /**
+   * Sets left motor output for manual control and testing. NOTE: ONLY USE FOR TESTING.
+   *
+   * @param output raw value (-1.0  to 1)
+   */
+  public void setLeftMotorOutputManual(double output) {
+    m_leftMotor.set(output);
+  }
+
+  /**
+   * Sets right motor output for manual control and testing. NOTE: ONLY USE FOR TESTING.
+   *
+   * @param output raw value (-1.0  to 1)
+   */
+  public void setRightMotorOutputManual(double output) {
+    m_rightMotor.set(output);
+  }
+
+  /**
    * Sets the desired height for the left hook and sends calculated output from controller to the
    * motor.
    *
    * @param height desired hook height (meters)
    */
-  private void setDesiredLeftHookHeight(double height) {
+  public void setDesiredLeftHookHeight(double height) {
     final double leftOutput = m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(),
         height);
     m_leftMotor.set(leftOutput);
@@ -157,12 +175,13 @@ public class ClimbSubsystem extends SubsystemBase {
    *
    * @param height desired hook height (meters)
    */
-  private void setDesiredRightHookHeight(double height) {
+  public void setDesiredRightHookHeight(double height) {
     final double rightOutput = m_climbRightProfiledPIDController.calculate(getRightHookHeight(),
         height);
     m_rightMotor.set(rightOutput);
   }
 
+  @Deprecated
   /**
    * Sets the desired height for the hooks.
    *

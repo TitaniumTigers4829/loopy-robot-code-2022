@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="ClimbSubsystem initial code done. now for commands and then testing.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/endgame/ClimbAngled.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/endgame/ClimbHookHeight.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/endgame/ClimbVertical.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/endgame/MidBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManual.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualIndependentControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualPairedControl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualSolenoidControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/ShooterManualControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ShooterManualControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -197,7 +209,7 @@
       <workItem from="1646339277127" duration="2813000" />
       <workItem from="1646456082887" duration="11888000" />
       <workItem from="1646493368604" duration="43411000" />
-      <workItem from="1646690712318" duration="19621000" />
+      <workItem from="1646690712318" duration="25385000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -297,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647110437890</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="ClimbSubsystem initial code done. now for commands and then testing.">
+      <created>1647110787297</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1647110787297</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -329,6 +348,7 @@
     <MESSAGE value="changes from Ryan and I's session" />
     <MESSAGE value="Almost entirely implemented Climb Subsystem" />
     <MESSAGE value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
+    <MESSAGE value="ClimbSubsystem initial code done. now for commands and then testing." />
+    <option name="LAST_COMMIT_MESSAGE" value="ClimbSubsystem initial code done. now for commands and then testing." />
   </component>
 </project>

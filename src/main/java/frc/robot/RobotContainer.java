@@ -14,16 +14,18 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.Constants.AutoConstants;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.OIConstants;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.LEDsSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.AutoConstants;
+import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.OIConstants;
+import frc.robot.commands.testing.ClimbManual;
+import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LEDsSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
@@ -33,20 +35,27 @@ import java.util.function.DoubleSupplier;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
+
+// TODO: Implement test mode. X button to toggle intake testing. Y button for Shooter. B for climb. A for swerve.
+
 public class RobotContainer {
+
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
   private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
 
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
+  /**
+   * The container for the robot. Contains subsystems, OI devices, and commands.
+   */
+  public RobotContainer(boolean isTestMode) {
     // Turn off the LEDsSubsystem
     m_Limelight.turnOffLED();
-    m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands
+//    m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands, just for testing.
 
     // Default for drivetrain
     m_robotDrive.setDefaultCommand(
@@ -55,19 +64,18 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    modifyAxis(()->-m_driverController.getRawAxis(0)) // xAxis
+                    modifyAxis(() -> -m_driverController.getRawAxis(0)) // xAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(()->m_driverController.getRawAxis(1)) // yAxis
+                    modifyAxis(() -> m_driverController.getRawAxis(1)) // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(()->m_driverController.getRawAxis(2)*-1) // rot
+                    modifyAxis(() -> m_driverController.getRawAxis(2) * -1) // rot
                         * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
                     false),
             m_robotDrive));
     // Configure the button bindings/joysticks
-    configureButtonBindings();
-
-//    SmartDashboard.putNumber("getRawAxis(1)")
+    configureButtonBindings(isTestMode);
   }
+
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -75,13 +83,27 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling passing it to a
    * {@link JoystickButton}.
    */
-  private void configureButtonBindings() {
-//    new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
-//    new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
-  }
+  private void configureButtonBindings(boolean isTestMode) {
+    JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
+    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
+    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
+    JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
+    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
+    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
 
-  public void resetDrivetrainEncoders(){
-    m_robotDrive.resetEncoders();
+    if (isTestMode) {
+      // TODO: Make it so this only runs in test mode
+      A_BUTTON.toggleWhenPressed(
+          new ClimbManual(m_climbSubsystem,
+              () -> m_driverController.getRawAxis(1),
+              () -> m_driverController.getRawAxis(3),
+              m_driverController.getRawButton()
+              ));
+
+    }
+
+//      new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
+//      new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
   }
 
   /**
@@ -93,8 +115,8 @@ public class RobotContainer {
     // Create config for trajectory
     TrajectoryConfig config =
         new TrajectoryConfig(
-                AutoConstants.kMaxSpeedMetersPerSecond,
-                AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+            AutoConstants.kMaxSpeedMetersPerSecond,
+            AutoConstants.kMaxAccelerationMetersPerSecondSquared)
             // Add kinematics to ensure max speed is actually obeyed
             .setKinematics(DriveConstants.kDriveKinematics);
 
@@ -134,6 +156,7 @@ public class RobotContainer {
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
   }
 
+
   private static double deadband(double value, double deadband) {
     if (Math.abs(value) > deadband) {
       if (value > 0.0) {
@@ -145,6 +168,10 @@ public class RobotContainer {
       return 0.0;
     }
   }
+
+//  public void resetDrivetrainEncoders(){
+//    m_robotDrive.resetEncoders();
+//  }
 
   private static double modifyAxis(DoubleSupplier supplierValue) {
     double value = supplierValue.getAsDouble();
