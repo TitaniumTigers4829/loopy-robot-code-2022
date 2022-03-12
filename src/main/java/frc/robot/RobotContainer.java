@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
@@ -68,7 +69,7 @@ public class RobotContainer {
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(() -> m_driverController.getRawAxis(1)) // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(() -> m_driverController.getRawAxis(2) * -1) // rot
+                    modifyAxis(() -> m_driverController.getRawAxis(2)) // rot TODO: removed -1
                         * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
                     false),
             m_robotDrive));
@@ -84,24 +85,35 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings(boolean isTestMode) {
+    DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
+    DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
+    DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
+    DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
+
+
+
     JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
     JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
     JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
     JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
     JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
     JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
+    POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
+    POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
+
 
     if (isTestMode) {
       // TODO: Make it so this only runs in test mode
       A_BUTTON.toggleWhenPressed(
           new ClimbManual(m_climbSubsystem,
-              () -> m_driverController.getRawAxis(1),
-              () -> m_driverController.getRawAxis(3),
-              m_driverController.getRawButton()
+              LEFT_STICK_Y,
+              RIGHT_STICK_Y,
+              RIGHT_BUMPER.getAsBoolean(),
+              UP_DIRECTION_PAD,
+              RIGHT_DIRECTION_PAD,
+              LEFT_BUMPER.getAsBoolean()
               ));
-
     }
-
 //      new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
 //      new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
   }
