@@ -189,13 +189,12 @@ public class SwerveModule {
       done = true;
     }
     /**
-     * feedforward no make sense for position only velocity stuff
-     *
+     * feedforward no make sense for position, only make sense for velocity stuff
      */
 
     // Calculate the turning motor output from the turning PID controller.
-    m_driveMotor.set(driveOutput / 4);  // max out at 25% of speed for now until we figure out why its freaking out
-    m_turningMotor.set(turnOutput / 4);  // max out at 25% of speed for now until we figure out why its freaking out
+    m_driveMotor.set(driveOutput / 12);  // max out at 25% of speed for now until we figure out why its freaking out
+    m_turningMotor.set(turnOutput / 12);  // max out at 25% of speed for now until we figure out why its freaking out
 
 //    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
 //    this.shuffleboardContainer.add("PID driveOutput", driveOutput);

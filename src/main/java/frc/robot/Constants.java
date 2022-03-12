@@ -97,7 +97,7 @@ public final class Constants {
     public static final double kIModuleTurnController = 0; // DO NOT USE
     public static final double kDModuleTurnController = 0; // TUNE
 
-    public static final double kPModuleDriveController = 0.1; // TUNE
+    public static final double kPModuleDriveController = 0; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
     public static final double kDModuleDriveController = 0;
 
