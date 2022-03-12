@@ -14,7 +14,8 @@ import frc.robot.Constants.ElectronicsConstants;
 
 // TODO: When make auto climb command, make sure to implement checking that the two arms are at least at similar heights, else throw an error.
 
-public class ClimbSubsystem extends SubsystemBase{
+public class ClimbSubsystem extends SubsystemBase {
+
   private final WPI_TalonFX m_leftMotor;
   private final WPI_TalonFX m_rightMotor;
 
@@ -23,12 +24,13 @@ public class ClimbSubsystem extends SubsystemBase{
 
   private final DoubleSolenoid m_solenoid;
 
-  /** NOTE:
-   * According to the documentation, it is possible to use a single controller asynchronously,
+  /**
+   * NOTE: According to the documentation, it is possible to use a single controller asynchronously,
    * but that it is not have any built in thread safety, and should only be done by advanced teams.
    * Thus, using two separate controllers is much easier.
    */
 
+  // Important: This PID Controller uses exclusively SI units.
   private final ProfiledPIDController m_climbLeftProfiledPIDController =
       new ProfiledPIDController(
           ClimbConstants.kPClimbController,
@@ -38,6 +40,7 @@ public class ClimbSubsystem extends SubsystemBase{
               ClimbConstants.kMaxClimbSpeedMetersPerSecond,
               ClimbConstants.kMaxClimbAccelerationMetersPerSecondSquared));
 
+  // Important: This PID Controller uses exclusively SI units.
   private final ProfiledPIDController m_climbRightProfiledPIDController =
       new ProfiledPIDController(
           ClimbConstants.kPClimbController,
@@ -47,7 +50,9 @@ public class ClimbSubsystem extends SubsystemBase{
               ClimbConstants.kMaxClimbSpeedMetersPerSecond,
               ClimbConstants.kMaxClimbAccelerationMetersPerSecondSquared));
 
-  /** Creates the climb subsystem. */
+  /**
+   * Creates the climb subsystem.
+   */
   public ClimbSubsystem() {
     // Initialize Motors
     m_leftMotor = new WPI_TalonFX(ClimbConstants.kLeftClimbMotorPort);
@@ -66,47 +71,60 @@ public class ClimbSubsystem extends SubsystemBase{
     // TODO: implement config stuff
 
     // Initialize Solenoid
-    m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType, ClimbConstants.kClimbVerticalSolenoidPort, ClimbConstants.kClimbAngledSolenoidPort);
+    m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
+        ClimbConstants.kClimbVerticalSolenoidPort, ClimbConstants.kClimbAngledSolenoidPort);
   }
 
-  /** Returns encoder values, but zeroing has already been taken care of.
+  /**
+   * Returns encoder values, but zeroing has already been taken care of.
+   *
    * @return encoder value
    */
   private double getLeftEncoderValue() {
     return m_leftEncoder.getPosition();
   }
 
-  /** Uses encoder values to calculate the height of the hooks.
+  /**
+   * Uses encoder values to calculate the height of the hooks.
+   *
    * @return height of left hook (meters)
    */
   public double getLeftHookHeight() {
     return 0;
   }
 
-  /** Returns encoder values, but zeroing has already been taken care of.
+  /**
+   * Returns encoder values, but zeroing has already been taken care of.
+   *
    * @return encoder value
    */
   private double getRightEncoderValue() {
     return m_rightEncoder.getPosition();
   }
 
-  /** Uses encoder values to calculate the height of the hooks.
+  /**
+   * Uses encoder values to calculate the height of the hooks.
+   *
    * @return height of right hook (meters)
    */
   public double getRightHookHeight() {
     return 0;
   }
 
-  /** Uses hook height of each side to calculate the average hook height between the arms.
+  /**
+   * Uses hook height of each side to calculate the average hook height between the arms.
+   *
    * @return average height of the hooks (meters)
    */
   public double getAverageHookHeight() {
     return (getLeftHookHeight() + getRightHookHeight()) / 2;
   }
 
-  /** Gets whether the climb is vertical or not.
-   *  Also handles unexpected states and throws exceptions accordingly.
-   *  @return isVertical (boolean)
+  /**
+   * Gets whether the climb is vertical or not. Also handles unexpected states and throws exceptions
+   * accordingly.
+   *
+   * @return isVertical (boolean)
    */
   public boolean getIsClimbVertical() {
     if (m_solenoid.get() == Value.kOff) {
@@ -116,39 +134,57 @@ public class ClimbSubsystem extends SubsystemBase{
     } else if (m_solenoid.get() == Value.kReverse) {
       return false;
     } else {
-      throw new RuntimeException("For some reason the climb solenoid is in none of the 3 possible positions.");
+      throw new RuntimeException(
+          "For some reason the climb solenoid is in none of the 3 possible positions.");
     }
   }
 
-
-  /** Sets the desired height for the left hook and sends calculated output from controller to the motor.
+  /**
+   * Sets the desired height for the left hook and sends calculated output from controller to the
+   * motor.
+   *
    * @param height desired hook height (meters)
    */
   private void setDesiredLeftHookHeight(double height) {
-    final double leftOutput =
+    final double leftOutput = m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(),
+        height);
+    m_leftMotor.set(leftOutput);
   }
 
-  /** Sets the desired height for the right hook and sends calculated output from controller to the motor.
+  /**
+   * Sets the desired height for the right hook and sends calculated output from controller to the
+   * motor.
+   *
    * @param height desired hook height (meters)
    */
   private void setDesiredRightHookHeight(double height) {
-
+    final double rightOutput = m_climbRightProfiledPIDController.calculate(getRightHookHeight(),
+        height);
+    m_rightMotor.set(rightOutput);
   }
 
-  /** Sets the desired height for the hooks.
+  /**
+   * Sets the desired height for the hooks.
+   *
    * @param height desired hook height (meters)
    */
   public void setDesiredHookHeight(double height) {
     setDesiredLeftHookHeight(height);
-    setDesiredRightHookHeight(height);
+
+    // TODO: uncomment this after initial testing.
+    // setDesiredRightHookHeight(height);
   }
 
-  /** Instructs the solenoid to make climb vertical. */
+  /**
+   * Instructs the solenoid to make climb vertical.
+   */
   public void setClimbVertical() {
     m_solenoid.set(Value.kForward);
   }
 
-  /** Instructs the solenoid to make climb angled. */
+  /**
+   * Instructs the solenoid to make climb angled.
+   */
   public void setClimbAngled() {
     m_solenoid.set(Value.kReverse);
   }
