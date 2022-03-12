@@ -138,13 +138,7 @@ public class SwerveModule {
 
 
   /**
-   * Sets the desired state for the module.
-   * <p>zuntooth meme op
-   * <p>trollface
-   * <p>never gonna give you up
-   * <p>never gonna let you down
-   * <p>trollface
-   *
+   * Sets the desired state for the module and sends calculated output from controller to the motor.
    * @param desiredState Desired state with speed and angle.
    */
   public void setDesiredState(SwerveModuleState desiredState) {
@@ -169,7 +163,7 @@ public class SwerveModule {
         m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()) + 0.1;
 //            + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
 
-    if (done == false) {
+    if (!done) {
       shuffleboardContainer.addNumber(
           shuffleboardContainer.getTitle() + " currentState (speedMetersPerSecond)",
           () -> getState().speedMetersPerSecond);

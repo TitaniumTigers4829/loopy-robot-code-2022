@@ -14,18 +14,17 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.LEDsSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 /*
@@ -37,15 +36,17 @@ import java.util.function.DoubleSupplier;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-  private final Limelight m_Limelight = Limelight.getInstance();
+  private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
+  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
   private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Turn off the LEDs
+    // Turn off the LEDsSubsystem
     m_Limelight.turnOffLED();
+    m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands
 
     // Default for drivetrain
     m_robotDrive.setDefaultCommand(

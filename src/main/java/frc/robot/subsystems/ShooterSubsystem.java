@@ -11,7 +11,9 @@ public class ShooterSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_leftMotor;
   private final WPI_TalonFX m_rightMotor;
 
-  /** Creates a new ExampleSubsystem. */
+
+  // TODO: IDEA: turn off teh compressor while trying to shoot to help the limelight see better
+  /** Creates the Shooter subsystem. */
   public ShooterSubsystem() {
 
     // Initialize Motors
@@ -35,6 +37,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    // Smart Dashboard Debugging
     SmartDashboard.putNumber("Shooter Encoder Value:", m_rightMotor.getSelectedSensorPosition());
   }
 

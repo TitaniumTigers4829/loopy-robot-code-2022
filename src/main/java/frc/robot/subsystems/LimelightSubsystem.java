@@ -5,17 +5,17 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
 /**
- * Limelight is a camera that emits a bright green light to track
+ * LimelightSubsystem is a camera that emits a bright green light to track
  * reflective tape commonly placed around targets for alignment.
  * This class creates all the necessary objects and methods to
  * retrieve data from the limelight in other classes.
  */
-public class Limelight
+public class LimelightSubsystem
 {
   /**
    * Declaring objects that are used for retrieving data from the limelight.
    */
-  private static Limelight instance = null;
+  private static LimelightSubsystem instance = null;
 
   private static NetworkTable table;
   private static NetworkTableEntry tx;
@@ -63,10 +63,10 @@ public class Limelight
    * Method for other classes to use this class' methods.
    * @return the limelight instance object.
    */
-  public static Limelight getInstance()
+  public static LimelightSubsystem getInstance()
   {
     if (instance == null)
-      instance = new Limelight();
+      instance = new LimelightSubsystem();
 
     return instance;
   }
@@ -74,7 +74,7 @@ public class Limelight
   /**
    * Get limelight data from network table.
    */
-  private Limelight()
+  private LimelightSubsystem()
   {
     table = NetworkTableInstance.getDefault().getTable("limelight-tigers");
     tx = table.getEntry("tx"); // Horizontal offset from crosshair to target (-29.8 to 29.8 degrees).
@@ -177,8 +177,8 @@ public class Limelight
 
   /**
    * Methods to tell whether the limelight is in driver or vision mode.
-   * Driver mode will consist of the LEDs being off and the camera being in color.
-   * Vision mode will consist of the LEDs being on and the camera being in black and white.
+   * Driver mode will consist of the LEDsSubsystem being off and the camera being in color.
+   * Vision mode will consist of the LEDsSubsystem being on and the camera being in black and white.
    */
   private boolean isModeDriver()
   {
