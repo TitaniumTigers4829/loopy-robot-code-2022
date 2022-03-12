@@ -4,7 +4,9 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.controller.PIDController;
+import java.util.List;
+import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -14,18 +16,14 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.Limelight;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import java.util.List;
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -59,7 +57,7 @@ public class RobotContainer {
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(()->m_driverController.getRawAxis(2)*-1) // rot
                         * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-                    false, modifyBool(()->m_driverController.getRawButton(9))),
+                    false),
             m_robotDrive));
     // Configure the button bindings/joysticks
     configureButtonBindings();
@@ -155,9 +153,5 @@ public class RobotContainer {
     value = Math.copySign(value * value, value);
 
     return value;
-  }
-
-  private static boolean modifyBool(BooleanSupplier sup){
-    return sup.getAsBoolean();
   }
 }

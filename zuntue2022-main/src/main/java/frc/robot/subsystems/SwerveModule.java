@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
@@ -92,16 +91,17 @@ public class SwerveModule {
         m_turningMotor = new WPI_TalonFX(turningMotorChannel);
         
         // For testing, can be removed later
-        m_driveMotor.setNeutralMode(NeutralMode.Brake);
-        m_turningMotor.setNeutralMode(NeutralMode.Brake);
+        m_driveMotor.setNeutralMode(NeutralMode.Coast);
+        m_turningMotor.setNeutralMode(NeutralMode.Coast);
         
         // Configure the encoders for both motors
         
         m_driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         m_turnEncoder = new CANCoder(turningEncoderChannel);
         // Pretty sure this is to handle all the modules starting in the same position/orientation.
-        // m_turnEncoder.configMagnetOffset(angleZero);
+        m_turnEncoder.configMagnetOffset(angleZero);
         m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+        // m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Unsigned_0_to_360);
         
         
         // Limit the PID Controller's input range between -pi and pi and set the input
@@ -114,11 +114,11 @@ public class SwerveModule {
     
     
     public double getModuleHeading(){
-        return (m_turnEncoder.getPosition() % 180);
+        return (m_turnEncoder.getPosition() % 180);// - 180;
     }
     
     public double getModuleRadians(){
-        return ((2*Math.PI)/360) * (m_turnEncoder.getPosition() % 180);
+        return (Math.PI/180) * ((m_turnEncoder.getPosition() % 180)/* - 180*/);
         
     }
     
@@ -139,7 +139,6 @@ public class SwerveModule {
     
     /**
     * Sets the desired state for the module.
-    * <p>zuntooth meme op
     * <p>trollface
     * <p>never gonna give you up
     * <p>never gonna let you down
@@ -148,8 +147,7 @@ public class SwerveModule {
     * @param desiredState Desired state with speed and angle.
     */
     public void setDesiredState(SwerveModuleState desiredState) {
-        double m_speedMetersPerSecond =
-        ModuleConstants.kDrivetoMetersPerSecond * m_driveMotor.getSelectedSensorVelocity();
+        double m_speedMetersPerSecond = ModuleConstants.kDrivetoMetersPerSecond * m_driveMotor.getSelectedSensorVelocity();
         
         double m_turnRadians = getModuleRadians();
         
@@ -164,9 +162,11 @@ public class SwerveModule {
         + driveFeedforward.calculate(state.speedMetersPerSecond);
         
         // Calculate the turning motor output from the turning PID controller.
-        double turnOutput =
-        m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians())
-        + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
+        // double turnOutput = m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians());
+        // + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
+        
+        double turnOutput = m_turnPIDController.calculate(getModuleRadians(), state.angle.getRadians());
+            // + feedforward.calculate(controller.getSetpoint().velocity, acceleration));
         
         // Would put this at top but this needs current/desired states 
         if (done == false) {
@@ -195,15 +195,15 @@ public class SwerveModule {
             done = true;  
         }
         SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " desired angle", desiredState.angle.getDegrees());
-        SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " turnOutput", turnOutput / 4);
+        SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " turnOutput", turnOutput / 12);
         /**
         * feedforward no make sense for position only velocity stuff
         *
         */
         
         // Calculate the turning motor output from the turning PID controller.
-        m_driveMotor.set(driveOutput / 4);  // max out at 25% of speed for now until we figure out why its freaking out
-        m_turningMotor.set(turnOutput / 4);  // max out at 25% of speed for now until we figure out why its freaking out
+        m_driveMotor.set(driveOutput / 12);  // max out at 25% of speed for now until we figure out why its freaking out
+        m_turningMotor.set(turnOutput / 12);  // max out at 25% of speed for now until we figure out why its freaking out
         
         //    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
         //    this.shuffleboardContainer.add("PID driveOutput", driveOutput);
@@ -213,17 +213,9 @@ public class SwerveModule {
     }
     
     public double getCANCoder(){
-        return m_turnEncoder.getPosition();
+        return m_turnEncoder.getPosition() % 180;
     }
     public double getCANCoderABS(){
-        return m_turnEncoder.getAbsolutePosition();
-    }
-    
-    
-    /** Zeros all the SwerveModule encoders. */
-    public void resetEncoders() {
-        m_turnEncoder.setPosition(0);
-        //    m_turningMotor.setSelectedSensorPosition(0);
-        m_driveMotor.setSelectedSensorPosition(0);
+        return m_turnEncoder.getAbsolutePosition() % 180;
     }
 }

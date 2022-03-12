@@ -158,7 +158,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @param fieldRelative Whether the provided x and y speeds are relative to the field.
    */
   @SuppressWarnings("ParameterName")
-  public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative, boolean toReset) {
+  public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
     SwerveModuleState[] swerveModuleStates =
         DriveConstants.kDriveKinematics.toSwerveModuleStates(
             fieldRelative
@@ -172,9 +172,6 @@ public class DriveSubsystem extends SubsystemBase {
     // m_frontRight.setDesiredState(swerveModuleStates[1]);
     // m_rearLeft.setDesiredState(swerveModuleStates[2]);
     // m_rearRight.setDesiredState(swerveModuleStates[3]);
-    if (toReset){
-      resetEncoders();
-    }
   }
 
   /**
@@ -189,14 +186,6 @@ public class DriveSubsystem extends SubsystemBase {
     m_frontRight.setDesiredState(desiredStates[1]);
     m_rearLeft.setDesiredState(desiredStates[2]);
     m_rearRight.setDesiredState(desiredStates[3]);
-  }
-
-  /** Resets the drive encoders to currently read a position of 0. */
-  public void resetEncoders() {
-    m_frontLeft.resetEncoders();
-    m_rearLeft.resetEncoders();
-    m_frontRight.resetEncoders();
-    m_rearRight.resetEncoders();
   }
 
   /** Zeroes the heading of the robot. */

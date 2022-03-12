@@ -53,10 +53,17 @@ public final class Constants {
     public static final boolean kFrontRightDriveEncoderReversed = false;
     public static final boolean kRearRightDriveEncoderReversed = true;
 
-    public static final double kFrontLeftCANCoderOffset = -158.5546875;
-    public static final double kRearLeftCANCoderOffset = 117.861328125;
-    public static final double kFrontRightCANCoderOffset = -151.171875;
-    public static final double kRearRightCANCoderOffset = -122.5;
+    /** 
+     * offset grabbed from abs position when zeroed
+     */
+    // public static final double kFrontLeftCANCoderOffset = 121.46484375;
+    public static final double kFrontLeftCANCoderOffset = 41.66015625;
+    // public static final double kRearLeftCANCoderOffset = 355.78125;
+    public static final double kRearLeftCANCoderOffset = -124.98046875;
+    // public static final double kFrontRightCANCoderOffset = 312.890625;
+    public static final double kFrontRightCANCoderOffset = 57.83203125;
+    // public static final double kRearRightCANCoderOffset = 357.1875;
+    public static final double kRearRightCANCoderOffset = 115.13671875;
 
 
     public static final double kTrackWidth = 0.57785; // FIXME
@@ -92,13 +99,13 @@ public final class Constants {
   public static final class ModuleConstants {
     // Drive motor -> FX Encoder (2048 units)
     // Turning motor -> CTRE CANcoder (4096 units)
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI / 2; // try 10 if going well
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = kMaxModuleAngularSpeedRadiansPerSecond / 8; // try 10 if going well
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI; // try 10 if going well
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = Math.PI; // try 10 if going well
 
     public static final double kDriveGearRatio = 7.13;
     public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary, but nice to have
 
-    public static final double kPModuleTurnController = 0.1; // TUNE
+    public static final double kPModuleTurnController = 0.5; // TUNE
     public static double kIModuleTurnController = 0;
     public static final double kDModuleTurnController = 0; // TUNE
 
