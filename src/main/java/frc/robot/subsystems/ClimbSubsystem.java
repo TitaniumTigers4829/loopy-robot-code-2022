@@ -7,6 +7,7 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimbConstants;
@@ -20,9 +21,9 @@ public class ClimbSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_rightMotor;
 
   private final CANCoder m_leftEncoder;
-  private final CANCoder m_rightEncoder;
+//  private final CANCoder m_rightEncoder;
 
-  private final DoubleSolenoid m_solenoid;
+//  private final DoubleSolenoid m_solenoid;
 
   /**
    * NOTE: According to the documentation, it is possible to use a single controller asynchronously,
@@ -66,13 +67,13 @@ public class ClimbSubsystem extends SubsystemBase {
 
     // Initialize Encoders
     m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
-    m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
+//    m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
 
     // TODO: implement config stuff
 
     // Initialize Solenoid
-    m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
-        ClimbConstants.kClimbVerticalSolenoidPort, ClimbConstants.kClimbAngledSolenoidPort);
+//    m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
+//        ClimbConstants.kClimbVerticalSolenoidPort, ClimbConstants.kClimbAngledSolenoidPort);
   }
 
   /**
@@ -90,7 +91,7 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return height of left hook (meters)
    */
   public double getLeftHookHeight() {
-    return 0;
+    return 0.00020887562 * getLeftEncoderValue() + 0.86995;
   }
 
   /**
@@ -98,9 +99,9 @@ public class ClimbSubsystem extends SubsystemBase {
    *
    * @return encoder value
    */
-  private double getRightEncoderValue() {
-    return m_rightEncoder.getPosition();
-  }
+//  private double getRightEncoderValue() {
+//    return m_rightEncoder.getPosition();
+//  }
 
   /**
    * Uses encoder values to calculate the height of the hooks.
@@ -126,18 +127,18 @@ public class ClimbSubsystem extends SubsystemBase {
    *
    * @return isVertical (boolean)
    */
-  public boolean getIsClimbVertical() {
-    if (m_solenoid.get() == Value.kOff) {
-      throw new RuntimeException("The climb solenoid should never be off. Something is wrong.");
-    } else if (m_solenoid.get() == Value.kForward) {
-      return true;
-    } else if (m_solenoid.get() == Value.kReverse) {
-      return false;
-    } else {
-      throw new RuntimeException(
-          "For some reason the climb solenoid is in none of the 3 possible positions.");
-    }
-  }
+//  public boolean getIsClimbVertical() {
+//    if (m_solenoid.get() == Value.kOff) {
+//      DriverStation.reportWarning("The climb solenoid should never be off. Something is wrong.", true);
+//    } else if (m_solenoid.get() == Value.kForward) {
+//      return true;
+//    } else if (m_solenoid.get() == Value.kReverse) {
+//      return false;
+//    } else {
+//      DriverStation.reportWarning("For some reason the climb solenoid is in none of the 3 possible positions.", true);
+//    }
+//    return true;
+//  }
 
   /**
    * Sets left motor output for manual control and testing. NOTE: ONLY USE FOR TESTING.
@@ -197,27 +198,27 @@ public class ClimbSubsystem extends SubsystemBase {
   /**
    * Instructs the solenoid to make climb vertical.
    */
-  public void setClimbVertical() {
-    m_solenoid.set(Value.kForward);
-  }
+//  public void setClimbVertical() {
+//    m_solenoid.set(Value.kForward);
+//  }
 
   /**
    * Instructs the solenoid to make climb angled.
    */
-  public void setClimbAngled() {
-    m_solenoid.set(Value.kReverse);
-  }
+//  public void setClimbAngled() {
+//    m_solenoid.set(Value.kReverse);
+//  }
 
   @Override
   public void periodic() {
     // Smart Dashboard Debugging
     SmartDashboard.putNumber("Left Climb Encoder : ", getLeftEncoderValue());
-    SmartDashboard.putNumber("Right Climb Encoder : ", getRightEncoderValue());
+//    SmartDashboard.putNumber("Right Climb Encoder : ", getRightEncoderValue());
 
-    SmartDashboard.putNumber("Right Hook Height : ", getLeftHookHeight());
-    SmartDashboard.putNumber("Left Hook Height: ", getRightHookHeight());
+    SmartDashboard.putNumber("Left Hook Height : ", getLeftHookHeight());
+    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
 
-    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
+//    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 
   @Override

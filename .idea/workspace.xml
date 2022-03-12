@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="implementing climb testing">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="made sure swerve wont freak out when i enable the robot">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManual.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualSolenoidControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualSolenoidControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +75,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/4829_code/FalconDashboard-main" />
   </component>
-  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
+  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -178,10 +183,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.zuntue2022 [build]" />
         <item itemvalue="Gradle.zuntue2022 [deploy]" />
-        <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
+        <item itemvalue="Gradle.zuntue2022 [build]" />
         <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
+        <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
         <item itemvalue="Gradle.zuntue2022 [vendordep]" />
       </list>
     </recent_temporary>
@@ -198,7 +203,7 @@
       <workItem from="1646339277127" duration="2813000" />
       <workItem from="1646456082887" duration="11888000" />
       <workItem from="1646493368604" duration="43411000" />
-      <workItem from="1646690712318" duration="27028000" />
+      <workItem from="1646690712318" duration="35480000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -319,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647117376842</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="made sure swerve wont freak out when i enable the robot">
+      <created>1647118340809</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1647118340809</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -353,6 +365,7 @@
     <MESSAGE value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
     <MESSAGE value="ClimbSubsystem initial code done. now for commands and then testing." />
     <MESSAGE value="implementing climb testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="implementing climb testing" />
+    <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
+    <option name="LAST_COMMIT_MESSAGE" value="made sure swerve wont freak out when i enable the robot" />
   </component>
 </project>

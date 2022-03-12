@@ -29,7 +29,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer(false);
+    m_robotContainer = new RobotContainer();
+    SmartDashboard.putData(CommandScheduler.getInstance());
   }
 
   /**
@@ -97,7 +98,6 @@ public class Robot extends TimedRobot {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
     SmartDashboard.putData(CommandScheduler.getInstance());
-    m_robotContainer = new RobotContainer(true);
   }
 
   /** This function is called periodically during test mode. */

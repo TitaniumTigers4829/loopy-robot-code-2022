@@ -1,10 +1,13 @@
 package frc.robot.commands.testing;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import frc.robot.subsystems.ClimbSubsystem;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
+@Deprecated
+// This was a huge failure
 public class ClimbManual extends CommandBase {
 
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
@@ -40,12 +43,12 @@ public class ClimbManual extends CommandBase {
   @Override
   public void initialize() {
     if (m_doPaired && !m_doSolenoids) {
-      new ClimbManualPairedControl(m_climbSubsystem, m_rightStick);
+      new ScheduleCommand(new ClimbManualPairedControl(m_climbSubsystem, m_rightStick));
     }
     else if (m_doSolenoids && !m_doPaired){
-      new ClimbManualSolenoidControl(m_climbSubsystem, m_setVertical, m_setAngled);
+      new ScheduleCommand(new ClimbManualSolenoidControl(m_climbSubsystem, m_setVertical, m_setAngled));
     } else {
-      new ClimbManualIndependentControl(m_climbSubsystem, m_leftStick, m_rightStick);
+      new ScheduleCommand(new ClimbManualIndependentControl(m_climbSubsystem, m_leftStick, m_rightStick));
     }
   }
 

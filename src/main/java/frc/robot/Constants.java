@@ -114,7 +114,7 @@ public final class Constants {
     public static final int kLeftClimbMotorPort = 12;
     public static final int kRightClimbMotorPort = 13;
     // Encoder port constants
-    public static final int kLeftClimbEncoderPort = 3;
+    public static final int kLeftClimbEncoderPort = 11;
     public static final int kRightClimbEncoderPort = 3;
     // Solenoid port constant
     public static final int kClimbVerticalSolenoidPort = 3;

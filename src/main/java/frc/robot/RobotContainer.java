@@ -15,6 +15,7 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -23,6 +24,8 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.testing.ClimbManual;
+import frc.robot.commands.testing.ClimbManualIndependentControl;
+import frc.robot.commands.testing.ClimbManualPairedControl;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.LEDsSubsystem;
@@ -37,15 +40,13 @@ import java.util.function.DoubleSupplier;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 
-// TODO: Implement test mode. X button to toggle intake testing. Y button for Shooter. B for climb. A for swerve.
-
 public class RobotContainer {
 
   // The robot's subsystems
-  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+//  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
-  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
+//  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
   private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
@@ -53,28 +54,19 @@ public class RobotContainer {
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
-  public RobotContainer(boolean isTestMode) {
-    // Turn off the LEDsSubsystem
-    m_Limelight.turnOffLED();
-//    m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands, just for testing.
+  public RobotContainer() {
+    // Turn off the limelight lights because they are very bright
+     m_Limelight.turnOffLED();
+    // m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands, just for testing.
 
-    // Default for drivetrain
-    m_robotDrive.setDefaultCommand(
-        // The left stick controls translation of the robot.
-        // Turning is controlled by the X axis of the right stick.
-        new RunCommand(
-            () ->
-                m_robotDrive.drive(
-                    modifyAxis(() -> -m_driverController.getRawAxis(0)) // xAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(() -> m_driverController.getRawAxis(1)) // yAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(() -> m_driverController.getRawAxis(2)) // rot TODO: removed -1
-                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-                    false),
-            m_robotDrive));
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
+
+
+
     // Configure the button bindings/joysticks
-    configureButtonBindings(isTestMode);
+    configureButtonBindings();
   }
 
 
@@ -84,13 +76,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling passing it to a
    * {@link JoystickButton}.
    */
-  private void configureButtonBindings(boolean isTestMode) {
+  private void configureButtonBindings() {
     DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
     DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
     DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
     DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
-
-
 
     JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
     JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
@@ -102,20 +92,33 @@ public class RobotContainer {
     POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
 
 
-    if (isTestMode) {
-      // TODO: Make it so this only runs in test mode
-      A_BUTTON.toggleWhenPressed(
-          new ClimbManual(m_climbSubsystem,
-              LEFT_STICK_Y,
-              RIGHT_STICK_Y,
-              RIGHT_BUMPER.getAsBoolean(),
-              UP_DIRECTION_PAD,
-              RIGHT_DIRECTION_PAD,
-              LEFT_BUMPER.getAsBoolean()
-              ));
-    }
-//      new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
-//      new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
+    /**
+     * Sets the default command and joystick bindings for the drive train.
+     * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
+     */
+
+//    m_robotDrive.setDefaultCommand(
+//        new RunCommand(
+//            () ->
+//                m_robotDrive.drive(
+//                    modifyAxis(() -> -m_driverController.getRawAxis(0)) // xAxis
+//                        * DriveConstants.kMaxSpeedMetersPerSecond,
+//                    modifyAxis(() -> m_driverController.getRawAxis(1)) // yAxis
+//                        * DriveConstants.kMaxSpeedMetersPerSecond,
+//                    modifyAxis(() -> m_driverController.getRawAxis(2)) // rot TODO: removed -1
+//                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
+//                    false),
+//            m_robotDrive));
+
+
+    A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+
+//    Y_BUTTON.whenPressed(new InstantCommand(m_Limelight::blinkLED));
+    B_BUTTON.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
+//    A_BUTTON.whenPressed(new InstantCommand(m_Limelight::turnOnLED));
+//
+    //  new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
+    //  new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
   }
 
   /**
@@ -124,48 +127,49 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    // Create config for trajectory
-    TrajectoryConfig config =
-        new TrajectoryConfig(
-            AutoConstants.kMaxSpeedMetersPerSecond,
-            AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-            // Add kinematics to ensure max speed is actually obeyed
-            .setKinematics(DriveConstants.kDriveKinematics);
-
-    // An example trajectory to follow.  All units in meters.
-    Trajectory exampleTrajectory =
-        TrajectoryGenerator.generateTrajectory(
-            // Start at the origin facing the +X direction
-            new Pose2d(0, 0, new Rotation2d(0)),
-            // Pass through these two interior waypoints, making an 's' curve path
-            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-            // End 3 meters straight ahead of where we started, facing forward
-            new Pose2d(3, 0, new Rotation2d(0)),
-            config);
-
-    var thetaController =
-        new ProfiledPIDController(
-            AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);
-
-    SwerveControllerCommand swerveControllerCommand =
-        new SwerveControllerCommand(
-            exampleTrajectory,
-            m_robotDrive::getPose, // Functional interface to feed supplier
-            DriveConstants.kDriveKinematics,
-
-            // Position controllers
-            new PIDController(AutoConstants.kPXController, 0, 0),
-            new PIDController(AutoConstants.kPYController, 0, 0),
-            thetaController,
-            m_robotDrive::setModuleStates,
-            m_robotDrive);
-
-    // Reset odometry to the starting pose of the trajectory.
-    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
-
-    // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+//    // Create config for trajectory
+//    TrajectoryConfig config =
+//        new TrajectoryConfig(
+//            AutoConstants.kMaxSpeedMetersPerSecond,
+//            AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+//            // Add kinematics to ensure max speed is actually obeyed
+//            .setKinematics(DriveConstants.kDriveKinematics);
+//
+//    // An example trajectory to follow.  All units in meters.
+//    Trajectory exampleTrajectory =
+//        TrajectoryGenerator.generateTrajectory(
+//            // Start at the origin facing the +X direction
+//            new Pose2d(0, 0, new Rotation2d(0)),
+//            // Pass through these two interior waypoints, making an 's' curve path
+//            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
+//            // End 3 meters straight ahead of where we started, facing forward
+//            new Pose2d(3, 0, new Rotation2d(0)),
+//            config);
+//
+//    var thetaController =
+//        new ProfiledPIDController(
+//            AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+//    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+//
+//    SwerveControllerCommand swerveControllerCommand =
+//        new SwerveControllerCommand(
+//            exampleTrajectory,
+//            m_robotDrive::getPose, // Functional interface to feed supplier
+//            DriveConstants.kDriveKinematics,
+//
+//            // Position controllers
+//            new PIDController(AutoConstants.kPXController, 0, 0),
+//            new PIDController(AutoConstants.kPYController, 0, 0),
+//            thetaController,
+//            m_robotDrive::setModuleStates,
+//            m_robotDrive);
+//
+//    // Reset odometry to the starting pose of the trajectory.
+//    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
+//
+//    // Run path following command, then stop at the end.
+//    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+    return null;
   }
 
 
