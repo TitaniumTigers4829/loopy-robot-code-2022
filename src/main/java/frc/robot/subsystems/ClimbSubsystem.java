@@ -14,7 +14,6 @@ import frc.robot.Constants.ElectronicsConstants;
 
 // TODO: When make auto climb command, make sure to implement checking that the two arms are at least at similar heights, else throw an error.
 
-
 public class ClimbSubsystem extends SubsystemBase{
   private final WPI_TalonFX m_leftMotor;
   private final WPI_TalonFX m_rightMotor;
@@ -126,7 +125,7 @@ public class ClimbSubsystem extends SubsystemBase{
    * @param height desired hook height (meters)
    */
   private void setDesiredLeftHookHeight(double height) {
-
+    final double leftOutput =
   }
 
   /** Sets the desired height for the right hook and sends calculated output from controller to the motor.
