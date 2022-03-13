@@ -39,14 +39,14 @@ public final class Constants {
     public static final int kFrontRightTurningEncoderPort = 9;
     public static final int kRearRightTurningEncoderPort = 8;
 
-    public static final double kFrontLeftAngleZero = 0; // FIXME: Add angle offset
-    public static final double kRearLeftAngleZero = 0; // FIXME: Add angle offset
-    public static final double kFrontRightAngleZero = 0; // FIXME: Add angle offset
-    public static final double kRearRightAngleZero = 0; // FIXME: Add angle offset
+    public static final double kFrontLeftAngleZero = 79.45; // FIXME: Add angle offset
+    public static final double kRearLeftAngleZero = 121.38; // FIXME: Add angle offset
+    public static final double kFrontRightAngleZero = -104.68; // FIXME: Add angle offset
+    public static final double kRearRightAngleZero = -118.30; // FIXME: Add angle offset
 
-    public static final boolean kFrontLeftTurningEncoderReversed = false;
+    public static final boolean kFrontLeftTurningEncoderReversed = true;
     public static final boolean kRearLeftTurningEncoderReversed = true;
-    public static final boolean kFrontRightTurningEncoderReversed = false;
+    public static final boolean kFrontRightTurningEncoderReversed = true;
     public static final boolean kRearRightTurningEncoderReversed = true;
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
@@ -74,8 +74,8 @@ public final class Constants {
     public static final double ksVolts = 1; // FIXME with sysid
     public static final double kvVoltSecondsPerMeter = 0.8; // FIXME with sysid
     public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
-    public static final double kMaxSpeedMetersPerSecond = 4.75;
-    public static final double kMaxRotationalSpeedMetersPerSecond = 4.75 * (3/2);
+    public static final double kMaxSpeedMetersPerSecond = 2;
+    public static final double kMaxRotationalSpeedMetersPerSecond = 2; // TODO: make sure this is right... (maybe should be radians)
 
 
     public static final double ksTurning = 1.0591; // FIXME feedforward turning once robot is fully assembled.
@@ -87,8 +87,8 @@ public final class Constants {
   public static final class ModuleConstants {
     // Drive motor -> FX Encoder (2048 units)
     // Turning motor -> CTRE CANcoder (4096 units)
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI; // try 10 if going well
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 0.002; // try 10 if going well
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI;
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 0.02;
 
     public static final double kDriveGearRatio = 7.13;
     public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary, but nice to have
@@ -106,7 +106,7 @@ public final class Constants {
     public static final int kTurningCANcoderCPR = 4096;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI; // C = D * pi
-    public static final double kDrivetoMetersPerSecond = (10 * kWheelCircumferenceMeters)/(kDriveGearRatio * 2048);
+    public static final double kDrivetoMetersPerSecond = (kWheelCircumferenceMeters)/(kDriveGearRatio * 2048);
   }
 
   public static final class ClimbConstants {
@@ -129,8 +129,8 @@ public final class Constants {
     public static final double kPClimbController = 0; // FIXME, TUNE
     public static final double kIClimbController = 0; // DO NOT USE
     public static final double kDClimbController = 0; // FIXME, TUNE
-    public static final double kMaxClimbSpeedMetersPerSecond = Math.PI; // FIXME, TUNE
-    public static final double kMaxClimbAccelerationMetersPerSecondSquared = 0.002; // FIXME, TUNE
+    public static final double kMaxClimbSpeedMetersPerSecond = 0.2; // FIXME, TUNE
+    public static final double kMaxClimbAccelerationMetersPerSecondSquared = 0.05; // FIXME, TUNE
 
   }
 

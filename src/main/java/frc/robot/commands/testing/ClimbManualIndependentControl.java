@@ -18,6 +18,7 @@ public class ClimbManualIndependentControl extends CommandBase {
    */
   public ClimbManualIndependentControl(ClimbSubsystem subsystem, DoubleSupplier leftStick, DoubleSupplier rightStick) {
     m_climbSubsystem = subsystem;
+    addRequirements(m_climbSubsystem);  // Use addRequirements() to declare subsystem dependencies.
 
     m_leftStick = leftStick;
     m_rightStick = rightStick;

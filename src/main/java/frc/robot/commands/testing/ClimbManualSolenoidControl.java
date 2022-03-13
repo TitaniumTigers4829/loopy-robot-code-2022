@@ -12,12 +12,13 @@ public class ClimbManualSolenoidControl extends CommandBase {
 
   private final BooleanSupplier m_setVertical, m_setAngled;
   /**
-   *                                                                `
+   *
    *
    * @param subsystem The climb subsystem used by this command.
    */
-  public ClimbManualSolenoidControl(ClimbSubsys                                                           tem subsystem, BooleanSupplier vertical, BooleanSupplier angled) {
+  public ClimbManualSolenoidControl(ClimbSubsystem subsystem, BooleanSupplier vertical, BooleanSupplier angled) {
     m_climbSubsystem = subsystem;
+    addRequirements(m_climbSubsystem);  // Use addRequirements() to declare subsystem dependencies.
 
     m_setVertical = vertical;
     m_setAngled = angled;

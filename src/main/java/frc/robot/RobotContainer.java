@@ -43,7 +43,7 @@ import java.util.function.DoubleSupplier;
 public class RobotContainer {
 
   // The robot's subsystems
-//  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
 //  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
@@ -97,18 +97,18 @@ public class RobotContainer {
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
 
-//    m_robotDrive.setDefaultCommand(
-//        new RunCommand(
-//            () ->
-//                m_robotDrive.drive(
-//                    modifyAxis(() -> -m_driverController.getRawAxis(0)) // xAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxis(() -> m_driverController.getRawAxis(1)) // yAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxis(() -> m_driverController.getRawAxis(2)) // rot TODO: removed -1
-//                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-//                    false),
-//            m_robotDrive));
+    m_robotDrive.setDefaultCommand(
+        new RunCommand(
+            () ->
+                m_robotDrive.drive(
+                    modifyAxis(LEFT_STICK_Y) * -1// xAxis
+                        * DriveConstants.kMaxSpeedMetersPerSecond,
+                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
+                        * DriveConstants.kMaxSpeedMetersPerSecond,
+                    modifyAxis(RIGHT_STICK_X) * -1 // rot
+                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
+                    true),
+            m_robotDrive));
 
 
     A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));

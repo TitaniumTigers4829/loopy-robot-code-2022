@@ -57,6 +57,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontLeftTurningMotorPort,
           DriveConstants.kFrontLeftTurningEncoderPort,
           DriveConstants.kFrontLeftAngleZero,
+          DriveConstants.kFrontLeftTurningEncoderReversed,
           moduleTab.getLayout("Front Left Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(0, 0));
@@ -67,6 +68,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearLeftTurningMotorPort,
           DriveConstants.kRearLeftTurningEncoderPort,
           DriveConstants.kRearLeftAngleZero,
+          DriveConstants.kRearLeftTurningEncoderReversed,
           moduleTab.getLayout("Rear Left Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(4, 0));
@@ -77,6 +79,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontRightTurningMotorPort,
           DriveConstants.kFrontRightTurningEncoderPort,
           DriveConstants.kFrontRightAngleZero,
+          DriveConstants.kFrontRightTurningEncoderReversed,
           moduleTab.getLayout("Front Right Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(8, 0));
@@ -87,6 +90,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearRightTurningMotorPort,
           DriveConstants.kRearRightTurningEncoderPort,
           DriveConstants.kRearRightAngleZero,
+          DriveConstants.kRearRightTurningEncoderReversed,
           moduleTab.getLayout("Rear Right Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(12, 0));

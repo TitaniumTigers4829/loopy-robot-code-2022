@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="added Angle Zero Offset">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualIndependentControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualIndependentControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualPairedControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualPairedControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualSolenoidControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualSolenoidControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -196,6 +206,7 @@
       <workItem from="1646456082887" duration="11888000" />
       <workItem from="1646493368604" duration="43411000" />
       <workItem from="1646690712318" duration="36433000" />
+      <workItem from="1647144886205" duration="6758000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -330,7 +341,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647128878641</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="updated CAN IDs">
+      <created>1647144969291</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1647144969291</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,6 +384,8 @@
     <MESSAGE value="implementing climb testing" />
     <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
     <MESSAGE value="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
-    <option name="LAST_COMMIT_MESSAGE" value="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
+    <MESSAGE value="updated CAN IDs" />
+    <MESSAGE value="added Angle Zero Offset" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Angle Zero Offset" />
   </component>
 </project>

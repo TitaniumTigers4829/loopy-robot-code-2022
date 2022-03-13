@@ -18,6 +18,8 @@ public class ClimbManualPairedControl extends CommandBase {
    */
   public ClimbManualPairedControl(ClimbSubsystem subsystem, DoubleSupplier rightStick) {
     m_climbSubsystem = subsystem;
+    addRequirements(m_climbSubsystem);  // Use addRequirements() to declare subsystem dependencies.
+
     m_rightStick = rightStick;
   }
 

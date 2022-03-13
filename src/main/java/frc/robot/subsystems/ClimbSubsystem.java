@@ -182,6 +182,18 @@ public class ClimbSubsystem extends SubsystemBase {
     m_rightMotor.set(rightOutput);
   }
 
+  public void setLeftHookToBottomPos() {
+    // TODO: implement once we have the limit switches
+    // TODO: Also make this reset the encoder math to account for weird rope behavior.
+  }
+
+  public void setRightHookToBottomPos() {
+    // TODO: implement once we have the limit switches
+    // TODO: Also make this reset the encoder math to account for weird rope behavior.
+  }
+
+
+
   @Deprecated
   /**
    * Sets the desired height for the hooks.

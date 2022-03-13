@@ -32,10 +32,6 @@ public class SwerveModule {
   // e.g. testMotor.getSelectedSensorPosition();
 
 
-  // Redundant with code below, but could be good starting spot.
-  // Gains are for example purposes only - must be determined for your own robot!
-  // private final PIDController m_drivePIDController = new PIDController(1, 0, 0);
-
   // PID controller for velocity. DO NOT SET kD.  It is redundant as setVoltage() already controls this
   private final PIDController m_drivePIDController =
       new PIDController(
@@ -86,6 +82,7 @@ public class SwerveModule {
       int turningMotorChannel,
       int turningEncoderChannel,
       double angleZero,
+      boolean encoderReversed,
       ShuffleboardLayout container
       ) {
 
@@ -101,9 +98,9 @@ public class SwerveModule {
 
     m_driveMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     m_turnEncoder = new CANCoder(turningEncoderChannel);
-    // Pretty sure this is to handle all the modules starting in the same position/orientation.
-    m_turnEncoder.configMagnetOffset(-1 * angleZero);
-//    m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+    m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
+    m_turnEncoder.configMagnetOffset(angleZero);
+    m_turnEncoder.configSensorDirection(encoderReversed);
 
 
     // Limit the PID Controller's input range between -pi and pi and set the input
@@ -203,10 +200,10 @@ public class SwerveModule {
 //    this.shuffleboardContainer.add("PID Output", m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond));
   }
 
+  @Deprecated
   /** Zeros all the SwerveModule encoders. */
   public void resetEncoders() {
     m_turnEncoder.setPosition(0);
-//    m_turningMotor.setSelectedSensorPosition(0);
     m_driveMotor.setSelectedSensorPosition(0);
   }
 }
