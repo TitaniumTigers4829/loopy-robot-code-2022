@@ -24,7 +24,7 @@ public final class Constants {
 
 
   public static final class DriveConstants {
-    public static final int kFrontLeftDriveMotorPort = 13;
+    public static final int kFrontLeftDriveMotorPort = 24;
     public static final int kRearLeftDriveMotorPort = 6;
     public static final int kFrontRightDriveMotorPort = 4;
     public static final int kRearRightDriveMotorPort = 23;
@@ -32,7 +32,7 @@ public final class Constants {
     public static final int kFrontLeftTurningMotorPort = 21;
     public static final int kRearLeftTurningMotorPort = 7;
     public static final int kFrontRightTurningMotorPort = 3;
-    public static final int kRearRightTurningMotorPort = 12;
+    public static final int kRearRightTurningMotorPort = 25;
 
     public static final int kFrontLeftTurningEncoderPort = 22;
     public static final int kRearLeftTurningEncoderPort = 10;
