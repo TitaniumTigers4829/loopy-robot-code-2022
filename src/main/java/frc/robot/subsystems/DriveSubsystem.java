@@ -58,6 +58,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontLeftTurningEncoderPort,
           DriveConstants.kFrontLeftAngleZero,
           DriveConstants.kFrontLeftTurningEncoderReversed,
+          DriveConstants.kFrontLeftDriveEncoderReversed,
           moduleTab.getLayout("Front Left Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(0, 0));
@@ -69,6 +70,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearLeftTurningEncoderPort,
           DriveConstants.kRearLeftAngleZero,
           DriveConstants.kRearLeftTurningEncoderReversed,
+          DriveConstants.kRearLeftDriveEncoderReversed,
           moduleTab.getLayout("Rear Left Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(4, 0));
@@ -80,6 +82,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kFrontRightTurningEncoderPort,
           DriveConstants.kFrontRightAngleZero,
           DriveConstants.kFrontRightTurningEncoderReversed,
+          DriveConstants.kFrontRightDriveEncoderReversed,
           moduleTab.getLayout("Front Right Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(8, 0));
@@ -91,6 +94,7 @@ public class DriveSubsystem extends SubsystemBase {
           DriveConstants.kRearRightTurningEncoderPort,
           DriveConstants.kRearRightAngleZero,
           DriveConstants.kRearRightTurningEncoderReversed,
+          DriveConstants.kRearRightDriveEncoderReversed,
           moduleTab.getLayout("Rear Right Module", BuiltInLayouts.kList)
               .withSize(4, 8)
               .withPosition(12, 0));
@@ -178,10 +182,10 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Resets the drive encoders to currently read a position of 0. */
   public void resetEncoders() {
-    m_frontLeft.resetEncoders();
-    m_rearLeft.resetEncoders();
-    m_frontRight.resetEncoders();
-    m_rearRight.resetEncoders();
+//    m_frontLeft.resetEncoders();
+//    m_rearLeft.resetEncoders();
+//    m_frontRight.resetEncoders();
+//    m_rearRight.resetEncoders();
   }
 
   /** Zeroes the heading of the robot. */

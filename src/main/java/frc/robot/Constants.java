@@ -44,14 +44,14 @@ public final class Constants {
     public static final double kFrontRightAngleZero = -104.68; // FIXME: Add angle offset
     public static final double kRearRightAngleZero = -118.30; // FIXME: Add angle offset
 
-    public static final boolean kFrontLeftTurningEncoderReversed = true;
-    public static final boolean kRearLeftTurningEncoderReversed = true;
-    public static final boolean kFrontRightTurningEncoderReversed = true;
-    public static final boolean kRearRightTurningEncoderReversed = true;
+    public static final boolean kFrontLeftTurningEncoderReversed = false;
+    public static final boolean kRearLeftTurningEncoderReversed = false;
+    public static final boolean kFrontRightTurningEncoderReversed = false;
+    public static final boolean kRearRightTurningEncoderReversed = false;
 
     public static final boolean kFrontLeftDriveEncoderReversed = false;
-    public static final boolean kRearLeftDriveEncoderReversed = true;
-    public static final boolean kFrontRightDriveEncoderReversed = false;
+    public static final boolean kRearLeftDriveEncoderReversed = false;
+    public static final boolean kFrontRightDriveEncoderReversed = true;
     public static final boolean kRearRightDriveEncoderReversed = true;
 
     public static final double kTrackWidth = 0.57785; // FIXME
@@ -74,7 +74,7 @@ public final class Constants {
     public static final double ksVolts = 1; // FIXME with sysid
     public static final double kvVoltSecondsPerMeter = 0.8; // FIXME with sysid
     public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
-    public static final double kMaxSpeedMetersPerSecond = 2;
+    public static final double kMaxSpeedMetersPerSecond = 4;
     public static final double kMaxRotationalSpeedMetersPerSecond = 2; // TODO: make sure this is right... (maybe should be radians)
 
 
@@ -88,16 +88,16 @@ public final class Constants {
     // Drive motor -> FX Encoder (2048 units)
     // Turning motor -> CTRE CANcoder (4096 units)
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI;
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 0.02;
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = Math.PI / 2;
 
     public static final double kDriveGearRatio = 7.13;
     public static final double kTurningGearRatio = 12.8; // FIXME, might be unnecessary, but nice to have
 
-    public static final double kPModuleTurnController = 0; // TUNE
+    public static final double kPModuleTurnController = 1; // TUNE
     public static final double kIModuleTurnController = 0; // DO NOT USE
-    public static final double kDModuleTurnController = 0; // TUNE
+    public static final double kDModuleTurnController = 0.05; // TUNE
 
-    public static final double kPModuleDriveController = 0; // TUNE
+    public static final double kPModuleDriveController = 3.5; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
     public static final double kDModuleDriveController = 0;
 
@@ -106,7 +106,7 @@ public final class Constants {
     public static final int kTurningCANcoderCPR = 4096;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
     public static final double kWheelCircumferenceMeters = kWheelDiameterMeters * Math.PI; // C = D * pi
-    public static final double kDrivetoMetersPerSecond = (kWheelCircumferenceMeters)/(kDriveGearRatio * 2048);
+    public static final double kDrivetoMetersPerSecond = (10 * kWheelCircumferenceMeters)/(kDriveGearRatio * 2048);
   }
 
   public static final class ClimbConstants {

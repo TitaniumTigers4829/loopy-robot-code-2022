@@ -72,10 +72,14 @@ public class SwerveModule {
   ShuffleboardLayout shuffleboardContainer;
 
   /**
-   * Constructs a SwerveModule.
-   *
-   * @param driveMotorChannel ID for the drive motor.
-   * @param turningMotorChannel ID for the turning motor.
+   * Constructs a swerve module
+   * @param driveMotorChannel ID of the drive motor
+   * @param turningMotorChannel ID of the turn motor
+   * @param turningEncoderChannel ID of the CANCoder
+   * @param angleZero CANCoder offset
+   * @param encoderReversed is the turn encoder reversed
+   * @param driveReversed is the drive motor reversed
+   * @param container shuffleboard container to print debug to
    */
   public SwerveModule(
       int driveMotorChannel,
@@ -83,6 +87,7 @@ public class SwerveModule {
       int turningEncoderChannel,
       double angleZero,
       boolean encoderReversed,
+      boolean driveReversed,
       ShuffleboardLayout container
       ) {
 
@@ -91,16 +96,16 @@ public class SwerveModule {
     m_turningMotor = new WPI_TalonFX(turningMotorChannel);
 
     // For testing, can be removed later
-    m_driveMotor.setNeutralMode(NeutralMode.Brake);
+    m_driveMotor.setNeutralMode(NeutralMode.Coast);
     m_turningMotor.setNeutralMode(NeutralMode.Brake);
 
     // Configure the encoders for both motors
-
     m_driveMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     m_turnEncoder = new CANCoder(turningEncoderChannel);
     m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
     m_turnEncoder.configMagnetOffset(angleZero);
     m_turnEncoder.configSensorDirection(encoderReversed);
+    m_driveMotor.setInverted(driveReversed);
 
 
     // Limit the PID Controller's input range between -pi and pi and set the input
@@ -109,18 +114,19 @@ public class SwerveModule {
 
     // Shuffleboard
     shuffleboardContainer = container;
-
-    resetEncoders();
   }
 
 
+  /**
+   * Gets the heading of the module
+   * @return the absolute position of the CANCoder
+   */
   public double getModuleHeading(){
     return this.m_turnEncoder.getAbsolutePosition();
   }
 
   /**
    * Returns the current state of the module.
-   *
    * @return The current state of the module.
    */
   public SwerveModuleState getState() {
@@ -128,7 +134,7 @@ public class SwerveModule {
         ModuleConstants.kDrivetoMetersPerSecond * m_driveMotor.getSelectedSensorVelocity();
 
     double m_turningRadians =
-        ((2*Math.PI)/360) * m_turnEncoder.getAbsolutePosition();
+        (Math.PI/180) * m_turnEncoder.getAbsolutePosition();
 
     return new SwerveModuleState(m_speedMetersPerSecond, new Rotation2d(m_turningRadians));
   }
@@ -152,8 +158,8 @@ public class SwerveModule {
 
     // Calculate the drive output from the drive PID controller.
     final double driveOutput =
-        m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond)
-            + driveFeedforward.calculate(state.speedMetersPerSecond);;
+        m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond);
+//             + driveFeedforward.calculate(state.speedMetersPerSecond);
 
     // Calculate the turning motor output from the turning PID controller.
     final double turnOutput =
@@ -185,19 +191,38 @@ public class SwerveModule {
           () -> m_turnPIDController.getSetpoint().velocity);
       done = true;
     }
+    SmartDashboard.putString(shuffleboardContainer.getTitle() + " desired state: ", state.toString());
     /**
-     * feedforward no make sense for position, only make sense for velocity stuff
+     * feedforward no make sense for position, only make sense for velocity stuff -- Prateek
      */
 
     // Calculate the turning motor output from the turning PID controller.
     m_driveMotor.set(driveOutput / 12);  // max out at 25% of speed for now until we figure out why its freaking out
     m_turningMotor.set(turnOutput / 12);  // max out at 25% of speed for now until we figure out why its freaking out
-
+    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput / 12);
+    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput / 12);
 //    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
+
 //    this.shuffleboardContainer.add("PID driveOutput", driveOutput);
 //    this.shuffleboardContainer.add("PID turnOutput", turnOutput);
 //    this.shuffleboardContainer.add("Feedforward", driveFeedforward.calculate(desiredState.speedMetersPerSecond));
 //    this.shuffleboardContainer.add("PID Output", m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond));
+  }
+
+  /**
+   * Gets the current position of the CANCoder
+   * @return cancoder position with magnet offset
+   */
+  public double getCANCoder(){
+    return m_turnEncoder.getPosition();
+  }
+
+  /**
+   * Gets the current position of the CANCoder in relation to the magnet
+   * @return current CANCoder position
+   */
+  public double getCANCoderABS(){
+    return m_turnEncoder.getAbsolutePosition();
   }
 
   @Deprecated

@@ -62,9 +62,6 @@ public class RobotContainer {
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
-
-
-
     // Configure the button bindings/joysticks
     configureButtonBindings();
   }
@@ -105,13 +102,15 @@ public class RobotContainer {
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(LEFT_STICK_X) * -1 // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(RIGHT_STICK_X) * -1 // rot
+                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
                         * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-                    true),
+                    false),
             m_robotDrive));
 
 
     A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+    Y_BUTTON.toggleWhenPressed(new ClimbManualPairedControl(m_climbSubsystem, RIGHT_STICK_Y));
+
 
 //    Y_BUTTON.whenPressed(new InstantCommand(m_Limelight::blinkLED));
     B_BUTTON.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
