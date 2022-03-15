@@ -151,7 +151,6 @@ public class SwerveModule {
     double m_turnRadians =
         ((2*Math.PI)/360) * m_turnEncoder.getAbsolutePosition();
 
-
     // Optimize the reference state to avoid spinning further than 90 degrees
     SwerveModuleState state =
         SwerveModuleState.optimize(desiredState, new Rotation2d(m_turnRadians));
@@ -197,10 +196,10 @@ public class SwerveModule {
      */
 
     // Calculate the turning motor output from the turning PID controller.
-    m_driveMotor.set(driveOutput / 12);
-    m_turningMotor.set(turnOutput / 12);
-    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput / 12);
-    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput / 12);
+    m_driveMotor.set(driveOutput);
+    m_turningMotor.set(turnOutput);
+    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput);
+    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput);
 //    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
 
 //    this.shuffleboardContainer.add("PID driveOutput", driveOutput);

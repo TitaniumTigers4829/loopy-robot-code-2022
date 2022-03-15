@@ -4,33 +4,23 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.testing.ClimbManual;
+import frc.robot.commands.intake.IntakeActiveTeleop;
 import frc.robot.commands.testing.ClimbManualIndependentControl;
 import frc.robot.commands.testing.ClimbManualPairedControl;
+import frc.robot.commands.testing.ClimbManualSolenoidControl;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.LEDsSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
-import java.util.List;
 import java.util.function.DoubleSupplier;
 
 /*
@@ -44,6 +34,7 @@ public class RobotContainer {
 
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
 //  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
@@ -56,7 +47,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Turn off the limelight lights because they are very bright
-     m_Limelight.turnOffLED();
+    m_Limelight.turnOffLED();
     // m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands, just for testing.
 
     /**
@@ -66,6 +57,29 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
+  private static double deadband(double value, double deadband) {
+    if (Math.abs(value) > deadband) {
+      if (value > 0.0) {
+        return (value - deadband) / (1.0 - deadband);
+      } else {
+        return (value + deadband) / (1.0 - deadband);
+      }
+    } else {
+      return 0.0;
+    }
+  }
+
+  private static double modifyAxis(DoubleSupplier supplierValue) {
+    double value = supplierValue.getAsDouble();
+
+    // Deadband
+    value = deadband(value, OIConstants.kDriverControllerDeadband);
+
+    // Square the axis
+    value = Math.copySign(value * value, value);
+
+    return value;
+  }
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -88,37 +102,47 @@ public class RobotContainer {
     POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
     POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
 
-
     /**
      * Sets the default command and joystick bindings for the drive train.
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
 
-    m_robotDrive.setDefaultCommand(
-        new RunCommand(
-            () ->
-                m_robotDrive.drive(
-                    modifyAxis(LEFT_STICK_Y) * -1// xAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-                    false),
-            m_robotDrive));
+//    m_robotDrive.setDefaultCommand(
+//        new RunCommand(
+//            () ->
+//                m_robotDrive.drive(
+//                    modifyAxis(LEFT_STICK_Y) * -1// xAxis
+//                        * DriveConstants.kMaxSpeedMetersPerSecond,
+//                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
+//                        * DriveConstants.kMaxSpeedMetersPerSecond,
+//                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
+//                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
+//                    false),
+//            m_robotDrive));
 
 
-    A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+
+    A_BUTTON.toggleWhenPressed(
+        new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
     Y_BUTTON.toggleWhenPressed(new ClimbManualPairedControl(m_climbSubsystem, RIGHT_STICK_Y));
 
+    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
+    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
 
+    RIGHT_BUMPER.whenPressed(new IntakeActiveTeleop(m_intakeSubsystem, RIGHT_BUMPER));
+
+//    B_BUTTON.toggleWhenPressed(new ClimbManualSolenoidControl(m_climbSubsystem, LEFT_BUMPER, RIGHT_BUMPER));
 //    Y_BUTTON.whenPressed(new InstantCommand(m_Limelight::blinkLED));
-    B_BUTTON.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
+    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
 //    A_BUTTON.whenPressed(new InstantCommand(m_Limelight::turnOnLED));
 //
     //  new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
     //  new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());
   }
+
+//  public void resetDrivetrainEncoders(){
+//    m_robotDrive.resetEncoders();
+//  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -169,34 +193,5 @@ public class RobotContainer {
 //    // Run path following command, then stop at the end.
 //    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
     return null;
-  }
-
-
-  private static double deadband(double value, double deadband) {
-    if (Math.abs(value) > deadband) {
-      if (value > 0.0) {
-        return (value - deadband) / (1.0 - deadband);
-      } else {
-        return (value + deadband) / (1.0 - deadband);
-      }
-    } else {
-      return 0.0;
-    }
-  }
-
-//  public void resetDrivetrainEncoders(){
-//    m_robotDrive.resetEncoders();
-//  }
-
-  private static double modifyAxis(DoubleSupplier supplierValue) {
-    double value = supplierValue.getAsDouble();
-
-    // Deadband
-    value = deadband(value, OIConstants.kDriverControllerDeadband);
-
-    // Square the axis
-    value = Math.copySign(value * value, value);
-
-    return value;
   }
 }

@@ -24,19 +24,19 @@ public class ClimbManualSolenoidControl extends CommandBase {
     m_setAngled = angled;
   }
 
-//  @Override
-//  public void initialize() {
-//    m_climbSubsystem.setClimbVertical();
-//  }
+  @Override
+  public void initialize() {
+    m_climbSubsystem.setClimbAngled();
+  }
 
-//  @Override
-//  public void execute() {
-//    if (m_setVertical.getAsBoolean() && !m_setAngled.getAsBoolean()) {
-//      m_climbSubsystem.setClimbVertical();
-//    } else if (!m_setVertical.getAsBoolean() && m_setAngled.getAsBoolean()) {
-//      m_climbSubsystem.setClimbAngled();
-//    }
-//  }
+  @Override
+  public void execute() {
+    if (m_setAngled.getAsBoolean()) {
+      m_climbSubsystem.setClimbAngled();
+    } else {
+      m_climbSubsystem.setClimbVertical();
+    }
+  }
 
   @Override
   public void end(boolean interrupted) {
