@@ -107,33 +107,34 @@ public class RobotContainer {
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
 
-//    m_robotDrive.setDefaultCommand(
-//        new RunCommand(
-//            () ->
-//                m_robotDrive.drive(
-//                    modifyAxis(LEFT_STICK_Y) * -1// xAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-//                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-//                    false),
-//            m_robotDrive));
+    m_robotDrive.setDefaultCommand(
+        new RunCommand(
+            () ->
+                m_robotDrive.drive(
+                    modifyAxis(LEFT_STICK_Y) * -1// xAxis
+                        * DriveConstants.kMaxSpeedMetersPerSecond,
+                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
+                        * DriveConstants.kMaxSpeedMetersPerSecond,
+                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
+                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
+                    true),
+            m_robotDrive));
 
 
 
-    A_BUTTON.toggleWhenPressed(
-        new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
-    Y_BUTTON.toggleWhenPressed(new ClimbManualPairedControl(m_climbSubsystem, RIGHT_STICK_Y));
-
-    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
-    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
-
-    RIGHT_BUMPER.whenPressed(new IntakeActiveTeleop(m_intakeSubsystem, RIGHT_BUMPER));
+//    A_BUTTON.toggleWhenPressed(
+//        new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+//    Y_BUTTON.toggleWhenPressed(new ClimbManualPairedControl(m_climbSubsystem, RIGHT_STICK_Y));
+//
+//    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
+//    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
+//
+//    RIGHT_BUMPER.whenPressed(new IntakeActiveTeleop(m_intakeSubsystem, RIGHT_BUMPER));
 
 //    B_BUTTON.toggleWhenPressed(new ClimbManualSolenoidControl(m_climbSubsystem, LEFT_BUMPER, RIGHT_BUMPER));
 //    Y_BUTTON.whenPressed(new InstantCommand(m_Limelight::blinkLED));
     UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
+    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 //    A_BUTTON.whenPressed(new InstantCommand(m_Limelight::turnOnLED));
 //
     //  new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));

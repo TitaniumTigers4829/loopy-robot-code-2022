@@ -81,9 +81,9 @@ public final class Constants {
     public static final double kMaxRotationalSpeedMetersPerSecond = 2; // TODO: make sure this is right... (maybe should be radians)
 
 
-    public static final double ksTurning = 1.0591; // FIXME feedforward turning once robot is fully assembled.
-    public static final double kvTurning = 1.3137;
-    public static final double kaTurning = 0.25475; // Default to zero
+    public static final double ksTurning = 0.66202; // FIXME feedforward turning once robot is fully assembled.
+    public static final double kvTurning = 3.0052;
+    public static final double kaTurning = 0.74495; // Default to zero
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
   }
 
@@ -91,14 +91,14 @@ public final class Constants {
 
     public static final double kDriveGearRatio = 7.13;
 
-    public static final double kPModuleTurnController = 0.3; // TUNE
+    public static final double kPModuleTurnController = 8.2142; // TUNE
     public static final double kIModuleTurnController = 0; // DO NOT USE
     public static final double kDModuleTurnController = 0; // TUNE
 
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = Math.PI;
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = Math.PI / 2;
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 10 * Math.PI;
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 10 * Math.PI / 2;
 
-    public static final double kPModuleDriveController = 1; // TUNE
+    public static final double kPModuleDriveController = 4; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
     public static final double kDModuleDriveController = 0;
 

@@ -99,6 +99,8 @@ public class SwerveModule {
     m_driveMotor.setNeutralMode(NeutralMode.Coast);
     m_turningMotor.setNeutralMode(NeutralMode.Brake);
 
+    m_turningMotor.setInverted(true);
+
     // Configure the encoders for both motors
     m_driveMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     m_turnEncoder = new CANCoder(turningEncoderChannel);
@@ -155,6 +157,8 @@ public class SwerveModule {
     SwerveModuleState state =
         SwerveModuleState.optimize(desiredState, new Rotation2d(m_turnRadians));
 
+//    SwerveModuleState state = desiredState;
+
     // Calculate the drive output from the drive PID controller.
     final double driveOutput =
         m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond);
@@ -162,8 +166,8 @@ public class SwerveModule {
 
     // Calculate the turning motor output from the turning PID controller.
     final double turnOutput =
-        m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians());
-//            + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
+        m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians())
+            + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
 
     if (!done) {
       shuffleboardContainer.addNumber(
@@ -196,10 +200,10 @@ public class SwerveModule {
      */
 
     // Calculate the turning motor output from the turning PID controller.
-    m_driveMotor.set(driveOutput);
-    m_turningMotor.set(turnOutput);
-    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput);
-    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput);
+    m_driveMotor.set(driveOutput/12);
+    m_turningMotor.set(turnOutput/12);
+    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput/12);
+    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput/12);
 //    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
 
 //    this.shuffleboardContainer.add("PID driveOutput", driveOutput);

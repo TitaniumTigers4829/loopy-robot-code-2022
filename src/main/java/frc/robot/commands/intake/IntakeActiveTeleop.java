@@ -31,7 +31,7 @@ public class IntakeActiveTeleop extends CommandBase {
   public void initialize() {
     m_intakeSubsystem.setSolenoidDeployed();
     // Timer.delay(0.5); // Slight delay
-    m_intakeSubsystem.setMotorFullPowerIn();
+//    m_intakeSubsystem.setMotorFullPowerIn();
   }
 
   @Override
@@ -40,7 +40,7 @@ public class IntakeActiveTeleop extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    m_intakeSubsystem.setMotorStopped();
+//    m_intakeSubsystem.setMotorStopped();
     // Timer.delay(0.5); // Slight delay
     m_intakeSubsystem.setSolenoidRetracted();
   }
