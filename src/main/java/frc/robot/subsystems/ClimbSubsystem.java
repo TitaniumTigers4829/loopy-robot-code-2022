@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -23,20 +24,24 @@ public class ClimbSubsystem extends SubsystemBase {
   private final CANCoder m_leftEncoder;
   private final CANCoder m_rightEncoder;
 
+  private final DigitalInput m_leftLimitSwitch;
+  private final DigitalInput m_rightLimitSwitch;
+
   private final DoubleSolenoid m_solenoid;
 
   /**
    * NOTE: According to the documentation, it is possible to use a single controller asynchronously,
    * but that it is not have any built in thread safety, and should only be done by advanced teams.
-   * Thus, using two separate controllers is much easier.
+   * Thus, using two separate controllers is much easier. It will also help account for slight
+   * mechanical differences between the two arms.
    */
 
   // Important: This PID Controller uses exclusively SI units.
   private final ProfiledPIDController m_climbLeftProfiledPIDController =
       new ProfiledPIDController(
           ClimbConstants.kPClimbController,
-          ClimbConstants.kIClimbController, // Always 0, do not change
-          ClimbConstants.kPClimbController,
+          ClimbConstants.kIClimbController,
+          ClimbConstants.kDClimbController,
           new TrapezoidProfile.Constraints(
               ClimbConstants.kMaxClimbSpeedMetersPerSecond,
               ClimbConstants.kMaxClimbAccelerationMetersPerSecondSquared));
@@ -45,8 +50,8 @@ public class ClimbSubsystem extends SubsystemBase {
   private final ProfiledPIDController m_climbRightProfiledPIDController =
       new ProfiledPIDController(
           ClimbConstants.kPClimbController,
-          ClimbConstants.kIClimbController, // Always 0, do not change
-          ClimbConstants.kPClimbController,
+          ClimbConstants.kIClimbController,
+          ClimbConstants.kDClimbController,
           new TrapezoidProfile.Constraints(
               ClimbConstants.kMaxClimbSpeedMetersPerSecond,
               ClimbConstants.kMaxClimbAccelerationMetersPerSecondSquared));
@@ -59,6 +64,9 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftMotor = new WPI_TalonFX(ClimbConstants.kLeftClimbMotorPort);
     m_rightMotor = new WPI_TalonFX(ClimbConstants.kRightClimbMotorPort);
 
+    m_leftMotor.configFactoryDefault();
+    m_rightMotor.configFactoryDefault();
+
     m_leftMotor.setInverted(true);
     m_rightMotor.setInverted(false);
 
@@ -69,7 +77,12 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
     m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
 
-    // TODO: implement config stuff
+    m_leftEncoder.configMagnetOffset(ClimbConstants.kLeftClimbEncoderOffsetForTopPos);
+    m_rightEncoder.configMagnetOffset(ClimbConstants.kRightClimbEncoderOffsetForTopPos);
+
+    // Initialize Limit Switches
+    m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
+    m_rightLimitSwitch = new DigitalInput(ClimbConstants.kRightClimbLimitSwitchPort);
 
     // Initialize Solenoid
     m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
@@ -90,6 +103,11 @@ public class ClimbSubsystem extends SubsystemBase {
    *
    * @return height of left hook (meters)
    */
+
+  private boolean getIsLeftLimitSwitchPressed() {
+    return m_leftLimitSwitch.get();
+  }
+
   public double getLeftHookHeight() {
     return 0.00020887562 * getLeftEncoderValue() + 0.86995;
   }
@@ -99,9 +117,9 @@ public class ClimbSubsystem extends SubsystemBase {
    *
    * @return encoder value
    */
-//  private double getRightEncoderValue() {
-//    return m_rightEncoder.getPosition();
-//  }
+  private double getRightEncoderValue() {
+    return m_rightEncoder.getPosition();
+  }
 
   /**
    * Uses encoder values to calculate the height of the hooks.
@@ -110,15 +128,6 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public double getRightHookHeight() {
     return 0;
-  }
-
-  /**
-   * Uses hook height of each side to calculate the average hook height between the arms.
-   *
-   * @return average height of the hooks (meters)
-   */
-  public double getAverageHookHeight() {
-    return (getLeftHookHeight() + getRightHookHeight()) / 2;
   }
 
   /**
@@ -230,7 +239,7 @@ public class ClimbSubsystem extends SubsystemBase {
     //SmartDashboard.putNumber("Left Hook Height : ", getLeftHookHeight());
     //SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
 
-    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
+//    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 
   @Override

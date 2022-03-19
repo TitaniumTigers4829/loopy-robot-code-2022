@@ -12,7 +12,7 @@ import frc.robot.Constants.ElectronicsConstants;
 import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  // private final WPI_TalonFX m_motor;
+//   private final WPI_TalonFX m_motor;
   private final DoubleSolenoid m_solenoid;
   private int m_stallCounter = 1;
 

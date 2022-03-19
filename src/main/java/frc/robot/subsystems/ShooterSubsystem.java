@@ -6,13 +6,14 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
+import java.util.function.DoubleSupplier;
 
 public class ShooterSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_leftMotor;
   private final WPI_TalonFX m_rightMotor;
 
 
-  // TODO: IDEA: turn off teh compressor while trying to shoot to help the limelight see better
+  // TODO: IDEA: turn off the compressor while trying to shoot to help the limelight see better
   /** Creates the Shooter subsystem. */
   public ShooterSubsystem() {
 
@@ -35,6 +36,16 @@ public class ShooterSubsystem extends SubsystemBase {
     return m_rightMotor.getSelectedSensorPosition();
   }
 
+  public void setSpeed(double speed) {
+    m_leftMotor.set(speed);
+    m_rightMotor.set(speed);
+  }
+
+  public void stopShooter() {
+    m_leftMotor.set(0);
+    m_rightMotor.set(0);
+  }
+
   @Override
   public void periodic() {
     // Smart Dashboard Debugging
@@ -44,6 +55,9 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
+  }
+
+  public void setSpeed() {
   }
 }
 
