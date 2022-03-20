@@ -161,7 +161,7 @@ public final class Constants {
     public static final double kClimbVoltageToHoldBottomPosition = -1; // in volts
 
     // in meters, how much extra should we un-spool, just to be safe we are at max extension.
-    public static final double kClimbMaxPosConfirmationExtraHeight = 0.05;
+    public static final double kClimbMaxPosConfirmationExtraHeight = 0.025;
 
 
     // ProfiledPID controller constants

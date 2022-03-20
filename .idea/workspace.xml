@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="most recent changes, still a work in progress">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy.">
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -222,7 +220,7 @@
       <workItem from="1647568818646" duration="9803000" />
       <workItem from="1647725994031" duration="59000" />
       <workItem from="1647726206377" duration="4692000" />
-      <workItem from="1647749007140" duration="5265000" />
+      <workItem from="1647749007140" duration="5921000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -406,11 +404,22 @@
       <option name="project" value="LOCAL" />
       <updated>1647727925197</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy.">
+      <created>1647754369887</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1647754369887</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java" />
+    <option featureType="dependencySupport" implementationName="java:edu.wpi.first.wpilibj:wpilibj-java" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -424,7 +433,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added phoenix and rev as dependencies" />
     <MESSAGE value="made a lot of changes, mostly copying code from RedThunder7166" />
     <MESSAGE value="updated it for our gyro" />
     <MESSAGE value="updated can IDs" />
@@ -449,6 +457,7 @@
     <MESSAGE value="added intake and restructured some things" />
     <MESSAGE value="Need to fix one more problem with swerve" />
     <MESSAGE value="most recent changes, still a work in progress" />
-    <option name="LAST_COMMIT_MESSAGE" value="most recent changes, still a work in progress" />
+    <MESSAGE value="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy." />
+    <option name="LAST_COMMIT_MESSAGE" value="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy." />
   </component>
 </project>

@@ -269,10 +269,12 @@ public class ClimbSubsystem extends SubsystemBase {
   private void setHookToBottomPos(double outputFromPID,
       double errorFromPID, WPI_TalonFX motor) {
     // FIXME: .getPositionErrorMight need to be negated
-    if (errorFromPID <= ClimbConstants.kClimbMinPosPIDErrorThreshold // Is error small, i.e. are we close?
+    if (errorFromPID <= ClimbConstants.kClimbMinPosPIDErrorThreshold
+        // Is error small, i.e. are we close?
         && errorFromPID != 0) { // But not fully there yet?
       motor.set(ClimbConstants.kClimbVoltageToApplyAfterPID / 12);
-    } else if (errorFromPID > ClimbConstants.kClimbMinPosPIDErrorThreshold) { // We must not be close
+    } else if (errorFromPID
+        > ClimbConstants.kClimbMinPosPIDErrorThreshold) { // We must not be close
       motor.set(outputFromPID); // Let the PID loop do the work
     } else { // we must be touching the limit switch
       motor.set(ClimbConstants.kClimbVoltageToHoldBottomPosition / 12); // Hold position
@@ -280,19 +282,25 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   /**
-   * Sets left hook to full extension.
+   * Sets left hook to full extension. Makes setpoint a little higher than it needs to be to ensure
+   * that arms are all the way extended. All this does is loosen the rope on the spool a tiny bit,
+   * but provides nice to have peace of mind.
    * TODO: confirm that this is within frame perimeter when angled.
    */
   public void setLeftHookToFullExtension() {
-    setDesiredLeftHookHeight(ClimbConstants.kClimbMaxHeight);
+    setDesiredLeftHookHeight(
+        ClimbConstants.kClimbMaxHeight + ClimbConstants.kClimbMaxPosConfirmationExtraHeight);
   }
 
   /**
-   * Sets right hook to full extension.
+   * Sets right hook to full extension. Makes setpoint a little higher than it needs to be to ensure
+   *    * that arms are all the way extended. All this does is loosen the rope on the spool a tiny bit,
+   *    * but provides nice to have peace of mind.
    * TODO: confirm that this is within frame perimeter when angled.
    */
   public void setRightHookToFullExtension() {
-    setDesiredRightHookHeight(ClimbConstants.kClimbMaxHeight);
+    setDesiredRightHookHeight(
+        ClimbConstants.kClimbMaxHeight + ClimbConstants.kClimbMaxPosConfirmationExtraHeight);
   }
 
   /**
