@@ -39,7 +39,7 @@ public class RobotContainer {
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
 //  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 //  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-//  private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
+  private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
 //  private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
 //  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
@@ -125,6 +125,12 @@ public class RobotContainer {
             m_robotDrive));
 
 
+
+    //TODO: Test/tune climb using commands like this
+
+    // Make sure hooks are latched when testing.
+    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
+    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
 //    B_BUTTON.toggleWhenPressed(new ShooterManualControl(m_shooterSubsystem, 0.5));
 
 //    A_BUTTON.toggleWhenPressed(

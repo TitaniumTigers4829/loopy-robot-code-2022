@@ -116,6 +116,7 @@ public final class Constants {
   }
 
   public static final class IntakeConstants {
+
     public static final int kIntakeMotorPort = 99;
     public static final int kIntakeRetractedSolenoidPort = 4;
     public static final int kIntakeDeployedSolenoidPort = 6;
@@ -124,23 +125,51 @@ public final class Constants {
   }
 
   public static final class TowerConstants {
-    public static final int bottomTowerFeedMotorPort = 0-9;
-    public static final int topTowerFeedMotorPort = 0-9;
 
-    public static final int bottomTowerSensorPort = 0-9;
-    public static final int topTowerSensorPort = 0-9;
+    public static final int bottomTowerFeedMotorPort = 0 - 9;
+    public static final int topTowerFeedMotorPort = 0 - 9;
+
+    public static final int bottomTowerSensorPort = 0 - 9;
+    public static final int topTowerSensorPort = 0 - 9;
   }
 
   public static final class ShooterConstants {
+
     public static final int kLeftShooterMotorPort = 19;
     public static final int kRightShooterMotorPort = 20;
   }
 
 
   public static final class ClimbConstants {
+
     // General constants
     public static final double kClimbMaxHeight = 0; // in meters // FIXME
     public static final double kClimbMinHeight = 0.86995; // in meters
+
+    // NOTE:
+    // We only need estimates for the bottom position of the climb arms because they are
+    // 'zeroed' in the top position. The bottom position values are just estimates becauese
+    // there is the unpredictable nature of how the climb rope winds up.
+
+    public static final double kClimbLeftMinHeightEncoderEstimate = -1000; // FIXME
+    public static final double kClimbRightMinHeightEncoderEstimate = -1000; // FIXME
+
+    // in meters, when do we switch to pure voltage control.
+    public static final double kClimbMinPosPIDErrorThreshold = 0.10;
+
+    public static final double kClimbVoltageToApplyAfterPID = -3.5; // in volts
+    public static final double kClimbVoltageToHoldBottomPosition = -1; // in volts
+
+    // in meters, how much extra should we un-spool, just to be safe we are at max extension.
+    public static final double kClimbMaxPosConfirmationExtraHeight = 0.05;
+
+
+    // ProfiledPID controller constants
+    public static final double kPClimbController = 1; // FIXME, TUNE
+    public static final double kIClimbController = 0; // DO NOT USE
+    public static final double kDClimbController = 0;
+    public static final double kMaxClimbSpeedMetersPerSecond = 0.2; // FIXME, TUNE
+    public static final double kMaxClimbAccelerationMetersPerSecondSquared = 0.05; // FIXME, TUNE
 
     // Motor constants
     public static final int kLeftClimbMotorPort = 12;
@@ -149,23 +178,16 @@ public final class Constants {
     // Encoder constants
     public static final int kLeftClimbEncoderPort = 11;
     public static final int kRightClimbEncoderPort = 3;
-    public static final double kLeftClimbEncoderOffsetForTopPos = 0; // FIXME ('zero' with arms fully extended)
-    public static double kRightClimbEncoderOffsetForTopPos = 0; // FIXME ('zero' with arms fully extended)
-
+    public static final double kLeftClimbEncoderOffsetForTopPos = 0; // FIXME ('zero' with arm fully extended)
     // Limit Switch constants
     public static final int kLeftClimbLimitSwitchPort = 0;
     public static final int kRightClimbLimitSwitchPort = 0;
-
     // Solenoid constants
     public static final int kClimbVerticalSolenoidPort = 5;
     public static final int kClimbAngledSolenoidPort = 7;
+    public static double kRightClimbEncoderOffsetForTopPos = 0; // FIXME ('zero' with arm fully extended)
 
-    // ProfiledPID controller constants
-    public static final double kPClimbController = 0; // FIXME, TUNE
-    public static final double kIClimbController = 0; // DO NOT USE
-    public static final double kDClimbController = 0;
-    public static final double kMaxClimbSpeedMetersPerSecond = 0.2; // FIXME, TUNE
-    public static final double kMaxClimbAccelerationMetersPerSecondSquared = 0.05; // FIXME, TUNE
+
   }
 
   public static final class LEDsConstants {

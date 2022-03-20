@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Need to fix one more problem with swerve">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/intake/IntakeCommand.java" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="most recent changes, still a work in progress">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ShooterManualControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ShooterManualControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/IntakeSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/IntakeSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +78,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master" />
   </component>
   <component name="RunManager" selected="Gradle.zuntue2022 [build]">
@@ -226,7 +221,8 @@
       <workItem from="1647561642027" duration="3221000" />
       <workItem from="1647568818646" duration="9803000" />
       <workItem from="1647725994031" duration="59000" />
-      <workItem from="1647726206377" duration="1424000" />
+      <workItem from="1647726206377" duration="4692000" />
+      <workItem from="1647749007140" duration="5265000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -403,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647463719118</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="most recent changes, still a work in progress">
+      <created>1647727925197</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1647727925197</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +424,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mostly added comments and few super minor changes (most recommended by intelliJ)" />
     <MESSAGE value="added phoenix and rev as dependencies" />
     <MESSAGE value="made a lot of changes, mostly copying code from RedThunder7166" />
     <MESSAGE value="updated it for our gyro" />
@@ -446,6 +448,7 @@
     <MESSAGE value="deleted wrong comments" />
     <MESSAGE value="added intake and restructured some things" />
     <MESSAGE value="Need to fix one more problem with swerve" />
-    <option name="LAST_COMMIT_MESSAGE" value="Need to fix one more problem with swerve" />
+    <MESSAGE value="most recent changes, still a work in progress" />
+    <option name="LAST_COMMIT_MESSAGE" value="most recent changes, still a work in progress" />
   </component>
 </project>
