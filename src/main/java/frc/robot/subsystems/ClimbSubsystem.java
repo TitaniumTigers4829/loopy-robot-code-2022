@@ -171,6 +171,14 @@ public class ClimbSubsystem extends SubsystemBase {
     }
   }
 
+  public double getLeftPIDError() {
+    return m_climbLeftProfiledPIDController.getPositionError();
+  }
+  public double getRightPIDError() {
+    return m_climbRightProfiledPIDController.getPositionError();
+  }
+
+
   /**
    * Gets whether the climb is vertical or not. Also handles unexpected states and throws exceptions
    * accordingly.
@@ -268,7 +276,7 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   private void setHookToBottomPos(double outputFromPID,
       double errorFromPID, WPI_TalonFX motor) {
-    // FIXME: .getPositionErrorMight need to be negated
+    // FIXME: .getPositionError might need to be negated
     if (errorFromPID <= ClimbConstants.kClimbMinPosPIDErrorThreshold
         // Is error small, i.e. are we close?
         && errorFromPID != 0) { // But not fully there yet?

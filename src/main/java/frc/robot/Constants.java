@@ -145,10 +145,11 @@ public final class Constants {
     // General constants
     public static final double kClimbMaxHeight = 0; // in meters // FIXME
     public static final double kClimbMinHeight = 0.86995; // in meters
+    public static final double kClimbSlightlyExtendedHeight = 0.8;
 
     // NOTE:
     // We only need estimates for the bottom position of the climb arms because they are
-    // 'zeroed' in the top position. The bottom position values are just estimates becauese
+    // 'zeroed' in the top position. The bottom position values are just estimates because
     // there is the unpredictable nature of how the climb rope winds up.
 
     public static final double kClimbLeftMinHeightEncoderEstimate = -1000; // FIXME
@@ -196,6 +197,7 @@ public final class Constants {
   }
 
   public static final class OIConstants {
+    public static final int kButtonControllerPort = 1;
 
     public static final int kDriverControllerPort = 0;
     public static final double kDriverControllerDeadband = 0.1;

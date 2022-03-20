@@ -1,0 +1,6 @@
+Things to do:
+- Check climb (values, encoders, PID)
+  - values --> manual control get stuff
+  - encoders --> link encoders and get values ^^
+  - PID --> tune with buttons
+- Tune swerve drive (PID)

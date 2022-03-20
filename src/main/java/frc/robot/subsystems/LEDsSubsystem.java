@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LEDsConstants;
 
+//Depricated tag because we won't use this
+@Deprecated
 public class LEDsSubsystem extends  SubsystemBase{
     private final Spark ledController;
 

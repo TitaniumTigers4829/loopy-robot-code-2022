@@ -55,6 +55,7 @@ public class IntakeSubsystem extends SubsystemBase {
 //  public void setMotorFullPowerOut() {
 //    m_motor.set(-1.0);
 //  }
+
 //
 //  public void setMotorCustomPowerIn(double customPower) {
 //    m_motor.set(customPower);
@@ -72,8 +73,8 @@ public class IntakeSubsystem extends SubsystemBase {
     m_solenoid.set(Value.kForward);
   }
 //
-//  @Override
-//  public void periodic() {
+  @Override
+  public void periodic() {
 //    // Smart Dashboard Debugging
 //
 //    // I believe motor should be reporting a max velocity theoretically close to 21777.0666666
@@ -89,5 +90,5 @@ public class IntakeSubsystem extends SubsystemBase {
 //    }
 //
 //    SmartDashboard.putBoolean("Is Intake Deployed?: ", getIsIntakeDeployed());
-//  }
+  }
 }
