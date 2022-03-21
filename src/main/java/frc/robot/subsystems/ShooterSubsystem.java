@@ -13,8 +13,8 @@ import java.util.function.DoubleSupplier;
 public class ShooterSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_leftMotor;
   private final WPI_TalonFX m_rightMotor;
-  private final Servo leftServo;
-  private final Servo rightServo;
+  private final Servo m_leftServo;
+  private final Servo m_rightServo;
 
   // TODO: IDEA: turn off the compressor while trying to shoot to help the limelight see better
   /** Creates the Shooter subsystem. */
@@ -22,8 +22,8 @@ public class ShooterSubsystem extends SubsystemBase {
     // Initialize Motors
     m_leftMotor = new WPI_TalonFX(ShooterConstants.kLeftShooterMotorPort);
     m_rightMotor = new WPI_TalonFX(ShooterConstants.kRightShooterMotorPort);
-    leftServo = new Servo(ShooterConstants.kLeftServoPort);
-    rightServo = new Servo(ShooterConstants.kRightServoPort);
+    m_leftServo = new Servo(ShooterConstants.kLeftServoPort);
+    m_rightServo = new Servo(ShooterConstants.kRightServoPort);
 
     m_leftMotor.setInverted(false);
     m_rightMotor.setInverted(true);
@@ -60,8 +60,8 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param height Value should be in between 0 and 1
    */
   public void setHeight(double height) {
-    leftServo.set(height);
-    rightServo.set(height);
+    m_leftServo.set(height);
+    m_rightServo.set(height);
   }
 
   @Override
