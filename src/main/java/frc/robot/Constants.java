@@ -72,20 +72,20 @@ public final class Constants {
 
 
     // Values to scale joystick inputs to desired states.
-    public static final double kMaxSpeedMetersPerSecond = 10;
-    public static final double kMaxRotationalSpeedMetersPerSecond = 6; // TODO: make sure this is right... (maybe should be radians)
+    public static final double kMaxSpeedMetersPerSecond = 4.5; // LOCKED IN
+    public static final double kMaxRotationalSpeedMetersPerSecond = 10; // TODO: make sure this is right... (maybe should be radians)
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically
     // for *your* robot's drive.
     // The SysId tool provides a convenient method for obtaining these values for your robot.
     public static final double ksVolts = 0.2; // FIXME with sysid
-    public static final double kvVoltSecondsPerMeter = 2.75; // FIXME with sysid
+    public static final double kvVoltSecondsPerMeter = 1; // FIXME with sysid
     public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
 
 
     public static final double ksTurning = 0.77; // LOCKED IN!  -----  old 0.66202
-    public static final double kvTurning = 2; // 3.0052
+    public static final double kvTurning = 1; // 3.0052
     public static final double kaTurning = 0; // Default to zero
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
   }
@@ -98,8 +98,12 @@ public final class Constants {
     public static final double kIModuleTurnController = 0; // DO NOT USE
     public static final double kDModuleTurnController = 0; // TUNE
 
+    // Acceleration could be 8pi to make module get anywhere in 0.5 seconds.
+    // Will never reach max velocity, so it can be right at the "top" of the triangle.
+    // In this case, that would be 2pi.
+
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI;
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = Math.PI;
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 8 * Math.PI;
 
     public static final double kPModuleDriveController = 0; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
