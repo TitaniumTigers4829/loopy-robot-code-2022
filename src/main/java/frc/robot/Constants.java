@@ -137,6 +137,8 @@ public final class Constants {
 
     public static final int kLeftShooterMotorPort = 19;
     public static final int kRightShooterMotorPort = 20;
+    public static final int kLeftServoPort = 0 - 9;
+    public static final int kRightServoPort = 0 - 9;
   }
 
 
