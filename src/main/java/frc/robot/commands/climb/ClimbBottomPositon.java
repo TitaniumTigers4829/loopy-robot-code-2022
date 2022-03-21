@@ -1,14 +1,13 @@
 package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ClimbConstants;
 import frc.robot.subsystems.ClimbSubsystem;
 
-public class ClimbRetractHooks extends CommandBase {
+public class ClimbBottomPositon extends CommandBase {
 
   private final ClimbSubsystem m_climb;
 
-  public ClimbRetractHooks(ClimbSubsystem climb) {
+  public ClimbBottomPositon(ClimbSubsystem climb) {
     m_climb = climb;
     addRequirements(climb);
   }

@@ -9,24 +9,15 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.climb.ClimbRetractHooks;
-import frc.robot.commands.climb.MidBarClimb;
-import frc.robot.commands.climb.MidBarLatchHooks;
-import frc.robot.commands.intake.IntakeActiveTeleop;
 import frc.robot.commands.testing.ClimbManualIndependentControl;
-import frc.robot.commands.testing.ClimbManualPairedControl;
-import frc.robot.commands.testing.ClimbManualSolenoidControl;
-import frc.robot.commands.testing.ShooterManualControl;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 import java.util.function.DoubleSupplier;
 
 /*
@@ -40,10 +31,10 @@ public class RobotContainer {
 
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-//  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
+  private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
 //  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
-//  private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
+  private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
 //  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
@@ -55,7 +46,7 @@ public class RobotContainer {
    */
   public RobotContainer() {
     // Turn off the limelight lights because they are very bright
-//    m_Limelight.turnOffLED();
+    m_Limelight.turnOffLED();
     // m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands, just for testing.
 
     /**
@@ -120,7 +111,7 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    modifyAxis(LEFT_STICK_Y) * -1// xAxis
+                    modifyAxis(LEFT_STICK_Y) * -1 // xAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(LEFT_STICK_X) * -1 // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
@@ -133,7 +124,7 @@ public class RobotContainer {
 //    new JoystickButton(m_buttonController, 8).whileHeld(new IntakeActiveTeleop())
 //    new JoystickButton(m_buttonController, 7).whileHeld(new Expel())
 //    new POVButton(m_buttonController, 270).whenPressed(new MidBarLatchHooks(m_climbSubsystem));
-//    new POVButton(m_buttonController, 180).whenPressed(new ClimbRetractHooks(m_climbSubsystem));
+//    new POVButton(m_buttonController, 180).whenPressed(new ClimbBottomPositon(m_climbSubsystem));
 //    new POVButton(m_buttonController, 90).whenPressed(new MidBarClimb(m_climbSubsystem));
 
     A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
@@ -141,8 +132,8 @@ public class RobotContainer {
     //TODO: Test/tune climb using commands like this
 
     // Make sure hooks are latched when testing.
-    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
-    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
+//    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
+//    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
 //    B_BUTTON.toggleWhenPressed(new ShooterManualControl(m_shooterSubsystem, 0.5));
 
 //    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
@@ -152,9 +143,11 @@ public class RobotContainer {
 
 //    B_BUTTON.toggleWhenPressed(new ClimbManualSolenoidControl(m_climbSubsystem, LEFT_BUMPER, RIGHT_BUMPER));
 //    Y_BUTTON.whenPressed(new InstantCommand(m_Limelight::blinkLED));
-//    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
+
+    RIGHT_BUMPER.whenPressed(new InstantCommand(m_intakeSubsystem::setSolenoidRetracted));
+    LEFT_BUMPER.whenPressed(new InstantCommand(m_intakeSubsystem::setSolenoidDeployed));
+    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
-//    A_BUTTON.whenPressed(new InstantCommand(m_Limelight::turnOnLED));
 //
     //  new JoystickButton(m_driverController, 2).whenPressed(new RunCommand(()->m_robotDrive.resetEncoders()));
     //  new JoystickButton(m_driverController, 1).whenPressed(()->m_robotDrive.zeroHeading());

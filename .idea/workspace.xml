@@ -4,24 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="most recent changes to climb subsystem and relevant constants">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/TODO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbFullExtension.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbRetractHooks.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbSlightlyExtended.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/MidBarClimb.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/MidBarLatchHooks.java" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="ryan changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbAngled.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbAngled.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbHookHeight.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbVertical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbVertical.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/MidBar.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbRetractHooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbBottomPositon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/MidBarClimb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/MidBarClimb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/IntakeSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/IntakeSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LEDsSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LEDsSubsystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +84,7 @@
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master" />
   </component>
-  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
+  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -203,10 +192,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.zuntue2022 [build]" />
         <item itemvalue="Gradle.zuntue2022 [deploy]" />
-        <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
+        <item itemvalue="Gradle.zuntue2022 [build]" />
         <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
+        <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
         <item itemvalue="Gradle.zuntue2022 [vendordep]" />
       </list>
     </recent_temporary>
@@ -237,7 +226,8 @@
       <workItem from="1647725994031" duration="59000" />
       <workItem from="1647726206377" duration="4692000" />
       <workItem from="1647749007140" duration="5921000" />
-      <workItem from="1647789675427" duration="12145000" />
+      <workItem from="1647789675427" duration="21586000" />
+      <workItem from="1647898496660" duration="588000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -435,7 +425,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647789716329</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="ryan changes">
+      <created>1647810219137</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1647810219137</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +454,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated it for our gyro" />
     <MESSAGE value="updated can IDs" />
     <MESSAGE value="changed some constants to try and get rid of chattering." />
     <MESSAGE value="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller)." />
@@ -482,6 +478,7 @@
     <MESSAGE value="most recent changes, still a work in progress" />
     <MESSAGE value="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy." />
     <MESSAGE value="most recent changes to climb subsystem and relevant constants" />
-    <option name="LAST_COMMIT_MESSAGE" value="most recent changes to climb subsystem and relevant constants" />
+    <MESSAGE value="ryan changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="ryan changes" />
   </component>
 </project>

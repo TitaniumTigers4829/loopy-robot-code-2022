@@ -328,19 +328,19 @@ public class ClimbSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // Warn Drivers if the hooks are not near each other for some reason.
-    if (Math.abs(getLeftHookHeight() - getRightHookHeight()) > 0.25) {
-      DriverStation.reportWarning(
-          "The climb hooks are not in sync. Manual control might be needed.", false);
-    }
+//    if (Math.abs(getLeftHookHeight() - getRightHookHeight()) > 0.25) {
+//      DriverStation.reportWarning(
+//          "The climb hooks are not in sync. Manual control might be needed.", false);
+//    }
 
     // Smart Dashboard Debugging
-    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
-    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
-    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
-    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
-    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
-    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
-    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
+//    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
+//    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
+//    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
+//    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
+//    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
+//    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
+//    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 
   @Override
