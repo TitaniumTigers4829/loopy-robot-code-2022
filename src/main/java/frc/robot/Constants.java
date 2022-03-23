@@ -139,6 +139,21 @@ public final class Constants {
     public static final int kRightShooterMotorPort = 20;
     public static final int kLeftServoPort = 0 - 9;
     public static final int kRightServoPort = 0 - 9;
+
+    public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
+    // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
+    public static final double kShooterGearRatio = 7.13;
+    public static final double kWheelDiameterMeters = 0.1016; // 4 inches
+    public static final double kWheelCircumferenceMeters =
+    kWheelDiameterMeters * Math.PI; // C = D * pi
+    public static final double kShootertoMetersPerSecond =
+        (10 * kWheelCircumferenceMeters) / (kShooterGearRatio * 2048);
+
+
+    // Preprogrammed shoot values
+    public static final double fenderShotHeight = 0 - 9;
+    public static final double fenderShotSpeed = 0 - 9;
+
   }
 
 
