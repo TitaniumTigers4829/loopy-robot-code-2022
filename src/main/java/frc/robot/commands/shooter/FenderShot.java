@@ -21,6 +21,7 @@ public class FenderShot extends SequentialCommandGroup {
       // Waits a second for flywheels to get up to speed
       new WaitCommand(1),
       // Shoots the ball
+      // TODO: Make it so the tower motors go a certain distance so we can control if there are multiple balls loaded
       new SetTowerMotorSpeed(towerSubsystem, 1.0),
       new WaitCommand(.5),
       // Stops the flywheels, the tower motors, and sets the shooter height to 50%
