@@ -30,28 +30,32 @@ public class ClimbManualIndependentControl extends CommandBase {
 
   @Override
   public void execute() {
-    if (!m_climbSubsystem.getIsLeftLimitSwitchPressed()){
-      m_climbSubsystem.setLeftMotorOutputManual(m_leftStick.getAsDouble() / 4);
-    }
-    else{
-      if (m_leftStick.getAsDouble() < 0){
-        m_climbSubsystem.setLeftMotorOutputManual(m_leftStick.getAsDouble() / 4);
-      }
-      else{
-        m_climbSubsystem.setLeftMotorOutputManual(0);
-      }
-    }
-    if (!m_climbSubsystem.getIsRightLimitSwitchPressed()){
-      m_climbSubsystem.setRightMotorOutputManual(m_rightStick.getAsDouble() / 4);
-    }
-    else{
-      if (m_rightStick.getAsDouble() < 0){
-        m_climbSubsystem.setRightMotorOutputManual(m_rightStick.getAsDouble() / 4);
-      }
-      else{
-        m_climbSubsystem.setRightMotorOutputManual(0);
-      }
-    }
+
+    m_climbSubsystem.setLeftMotorOutputManual(-m_leftStick.getAsDouble() / 4);
+    m_climbSubsystem.setRightMotorOutputManual(-m_rightStick.getAsDouble() / 4);
+
+//    if (!m_climbSubsystem.getIsLeftLimitSwitchPressed()){
+//      m_climbSubsystem.setLeftMotorOutputManual(m_leftStick.getAsDouble() / 4);
+//    }
+//    else{
+//      if (m_leftStick.getAsDouble() < 0){
+//        m_climbSubsystem.setLeftMotorOutputManual(m_leftStick.getAsDouble() / 4);
+//      }
+//      else{
+//        m_climbSubsystem.setLeftMotorOutputManual(0);
+//      }
+//    }
+//    if (!m_climbSubsystem.getIsRightLimitSwitchPressed()){
+//      m_climbSubsystem.setRightMotorOutputManual(m_rightStick.getAsDouble() / 4);
+//    }
+//    else{
+//      if (m_rightStick.getAsDouble() < 0){
+//        m_climbSubsystem.setRightMotorOutputManual(m_rightStick.getAsDouble() / 4);
+//      }
+//      else{
+//        m_climbSubsystem.setRightMotorOutputManual(0);
+//      }
+//    }
   }
 
   @Override

@@ -2,46 +2,39 @@ package frc.robot.commands.testing;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimbSubsystem;
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-@Deprecated
-public class ClimbManualSolenoidControl extends CommandBase {
-
+public class ClimbManualPairedPIDControl extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ClimbSubsystem m_climbSubsystem;
+  private final DoubleSupplier m_rightStick;
 
-  private final BooleanSupplier m_setVertical, m_setAngled;
   /**
-   *
+   * Creates ClimbManualIndependentControl.
    *
    * @param subsystem The climb subsystem used by this command.
    */
-  public ClimbManualSolenoidControl(ClimbSubsystem subsystem, BooleanSupplier vertical, BooleanSupplier angled) {
+  public ClimbManualPairedPIDControl(ClimbSubsystem subsystem, DoubleSupplier rightStick) {
     m_climbSubsystem = subsystem;
     addRequirements(m_climbSubsystem);  // Use addRequirements() to declare subsystem dependencies.
 
-    m_setVertical = vertical;
-    m_setAngled = angled;
+    m_rightStick = rightStick;
   }
 
   @Override
   public void initialize() {
-    m_climbSubsystem.setClimbAngled();
   }
 
   @Override
   public void execute() {
-    if (m_setAngled.getAsBoolean()) {
-      m_climbSubsystem.setClimbAngled();
-    }
-    if (m_setVertical.getAsBoolean()){
-      m_climbSubsystem.setClimbVertical();
-    }
+    m_climbSubsystem.setDesiredLeftHookHeight(m_rightStick.getAsDouble() + 1);
+    m_climbSubsystem.setDesiredRightHookHeight(m_rightStick.getAsDouble() + 1);
   }
 
   @Override
   public void end(boolean interrupted) {
+    m_climbSubsystem.setLeftMotorOutputManual(0);
+    m_climbSubsystem.setRightMotorOutputManual(0);
   }
 
   @Override
@@ -49,3 +42,4 @@ public class ClimbManualSolenoidControl extends CommandBase {
     return false;
   }
 }
+

@@ -73,19 +73,19 @@ public final class Constants {
 
     // Values to scale joystick inputs to desired states.
     public static final double kMaxSpeedMetersPerSecond = 4.5; // LOCKED IN
-    public static final double kMaxRotationalSpeedMetersPerSecond = 10; // TODO: make sure this is right... (maybe should be radians)
+    public static final double kMaxRotationalSpeed = 4 * Math.PI; // TODO: make sure this is right... (maybe should be radians)
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically
     // for *your* robot's drive.
     // The SysId tool provides a convenient method for obtaining these values for your robot.
     public static final double ksVolts = 0.2; // FIXME with sysid
-    public static final double kvVoltSecondsPerMeter = 1; // FIXME with sysid
+    public static final double kvVoltSecondsPerMeter = 2.75; // FIXME with sysid
     public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
 
 
     public static final double ksTurning = 0.77; // LOCKED IN!  -----  old 0.66202
-    public static final double kvTurning = 1; // 3.0052
+    public static final double kvTurning = 0.75; // 3.0052
     public static final double kaTurning = 0; // Default to zero
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
   }
@@ -94,7 +94,7 @@ public final class Constants {
 
     public static final double kDriveGearRatio = 7.13;
 
-    public static final double kPModuleTurnController = 6; // TUNE: 8.2142
+    public static final double kPModuleTurnController = 8.5; // TUNE: 8.2142
     public static final double kIModuleTurnController = 0; // DO NOT USE
     public static final double kDModuleTurnController = 0; // TUNE
 
@@ -103,7 +103,7 @@ public final class Constants {
     // In this case, that would be 2pi.
 
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI;
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 8 * Math.PI;
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 10 * Math.PI;
 
     public static final double kPModuleDriveController = 0; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
@@ -158,8 +158,8 @@ public final class Constants {
     // 'zeroed' in the top position. The bottom position values are just estimates because
     // there is the unpredictable nature of how the climb rope winds up.
 
-    public static final double kClimbLeftMinHeightEncoderEstimate = -3800; // FIXME
-    public static final double kClimbRightMinHeightEncoderEstimate = -3800; // FIXME
+    public static final double kClimbLeftMinHeightEncoderEstimate = -3764.00390625; // FIXME
+    public static final double kClimbRightMinHeightEncoderEstimate = -3756.97; // FIXME
 
     // in meters, when do we switch to pure voltage control.
     public static final double kClimbMinPosPIDErrorThreshold = 0.10;
@@ -175,7 +175,7 @@ public final class Constants {
     public static final double kPClimbController = 1; // FIXME, TUNE
     public static final double kIClimbController = 0; // DO NOT USE
     public static final double kDClimbController = 0;
-    public static final double kMaxClimbSpeedMetersPerSecond = 0.2; // FIXME, TUNE
+    public static final double kMaxClimbSpeedMetersPerSecond = 0.1; // FIXME, TUNE
     public static final double kMaxClimbAccelerationMetersPerSecondSquared = 0.05; // FIXME, TUNE
 
     // Motor constants
@@ -185,16 +185,12 @@ public final class Constants {
     // Encoder constants
     public static final int kLeftClimbEncoderPort = 11;
     public static final int kRightClimbEncoderPort = 29;
-    public static final double kLeftClimbEncoderOffsetForTopPos = 3947.607421875; // FIXME ('zero' with arm fully extended)
     // Limit Switch constants
     public static final int kLeftClimbLimitSwitchPort = 2;
     public static final int kRightClimbLimitSwitchPort = 3;
     // Solenoid constants
     public static final int kClimbVerticalSolenoidPort = 5;
     public static final int kClimbAngledSolenoidPort = 7;
-    public static double kRightClimbEncoderOffsetForTopPos = 3728.3203125; // FIXME ('zero' with arm fully extended)
-
-
   }
 
   public static final class LEDsConstants {

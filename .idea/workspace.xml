@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="renamed climb retract hooks to make more sense">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now).">
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualPairedPIDControl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualIndependentControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualIndependentControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualSolenoidControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ClimbManualSolenoidControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +230,8 @@
       <workItem from="1647726206377" duration="4692000" />
       <workItem from="1647749007140" duration="5921000" />
       <workItem from="1647789675427" duration="21586000" />
-      <workItem from="1647898496660" duration="4413000" />
+      <workItem from="1647898496660" duration="11186000" />
+      <workItem from="1648000305945" duration="8039000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -435,7 +443,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647899116279</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now).">
+      <created>1647904404554</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1647904404554</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -457,7 +472,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed some constants to try and get rid of chattering." />
     <MESSAGE value="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller)." />
     <MESSAGE value="Added Shooter Subsystem" />
     <MESSAGE value="tuning first attempts" />
@@ -482,6 +496,7 @@
     <MESSAGE value="most recent changes to climb subsystem and relevant constants" />
     <MESSAGE value="ryan changes" />
     <MESSAGE value="renamed climb retract hooks to make more sense" />
-    <option name="LAST_COMMIT_MESSAGE" value="renamed climb retract hooks to make more sense" />
+    <MESSAGE value="swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now)." />
+    <option name="LAST_COMMIT_MESSAGE" value="swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now)." />
   </component>
 </project>
