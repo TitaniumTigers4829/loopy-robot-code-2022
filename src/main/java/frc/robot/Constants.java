@@ -145,17 +145,17 @@ public final class Constants {
   public static final class ClimbConstants {
 
     // General constants
-    public static final double kClimbMaxHeight = 0; // in meters // FIXME
-    public static final double kClimbMinHeight = 0.86995; // in meters
-    public static final double kClimbSlightlyExtendedHeight = 0.8;
+    public static final double kClimbMaxHeight = 1.6081375; // in meters // FIXME
+    public static final double kClimbMinHeight = 0.815975; // in meters
+    public static final double kClimbSlightlyExtendedHeight = -0.1;
 
     // NOTE:
     // We only need estimates for the bottom position of the climb arms because they are
     // 'zeroed' in the top position. The bottom position values are just estimates because
     // there is the unpredictable nature of how the climb rope winds up.
 
-    public static final double kClimbLeftMinHeightEncoderEstimate = -1000; // FIXME
-    public static final double kClimbRightMinHeightEncoderEstimate = -1000; // FIXME
+    public static final double kClimbLeftMinHeightEncoderEstimate = -3800; // FIXME
+    public static final double kClimbRightMinHeightEncoderEstimate = -3800; // FIXME
 
     // in meters, when do we switch to pure voltage control.
     public static final double kClimbMinPosPIDErrorThreshold = 0.10;
@@ -181,14 +181,14 @@ public final class Constants {
     // Encoder constants
     public static final int kLeftClimbEncoderPort = 11;
     public static final int kRightClimbEncoderPort = 29;
-    public static final double kLeftClimbEncoderOffsetForTopPos = 0; // FIXME ('zero' with arm fully extended)
+    public static final double kLeftClimbEncoderOffsetForTopPos = 3947.607421875; // FIXME ('zero' with arm fully extended)
     // Limit Switch constants
-    public static final int kLeftClimbLimitSwitchPort = 3;
-    public static final int kRightClimbLimitSwitchPort = 2;
+    public static final int kLeftClimbLimitSwitchPort = 2;
+    public static final int kRightClimbLimitSwitchPort = 3;
     // Solenoid constants
     public static final int kClimbVerticalSolenoidPort = 5;
     public static final int kClimbAngledSolenoidPort = 7;
-    public static double kRightClimbEncoderOffsetForTopPos = 0; // FIXME ('zero' with arm fully extended)
+    public static double kRightClimbEncoderOffsetForTopPos = 3728.3203125; // FIXME ('zero' with arm fully extended)
 
 
   }
