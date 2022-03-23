@@ -77,8 +77,10 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
     m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
 
-    m_leftEncoder.configMagnetOffset(ClimbConstants.kLeftClimbEncoderOffsetForTopPos);
-    m_rightEncoder.configMagnetOffset(ClimbConstants.kRightClimbEncoderOffsetForTopPos);
+    m_rightEncoder.configSensorDirection(true);
+
+    // m_leftEncoder.configMagnetOffset(ClimbConstants.kLeftClimbEncoderOffsetForTopPos);
+    // m_rightEncoder.configMagnetOffset(ClimbConstants.kRightClimbEncoderOffsetForTopPos);
 
     // Initialize Limit Switches
     m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
@@ -95,8 +97,7 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return encoder value
    */
   public double getLeftEncoderValue() {
-    return m_leftEncoder.getPosition();
-    // TODO: change encoders in phoenix tuner to persist across power cycles.
+    return m_leftEncoder.getPosition() - ClimbConstants.kLeftClimbEncoderOffsetForTopPos;
   }
 
 
@@ -136,9 +137,7 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return encoder value
    */
   private double getRightEncoderValue() {
-    return m_rightEncoder.getPosition();
-    // TODO: change encoders in phoenix tuner to persist across power cycles.
-
+    return m_rightEncoder.getPosition() - ClimbConstants.kRightClimbEncoderOffsetForTopPos;
   }
 
   /**
@@ -148,7 +147,7 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return true: climb is at bottom pos, false: climb is not at bottom pos
    */
   public boolean getIsRightLimitSwitchPressed() {
-    return m_rightLimitSwitch.get();
+    return !m_rightLimitSwitch.get();
   }
 
 
@@ -161,8 +160,8 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return height of right hook (in meters)
    */
   public double getRightHookHeight() {
-    double multiplier = (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) / (0
-        - ClimbConstants.kClimbRightMinHeightEncoderEstimate);
+    double multiplier = (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight)
+     / (0 - ClimbConstants.kClimbRightMinHeightEncoderEstimate);
     if (!getIsRightLimitSwitchPressed()) {
       return multiplier * getRightEncoderValue()
           + ClimbConstants.kClimbMinHeight;
@@ -334,12 +333,14 @@ public class ClimbSubsystem extends SubsystemBase {
 //    }
 
     // Smart Dashboard Debugging
-//    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
-//    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
-//    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
-//    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
-//    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
-//    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
+   SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
+   SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
+   SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
+   SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
+  //  SmartDashboard.putNumber("Left Climb Encoder abs: ", m_leftEncoder.getPosition());
+  //  SmartDashboard.putNumber("Right Climb Encoder abs: ", m_rightEncoder.getPosition());
+   SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
+   SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
 //    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 
