@@ -67,8 +67,8 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftMotor.configFactoryDefault();
     m_rightMotor.configFactoryDefault();
 
-    m_leftMotor.setInverted(true);
-    m_rightMotor.setInverted(false);
+    m_leftMotor.setInverted(false);
+    m_rightMotor.setInverted(true);
 
     m_leftMotor.setNeutralMode(NeutralMode.Brake);
     m_rightMotor.setNeutralMode(NeutralMode.Brake);
@@ -77,8 +77,10 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
     m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
 
-    m_leftEncoder.configMagnetOffset(ClimbConstants.kLeftClimbEncoderOffsetForTopPos);
-    m_rightEncoder.configMagnetOffset(ClimbConstants.kRightClimbEncoderOffsetForTopPos);
+    m_rightEncoder.configSensorDirection(true);
+
+    // m_leftEncoder.configMagnetOffset(ClimbConstants.kLeftClimbEncoderOffsetForTopPos);
+    // m_rightEncoder.configMagnetOffset(ClimbConstants.kRightClimbEncoderOffsetForTopPos);
 
     // Initialize Limit Switches
     m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
@@ -96,7 +98,6 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public double getLeftEncoderValue() {
     return m_leftEncoder.getPosition();
-    // TODO: change encoders in phoenix tuner to persist across power cycles.
   }
 
 
@@ -124,7 +125,7 @@ public class ClimbSubsystem extends SubsystemBase {
         - ClimbConstants.kClimbLeftMinHeightEncoderEstimate);
     if (!getIsLeftLimitSwitchPressed()) {
       return multiplier * getLeftEncoderValue()
-          + ClimbConstants.kClimbMinHeight;
+          + ClimbConstants.kClimbMaxHeight;
     } else {
       return ClimbConstants.kClimbMinHeight;
     }
@@ -137,8 +138,6 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   private double getRightEncoderValue() {
     return m_rightEncoder.getPosition();
-    // TODO: change encoders in phoenix tuner to persist across power cycles.
-
   }
 
   /**
@@ -148,7 +147,7 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return true: climb is at bottom pos, false: climb is not at bottom pos
    */
   public boolean getIsRightLimitSwitchPressed() {
-    return m_rightLimitSwitch.get();
+    return !m_rightLimitSwitch.get();
   }
 
 
@@ -161,11 +160,11 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return height of right hook (in meters)
    */
   public double getRightHookHeight() {
-    double multiplier = (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) / (0
-        - ClimbConstants.kClimbRightMinHeightEncoderEstimate);
+    double multiplier = (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight)
+        / (0 - ClimbConstants.kClimbRightMinHeightEncoderEstimate);
     if (!getIsRightLimitSwitchPressed()) {
       return multiplier * getRightEncoderValue()
-          + ClimbConstants.kClimbMinHeight;
+          + ClimbConstants.kClimbMaxHeight;
     } else {
       return ClimbConstants.kClimbMinHeight;
     }
@@ -174,6 +173,7 @@ public class ClimbSubsystem extends SubsystemBase {
   public double getLeftPIDError() {
     return m_climbLeftProfiledPIDController.getPositionError();
   }
+
   public double getRightPIDError() {
     return m_climbRightProfiledPIDController.getPositionError();
   }
@@ -208,6 +208,7 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setLeftMotorOutputManual(double output) {
     m_leftMotor.set(output);
+    SmartDashboard.putNumber("leftOutput: ", output);
   }
 
   /**
@@ -218,6 +219,7 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setRightMotorOutputManual(double output) {
     m_rightMotor.set(output);
+    SmartDashboard.putNumber("rightOutput: ", output);
   }
 
   /**
@@ -227,9 +229,11 @@ public class ClimbSubsystem extends SubsystemBase {
    * @param height desired hook height (meters)
    */
   public void setDesiredLeftHookHeight(double height) {
-    final double leftOutput = m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(),
+    double leftOutput = m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(),
         height);
     m_leftMotor.set(leftOutput);
+    SmartDashboard.putNumber("left height: ", height);
+    SmartDashboard.putNumber("leftOutput PID: ", leftOutput);
   }
 
   /**
@@ -239,9 +243,11 @@ public class ClimbSubsystem extends SubsystemBase {
    * @param height desired hook height (meters)
    */
   public void setDesiredRightHookHeight(double height) {
-    final double rightOutput = m_climbRightProfiledPIDController.calculate(getRightHookHeight(),
+    double rightOutput = m_climbRightProfiledPIDController.calculate(getRightHookHeight(),
         height);
     m_rightMotor.set(rightOutput);
+    SmartDashboard.putNumber("right height: ", height);
+    SmartDashboard.putNumber("rightOutput PID: ", rightOutput);
   }
 
   /**
@@ -302,8 +308,8 @@ public class ClimbSubsystem extends SubsystemBase {
 
   /**
    * Sets right hook to full extension. Makes setpoint a little higher than it needs to be to ensure
-   *    * that arms are all the way extended. All this does is loosen the rope on the spool a tiny bit,
-   *    * but provides nice to have peace of mind.
+   * * that arms are all the way extended. All this does is loosen the rope on the spool a tiny bit,
+   * * but provides nice to have peace of mind.
    * TODO: confirm that this is within frame perimeter when angled.
    */
   public void setRightHookToFullExtension() {
@@ -325,6 +331,11 @@ public class ClimbSubsystem extends SubsystemBase {
     m_solenoid.set(Value.kReverse);
   }
 
+  public void resetEncoders() {
+    m_leftEncoder.setPosition(0);
+    m_rightEncoder.setPosition(0);
+  }
+
   @Override
   public void periodic() {
     // Warn Drivers if the hooks are not near each other for some reason.
@@ -334,13 +345,17 @@ public class ClimbSubsystem extends SubsystemBase {
 //    }
 
     // Smart Dashboard Debugging
-//    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
-//    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
-//    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
-//    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
-//    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
-//    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
-//    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
+    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
+    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
+    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
+    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
+    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
+    SmartDashboard.putNumber("Right Climb PID Error: ", getRightPIDError());
+    SmartDashboard.putNumber("Left Climb PID setpoint: ", m_climbLeftProfiledPIDController.getSetpoint().position);
+    SmartDashboard.putNumber("Right Climb PID setpoint: ", m_climbRightProfiledPIDController.getSetpoint().position);
+    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
+    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
+    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 
   @Override

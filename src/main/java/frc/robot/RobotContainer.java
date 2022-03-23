@@ -13,7 +13,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.climb.ClimbBottomPositon;
+import frc.robot.commands.climb.MidBarClimb;
+import frc.robot.commands.climb.MidBarLatchHooks;
 import frc.robot.commands.testing.ClimbManualIndependentControl;
+import frc.robot.commands.testing.ClimbManualPairedControl;
+import frc.robot.commands.testing.ClimbManualPairedPIDControl;
+import frc.robot.commands.testing.ClimbManualSolenoidControl;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -39,7 +45,7 @@ public class RobotContainer {
 
   // The driver's controller
   private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
+  // private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -101,24 +107,37 @@ public class RobotContainer {
     JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
     POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
     POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
+    POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
 
     /**
      * Sets the default command and joystick bindings for the drive train.
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
 
-    m_robotDrive.setDefaultCommand(
-        new RunCommand(
-            () ->
-                m_robotDrive.drive(
-                    modifyAxis(LEFT_STICK_Y) * -1 // xAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
-                    true),
-            m_robotDrive));
+    RIGHT_BUMPER.toggleWhenPressed( new RunCommand(
+        () ->
+            m_robotDrive.drive(
+                modifyAxis(LEFT_STICK_Y) * -1 // xAxis
+                    * DriveConstants.kMaxSpeedMetersPerSecond,
+                modifyAxis(LEFT_STICK_X) * -1 // yAxis
+                    * DriveConstants.kMaxSpeedMetersPerSecond,
+                modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
+                    * DriveConstants.kMaxRotationalSpeed,
+                true),
+        m_robotDrive));
+
+//     m_robotDrive.setDefaultCommand(
+//         new RunCommand(
+//             () ->
+//                 m_robotDrive.drive(
+//                     modifyAxis(LEFT_STICK_Y) * -1 // xAxis
+//                         * DriveConstants.kMaxSpeedMetersPerSecond,
+//                     modifyAxis(LEFT_STICK_X) * -1 // yAxis
+//                         * DriveConstants.kMaxSpeedMetersPerSecond,
+//                     modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
+//                         * DriveConstants.kMaxRotationalSpeed,
+//                     true),
+//             m_robotDrive));
 
 //    new JoystickButton(m_buttonController, 2).whileHeld(new Shoot)
 //    new JoystickButton(m_buttonController, 8).whileHeld(new IntakeActiveTeleop())
@@ -127,7 +146,11 @@ public class RobotContainer {
 //    new POVButton(m_buttonController, 180).whenPressed(new ClimbBottomPositon(m_climbSubsystem));
 //    new POVButton(m_buttonController, 90).whenPressed(new MidBarClimb(m_climbSubsystem));
 
-    A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
+X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
+Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
 
     //TODO: Test/tune climb using commands like this
 
@@ -144,8 +167,10 @@ public class RobotContainer {
 //    B_BUTTON.toggleWhenPressed(new ClimbManualSolenoidControl(m_climbSubsystem, LEFT_BUMPER, RIGHT_BUMPER));
 //    Y_BUTTON.whenPressed(new InstantCommand(m_Limelight::blinkLED));
 
-    RIGHT_BUMPER.whenPressed(new InstantCommand(m_intakeSubsystem::setSolenoidRetracted));
-    LEFT_BUMPER.whenPressed(new InstantCommand(m_intakeSubsystem::setSolenoidDeployed));
+
+
+//    RIGHT_BUMPER.whenPressed(new InstantCommand(m_intakeSubsystem::setSolenoidRetracted));
+//    LEFT_BUMPER.whenPressed(new InstantCommand(m_intakeSubsystem::setSolenoidDeployed));
     UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 //
@@ -188,7 +213,7 @@ public class RobotContainer {
 //                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
 //                        * DriveConstants.kMaxSpeedMetersPerSecond,
 //                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-//                        * DriveConstants.kMaxRotationalSpeedMetersPerSecond,
+//                        * DriveConstants.kMaxRotationalSpeed,
 //                    true),
 //            m_robotDrive));
 //

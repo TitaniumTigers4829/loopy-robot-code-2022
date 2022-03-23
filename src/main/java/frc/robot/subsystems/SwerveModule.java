@@ -15,10 +15,8 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
@@ -196,18 +194,19 @@ public class SwerveModule {
 //      done = true;
 //    }
     SmartDashboard.putString(shuffleboardContainer.getTitle() + " desired state: ", state.toString());
-
-
     // Calculate the turning motor output from the turning PID controller.
     m_driveMotor.set(driveOutput/12);
     m_turningMotor.set(turnOutput/12);
-    SmartDashboard.putNumber("Rear Right PID", m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()));
-    SmartDashboard.putNumber("Rear Right setpoint velocity", m_turnPIDController.getSetpoint().velocity);
-    SmartDashboard.putNumber("Rear Right FeedForward", turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity));
-    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput/12);
-    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput/12);
-//    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
+    if (shuffleboardContainer.getTitle().equals("Rear Right Module")) {
+      SmartDashboard.putNumber("Rear Right PID", m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()));
+      SmartDashboard.putNumber("Rear Right setpoint velocity", m_turnPIDController.getSetpoint().velocity);
+      SmartDashboard.putNumber("Rear Right velocity error", m_turnPIDController.getVelocityError());
+      SmartDashboard.putNumber("Rear Right FeedForward", turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity));
+      SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput/12);
+      SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput/12);
+    }
 
+//    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
 //    this.shuffleboardContainer.add("PID driveOutput", driveOutput);
 //    this.shuffleboardContainer.add("PID turnOutput", turnOutput);
 //    this.shuffleboardContainer.add("Feedforward", driveFeedforward.calculate(desiredState.speedMetersPerSecond));
