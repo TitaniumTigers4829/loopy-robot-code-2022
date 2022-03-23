@@ -14,35 +14,40 @@ import frc.robot.Constants.TowerConstants;
 
 
 public class TowerSubsystem extends SubsystemBase {
-  private final WPI_TalonSRX topTowerMotor;
-  private final WPI_TalonSRX bottomTowerMotor;
+  private final WPI_TalonSRX m_topTowerMotor;
+  private final WPI_TalonSRX m_bottomTowerMotor;
 
   private final DigitalInput bottomTowerSensor;
   private final DigitalInput topTowerSensor;
 
   public TowerSubsystem() {
-    topTowerMotor = new WPI_TalonSRX(TowerConstants.topTowerFeedMotorPort);
-    bottomTowerMotor = new WPI_TalonSRX(TowerConstants.bottomTowerFeedMotorPort);
+    m_topTowerMotor = new WPI_TalonSRX(TowerConstants.topTowerFeedMotorPort);
+    m_bottomTowerMotor = new WPI_TalonSRX(TowerConstants.bottomTowerFeedMotorPort);
 
     bottomTowerSensor = new DigitalInput(TowerConstants.bottomTowerFeedMotorPort);
     topTowerSensor = new DigitalInput(TowerConstants.topTowerFeedMotorPort);
 
-    topTowerMotor.configFactoryDefault();
-    bottomTowerMotor.configFactoryDefault();
+    m_topTowerMotor.configFactoryDefault();
+    m_bottomTowerMotor.configFactoryDefault();
 
-    bottomTowerMotor.setNeutralMode(NeutralMode.Brake);
-    topTowerMotor.setNeutralMode(NeutralMode.Brake);
+    m_bottomTowerMotor.setNeutralMode(NeutralMode.Brake);
+    m_topTowerMotor.setNeutralMode(NeutralMode.Brake);
 
-    bottomTowerMotor.setInverted(true);
-    topTowerMotor.setInverted(true);
+    m_bottomTowerMotor.setInverted(true);
+    m_topTowerMotor.setInverted(true);
+  }
+
+  public void setTowerMotorsSpeed(double speed) {
+    m_topTowerMotor.set(speed);
+    m_bottomTowerMotor.set(speed);
   }
 
   public void setTopMotorOutputManual(double output) {
-    topTowerMotor.set(output);
+    m_topTowerMotor.set(output);
   }
 
   public void setBottomMotorOutputManual(double output) {
-    bottomTowerMotor.set(output);
+    m_bottomTowerMotor.set(output);
   }
 
   @Override

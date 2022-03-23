@@ -7,22 +7,20 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSubsystem;
 
-public class SetFlyWheelSpeed extends CommandBase {
+public class ResetShooter extends CommandBase {
 
   private ShooterSubsystem shooterSubsystem;
-  private final double speed;
 
-  /** Creates a new SetFlyWheelSpeed. */
-  public SetFlyWheelSpeed(ShooterSubsystem shooterSubsystem, double speed) {
-    this.shooterSubsystem = shooterSubsystem;
-    this.speed = speed;
-    addRequirements(shooterSubsystem);
+  /** Creates a new ResetShooter. */
+  public ResetShooter(ShooterSubsystem shooterSubsystem) {
+    this.shooterSubsystem = shooterSubsystem;    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooterSubsystem.setSpeed(speed);
+    shooterSubsystem.setHeight(.5);
+    shooterSubsystem.stopFlyWheels();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -50,7 +50,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_rightMotor.set(speed);
   }
 
-  public void stopShooter() {
+  public void stopFlyWheels() {
     m_leftMotor.set(0);
     m_rightMotor.set(0);
   }

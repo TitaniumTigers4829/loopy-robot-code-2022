@@ -11,10 +11,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class SetShooterHeight extends CommandBase {
 
 private ShooterSubsystem shooterSubsystem;
-private final Double height;
+private final double height;
 
   /** Creates a new SetShooterHeight. */
-  public SetShooterHeight(ShooterSubsystem shooterSubsystem, Double height) {
+  public SetShooterHeight(ShooterSubsystem shooterSubsystem, double height) {
     this.shooterSubsystem = shooterSubsystem;
     this.height = height;
     addRequirements(shooterSubsystem);

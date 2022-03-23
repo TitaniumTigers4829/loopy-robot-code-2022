@@ -2,27 +2,27 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.tower;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TowerSubsystem;
 
-public class SetFlyWheelSpeed extends CommandBase {
+public class SetTowerMotorSpeed extends CommandBase {
 
-  private ShooterSubsystem shooterSubsystem;
+  private TowerSubsystem towerSubsystem;
   private final double speed;
 
-  /** Creates a new SetFlyWheelSpeed. */
-  public SetFlyWheelSpeed(ShooterSubsystem shooterSubsystem, double speed) {
-    this.shooterSubsystem = shooterSubsystem;
+  /** Creates a new SetTowerMotorSpeed. */
+  public SetTowerMotorSpeed(TowerSubsystem towerSubsystem, Double speed) {
+    this.towerSubsystem = towerSubsystem;
     this.speed = speed;
-    addRequirements(shooterSubsystem);
+    addRequirements(towerSubsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooterSubsystem.setSpeed(speed);
+    towerSubsystem.setTowerMotorsSpeed(speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,5 +37,4 @@ public class SetFlyWheelSpeed extends CommandBase {
   @Override
   public boolean isFinished() {
     return true;
-  }
 }
