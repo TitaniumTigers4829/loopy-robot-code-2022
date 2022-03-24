@@ -83,7 +83,6 @@ public final class Constants {
     public static final double kvVoltSecondsPerMeter = 2.75; // FIXME with sysid
     public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
 
-
     public static final double ksTurning = 0.77; // LOCKED IN!  -----  old 0.66202
     public static final double kvTurning = 0.75; // 3.0052
     public static final double kaTurning = 0; // Default to zero
@@ -108,7 +107,6 @@ public final class Constants {
     public static final double kPModuleDriveController = 0; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
     public static final double kDModuleDriveController = 0;
-
 
     public static final int kDriveFXEncoderCPR = 2048;
     public static final int kTurningCANcoderCPR = 4096;
@@ -141,8 +139,8 @@ public final class Constants {
 
     public static final int kLeftShooterMotorPort = 19;
     public static final int kRightShooterMotorPort = 20;
-    public static final int kLeftServoPort = 0 - 9;
-    public static final int kRightServoPort = 0 - 9;
+    public static final int kLeftServoPort = 0;
+    public static final int kRightServoPort = 1;
 
     public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
