@@ -155,8 +155,8 @@ public final class Constants {
 
 
     // Preprogrammed shoot values
-    public static final double fenderShotHeight = 0 - 9;
-    public static final double fenderShotSpeed = 0 - 9;
+    public static final double fenderShotHeight = 0;
+    public static final double fenderShotSpeed = 0.57;
 
   }
 
