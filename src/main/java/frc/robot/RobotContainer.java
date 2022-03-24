@@ -48,7 +48,7 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
-  private final TowerSubsystem m_tower = new TowerSubsystem();
+  private final TowerSubsystem m_towerSubsystem = new TowerSubsystem();
 //  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
@@ -166,13 +166,13 @@ LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoder
 //    Y_BUTTON.whenPressed(new InstantCommand(m_Limelight::blinkLED));
 //
 
-    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
+    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_towerSubsystem::setTowerThirdPower));
     DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
-    Y_BUTTON.whenPressed(new InstantCommand(m_tower::setTowerOff));
+    Y_BUTTON.whenPressed(new InstantCommand(m_towerSubsystem::setTowerOff));
     A_BUTTON.whenPressed(new InstantCommand(m_shooterSubsystem::stopShooter));
 
 
-    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem));
+    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem, m_towerSubsystem));
 //    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 //
@@ -201,7 +201,7 @@ LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoder
     JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
 
     // Drive/Limelight Testing code
-    RIGHT_BUMPER.toggleWhenPressed( new RunCommand(
+    RIGHT_BUMPER.toggleWhenPressed(new RunCommand(
         () ->
             m_robotDrive.drive(
                 modifyAxis(LEFT_STICK_Y) * -1 // xAxis
@@ -213,7 +213,7 @@ LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoder
                 true),
         m_robotDrive));
 
-    LEFT_BUMPER.toggleWhenPressed( new RunCommand(
+    LEFT_BUMPER.toggleWhenPressed(new RunCommand(
         () ->
             m_robotDrive.drive(
                 modifyAxis(LEFT_STICK_Y) * -1 // xAxis
@@ -229,12 +229,12 @@ LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoder
     LEFT_STICK_DEPRESSED.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
 
     // Intake command
-    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem));
+    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem, m_towerSubsystem));
 
     // Shooter/Tower Testing code
-    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
+    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_towerSubsystem::setTowerThirdPower));
     DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
-    Y_BUTTON.whenPressed(new InstantCommand(m_tower::setTowerOff));
+    Y_BUTTON.whenPressed(new InstantCommand(m_towerSubsystem::setTowerOff));
     A_BUTTON.whenPressed(new InstantCommand(m_shooterSubsystem::stopShooter));
 
     // Climb Testing code

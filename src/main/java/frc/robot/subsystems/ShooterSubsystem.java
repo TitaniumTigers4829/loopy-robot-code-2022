@@ -22,8 +22,8 @@ public class ShooterSubsystem extends SubsystemBase {
     // Initialize Motors
     m_leftMotor = new WPI_TalonFX(ShooterConstants.kLeftShooterMotorPort);
     m_rightMotor = new WPI_TalonFX(ShooterConstants.kRightShooterMotorPort);
-   m_leftServo = new Servo(ShooterConstants.kLeftServoPort);
-   m_rightServo = new Servo(ShooterConstants.kRightServoPort);
+    m_leftServo = new Servo(ShooterConstants.kLeftServoPort);
+    m_rightServo = new Servo(ShooterConstants.kRightServoPort);
 
     m_leftMotor.setInverted(false);
     m_rightMotor.setInverted(true);

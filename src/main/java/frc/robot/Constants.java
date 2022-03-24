@@ -133,6 +133,8 @@ public final class Constants {
 
     public static final int bottomTowerSensorPort = 0 - 9;
     public static final int topTowerSensorPort = 0 - 9;
+
+    public static final double towerMotorLoadSpeed = .5; // FIXME: Find good value
   }
 
   public static final class ShooterConstants {
@@ -212,6 +214,7 @@ public final class Constants {
   }
 
   public static final class OIConstants {
+
     public static final int kButtonControllerPort = 1;
 
     public static final int kDriverControllerPort = 0;

@@ -12,6 +12,7 @@ public class SetTowerMotorSpeed extends CommandBase {
   private TowerSubsystem towerSubsystem;
   private final double speed;
   
+  // TODO: Eventually this class will be deleted
   /** Creates a new SetTowerMotorSpeed. */
   public SetTowerMotorSpeed(TowerSubsystem towerSubsystem, Double speed) {
     this.towerSubsystem = towerSubsystem;
@@ -22,7 +23,8 @@ public class SetTowerMotorSpeed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    towerSubsystem.setTowerMotorsSpeed(speed);
+    towerSubsystem.setTopTowerMotorSpeed(speed);
+    towerSubsystem.setBottomTowerMotorSpeed(speed);
   }
   
   // Called every time the scheduler runs while the command is scheduled.

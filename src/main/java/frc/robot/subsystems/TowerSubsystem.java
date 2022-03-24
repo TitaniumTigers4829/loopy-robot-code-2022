@@ -37,11 +37,15 @@ public class TowerSubsystem extends SubsystemBase {
     m_topTowerMotor.setInverted(true);
   }
 
-  public void setTowerMotorsSpeed(double speed) {
+  public void setTopTowerMotorSpeed(double speed) {
     m_topTowerMotor.set(speed);
+  }
+
+  public void setBottomTowerMotorSpeed(double speed) {
     m_bottomTowerMotor.set(speed);
   }
 
+  // TODO: Remove these functions when testing is done
   public void setTopMotorOutputManual(double output) {
     m_topTowerMotor.set(output);
   }
@@ -65,13 +69,13 @@ public class TowerSubsystem extends SubsystemBase {
     m_bottomTowerMotor.set(0);
   }
 
-  public boolean getBallInBottom() {
-    return (!bottomTowerSensor.get());
-  } 
-
-  public boolean getBallInTop() {
+  public boolean getTopBallIn() {
     return (!topTowerSensor.get());
   }
+
+  public boolean getBottomBallIn() {
+    return (!bottomTowerSensor.get());
+  } 
 
   @Override
   public void periodic() {

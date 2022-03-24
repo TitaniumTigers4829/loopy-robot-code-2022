@@ -1,23 +1,26 @@
 package frc.robot.commands.intake;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.IntakeSubsystem;
-import java.util.function.BooleanSupplier;
+import frc.robot.subsystems.TowerSubsystem;
 
 public class IntakeActiveTeleop extends CommandBase {
 
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final IntakeSubsystem m_intakeSubsystem;
+  private final TowerSubsystem m_towerSubsystem;
 
   /**
    * Creates IntakeActiveTeleop. By default, a "while held" command.
    *
-   * @param subsystem The climb subsystem used by this command.
+   * @param m_intakeSubsystem The climb subsystem used by this command.
+   * @param m_towerSubsystem The tower subsystem used by this command.
    */
-  public IntakeActiveTeleop(IntakeSubsystem subsystem) {
-    m_intakeSubsystem = subsystem;
-    addRequirements(m_intakeSubsystem);  // Use addRequirements() to declare subsystem dependencies.
+  public IntakeActiveTeleop(IntakeSubsystem m_intakeSubsystem, TowerSubsystem towerSubsystem) {
+    this.m_intakeSubsystem = m_intakeSubsystem;
+    this.m_towerSubsystem = towerSubsystem;
+    addRequirements(m_intakeSubsystem, towerSubsystem);
   }
 
   @Override
@@ -29,6 +32,19 @@ public class IntakeActiveTeleop extends CommandBase {
   @Override
   public void execute() {
     m_intakeSubsystem.setMotorFullPowerIn();
+
+    // Code to load balls
+    if (!m_towerSubsystem.getTopBallIn()) {
+      m_towerSubsystem.setTopTowerMotorSpeed(TowerConstants.towerMotorLoadSpeed);
+      m_towerSubsystem.setBottomTowerMotorSpeed(TowerConstants.towerMotorLoadSpeed);
+    } else {
+      m_towerSubsystem.setTopTowerMotorSpeed(0);
+      if (!m_towerSubsystem.getBottomBallIn()) {
+        m_towerSubsystem.setBottomTowerMotorSpeed(TowerConstants.towerMotorLoadSpeed);
+      } else {
+        m_towerSubsystem.setBottomTowerMotorSpeed(0);
+      }
+    }
   }
 
   @Override
