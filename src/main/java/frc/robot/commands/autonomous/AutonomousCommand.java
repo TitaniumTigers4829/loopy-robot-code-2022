@@ -19,7 +19,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
       new FenderShot(shooterSubsystem, towerSubsystem),
       new WaitCommand(1), // Waits just in case
       // Moves backwards
-      new SetDriveSpeed(driveSubsystem, .1, 0),
+      new SetDriveSpeed(driveSubsystem, -.1, 0),
       new WaitCommand(2),
       // Stops the robot
       new SetDriveSpeed(driveSubsystem, 0, 0)
