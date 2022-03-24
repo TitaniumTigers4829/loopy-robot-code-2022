@@ -17,15 +17,15 @@ public class TowerSubsystem extends SubsystemBase {
   private final WPI_TalonSRX m_topTowerMotor;
   private final WPI_TalonSRX m_bottomTowerMotor;
 
-//  private final DigitalInput bottomTowerSensor;
-//  private final DigitalInput topTowerSensor;
+ private final DigitalInput bottomTowerSensor;
+ private final DigitalInput topTowerSensor;
 
   public TowerSubsystem() {
     m_topTowerMotor = new WPI_TalonSRX(TowerConstants.topTowerFeedMotorPort);
     m_bottomTowerMotor = new WPI_TalonSRX(TowerConstants.bottomTowerFeedMotorPort);
 
-//    bottomTowerSensor = new DigitalInput(TowerConstants.bottomTowerFeedMotorPort);
-//    topTowerSensor = new DigitalInput(TowerConstants.topTowerFeedMotorPort);
+    bottomTowerSensor = new DigitalInput(TowerConstants.bottomTowerFeedMotorPort);
+    topTowerSensor = new DigitalInput(TowerConstants.topTowerFeedMotorPort);
 
     m_topTowerMotor.configFactoryDefault();
     m_bottomTowerMotor.configFactoryDefault();
@@ -51,18 +51,26 @@ public class TowerSubsystem extends SubsystemBase {
   }
 
   public void setTowerFullPower() {
-    topTowerMotor.set(1.0);
-    bottomTowerMotor.set(1.0);
+    m_topTowerMotor.set(1.0);
+    m_bottomTowerMotor.set(1.0);
   }
 
   public void setTowerThirdPower() {
-    topTowerMotor.set(0.334);
-    bottomTowerMotor.set(0.34);
+    m_topTowerMotor.set(0.334);
+    m_bottomTowerMotor.set(0.34);
   }
 
   public void setTowerOff() {
-    topTowerMotor.set(0);
-    bottomTowerMotor.set(0);
+    m_topTowerMotor.set(0);
+    m_bottomTowerMotor.set(0);
+  }
+
+  public boolean getBallInBottom() {
+    return (!bottomTowerSensor.get());
+  } 
+
+  public boolean getBallInTop() {
+    return (!topTowerSensor.get());
   }
 
   @Override
