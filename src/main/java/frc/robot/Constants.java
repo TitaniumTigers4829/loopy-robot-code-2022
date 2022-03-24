@@ -141,8 +141,8 @@ public final class Constants {
 
     public static final int kLeftShooterMotorPort = 19;
     public static final int kRightShooterMotorPort = 20;
-    public static final int kLeftServoPort = 0 - 9;
-    public static final int kRightServoPort = 0 - 9;
+    public static final int kLeftServoPort = 00;
+    public static final int kRightServoPort = 01;
 
     public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope

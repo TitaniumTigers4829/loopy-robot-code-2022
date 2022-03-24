@@ -51,18 +51,18 @@ public class TowerSubsystem extends SubsystemBase {
   }
 
   public void setTowerFullPower() {
-    topTowerMotor.set(1.0);
-    bottomTowerMotor.set(1.0);
+    m_topTowerMotor.set(1.0);
+    m_bottomTowerMotor.set(1.0);
   }
 
   public void setTowerThirdPower() {
-    topTowerMotor.set(0.334);
-    bottomTowerMotor.set(0.34);
+    m_topTowerMotor.set(0.334);
+    m_bottomTowerMotor.set(0.34);
   }
 
   public void setTowerOff() {
-    topTowerMotor.set(0);
-    bottomTowerMotor.set(0);
+    m_topTowerMotor.set(0);
+    m_bottomTowerMotor.set(0);
   }
 
   @Override

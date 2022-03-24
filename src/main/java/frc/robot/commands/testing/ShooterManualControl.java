@@ -36,7 +36,7 @@ public class ShooterManualControl extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    m_shooterSubsystem.stopFlyWheels();
+    m_shooterSubsystem.setSpeed(0);
   }
 
   @Override

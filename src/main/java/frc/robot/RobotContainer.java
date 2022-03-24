@@ -74,7 +74,7 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     // Configure the button bindings/joysticks
-    configureButtonBindings();
+    configureButtonBindingsTest();
   }
 
   private static double deadband(double value, double deadband) {
@@ -239,22 +239,22 @@ LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoder
     LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem));
 
     // Shooter/Tower Testing code
-    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
-    DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
-    Y_BUTTON.whenPressed(new InstantCommand(m_tower::setTowerOff));
-    A_BUTTON.whenPressed(new InstantCommand(m_shooterSubsystem::stopShooter));
+//    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
+//    DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
+//    Y_BUTTON.whenPressed(new InstantCommand(m_tower::setTowerOff));
+//    A_BUTTON.whenPressed(new InstantCommand(m_shooterSubsystem::stopShooter));
 
     // Climb Testing code
     // TODO: Test/tune climb using commands like this
-//    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
-//    A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
-//    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
-//    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
-//    Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
+    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+    A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
+    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
+    Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
 
     // Make sure hooks are latched when testing this part
-//    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
-//    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
+    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
+    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
   }
 
   /**
