@@ -12,24 +12,24 @@ import frc.robot.Constants.ElectronicsConstants;
 import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
-//   private final WPI_TalonFX m_motor;
+   private final WPI_TalonFX m_motor;
   private final DoubleSolenoid m_solenoid;
   private int m_stallCounter = 1;
 
 
   public IntakeSubsystem() {
 
-    // m_motor = new WPI_TalonFX(IntakeConstants.kIntakeMotorPort);
-    // m_motor.setInverted(true); // should make sure motor.set(1.0) means we are intaking.
-    // m_motor.setNeutralMode(NeutralMode.Coast);
-    // m_motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+     m_motor = new WPI_TalonFX(IntakeConstants.kIntakeMotorPort);
+     m_motor.setInverted(false); // should make sure motor.set(1.0) means we are intaking.
+     m_motor.setNeutralMode(NeutralMode.Coast);
+     m_motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
 
     m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType, IntakeConstants.kIntakeDeployedSolenoidPort, IntakeConstants.kIntakeRetractedSolenoidPort);
   }
 
-//  private double getIntakeVelocity() {
-//    return m_motor.getSelectedSensorVelocity(); // encoder units per 100ms
-//  }
+  private double getIntakeVelocity() {
+    return m_motor.getSelectedSensorVelocity(); // encoder units per 100ms
+  }
 
   public boolean getIsIntakeDeployed() {
     if (m_solenoid.get() == Value.kOff) {
@@ -44,17 +44,17 @@ public class IntakeSubsystem extends SubsystemBase {
     return true;
   }
 
-//  public void setMotorStopped(){
-//    m_motor.set(0);
-//  }
-//
-//  public void setMotorFullPowerIn() {
-//    m_motor.set(1.0);
-//  }
-//
-//  public void setMotorFullPowerOut() {
-//    m_motor.set(-1.0);
-//  }
+  public void setMotorStopped(){
+    m_motor.set(0);
+  }
+
+  public void setMotorFullPowerIn() {
+    m_motor.set(0.55);
+  }
+
+  public void setMotorFullPowerOut() {
+    m_motor.set(-0.5);
+  }
 
 //
 //  public void setMotorCustomPowerIn(double customPower) {

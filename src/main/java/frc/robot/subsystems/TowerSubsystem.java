@@ -17,15 +17,15 @@ public class TowerSubsystem extends SubsystemBase {
   private final WPI_TalonSRX topTowerMotor;
   private final WPI_TalonSRX bottomTowerMotor;
 
-  private final DigitalInput bottomTowerSensor;
-  private final DigitalInput topTowerSensor;
+//  private final DigitalInput bottomTowerSensor;
+//  private final DigitalInput topTowerSensor;
 
   public TowerSubsystem() {
     topTowerMotor = new WPI_TalonSRX(TowerConstants.topTowerFeedMotorPort);
     bottomTowerMotor = new WPI_TalonSRX(TowerConstants.bottomTowerFeedMotorPort);
 
-    bottomTowerSensor = new DigitalInput(TowerConstants.bottomTowerFeedMotorPort);
-    topTowerSensor = new DigitalInput(TowerConstants.topTowerFeedMotorPort);
+//    bottomTowerSensor = new DigitalInput(TowerConstants.bottomTowerFeedMotorPort);
+//    topTowerSensor = new DigitalInput(TowerConstants.topTowerFeedMotorPort);
 
     topTowerMotor.configFactoryDefault();
     bottomTowerMotor.configFactoryDefault();
@@ -45,9 +45,24 @@ public class TowerSubsystem extends SubsystemBase {
     bottomTowerMotor.set(output);
   }
 
+  public void setTowerFullPower() {
+    topTowerMotor.set(1.0);
+    bottomTowerMotor.set(1.0);
+  }
+
+  public void setTowerThirdPower() {
+    topTowerMotor.set(0.334);
+    bottomTowerMotor.set(0.34);
+  }
+
+  public void setTowerOff() {
+    topTowerMotor.set(0);
+    bottomTowerMotor.set(0);
+  }
+
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Bottom Tower Sensor", bottomTowerSensor.get());
-    SmartDashboard.putBoolean("Top Tower Sensor", topTowerSensor.get());
+//    SmartDashboard.putBoolean("Bottom Tower Sensor", bottomTowerSensor.get());
+//    SmartDashboard.putBoolean("Top Tower Sensor", topTowerSensor.get());
   }
 }

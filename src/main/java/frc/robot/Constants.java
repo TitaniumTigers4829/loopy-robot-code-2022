@@ -121,17 +121,17 @@ public final class Constants {
 
   public static final class IntakeConstants {
 
-    public static final int kIntakeMotorPort = 99;
-    public static final int kIntakeRetractedSolenoidPort = 4;
-    public static final int kIntakeDeployedSolenoidPort = 6;
+    public static final int kIntakeMotorPort = 5;
+    public static final int kIntakeDeployedSolenoidPort = 4;
+    public static final int kIntakeRetractedSolenoidPort = 6;
 
     public static final double kIntakeCustomPower = 0.7; // 0 to 1.0
   }
 
   public static final class TowerConstants {
 
-    public static final int bottomTowerFeedMotorPort = 0 - 9;
-    public static final int topTowerFeedMotorPort = 0 - 9;
+    public static final int bottomTowerFeedMotorPort = 14;
+    public static final int topTowerFeedMotorPort = 16;
 
     public static final int bottomTowerSensorPort = 0 - 9;
     public static final int topTowerSensorPort = 0 - 9;
@@ -151,7 +151,7 @@ public final class Constants {
     // General constants
     public static final double kClimbMaxHeight = 1.6081375; // in meters // FIXME
     public static final double kClimbMinHeight = 0.815975; // in meters
-    public static final double kClimbSlightlyExtendedHeight = -0.1;
+    public static final double kClimbSlightlyExtendedHeight = 0.9;
 
     // NOTE:
     // We only need estimates for the bottom position of the climb arms because they are

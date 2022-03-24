@@ -156,6 +156,13 @@ public class SwerveModule {
     SwerveModuleState state =
         SwerveModuleState.optimize(desiredState, new Rotation2d(m_turnRadians));
 
+//    stop the code to stop it from moving if the speed is very, very small
+    if (Math.abs(state.speedMetersPerSecond) <= 0.01){
+      m_turningMotor.set(0);
+      m_driveMotor.set(0);
+      return;
+    }
+
 //    SwerveModuleState state = desiredState;
 
     // Calculate the drive output from the drive PID controller.

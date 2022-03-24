@@ -345,17 +345,19 @@ public class ClimbSubsystem extends SubsystemBase {
 //    }
 
     // Smart Dashboard Debugging
-    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
-    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
-    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
-    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
-    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
-    SmartDashboard.putNumber("Right Climb PID Error: ", getRightPIDError());
-    SmartDashboard.putNumber("Left Climb PID setpoint: ", m_climbLeftProfiledPIDController.getSetpoint().position);
-    SmartDashboard.putNumber("Right Climb PID setpoint: ", m_climbRightProfiledPIDController.getSetpoint().position);
-    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
-    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
-    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
+//    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
+//    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
+//    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
+//    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
+//    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
+//    SmartDashboard.putNumber("Right Climb PID Error: ", getRightPIDError());
+//    SmartDashboard.putNumber("Left Climb PID setpoint: ", m_climbLeftProfiledPIDController.getSetpoint().position);
+//    SmartDashboard.putNumber("Right Climb PID setpoint: ", m_climbRightProfiledPIDController.getSetpoint().position);
+//    SmartDashboard.putNumber("Left Climb PID velocity: ", m_climbLeftProfiledPIDController.getSetpoint().velocity);
+//    SmartDashboard.putNumber("Right Climb PID velocity: ", m_climbRightProfiledPIDController.getSetpoint().velocity);
+//    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
+//    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
+//    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 
   @Override

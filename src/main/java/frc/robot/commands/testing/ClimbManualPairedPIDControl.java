@@ -1,6 +1,7 @@
 package frc.robot.commands.testing;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ClimbConstants;
 import frc.robot.subsystems.ClimbSubsystem;
 import java.util.function.DoubleSupplier;
 
@@ -27,8 +28,14 @@ public class ClimbManualPairedPIDControl extends CommandBase {
 
   @Override
   public void execute() {
-    m_climbSubsystem.setDesiredLeftHookHeight(m_rightStick.getAsDouble() + 1);
-    m_climbSubsystem.setDesiredRightHookHeight(m_rightStick.getAsDouble() + 1);
+    double height = (-m_rightStick.getAsDouble() + 1) / 2;
+    double heightDiff = ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight;
+    height *= heightDiff;
+    height += heightDiff;
+    m_climbSubsystem.setDesiredLeftHookHeight(height);
+    m_climbSubsystem.setDesiredRightHookHeight(height);
+//    m_climbSubsystem.setDesiredLeftHookHeight(m_rightStick.getAsDouble());
+//    m_climbSubsystem.setDesiredLeftHookHeight(m_rightStick.getAsDouble());
   }
 
   @Override
