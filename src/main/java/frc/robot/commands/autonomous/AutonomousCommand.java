@@ -5,6 +5,7 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.WaitCommand;
 import frc.robot.commands.shooter.FenderShot;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -15,9 +16,13 @@ public class AutonomousCommand extends SequentialCommandGroup {
   public AutonomousCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem, DriveSubsystem driveSubsystem) {
     addCommands(
       // Starts assuming that we the robot is in the correct position for a fender shot
-      new FenderShot(shooterSubsystem, towerSubsystem)
+      new FenderShot(shooterSubsystem, towerSubsystem),
+      new WaitCommand(1), // Waits just in case
       // Moves backwards
-      //driveSubsystem.drive(-.25, 0, 0, false)
+      new SetDriveSpeed(driveSubsystem, -.1, 0),
+      new WaitCommand(2),
+      // Stops the robot
+      new SetDriveSpeed(driveSubsystem, 0, 0)
     );
   }
 }

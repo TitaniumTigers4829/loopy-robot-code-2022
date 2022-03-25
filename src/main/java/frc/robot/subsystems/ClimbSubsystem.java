@@ -100,7 +100,6 @@ public class ClimbSubsystem extends SubsystemBase {
     return m_leftEncoder.getPosition();
   }
 
-
   /**
    * Gets whether the left limit switch is triggered. When triggered, it indicates that the climb is
    * at its lowest possible position.
@@ -110,7 +109,6 @@ public class ClimbSubsystem extends SubsystemBase {
   public boolean getIsLeftLimitSwitchPressed() {
     return m_leftLimitSwitch.get();
   }
-
 
   /**
    * Returns left hook height (defined as the uppermost part of the inner edge of the hook) in
@@ -150,7 +148,6 @@ public class ClimbSubsystem extends SubsystemBase {
     return !m_rightLimitSwitch.get();
   }
 
-
   /**
    * Returns right hook height (defined as the uppermost part of the inner edge of the hook) in
    * meters. Uses encoder values to calculate the height of the hooks. If limit switch is triggered
@@ -176,8 +173,7 @@ public class ClimbSubsystem extends SubsystemBase {
 
   public double getRightPIDError() {
     return m_climbRightProfiledPIDController.getPositionError();
-  }
-
+  } 
 
   /**
    * Gets whether the climb is vertical or not. Also handles unexpected states and throws exceptions
