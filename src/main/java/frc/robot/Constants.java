@@ -73,7 +73,7 @@ public final class Constants {
 
     // Values to scale joystick inputs to desired states.
     public static final double kMaxSpeedMetersPerSecond = 4.5; // LOCKED IN
-    public static final double kMaxRotationalSpeed = 4 * Math.PI; // TODO: make sure this is right... (maybe should be radians)
+    public static final double kMaxRotationalSpeed = 3 * Math.PI; // TODO: make sure this is right... (maybe should be radians)
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically
@@ -94,7 +94,7 @@ public final class Constants {
 
     public static final double kDriveGearRatio = 7.13;
 
-    public static final double kPModuleTurnController = 8.5; // TUNE: 8.2142
+    public static final double kPModuleTurnController = 8.3; // TUNE: 8.2142
     public static final double kIModuleTurnController = 0; // DO NOT USE
     public static final double kDModuleTurnController = 0; // TUNE
 
@@ -102,7 +102,7 @@ public final class Constants {
     // Will never reach max velocity, so it can be right at the "top" of the triangle.
     // In this case, that would be 2pi.
 
-    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI;
+    public static final double kMaxModuleAngularSpeedRadiansPerSecond = 3 * Math.PI;
     public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 10 * Math.PI;
 
     public static final double kPModuleDriveController = 0; // TUNE
@@ -133,8 +133,8 @@ public final class Constants {
     public static final int bottomTowerFeedMotorPort = 14;
     public static final int topTowerFeedMotorPort = 16;
 
-    public static final int bottomTowerSensorPort = 0 - 9;
-    public static final int topTowerSensorPort = 0 - 9;
+    public static final int bottomTowerSensorPort = 1;
+    public static final int topTowerSensorPort = 0;
   }
 
   public static final class ShooterConstants {
@@ -155,8 +155,8 @@ public final class Constants {
 
 
     // Preprogrammed shoot values
-    public static final double fenderShotHeight = 0 - 9;
-    public static final double fenderShotSpeed = 0 - 9;
+    public static final double fenderShotHeight = 0.1;
+    public static final double fenderShotSpeed = 0.57;
 
   }
 
@@ -187,7 +187,7 @@ public final class Constants {
 
 
     // ProfiledPID controller constants
-    public static final double kPClimbController = 1; // FIXME, TUNE
+    public static final double kPClimbController = 0.3; // FIXME, TUNE
     public static final double kIClimbController = 0; // DO NOT USE
     public static final double kDClimbController = 0;
     public static final double kMaxClimbSpeedMetersPerSecond = 0.1; // FIXME, TUNE

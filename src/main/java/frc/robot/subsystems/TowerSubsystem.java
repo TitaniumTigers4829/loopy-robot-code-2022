@@ -17,15 +17,15 @@ public class TowerSubsystem extends SubsystemBase {
   private final WPI_TalonSRX m_topTowerMotor;
   private final WPI_TalonSRX m_bottomTowerMotor;
 
-//  private final DigitalInput bottomTowerSensor;
-//  private final DigitalInput topTowerSensor;
+  private final DigitalInput bottomTowerSensor;
+  private final DigitalInput topTowerSensor;
 
   public TowerSubsystem() {
     m_topTowerMotor = new WPI_TalonSRX(TowerConstants.topTowerFeedMotorPort);
     m_bottomTowerMotor = new WPI_TalonSRX(TowerConstants.bottomTowerFeedMotorPort);
 
-//    bottomTowerSensor = new DigitalInput(TowerConstants.bottomTowerFeedMotorPort);
-//    topTowerSensor = new DigitalInput(TowerConstants.topTowerFeedMotorPort);
+    bottomTowerSensor = new DigitalInput(TowerConstants.bottomTowerSensorPort);
+    topTowerSensor = new DigitalInput(TowerConstants.topTowerSensorPort);
 
     m_topTowerMotor.configFactoryDefault();
     m_bottomTowerMotor.configFactoryDefault();
@@ -65,9 +65,19 @@ public class TowerSubsystem extends SubsystemBase {
     m_bottomTowerMotor.set(0);
   }
 
+  public boolean getIsBallInBottom(){
+//    return false;
+    return !bottomTowerSensor.get();
+  }
+
+  public boolean getIsBallInTop(){
+//    return false;
+    return !topTowerSensor.get();
+  }
+
   @Override
   public void periodic() {
-//    SmartDashboard.putBoolean("Bottom Tower Sensor", bottomTowerSensor.get());
-//    SmartDashboard.putBoolean("Top Tower Sensor", topTowerSensor.get());
+//    SmartDashboard.putBoolean("Bottom Tower Sensor", getIsBallInBottom());
+//    SmartDashboard.putBoolean("Top Tower Sensor", getIsBallInTop());
   }
 }

@@ -27,6 +27,9 @@ import frc.robot.commands.climb.ClimbBottomPositon;
 import frc.robot.commands.climb.MidBarClimb;
 import frc.robot.commands.climb.MidBarLatchHooks;
 import frc.robot.commands.intake.IntakeActiveTeleop;
+import frc.robot.commands.intake.IntakeWithTower;
+import frc.robot.commands.shooter.FenderShot;
+import frc.robot.commands.shooter.FenderShot2;
 import frc.robot.commands.testing.ClimbManualIndependentControl;
 import frc.robot.commands.testing.ClimbManualPairedControl;
 import frc.robot.commands.testing.ClimbManualPairedPIDControl;
@@ -68,6 +71,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Turn off the limelight lights because they are very bright
     m_Limelight.turnOffLED();
+    m_shooterSubsystem.setHeight(0.1);
     // m_LEDs.setLEDsRaw(-0.39 ); // will normally be handled by commands, just for testing.
 
     /**
@@ -236,25 +240,27 @@ LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoder
     LEFT_STICK_DEPRESSED.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
 
     // Intake command
-    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem));
+//    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem));
 
+    LEFT_TRIGGER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
+    RIGHT_TRIGGER.whileHeld(new FenderShot2(m_tower, m_shooterSubsystem));
     // Shooter/Tower Testing code
-//    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
-//    DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
-//    Y_BUTTON.whenPressed(new InstantCommand(m_tower::setTowerOff));
-//    A_BUTTON.whenPressed(new InstantCommand(m_shooterSubsystem::stopShooter));
+    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
+    DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
+    Y_BUTTON.whenPressed(new InstantCommand(m_tower::setTowerOff));
+    A_BUTTON.whenPressed(new InstantCommand(m_shooterSubsystem::stopShooter));
 
     // Climb Testing code
     // TODO: Test/tune climb using commands like this
-    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
-    A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
-    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
-    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
-    Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
+//    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+//    A_BUTTON.toggleWhenPressed(new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
+//    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
+//    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
+//    Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
 
     // Make sure hooks are latched when testing this part
-    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
-    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
+//    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
+//    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
   }
 
   /**

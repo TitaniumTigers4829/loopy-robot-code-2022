@@ -31,25 +31,25 @@ public class IntakeSubsystem extends SubsystemBase {
     return m_motor.getSelectedSensorVelocity(); // encoder units per 100ms
   }
 
-  public boolean getIsIntakeDeployed() {
-    if (m_solenoid.get() == Value.kOff) {
-      DriverStation.reportWarning("The intake solenoid should never be off. Something is wrong.", true);
-    } else if (m_solenoid.get() == Value.kForward) {
-      return true;
-    } else if (m_solenoid.get() == Value.kReverse) {
-      return false;
-    } else {
-      DriverStation.reportWarning("For some reason the intake solenoid is in none of the 3 possible positions.", true);
-    }
-    return true;
-  }
+//  public boolean getIsIntakeDeployed() {
+//    if (m_solenoid.get() == Value.kOff) {
+//      DriverStation.reportWarning("The intake solenoid should never be off. Something is wrong.", true);
+//    } else if (m_solenoid.get() == Value.kForward) {
+//      return true;
+//    } else if (m_solenoid.get() == Value.kReverse) {
+//      return false;
+//    } else {
+//      DriverStation.reportWarning("For some reason the intake solenoid is in none of the 3 possible positions.", true);
+//    }
+//    return true;
+//  }
 
   public void setMotorStopped(){
     m_motor.set(0);
   }
 
   public void setMotorFullPowerIn() {
-    m_motor.set(0.55);
+    m_motor.set(0.5);
   }
 
   public void setMotorFullPowerOut() {

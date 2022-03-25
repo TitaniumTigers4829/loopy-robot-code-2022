@@ -6,37 +6,43 @@ package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TowerSubsystem;
 
-public class SetFlyWheelSpeed extends CommandBase {
-
-  private ShooterSubsystem shooterSubsystem;
-  private final double speed;
+public class FenderShot2 extends CommandBase {
+  /** Creates a new FenderShot2. */
+  private TowerSubsystem tower;
+  private ShooterSubsystem shooter;
   private boolean done = false;
-
-  /** Creates a new SetFlyWheelSpeed. */
-  public SetFlyWheelSpeed(ShooterSubsystem shooterSubsystem, double speed) {
-    this.shooterSubsystem = shooterSubsystem;
-    this.speed = speed;
-    addRequirements(shooterSubsystem);
+  public FenderShot2(TowerSubsystem tower, ShooterSubsystem shooter) {
+    // Use addRequirements() here to declare subsystem dependencies.
+    this.tower = tower;
+    this.shooter = shooter;
+    addRequirements(tower, shooter);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooterSubsystem.setSpeed(speed);
+    shooter.setHeight(ShooterConstants.fenderShotHeight);
+    shooter.setSpeed(ShooterConstants.fenderShotSpeed);
     Timer.delay(1);
-    this.done = true;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    tower.setTowerMotorsSpeed(0.34);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    shooter.setHeight(0);
+    shooter.setSpeed(0);
+    tower.setTowerMotorsSpeed(0);
+  }
 
   // Returns true when the command should end.
   @Override

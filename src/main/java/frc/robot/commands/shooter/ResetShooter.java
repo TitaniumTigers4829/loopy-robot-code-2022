@@ -19,7 +19,7 @@ public class ResetShooter extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-//    shooterSubsystem.setHeight(.5);
+    shooterSubsystem.setHeight(0);
     shooterSubsystem.setSpeed(0);
   }
 
