@@ -16,11 +16,15 @@ public class AutonomousCommand extends SequentialCommandGroup {
   /** Add your docs here. */
   public AutonomousCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem, DriveSubsystem driveSubsystem) {
     addCommands(
-      // Starts assuming that we have the robot is in the correct position for a fender shot
-      new FenderShot2(towerSubsystem, shooterSubsystem).withTimeout(5),
       // Moves backwards
       new SetDriveSpeed(driveSubsystem, -.85, 0).withTimeout(3),
       // Stops the robot
+      new SetDriveSpeed(driveSubsystem, 0, 0).withTimeout(1),
+        // Starts assuming that we have the robot is in the correct position for a fender shot
+      new FenderShot2(towerSubsystem, shooterSubsystem, true).withTimeout(5),
+          // Moves backwards
+      new SetDriveSpeed(driveSubsystem, -.85, 0).withTimeout(1),
+          // Stops the robot
       new SetDriveSpeed(driveSubsystem, 0, 0).withTimeout(1)
     );
   }

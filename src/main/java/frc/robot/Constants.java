@@ -155,8 +155,8 @@ public final class Constants {
 
 
     // Preprogrammed shoot values
-    public static final double fenderShotHeight = 0.25;
-    public static final double fenderShotSpeed = 0.57;
+    public static final double fenderShotHeight = 0.45;
+    public static final double fenderShotSpeed = 0.6;
 
     // Limelight constants
     public static double cameraHeight = 0 - 9;

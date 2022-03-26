@@ -31,6 +31,10 @@ public class ShooterSubsystem extends SubsystemBase {
 
     m_leftMotor.setNeutralMode(NeutralMode.Coast);
     m_rightMotor.setNeutralMode(NeutralMode.Coast);
+    m_leftMotor.enableVoltageCompensation(true);
+    m_rightMotor.enableVoltageCompensation(true);
+    m_leftMotor.configVoltageCompSaturation(12);
+    m_rightMotor.configVoltageCompSaturation(12);
 
 
     // configure built-in encoder (only need to use the right one).

@@ -135,7 +135,7 @@ public class RobotContainer {
                         * DriveConstants.kMaxRotationalSpeed,
                     !LEFT_BUMPER.get()),
             m_robotDrive));
-//    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
+    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
 //    new POVButton(m_buttonController, 270).whenPressed(new MidBarLatchHooks(m_climbSubsystem));
 //    new POVButton(m_buttonController, 180).whenPressed(new ClimbBottomPosition(m_climbSubsystem));
@@ -161,7 +161,7 @@ public class RobotContainer {
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
     // Fender Shot
     new JoystickButton(m_buttonController, 5).whileHeld(
-        new FenderShot2(m_tower, m_shooterSubsystem));
+        new FenderShot2(m_tower, m_shooterSubsystem, false));
     // While held for intake
     new JoystickButton(m_buttonController, 12).whileHeld(
         new IntakeWithTower(m_intakeSubsystem, m_tower));
