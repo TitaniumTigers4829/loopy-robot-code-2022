@@ -5,27 +5,27 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class Shoot extends CommandBase {
 
-  private ShooterSubsystem shooterSubsystem;
-  private double distance;
+  private final ShooterSubsystem shooterSubsystem;
+  private final LimelightSubsystem limelight;
 
   /** Creates a new Shoot. */
-  public Shoot(ShooterSubsystem shooterSubsystem, double distance) {
-    // Use addRequirements() here to declare subsystem dependencies.
+  public Shoot(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight) {
     this.shooterSubsystem = shooterSubsystem;
-    this.distance = distance;
-    addRequirements(shooterSubsystem);
+    this.limelight = limelight;
+    addRequirements(shooterSubsystem, limelight);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // We get a line of best fit equation for the motor speeds with a set angle at certain increments
-    double speed = .5;
-    shooterSubsystem.setSpeed(speed);
+    // We get speed and angle from lookup table
+//    double speed = m_l;
+    shooterSubsystem.setSpeed(limelight.calculateSpeed());
   }
 
   // Called every time the scheduler runs while the command is scheduled.

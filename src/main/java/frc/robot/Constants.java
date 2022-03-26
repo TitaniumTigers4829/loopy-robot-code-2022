@@ -57,9 +57,9 @@ public final class Constants {
     public static final boolean kFrontRightDriveEncoderReversed = true;
     public static final boolean kRearRightDriveEncoderReversed = true;
 
-    public static final double kTrackWidth = 0.57785; // FIXME
+    public static final double kTrackWidth = 0.57785;
     // Distance between centers of right and left wheels on robot
-    public static final double kWheelBase = 0.57785; // FIXME
+    public static final double kWheelBase = 0.57785;
     // Distance between front and back wheels on robot
     public static final SwerveDriveKinematics kDriveKinematics =
         new SwerveDriveKinematics(
@@ -122,8 +122,8 @@ public final class Constants {
   public static final class IntakeConstants {
 
     public static final int kIntakeMotorPort = 5;
-    public static final int kIntakeDeployedSolenoidPort = 4;
-    public static final int kIntakeRetractedSolenoidPort = 6;
+    public static final int kIntakeDeployedSolenoidPort = 6;
+    public static final int kIntakeRetractedSolenoidPort = 4;
 
     public static final double kIntakeCustomPower = 0.7; // 0 to 1.0
   }
@@ -155,9 +155,13 @@ public final class Constants {
 
 
     // Preprogrammed shoot values
-    public static final double fenderShotHeight = 0.1;
+    public static final double fenderShotHeight = 0.25;
     public static final double fenderShotSpeed = 0.57;
 
+    // Limelight constants
+    public static double cameraHeight = 0 - 9;
+    public static double cameraAngle = 0 - 9;
+    public static double targetHeight = 8.66;
   }
 
 
@@ -196,7 +200,6 @@ public final class Constants {
     // Motor constants
     public static final int kLeftClimbMotorPort = 12;
     public static final int kRightClimbMotorPort = 13;
-
     // Encoder constants
     public static final int kLeftClimbEncoderPort = 11;
     public static final int kRightClimbEncoderPort = 29;

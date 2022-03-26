@@ -33,7 +33,12 @@ public class FenderShot2 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    tower.setTowerMotorsSpeed(0.34);
+//    if (!tower.getIsBallInBottom() && !tower.getIsBallInTop()){
+//      done = true;
+//    }
+//    else{
+      tower.setTowerMotorsSpeed(0.34);
+//    }
   }
 
   // Called once the command ends or is interrupted.

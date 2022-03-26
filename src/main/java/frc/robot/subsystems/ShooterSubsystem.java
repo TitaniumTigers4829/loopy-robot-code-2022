@@ -15,6 +15,7 @@ public class ShooterSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_rightMotor;
   private final Servo m_leftServo;
   private final Servo m_rightServo;
+  private double pos = 0;
 
   // TODO: IDEA: turn off the compressor while trying to shoot to help the limelight see better
   /** Creates the Shooter subsystem. */
@@ -59,6 +60,22 @@ public class ShooterSubsystem extends SubsystemBase {
     m_leftMotor.set(1.0);
     m_rightMotor.set(1.0);
   }
+//  FIXME
+  public void setFenderShotHeight(){
+    setHeight(ShooterConstants.fenderShotHeight);
+  }
+
+  public void increasePos(){
+    pos += 0.05;
+    setHeight(pos);
+    SmartDashboard.putNumber("Extension", pos);
+  }
+
+  public void decreasePos(){
+    pos -= 0.05;
+    setHeight(pos);
+    SmartDashboard.putNumber("Extension", pos);
+  }
 
   public void stopShooter() {
     m_leftMotor.set(0);
@@ -77,7 +94,7 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // Smart Dashboard Debugging
-    SmartDashboard.putNumber("Shooter Encoder Value:", m_rightMotor.getSelectedSensorPosition());
+//    SmartDashboard.putNumber("Shooter Encoder Value:", m_rightMotor.getSelectedSensorPosition());
   }
 
   @Override
