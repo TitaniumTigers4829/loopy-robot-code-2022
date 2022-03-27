@@ -18,6 +18,7 @@ import frc.robot.commands.climb.ClimbAngleToggle;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.FenderShot2;
+import frc.robot.commands.shooter.LowShot;
 import frc.robot.commands.testing.AcuatorTesting;
 import frc.robot.commands.testing.ClimbManualIndependentControl;
 import frc.robot.commands.testing.ClimbManualPairedPIDControl;
@@ -162,6 +163,9 @@ public class RobotContainer {
     // Fender Shot
     new JoystickButton(m_buttonController, 5).whileHeld(
         new FenderShot2(m_tower, m_shooterSubsystem, false));
+    // Low Shot
+    new JoystickButton(m_buttonController, 8).whileHeld(
+        new LowShot(m_tower, m_shooterSubsystem));
     // While held for intake
     new JoystickButton(m_buttonController, 12).whileHeld(
         new IntakeWithTower(m_intakeSubsystem, m_tower));

@@ -11,11 +11,18 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
 public class FenderShot2 extends CommandBase {
-  /** Creates a new FenderShot2. */
-  private TowerSubsystem tower;
-  private ShooterSubsystem shooter;
-  private boolean isAuto;
-  private boolean done = false;
+
+  /**
+   * Creates a new FenderShot2.
+   */
+  private final TowerSubsystem tower;
+  private final ShooterSubsystem shooter;
+  private final boolean isAuto;
+  private boolean shotTop = false;
+  private int ballCount = 0;
+  private int iteration = 0;
+  private final boolean isFancyShooting = false;
+
   public FenderShot2(TowerSubsystem tower, ShooterSubsystem shooter, boolean isAuto) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.tower = tower;
@@ -23,63 +30,65 @@ public class FenderShot2 extends CommandBase {
     this.isAuto = isAuto;
     addRequirements(tower, shooter);
   }
-  int ballcount = 0;
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (!isAuto) {
+    // This decides what type of shot it will be
+    if (isAuto) {
       shooter.setHeight(ShooterConstants.fenderShotHeight);
       shooter.setSpeed(ShooterConstants.fenderShotSpeed);
     } else {
-      shooter.setHeight(0.3);
-      shooter.setSpeed(0.57);
+      shooter.setHeight(ShooterConstants.tarmacShotHeight);
+      shooter.setSpeed(ShooterConstants.tarmacShotSpeed);
     }
     Timer.delay(1);
     if (tower.getIsBallInBottom()) {
-      ballcount ++;
+      ballCount++;
     }
     if (tower.getIsBallInTop()) {
-      ballcount ++;
+      ballCount++;
     }
   }
-  private boolean shotBottom = false;
-  private boolean shotTop = false;
-  private int iteration = 0;
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-//    if (!tower.getIsBallInBottom() && !tower.getIsBallInTop()){
-//      done = true;
-//    }
-//    else{
-      tower.setTowerMotorsSpeed(0.34);
-//    }
-//    if ((ballcount == 2) && (!shotTop)){
-//      if (tower.getIsBallInTop()) {
-//        tower.setTowerMotorsSpeed(0.34);
-//      } else {
-//        tower.setTowerMotorsSpeed(0);
-//        shotTop = true;
-//      }
-//    }
-//    if ((ballcount == 2) && (shotTop)) {
-//      if (iteration <= 25){
-//        iteration ++;
-//      } else {
-//        tower.setTowerMotorsSpeed(0.34);
-//      }
-//    }
-//    if (ballcount == 1){
-//      tower.setTowerMotorsSpeed(0.34);
-//    }
+    if ((isFancyShooting) && (!isAuto)) {
+      // Adds a little delay in between the shooting of two balls
+      if ((ballCount == 2) && (!shotTop)) {
+        if (tower.getIsBallInTop()) {
+          // Shoots the top ball if there are two balls
+          tower.setTopMotorOutputManual(ShooterConstants.towerMotorSpeed);
+        } else {
+          tower.setTowerMotorsSpeed(0);
+          shotTop = true;
+        }
+      }
+
+      if ((ballCount == 2) && (shotTop)) {
+        if (iteration <= 25) {
+          // Execute is called 50 times a second, this adds a half second delay to the firing of the second ball
+          iteration++;
+        } else {
+          // Shoots the bottom ball if there were two balls when originally fired
+          tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
+        }
+      }
+
+      if (ballCount == 1) {
+        // Shoots the top ball if there is only one ball
+        tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
+      }
+    } else {
+      tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
+    }
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-//    shooter.setHeight(0);
     shooter.setSpeed(0);
     tower.setTowerMotorsSpeed(0);
   }
@@ -87,6 +96,6 @@ public class FenderShot2 extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return done;
+    return false;
   }
 }

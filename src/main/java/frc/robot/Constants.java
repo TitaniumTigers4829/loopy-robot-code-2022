@@ -32,7 +32,7 @@ public final class Constants {
     public static final int kFrontRightDriveMotorPort = 4;
     public static final int kRearRightDriveMotorPort = 23;
 
-    public static final int kFrontLeftTurningMotorPort = 21;
+    public static final int kFrontLeftTurningMotorPort = 1;
     public static final int kRearLeftTurningMotorPort = 7;
     public static final int kFrontRightTurningMotorPort = 3;
     public static final int kRearRightTurningMotorPort = 25;
@@ -153,10 +153,15 @@ public final class Constants {
     public static final double kShootertoMetersPerSecond =
         (10 * kWheelCircumferenceMeters) / (kShooterGearRatio * 2048);
 
+    // Pre-programmed shoot values
+    public static final double towerMotorSpeed = 0.34;
 
-    // Preprogrammed shoot values
-    public static final double fenderShotHeight = 0.45;
-    public static final double fenderShotSpeed = 0.6;
+    public static final double fenderShotHeight = 0.3;
+    public static final double fenderShotSpeed = 0.57;
+    public static final double tarmacShotHeight = 0.45;
+    public static final double tarmacShotSpeed = 0.6;
+    public static final double lowShotSpeed = 0.6;
+    public static final double lowShotHeight = 0.45;
 
     // Limelight constants
     public static double cameraHeight = 0 - 9;
