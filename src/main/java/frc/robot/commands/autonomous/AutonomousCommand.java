@@ -5,8 +5,6 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.WaitCommand;
-import frc.robot.commands.shooter.FenderShot;
 import frc.robot.commands.shooter.FenderShot2;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;

@@ -28,7 +28,7 @@ public class LowShot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    shooter.setHeight(ShooterConstants.lowShotHeight);
+//    shooter.setHeight(ShooterConstants.lowShotHeight);
     shooter.setSpeed(ShooterConstants.lowShotSpeed);
     Timer.delay(1);
     tower.setTopMotorOutputManual(ShooterConstants.towerMotorSpeed);
@@ -37,7 +37,7 @@ public class LowShot extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    shooter.setHeight(ShooterConstants.lowShotHeight);
+//    shooter.setHeight(ShooterConstants.lowShotHeight);
     shooter.setSpeed(ShooterConstants.lowShotSpeed);
     tower.setTopMotorOutputManual(ShooterConstants.towerMotorSpeed);
   }

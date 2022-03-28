@@ -36,10 +36,8 @@ public class FenderShot2 extends CommandBase {
   public void initialize() {
     // This decides what type of shot it will be
     if (isAuto) {
-      shooter.setHeight(ShooterConstants.fenderShotHeight);
       shooter.setSpeed(ShooterConstants.fenderShotSpeed);
     } else {
-      shooter.setHeight(ShooterConstants.tarmacShotHeight);
       shooter.setSpeed(ShooterConstants.tarmacShotSpeed);
     }
     Timer.delay(1);

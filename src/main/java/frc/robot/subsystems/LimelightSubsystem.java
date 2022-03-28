@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -179,6 +180,33 @@ public class LimelightSubsystem extends SubsystemBase {
         ShooterConstants.cameraAngle + getTargetOffsetY()));
   }
 
+  public double calculateSpeed() {
+    double distance = calculateDistance();
+    double[][] speedTable = ShooterConstants.shootSpeedValues;
+
+    double lowerDistance = 0;
+    double lowerSpeed = 0;
+    double higherDistance = 0;
+    double higherSpeed = 0;
+
+    // Gets the closest values below and above the desired value
+    for (int i = 0; i < speedTable.length; i++) {
+      if (speedTable[i][0] <= distance && speedTable[i + 1][0] > distance) {
+        lowerDistance = speedTable[i][0];
+        lowerSpeed = speedTable[i][1];
+        higherDistance = speedTable[i + 1][0];
+        higherSpeed = speedTable[i + 1][1];
+        break;
+      }
+    }
+
+    // Gets slope or line connecting points
+    double linearSlope = (higherSpeed - lowerSpeed) / (higherDistance - lowerDistance);
+
+    // Uses point slope form to get the xValue
+    return (linearSlope * (distance - lowerDistance) + lowerSpeed);
+  }
+
   /**
    * Enums allow for values to have labels. This is especially useful when a parameter takes a value
    * that has a specific function associated with said value. With labels, it is clearer what a
@@ -210,4 +238,8 @@ public class LimelightSubsystem extends SubsystemBase {
     }
   }
 
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Distance", calculateDistance());
+  }
 }

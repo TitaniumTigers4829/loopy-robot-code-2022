@@ -29,7 +29,7 @@ public class AcuatorTesting extends CommandBase {
   @Override
   public void execute() {
     double extension = ((pos.getAsDouble() + 1) / 2);
-    shooter.setHeight(extension);
+//    shooter.setHeight(extension);
     SmartDashboard.putNumber("Extension", extension);
   }
 

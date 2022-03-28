@@ -73,7 +73,8 @@ public final class Constants {
 
     // Values to scale joystick inputs to desired states.
     public static final double kMaxSpeedMetersPerSecond = 4.5; // LOCKED IN
-    public static final double kMaxRotationalSpeed = 3 * Math.PI; // TODO: make sure this is right... (maybe should be radians)
+    public static final double kMaxRotationalSpeed =
+        3 * Math.PI; // TODO: make sure this is right... (maybe should be radians)
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically
@@ -143,37 +144,29 @@ public final class Constants {
     public static final int kRightShooterMotorPort = 20;
     public static final int kLeftServoPort = 00;
     public static final int kRightServoPort = 01;
-
-    public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
     public static final double kShooterGearRatio = 7.13;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
     public static final double kWheelCircumferenceMeters =
-    kWheelDiameterMeters * Math.PI; // C = D * pi
+        kWheelDiameterMeters * Math.PI; // C = D * pi
     public static final double kShootertoMetersPerSecond =
         (10 * kWheelCircumferenceMeters) / (kShooterGearRatio * 2048);
-
     // Pre-programmed shoot values
     public static final double towerMotorSpeed = 0.34;
-
     public static final double fenderShotHeight = 0.3;
     public static final double fenderShotSpeed = 0.57;
     public static final double tarmacShotHeight = 0.45;
     public static final double tarmacShotSpeed = 0.6;
     public static final double lowShotSpeed = 0.6;
     public static final double lowShotHeight = 0.45;
+    public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
+
+    // Limelight constants
+    public static double cameraHeight = 0.64135; // Meters
+    public static double cameraAngle = 55; // Degrees
+    public static double targetHeight = 8.66;
 
     public static double[][] shootSpeedValues = {
-    //{distance, speed}
-      {0, 1},
-      {1, 2},
-      {3, 4},
-      {4, 10},
-      {5, 200},
-      {6, 10}
-  };
-
-    public static double[][] shootHeightValues = {
         //{distance, speed}
         {0, 1},
         {1, 2},
@@ -182,11 +175,6 @@ public final class Constants {
         {5, 200},
         {6, 10}
     };
-
-    // Limelight constants
-    public static double cameraHeight = 0 - 9;
-    public static double cameraAngle = 0 - 9;
-    public static double targetHeight = 8.66;
   }
 
 
@@ -242,6 +230,7 @@ public final class Constants {
   }
 
   public static final class OIConstants {
+
     public static final int kButtonControllerPort = 1;
 
     public static final int kDriverControllerPort = 0;
