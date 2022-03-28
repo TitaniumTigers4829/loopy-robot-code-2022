@@ -17,17 +17,17 @@ public class FenderShot2 extends CommandBase {
    */
   private final TowerSubsystem tower;
   private final ShooterSubsystem shooter;
-  private final boolean isAuto;
+  private final boolean isFender;
   private boolean shotTop = false;
   private int ballCount = 0;
   private int iteration = 0;
   private final boolean isFancyShooting = false;
 
-  public FenderShot2(TowerSubsystem tower, ShooterSubsystem shooter, boolean isAuto) {
+  public FenderShot2(TowerSubsystem tower, ShooterSubsystem shooter, boolean isFender) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.tower = tower;
     this.shooter = shooter;
-    this.isAuto = isAuto;
+    this.isFender = isFender;
     addRequirements(tower, shooter);
   }
 
@@ -35,9 +35,11 @@ public class FenderShot2 extends CommandBase {
   @Override
   public void initialize() {
     // This decides what type of shot it will be
-    if (isAuto) {
+    if (isFender) {
+      shooter.setHeight(ShooterConstants.fenderShotHeight);
       shooter.setSpeed(ShooterConstants.fenderShotSpeed);
     } else {
+      shooter.setHeight(ShooterConstants.tarmacShotHeight);
       shooter.setSpeed(ShooterConstants.tarmacShotSpeed);
     }
     Timer.delay(1);
@@ -52,7 +54,8 @@ public class FenderShot2 extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if ((isFancyShooting) && (!isAuto)) {
+//    isFender ~= isAuto
+    if ((isFancyShooting) && (!isFender)) {
       // Adds a little delay in between the shooting of two balls
       if ((ballCount == 2) && (!shotTop)) {
         if (tower.getIsBallInTop()) {
