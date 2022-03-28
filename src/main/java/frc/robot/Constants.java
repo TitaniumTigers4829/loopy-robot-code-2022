@@ -163,6 +163,26 @@ public final class Constants {
     public static final double lowShotSpeed = 0.6;
     public static final double lowShotHeight = 0.45;
 
+    public static double[][] shootSpeedValues = {
+    //{distance, speed}
+      {0, 1},
+      {1, 2},
+      {3, 4},
+      {4, 10},
+      {5, 200},
+      {6, 10}
+  };
+
+    public static double[][] shootHeightValues = {
+        //{distance, speed}
+        {0, 1},
+        {1, 2},
+        {3, 4},
+        {4, 10},
+        {5, 200},
+        {6, 10}
+    };
+
     // Limelight constants
     public static double cameraHeight = 0 - 9;
     public static double cameraAngle = 0 - 9;
