@@ -179,10 +179,6 @@ public class LimelightSubsystem extends SubsystemBase {
         ShooterConstants.cameraAngle + getTargetOffsetY()));
   }
 
-  public double calculateSpeed(){
-    return 0;
-  }
-
   /**
    * Enums allow for values to have labels. This is especially useful when a parameter takes a value
    * that has a specific function associated with said value. With labels, it is clearer what a
