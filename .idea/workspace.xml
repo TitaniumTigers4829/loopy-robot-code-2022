@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="shoot">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/LowShot.java" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="added low shot">
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/auto/autoAimCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutonomousCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutonomousCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/FenderShot2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/FenderShot2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -264,7 +261,8 @@
       <workItem from="1648156094152" duration="26379000" />
       <workItem from="1648257088166" duration="1316000" />
       <workItem from="1648297625106" duration="9683000" />
-      <workItem from="1648311355522" duration="23680000" />
+      <workItem from="1648311355522" duration="26807000" />
+      <workItem from="1648424759169" duration="771000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -525,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648332852017</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="added low shot">
+      <created>1648396575805</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1648396575805</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -547,7 +552,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="improved logging" />
     <MESSAGE value="changes from Ryan and I's session" />
     <MESSAGE value="Almost entirely implemented Climb Subsystem" />
     <MESSAGE value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
@@ -572,6 +576,7 @@
     <MESSAGE value="organized RobotContainer a bit." />
     <MESSAGE value="e" />
     <MESSAGE value="shoot" />
-    <option name="LAST_COMMIT_MESSAGE" value="shoot" />
+    <MESSAGE value="added low shot" />
+    <option name="LAST_COMMIT_MESSAGE" value="added low shot" />
   </component>
 </project>

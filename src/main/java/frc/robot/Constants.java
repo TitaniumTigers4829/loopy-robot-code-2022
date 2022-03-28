@@ -103,7 +103,7 @@ public final class Constants {
     // In this case, that would be 2pi.
 
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = 3 * Math.PI;
-    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 10 * Math.PI;
+    public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 6 * Math.PI;
 
     public static final double kPModuleDriveController = 0; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
@@ -160,7 +160,7 @@ public final class Constants {
     public static final double fenderShotSpeed = 0.57;
     public static final double tarmacShotHeight = 0.45;
     public static final double tarmacShotSpeed = 0.6;
-    public static final double lowShotSpeed = 0.6;
+    public static final double lowShotSpeed = 0.2;
     public static final double lowShotHeight = 0.45;
 
     // Limelight constants
