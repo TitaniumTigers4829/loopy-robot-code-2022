@@ -34,63 +34,64 @@ public class FenderShot2 extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    tower.setTowerThirdPower();
     // This decides what type of shot it will be
-    if (isFender) {
-      shooter.setHeight(ShooterConstants.fenderShotHeight);
-      shooter.setSpeed(ShooterConstants.fenderShotSpeed);
-    } else {
-      shooter.setHeight(ShooterConstants.tarmacShotHeight);
-      shooter.setSpeed(ShooterConstants.tarmacShotSpeed);
-    }
-    Timer.delay(1);
-    if (tower.getIsBallInBottom()) {
-      ballCount++;
-    }
-    if (tower.getIsBallInTop()) {
-      ballCount++;
-    }
+//    if (isFender) {
+////      shooter.setHeight(ShooterConstants.fenderShotHeight);
+//      shooter.setSpeed(ShooterConstants.fenderShotSpeed);
+//    } else {
+////      shooter.setHeight(ShooterConstants.tarmacShotHeight);
+//      shooter.setSpeed(ShooterConstants.tarmacShotSpeed);
+//    }
+//    Timer.delay(1);
+//    if (tower.getIsBallInBottom()) {
+//      ballCount++;
+//    }
+//    if (tower.getIsBallInTop()) {
+//      ballCount++;
+//    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 //    isFender ~= isAuto
-    if ((isFancyShooting) && (!isFender)) {
-      // Adds a little delay in between the shooting of two balls
-      if ((ballCount == 2) && (!shotTop)) {
-        if (tower.getIsBallInTop()) {
-          // Shoots the top ball if there are two balls
-          tower.setTopMotorOutputManual(ShooterConstants.towerMotorSpeed);
-        } else {
-          tower.setTowerMotorsSpeed(0);
-          shotTop = true;
-        }
-      }
-
-      if ((ballCount == 2) && (shotTop)) {
-        if (iteration <= 25) {
-          // Execute is called 50 times a second, this adds a half second delay to the firing of the second ball
-          iteration++;
-        } else {
-          // Shoots the bottom ball if there were two balls when originally fired
-          tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
-        }
-      }
-
-      if (ballCount == 1) {
-        // Shoots the top ball if there is only one ball
-        tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
-      }
-    } else {
-      tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
-    }
+//    if ((isFancyShooting) && (!isFender)) {
+//      // Adds a little delay in between the shooting of two balls
+//      if ((ballCount == 2) && (!shotTop)) {
+//        if (tower.getIsBallInTop()) {
+//          // Shoots the top ball if there are two balls
+//          tower.setTopMotorOutputManual(ShooterConstants.towerMotorSpeed);
+//        } else {
+//          tower.setTowerMotorsSpeed(0);
+//          shotTop = true;
+//        }
+//      }
+//
+//      if ((ballCount == 2) && (shotTop)) {
+//        if (iteration <= 25) {
+//          // Execute is called 50 times a second, this adds a half second delay to the firing of the second ball
+//          iteration++;
+//        } else {
+//          // Shoots the bottom ball if there were two balls when originally fired
+//          tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
+//        }
+//      }
+//
+//      if (ballCount == 1) {
+//        // Shoots the top ball if there is only one ball
+//        tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
+//      }
+//    } else {
+//      tower.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
+//    }
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    shooter.setSpeed(0);
+//    shooter.setSpeed(0);
     tower.setTowerMotorsSpeed(0);
   }
 

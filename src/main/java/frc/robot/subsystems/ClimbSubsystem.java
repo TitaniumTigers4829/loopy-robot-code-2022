@@ -28,7 +28,6 @@ public class ClimbSubsystem extends SubsystemBase {
   private final DigitalInput m_rightLimitSwitch;
 
   private final DoubleSolenoid m_solenoid;
-
   /**
    * NOTE: According to the documentation, it is possible to use a single controller asynchronously,
    * but that it is not have any built in thread safety, and should only be done by advanced teams.

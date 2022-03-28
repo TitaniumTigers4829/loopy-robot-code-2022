@@ -171,13 +171,13 @@ public class LimelightSubsystem extends SubsystemBase {
   }
 
   /**
-   * Calculates distance in feet
+   * Calculates distance in meters
    *
-   * @return distance in feet
+   * @return distance in meters
    */
   public double calculateDistance() {
-    return ((ShooterConstants.targetHeight - ShooterConstants.cameraHeight) / Math.tan(
-        ShooterConstants.cameraAngle + getTargetOffsetY()));
+    return ((ShooterConstants.targetHeight - ShooterConstants.cameraHeight) / Math.tan((
+        ShooterConstants.cameraAngle + getTargetOffsetY()) * (Math.PI / 180)));
   }
 
   public double calculateSpeed() {
@@ -241,5 +241,6 @@ public class LimelightSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Distance", calculateDistance());
+    SmartDashboard.putNumber("a2: ", getTargetOffsetY());
   }
 }

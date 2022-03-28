@@ -140,10 +140,8 @@ public final class Constants {
 
   public static final class ShooterConstants {
 
-    public static final int kLeftShooterMotorPort = 19;
-    public static final int kRightShooterMotorPort = 20;
-    public static final int kLeftServoPort = 00;
-    public static final int kRightServoPort = 01;
+    public static final int kFrontShooterMotorPort = 20;
+    public static final int kBackShooterMotorPort = 19;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
     public static final double kShooterGearRatio = 7.13;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
@@ -153,18 +151,15 @@ public final class Constants {
         (10 * kWheelCircumferenceMeters) / (kShooterGearRatio * 2048);
     // Pre-programmed shoot values
     public static final double towerMotorSpeed = 0.34;
-    public static final double fenderShotHeight = 0.3;
     public static final double fenderShotSpeed = 0.57;
-    public static final double tarmacShotHeight = 0.45;
     public static final double tarmacShotSpeed = 0.6;
     public static final double lowShotSpeed = 0.2;
-    public static final double lowShotHeight = 0.45;
     public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
 
     // Limelight constants
-    public static double cameraHeight = 0.64135; // Meters
-    public static double cameraAngle = 55; // Degrees
-    public static double targetHeight = 8.66;
+    public static double cameraHeight = 0.6604; // Meters
+    public static double cameraAngle = 35; // Degrees
+    public static double targetHeight = 2.67; // Meters
 
     public static double[][] shootSpeedValues = {
         //{distance, speed}
@@ -220,8 +215,8 @@ public final class Constants {
     public static final int kLeftClimbLimitSwitchPort = 2;
     public static final int kRightClimbLimitSwitchPort = 3;
     // Solenoid constants
-    public static final int kClimbVerticalSolenoidPort = 5;
-    public static final int kClimbAngledSolenoidPort = 7;
+    public static final int kClimbVerticalSolenoidPort = 7;
+    public static final int kClimbAngledSolenoidPort = 5;
   }
 
   public static final class LEDsConstants {

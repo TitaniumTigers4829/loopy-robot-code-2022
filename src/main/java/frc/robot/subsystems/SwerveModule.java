@@ -135,7 +135,7 @@ public class SwerveModule {
         ModuleConstants.kDrivetoMetersPerSecond * m_driveMotor.getSelectedSensorVelocity();
 
     double m_turningRadians =
-        (Math.PI/180) * m_turnEncoder.getAbsolutePosition();
+        (Math.PI / 180) * m_turnEncoder.getAbsolutePosition();
 
     return new SwerveModuleState(m_speedMetersPerSecond, new Rotation2d(m_turningRadians));
   }
