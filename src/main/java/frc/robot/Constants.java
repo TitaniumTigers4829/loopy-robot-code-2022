@@ -161,15 +161,28 @@ public final class Constants {
     public static double cameraAngle = 35; // Degrees
     public static double targetHeight = 2.67; // Meters
 
-    public static double[][] shootSpeedValues = {
-        //{distance, speed}
-        {0, 1},
-        {1, 2},
-        {3, 4},
-        {4, 10},
-        {5, 200},
-        {6, 10}
+    public static double[][] topMotorValues = {
+        //{distance, rpm}
+        {Units.feetToMeters(5), 1950},
+        {Units.feetToMeters(6.5), 2150},
+        {Units.feetToMeters(8), 2500},
+        {Units.feetToMeters(10), 2950},
+        {Units.feetToMeters(11), 3350},
+        {Units.feetToMeters(12), 4100},
+        {Units.feetToMeters(13.5), 4900}
     };
+
+    public static double[][] bottomMotorValues = {
+        //{distance, rpm}
+        {Units.feetToMeters(5), 1500},
+        {Units.feetToMeters(6.5), 1500},
+        {Units.feetToMeters(8), 1450},
+        {Units.feetToMeters(10), 1350},
+        {Units.feetToMeters(11), 1250},
+        {Units.feetToMeters(12), 800},
+        {Units.feetToMeters(13.5), 700}
+    };
+
   }
 
 

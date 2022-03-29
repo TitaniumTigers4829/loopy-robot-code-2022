@@ -181,9 +181,8 @@ public class LimelightSubsystem extends SubsystemBase {
         ShooterConstants.cameraAngle + getTargetOffsetY()) * (Math.PI / 180)));
   }
 
-  public double calculateSpeed() {
+  public double calculateRPM(double[][] table) {
     double distance = calculateDistance();
-    double[][] speedTable = ShooterConstants.shootSpeedValues;
 
     double lowerDistance = 0;
     double lowerSpeed = 0;
@@ -191,12 +190,12 @@ public class LimelightSubsystem extends SubsystemBase {
     double higherSpeed = 0;
 
     // Gets the closest values below and above the desired value
-    for (int i = 0; i < speedTable.length; i++) {
-      if (speedTable[i][0] <= distance && speedTable[i + 1][0] > distance) {
-        lowerDistance = speedTable[i][0];
-        lowerSpeed = speedTable[i][1];
-        higherDistance = speedTable[i + 1][0];
-        higherSpeed = speedTable[i + 1][1];
+    for (int i = 0; i < table.length; i++) {
+      if (table[i][0] <= distance && table[i + 1][0] > distance) {
+        lowerDistance = table[i][0];
+        lowerSpeed = table[i][1];
+        higherDistance = table[i + 1][0];
+        higherSpeed = table[i + 1][1];
         break;
       }
     }
@@ -210,6 +209,8 @@ public class LimelightSubsystem extends SubsystemBase {
     // Uses point slope form to get the xValue
     return (linearSlope * (distance - lowerDistance) + lowerSpeed);
   }
+
+
 
   /**
    * Enums allow for values to have labels. This is especially useful when a parameter takes a value

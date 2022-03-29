@@ -5,6 +5,9 @@
 package frc.robot.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ShooterConstants;
+import frc.robot.subsystems.EastShooter;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
@@ -14,12 +17,15 @@ public class TestShot extends CommandBase {
    * Creates a new FenderShot2.
    */
   private final TowerSubsystem tower;
-  private final ShooterSubsystem shooter;
+//  private final ShooterSubsystem shooter;
+  private final EastShooter eastShooter;
+  private final LimelightSubsystem limelight = LimelightSubsystem.getInstance();
 
-  public TestShot(TowerSubsystem tower, ShooterSubsystem shooter) {
+  public TestShot(TowerSubsystem tower, EastShooter eastShooter/*ShooterSubsystem shooter*/) {
     this.tower = tower;
-    this.shooter = shooter;
-    addRequirements(tower, shooter);
+//    this.shooter = shooter;
+    this.eastShooter = eastShooter;
+    addRequirements(tower, eastShooter /*shooter*/);
   }
 
   // Called when the command is initially scheduled.
