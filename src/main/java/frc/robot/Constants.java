@@ -7,7 +7,6 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 /**
@@ -141,8 +140,8 @@ public final class Constants {
 
   public static final class ShooterConstants {
 
-    public static final int kTopShooterPort = 19;
-    public static final int kBottomShooterPort = 20;
+    public static final int kFrontShooterMotorPort = 20;
+    public static final int kBackShooterMotorPort = 19;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
     public static final double kShooterGearRatio = 7.13;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
@@ -151,14 +150,14 @@ public final class Constants {
     public static final double kShootertoMetersPerSecond =
         (10 * kWheelCircumferenceMeters) / (kShooterGearRatio * 2048);
     // Pre-programmed shoot values
-    public static final double towerMotorSpeed = 0.7;
+    public static final double towerMotorSpeed = 0.34;
     public static final double fenderShotSpeed = 0.57;
     public static final double tarmacShotSpeed = 0.6;
     public static final double lowShotSpeed = 0.2;
     public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
 
     // Limelight constants
-    public static double cameraHeight = Units.inchesToMeters(29.5); // Meters
+    public static double cameraHeight = 0.6604; // Meters
     public static double cameraAngle = 35; // Degrees
     public static double targetHeight = 2.67; // Meters
 
