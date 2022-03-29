@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="changes from sunday">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" afterDir="false" />
-    </list>
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="e" />
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" afterDir="false" />
@@ -98,51 +88,6 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java">
-      <ranges>
-        <range start1="9" end1="9" start2="9" end2="10" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="10" end1="11" start2="11" end2="11" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="15" end1="16" start2="15" end2="17" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="19" end1="22" start2="20" end2="27" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="24" end1="25" start2="29" end2="30" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="30" end1="32" start2="35" end2="40" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="39" end1="40" start2="47" end2="51" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="45" end1="46" start2="56" end2="58" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java">
-      <ranges>
-        <range start1="9" end1="9" start2="9" end2="10" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="142" end1="144" start2="143" end2="145" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="152" end1="153" start2="153" end2="154" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="159" end1="160" start2="160" end2="161" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="163" end1="171" start2="164" end2="173" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="172" end1="172" start2="174" end2="186" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java">
-      <ranges>
-        <range start1="2" end1="2" start2="2" end2="3" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="182" end1="183" start2="183" end2="184" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="184" end1="185" start2="185" end2="185" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="188" end1="189" start2="188" end2="189" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="192" end1="198" start2="192" end2="198" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="201" end1="201" start2="201" end2="204" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-        <range start1="209" end1="209" start2="212" end2="214" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="242" end1="244" start2="247" end2="249" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java">
-      <ranges>
-        <range start1="7" end1="7" start2="7" end2="10" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="16" end1="17" start2="19" end2="22" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="18" end1="19" start2="23" end2="24" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="20" end1="22" start2="25" end2="28" changelist="be6ecede-5820-491c-8c48-71048fa5dbff" />
-        <range start1="33" end1="34" start2="39" end2="39" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -322,7 +267,7 @@
       <workItem from="1648424759169" duration="771000" />
       <workItem from="1648486156367" duration="800000" />
       <workItem from="1648510293870" duration="3857000" />
-      <workItem from="1648567972372" duration="7704000" />
+      <workItem from="1648567972372" duration="8578000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -597,7 +542,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648486338552</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="e">
+      <created>1648577961807</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1648577961807</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -640,10 +592,10 @@
     <MESSAGE value="swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now)." />
     <MESSAGE value="we made our first shot!!! :D" />
     <MESSAGE value="organized RobotContainer a bit." />
-    <MESSAGE value="e" />
     <MESSAGE value="shoot" />
     <MESSAGE value="added low shot" />
     <MESSAGE value="changes from sunday" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes from sunday" />
+    <MESSAGE value="e" />
+    <option name="LAST_COMMIT_MESSAGE" value="e" />
   </component>
 </project>
