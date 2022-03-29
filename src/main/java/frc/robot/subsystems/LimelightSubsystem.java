@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -186,7 +187,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
     double lowerDistance = 0;
     double lowerSpeed = 0;
-    double higherDistance = 0;
+    double higherDistance = 0.1; // Shouldn't be necessary but just in case
     double higherSpeed = 0;
 
     // Gets the closest values below and above the desired value
@@ -199,6 +200,9 @@ public class LimelightSubsystem extends SubsystemBase {
         break;
       }
     }
+
+    // Shouldn't be necessary but just in case
+    if (table[-1][0] < distance) return table[-1][0];
 
     // Gets slope or line connecting points
     double linearSlope = (higherSpeed - lowerSpeed) / (higherDistance - lowerDistance);
@@ -240,7 +244,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Distance", calculateDistance());
-    SmartDashboard.putNumber("a2: ", getTargetOffsetY());
+    SmartDashboard.putNumber("Distance ", calculateDistance());
+    SmartDashboard.putNumber("Distance (ft)", Units.metersToFeet(calculateDistance()));
   }
 }

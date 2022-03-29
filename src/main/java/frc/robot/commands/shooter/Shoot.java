@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
 public class Shoot extends CommandBase {
@@ -28,8 +27,11 @@ public class Shoot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    double speed = limelight.calculateSpeed();
-    shooterSubsystem.setSpeed(speed);
+//    shooterSubsystem.setSpeed(limelight.calculateSpeed());
+    eastShooter.setShooterRPM(
+        limelight.calculateRPM(ShooterConstants.bottomMotorValues),
+        limelight.calculateRPM(ShooterConstants.topMotorValues)
+    );
     Timer.delay(1);
     towerSubsystem.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
   }

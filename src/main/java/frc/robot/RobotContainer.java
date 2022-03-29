@@ -28,11 +28,13 @@ import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.FenderShot2;
 import frc.robot.commands.shooter.LowShot;
+import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.shooter.TestShot;
 import frc.robot.commands.testing.ClimbManualIndependentControl;
 import frc.robot.commands.testing.ClimbManualPairedPIDControl;
 import frc.robot.subsystems.ClimbSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.EastShooter;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -56,6 +58,7 @@ public class RobotContainer {
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
+  private final EastShooter shooter = new EastShooter();
 //  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
@@ -65,6 +68,8 @@ public class RobotContainer {
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
+//  type a response if u see this
+
   public RobotContainer() {
     // Turn off the limelight lights because they are very bright
 //    m_Limelight.turnOffLED();
@@ -166,16 +171,22 @@ public class RobotContainer {
     JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 7);
     JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 6);
 
-    new JoystickButton(m_buttonController, 9).toggleWhenPressed(
-        new ClimbWithButtons(m_climbSubsystem,
-            LClimbUp::get, LClimbDown::get, RClimbUp::get,
-            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
+//    new JoystickButton(m_buttonController, 9).toggleWhenPressed(
+//        new ClimbWithButtons(m_climbSubsystem,
+//            LClimbUp::get, LClimbDown::get, RClimbUp::get,
+//            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
 
     // Manual control for getting shoot values
-    RIGHT_TRIGGER.whenPressed(
-        new InstantCommand(m_shooterSubsystem::increaseSpeed));
-    LEFT_TRIGGER.whenPressed(
-        new InstantCommand(m_shooterSubsystem::decreaseSpeed));
+//    RIGHT_TRIGGER.whenPressed(
+//        new InstantCommand(m_shooterSubsystem::increaseBackSpeed));
+//    LEFT_TRIGGER.whenPressed(
+//        new InstantCommand(m_shooterSubsystem::decreaseBackSpeed));
+//    RIGHT_BUMPER.whenPressed(
+//        new InstantCommand(m_shooterSubsystem::increaseFrontSpeed));
+//    LEFT_BUMPER.whenPressed(
+//        new InstantCommand(m_shooterSubsystem::decreaseFrontSpeed));
+
+
 
     // Fender Shot
 //    new JoystickButton(m_buttonController, 5).whileHeld(
@@ -188,7 +199,8 @@ public class RobotContainer {
     // While held for intake
     RIGHT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
 
-    A_BUTTON.whileHeld(new TestShot(m_tower, m_shooterSubsystem));
+//    A_BUTTON.whileHeld(new TestShot(m_tower, new EastShooter()));
+    A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight));
 
 //     Toggle for climb solenoids
 ////     Intake down

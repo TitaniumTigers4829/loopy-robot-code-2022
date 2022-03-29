@@ -10,8 +10,8 @@ import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  private final WPI_TalonFX m_frontMotor;
-  private final WPI_TalonFX m_backMotor;
+  private final WPI_TalonFX m_topMotor;
+  private final WPI_TalonFX m_bottomMotor;
 
   private double speed = 0;
 
@@ -19,21 +19,21 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Creates the Shooter subsystem. */
   public ShooterSubsystem() {
     // Initialize Motors
-    m_frontMotor = new WPI_TalonFX(ShooterConstants.kBackShooterMotorPort);
-    m_backMotor = new WPI_TalonFX(ShooterConstants.kFrontShooterMotorPort);
+    m_topMotor = new WPI_TalonFX(ShooterConstants.kBottomShooterPort);
+    m_bottomMotor = new WPI_TalonFX(ShooterConstants.kTopShooterPort);
 
-    m_frontMotor.setInverted(true);
-    m_backMotor.setInverted(true);
+    m_topMotor.setInverted(true);
+    m_bottomMotor.setInverted(true);
 
-    m_frontMotor.setNeutralMode(NeutralMode.Coast);
-    m_backMotor.setNeutralMode(NeutralMode.Coast);
-    m_frontMotor.enableVoltageCompensation(true);
-    m_backMotor.enableVoltageCompensation(true);
-    m_frontMotor.configVoltageCompSaturation(12);
-    m_backMotor.configVoltageCompSaturation(12);
+    m_topMotor.setNeutralMode(NeutralMode.Coast);
+    m_bottomMotor.setNeutralMode(NeutralMode.Coast);
+    m_topMotor.configVoltageCompSaturation(12);
+    m_bottomMotor.configVoltageCompSaturation(12);
+    m_topMotor.enableVoltageCompensation(true);
+    m_bottomMotor.enableVoltageCompensation(true);
 
     // configure built-in encoder (only need to use the right one).
-    m_backMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+    m_bottomMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
   }
 
   /**
@@ -42,24 +42,63 @@ public class ShooterSubsystem extends SubsystemBase {
    */
   public void setSpeed(double speed) {
     this.speed = speed;
-    m_frontMotor.set(speed);
-    m_backMotor.set(speed);
+    m_topMotor.set(speed / 1.2);
+    m_bottomMotor.set(speed);
   }
 
-  public void increaseSpeed() {
+  public void increaseBackSpeed() {
     speed += .05;
     speed = (speed >= 1 ? 1 : speed);
-    m_backMotor.set(speed);
-    m_frontMotor.set((speed * 1.2 >= 1 ? 1 : speed * 1.2));
-    SmartDashboard.putNumber("Speed", speed);
+    m_bottomMotor.set(speed);
+    SmartDashboard.putNumber("back speed", speed);
   }
 
-  public void decreaseSpeed() {
+  public void decreaseBackSpeed() {
     speed -= .05;
     speed = (speed <= -1 ? -1 : speed);
-    m_backMotor.set(speed);
-    m_frontMotor.set((speed * 1.2 <= -1 ? -1 : speed * 1.2));
-    SmartDashboard.putNumber("Speed", speed);
+    m_bottomMotor.set(speed);
+    SmartDashboard.putNumber("back speed", speed);
+  }
+
+  public void increaseFrontSpeed() {
+    speed += .05;
+    speed = (speed >= 1 ? 1 : speed);
+    m_topMotor.set(speed);
+    SmartDashboard.putNumber("front speed", speed);
+  }
+
+  public void decreaseFrontSpeed() {
+    speed -= .05;
+    speed = (speed <= -1 ? -1 : speed);
+    m_topMotor.set(speed);
+    SmartDashboard.putNumber("front speed", speed);
+  }
+
+  public void setShooterRPM(double topSpeed, double bottomSpeed) {
+//    targetRPM = speedMain;
+//    // 2048 ticks per revolution, ticks per .10 second, 1 / 2048 * 60
+//    double speed_FalconUnits1 = speedMain / (600.0) * 2048.0;
+//    double speed_FalconUnits2 = speedTop / (600.0) * 2048.0;
+//
+//    if (Math.abs(getMainRPM()) < Math.abs(speedMain) * 1.1) {
+//      FlywheelMain.set(TalonFXControlMode.Velocity, speed_FalconUnits1);
+//    } else {
+//      FlywheelMain.set(ControlMode.PercentOutput, 0);
+//    }
+//
+//    if (Math.abs(getTopRPM()) < Math.abs(speedTop) * 1.1) {
+//      FlywheelTop.set(TalonFXControlMode.Velocity, speed_FalconUnits2);
+//    } else {
+//      FlywheelTop.set(ControlMode.PercentOutput, 0);
+//    }
+  }
+
+  public double getTopRPM(){
+    return (m_topMotor.getSelectedSensorVelocity()) / 2048 * 600;
+  }
+
+  public double getBottomRPM(){
+    return (m_bottomMotor.getSelectedSensorVelocity()) / 2048 * 600;
   }
 
   @Override
