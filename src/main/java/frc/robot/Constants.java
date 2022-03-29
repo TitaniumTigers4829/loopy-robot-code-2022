@@ -156,13 +156,13 @@ public final class Constants {
     public static final double lowShotSpeed = 0.2;
     public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
 
-    // Limelight constants
+    // Limelight constants // FIXME: Get more precise values
     public static double cameraHeight = 0.6604; // Meters
     public static double cameraAngle = 35; // Degrees
     public static double targetHeight = 2.67; // Meters
 
     public static double[][] shootSpeedValues = {
-        //{distance, speed}
+    //  {distance, speed}
         {0, 1},
         {1, 2},
         {3, 4},
