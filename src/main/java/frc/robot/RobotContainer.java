@@ -23,13 +23,8 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.autonomous.AutonomousCommand;
-import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
-import frc.robot.commands.shooter.FenderShot2;
-import frc.robot.commands.shooter.LowShot;
 import frc.robot.commands.shooter.Shoot;
-import frc.robot.commands.shooter.TestShot;
 import frc.robot.commands.testing.ClimbManualIndependentControl;
 import frc.robot.commands.testing.ClimbManualPairedPIDControl;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -178,19 +173,17 @@ public class RobotContainer {
 
     // Manual control for getting shoot values
     RIGHT_TRIGGER.whenPressed(
-        new InstantCommand(m_shooterSubsystem::increaseBackSpeed));
+        new InstantCommand(shooter::increaseTopRPM));
     LEFT_TRIGGER.whenPressed(
-        new InstantCommand(m_shooterSubsystem::decreaseBackSpeed));
-    RIGHT_TRIGGER.whenPressed(
-        new InstantCommand(m_shooterSubsystem::increaseFrontSpeed));
-    LEFT_TRIGGER.whenPressed(
-        new InstantCommand(m_shooterSubsystem::decreaseFrontSpeed));
-
-
+        new InstantCommand(shooter::decreaseTopRPM));
+    RIGHT_BUMPER.whenPressed(
+        new InstantCommand(shooter::increaseBottomRPM));
+    LEFT_BUMPER.whenPressed(
+        new InstantCommand(shooter::decreaseBottomRPM));
 
     // Fender Shot
 //    new JoystickButton(m_buttonController, 5).whileHeld(
-//        new FenderShot2(m_tower, m_shooterSubsystem, false));
+//        new FenderShot(m_tower, m_shooterSubsystem, false));
 //    // Low Shot
 //    new JoystickButton(m_buttonController, 8).whileHeld(
 //        new LowShot(m_tower, m_shooterSubsystem));
@@ -200,11 +193,7 @@ public class RobotContainer {
     LEFT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
 
 //    A_BUTTON.whileHeld(new TestShot(m_tower, new EastShooter()));
-    A_BUTTON.toggleWhenPressed(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive,
-        () -> modifyAxis(LEFT_STICK_Y) * -1 // xAxis
-        * DriveConstants.kMaxSpeedMetersPerSecond,
-        () -> modifyAxis(LEFT_STICK_X) * -1 // yAxis
-            * DriveConstants.kMaxSpeedMetersPerSecond, RIGHT_BUMPER));
+    A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight));
 
 //     Toggle for climb solenoids
 ////     Intake down
@@ -270,7 +259,7 @@ public class RobotContainer {
 //    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem));
 
 //    LEFT_TRIGGER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
-//    RIGHT_TRIGGER.whileHeld(new FenderShot2(m_tower, m_shooterSubsystem));
+//    RIGHT_TRIGGER.whileHeld(new FenderShot(m_tower, m_shooterSubsystem));
     // Shooter/Tower Testing code
 //    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
 //    DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
@@ -289,13 +278,6 @@ public class RobotContainer {
     // Make sure hooks are latched when testing this part
 //    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
 //    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
-  }
-
-  /**
-   * CAUTION: Only to be used when zeroing modules with screws.
-   */
-  public void resetDrivetrainEncoders() {
-    m_robotDrive.resetEncoders();
   }
 
   /**
@@ -347,7 +329,7 @@ public class RobotContainer {
     // Run path following command, then stop at the end.
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
 //    return new AutonomousCommand(m_shooterSubsystem, m_tower, m_robotDrive);
-//    return new FenderShot2(m_tower, m_shooterSubsystem).withTimeout(5)
+//    return new FenderShot(m_tower, m_shooterSubsystem).withTimeout(5)
 //        .andThen(
 //            new RunCommand(() -> m_robotDrive.drive(-0.2, 0, 0, false))
 //                .withTimeout(1)

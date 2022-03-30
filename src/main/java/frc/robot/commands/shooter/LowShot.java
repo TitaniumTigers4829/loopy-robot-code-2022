@@ -13,7 +13,7 @@ import frc.robot.subsystems.TowerSubsystem;
 public class LowShot extends CommandBase {
 
   /**
-   * Creates a new FenderShot2.
+   * Creates a new FenderShot.
    */
   private final TowerSubsystem tower;
   private final ShooterSubsystem shooter;
@@ -39,7 +39,7 @@ public class LowShot extends CommandBase {
   public void execute() {
 //    shooter.setHeight(ShooterConstants.lowShotHeight);
     shooter.setSpeed(ShooterConstants.lowShotSpeed);
-    tower.setTopMotorOutputManual(ShooterConstants.towerMotorSpeed);
+    tower.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
   }
 
   // Called once the command ends or is interrupted.

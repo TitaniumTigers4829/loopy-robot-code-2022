@@ -4,16 +4,14 @@
 
 package frc.robot.commands.shooter;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
-public class FenderShot2 extends CommandBase {
+public class FenderShot extends CommandBase {
 
   /**
-   * Creates a new FenderShot2.
+   * Creates a new FenderShot.
    */
   private final TowerSubsystem tower;
   private final ShooterSubsystem shooter;

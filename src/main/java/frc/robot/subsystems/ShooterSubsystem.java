@@ -46,33 +46,33 @@ public class ShooterSubsystem extends SubsystemBase {
     m_bottomMotor.set(speed);
   }
 
-  public void increaseBackSpeed() {
-    speed += .05;
-    speed = (speed >= 1 ? 1 : speed);
-    m_bottomMotor.set(speed);
-    SmartDashboard.putNumber("back speed", speed);
-  }
-
-  public void decreaseBackSpeed() {
-    speed -= .05;
-    speed = (speed <= -1 ? -1 : speed);
-    m_bottomMotor.set(speed);
-    SmartDashboard.putNumber("back speed", speed);
-  }
-
-  public void increaseFrontSpeed() {
-    speed += .05;
-    speed = (speed >= 1 ? 1 : speed);
-    m_topMotor.set(speed);
-    SmartDashboard.putNumber("front speed", speed);
-  }
-
-  public void decreaseFrontSpeed() {
-    speed -= .05;
-    speed = (speed <= -1 ? -1 : speed);
-    m_topMotor.set(speed);
-    SmartDashboard.putNumber("front speed", speed);
-  }
+//  public void increaseBackSpeed() {
+//    speed += .05;
+//    speed = (speed >= 1 ? 1 : speed);
+//    m_bottomMotor.set(speed);
+//    SmartDashboard.putNumber("back speed", speed);
+//  }
+//
+//  public void decreaseBackSpeed() {
+//    speed -= .05;
+//    speed = (speed <= -1 ? -1 : speed);
+//    m_bottomMotor.set(speed);
+//    SmartDashboard.putNumber("back speed", speed);
+//  }
+//
+//  public void increaseFrontSpeed() {
+//    speed += .05;
+//    speed = (speed >= 1 ? 1 : speed);
+//    m_topMotor.set(speed);
+//    SmartDashboard.putNumber("front speed", speed);
+//  }
+//
+//  public void decreaseFrontSpeed() {
+//    speed -= .05;
+//    speed = (speed <= -1 ? -1 : speed);
+//    m_topMotor.set(speed);
+//    SmartDashboard.putNumber("front speed", speed);
+//  }
 
   public void setShooterRPM(double topSpeed, double bottomSpeed) {
 //    targetRPM = speedMain;

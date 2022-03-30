@@ -4,8 +4,8 @@
 
 package frc.robot.commands.tower;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.TowerSubsystem;
 
 public class TowerIntake extends CommandBase {
@@ -20,8 +20,8 @@ public class TowerIntake extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    tower.setTopMotorOutputManual(0.34);
-    tower.setBottomMotorOutputManual(0.34);
+    tower.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
+    tower.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

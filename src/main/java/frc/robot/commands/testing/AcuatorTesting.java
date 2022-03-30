@@ -11,7 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import java.util.function.DoubleSupplier;
 
 public class AcuatorTesting extends CommandBase {
-  /** Creates a new FenderShot2. */
+  /** Creates a new FenderShot. */
   private final ShooterSubsystem shooter;
   private final DoubleSupplier pos;
   public AcuatorTesting(ShooterSubsystem shooter, DoubleSupplier pos) {
