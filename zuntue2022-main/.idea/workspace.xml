@@ -4,13 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="improved logging">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Changes by jackg">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/zuntue2022-main.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/zuntue2022.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShoot2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LinearInterpolator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.wpilib/wpilib_preferences.json" beforeDir="false" afterPath="$PROJECT_DIR$/.wpilib/wpilib_preferences.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPILib-License.md" beforeDir="false" afterPath="$PROJECT_DIR$/WPILib-License.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/deploy/example.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/example.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/ShooterManualControl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Limelight.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendordeps/Phoenix.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendordeps/Phoenix.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendordeps/REVLib.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendordeps/REVLib.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendordeps/WPILibNewCommands.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendordeps/WPILibNewCommands.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendordeps/navx_frc.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendordeps/navx_frc.json" afterDir="false" />
     </list>
+    <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
+    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +68,28 @@
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="zuntue2022" type="f1a62948:ProjectNode" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="zuntue2022" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="zuntue2022" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="zuntue2022" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="deployutils" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="zuntue2022" type="f1a62948:ProjectNode" />
+                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -49,7 +105,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -59,10 +115,21 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="25I8vs1nY94LAG4hfCytLjiLQJC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -70,8 +137,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/4829_code/FalconDashboard-main" />
+    <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="frc.robot.commands.shooter" />
+    </key>
   </component>
   <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
@@ -137,7 +212,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="zuntue2022 [deploy]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="zuntue2022 [deploy]" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -181,10 +256,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.zuntue2022 [deploy]" />
         <item itemvalue="Gradle.zuntue2022 [build]" />
-        <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
         <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
+        <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
         <item itemvalue="Gradle.zuntue2022 [vendordep]" />
       </list>
     </recent_temporary>
@@ -201,7 +275,33 @@
       <workItem from="1646339277127" duration="2813000" />
       <workItem from="1646456082887" duration="11888000" />
       <workItem from="1646493368604" duration="43411000" />
-      <workItem from="1646690712318" duration="7881000" />
+      <workItem from="1646690712318" duration="36433000" />
+      <workItem from="1647144886205" duration="15535000" />
+      <workItem from="1647215434845" duration="12970000" />
+      <workItem from="1647364674542" duration="12797000" />
+      <workItem from="1647462967505" duration="5647000" />
+      <workItem from="1647487999931" duration="1233000" />
+      <workItem from="1647548605126" duration="6000" />
+      <workItem from="1647548646641" duration="4000" />
+      <workItem from="1647548736966" duration="2205000" />
+      <workItem from="1647561642027" duration="3221000" />
+      <workItem from="1647568818646" duration="9803000" />
+      <workItem from="1647725994031" duration="59000" />
+      <workItem from="1647726206377" duration="4692000" />
+      <workItem from="1647749007140" duration="5921000" />
+      <workItem from="1647789675427" duration="21586000" />
+      <workItem from="1647898496660" duration="11186000" />
+      <workItem from="1648000305945" duration="8039000" />
+      <workItem from="1648065965136" duration="16152000" />
+      <workItem from="1648120904439" duration="3010000" />
+      <workItem from="1648156094152" duration="26379000" />
+      <workItem from="1648257088166" duration="1316000" />
+      <workItem from="1648297625106" duration="9683000" />
+      <workItem from="1648311355522" duration="26807000" />
+      <workItem from="1648424759169" duration="771000" />
+      <workItem from="1648486156367" duration="800000" />
+      <workItem from="1648510293870" duration="3857000" />
+      <workItem from="1648567972372" duration="21307000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -280,11 +380,232 @@
       <option name="project" value="LOCAL" />
       <updated>1646686577773</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="changes from Ryan and I's session">
+      <created>1646774717812</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1646774717812</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Almost entirely implemented Climb Subsystem">
+      <created>1647110287099</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1647110287099</updated>
+    </task>
+    <task id="LOCAL-00014" summary="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem">
+      <created>1647110437890</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1647110437890</updated>
+    </task>
+    <task id="LOCAL-00015" summary="ClimbSubsystem initial code done. now for commands and then testing.">
+      <created>1647110787297</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1647110787297</updated>
+    </task>
+    <task id="LOCAL-00016" summary="implementing climb testing">
+      <created>1647116759163</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1647116759163</updated>
+    </task>
+    <task id="LOCAL-00017" summary="implementing climb testing">
+      <created>1647117376842</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1647117376842</updated>
+    </task>
+    <task id="LOCAL-00018" summary="made sure swerve wont freak out when i enable the robot">
+      <created>1647118340809</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1647118340809</updated>
+    </task>
+    <task id="LOCAL-00019" summary="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably.">
+      <created>1647128878641</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1647128878641</updated>
+    </task>
+    <task id="LOCAL-00020" summary="updated CAN IDs">
+      <created>1647144969291</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1647144969291</updated>
+    </task>
+    <task id="LOCAL-00021" summary="idk">
+      <created>1647186316920</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1647186316920</updated>
+    </task>
+    <task id="LOCAL-00022" summary="changes from today, climb still not working">
+      <created>1647217269888</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1647217269888</updated>
+    </task>
+    <task id="LOCAL-00023" summary="deleted wrong comments">
+      <created>1647290174674</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1647290174674</updated>
+    </task>
+    <task id="LOCAL-00024" summary="added intake and restructured some things">
+      <created>1647368997228</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1647368997228</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Need to fix one more problem with swerve">
+      <created>1647463719118</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1647463719118</updated>
+    </task>
+    <task id="LOCAL-00026" summary="most recent changes, still a work in progress">
+      <created>1647727925197</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1647727925197</updated>
+    </task>
+    <task id="LOCAL-00027" summary="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy.">
+      <created>1647754369887</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1647754369887</updated>
+    </task>
+    <task id="LOCAL-00028" summary="most recent changes to climb subsystem and relevant constants">
+      <created>1647789716329</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1647789716329</updated>
+    </task>
+    <task id="LOCAL-00029" summary="ryan changes">
+      <created>1647810219137</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1647810219137</updated>
+    </task>
+    <task id="LOCAL-00030" summary="renamed climb retract hooks to make more sense">
+      <created>1647899116279</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1647899116279</updated>
+    </task>
+    <task id="LOCAL-00031" summary="swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now).">
+      <created>1647904404554</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1647904404554</updated>
+    </task>
+    <task id="LOCAL-00032" summary="we made our first shot!!! :D">
+      <created>1648121363793</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1648121363793</updated>
+    </task>
+    <task id="LOCAL-00033" summary="organized RobotContainer a bit.">
+      <created>1648126412963</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1648126412963</updated>
+    </task>
+    <task id="LOCAL-00034" summary="organized RobotContainer a bit.">
+      <created>1648158187768</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1648158187768</updated>
+    </task>
+    <task id="LOCAL-00035" summary="shoot">
+      <created>1648232865222</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1648232865223</updated>
+    </task>
+    <task id="LOCAL-00036" summary="e">
+      <created>1648319757767</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1648319757767</updated>
+    </task>
+    <task id="LOCAL-00037" summary="shoot">
+      <created>1648332852017</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1648332852017</updated>
+    </task>
+    <task id="LOCAL-00038" summary="added low shot">
+      <created>1648396575805</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1648396575805</updated>
+    </task>
+    <task id="LOCAL-00039" summary="changes from sunday">
+      <created>1648486338552</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1648486338552</updated>
+    </task>
+    <task id="LOCAL-00040" summary="e">
+      <created>1648577961807</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1648577961807</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Changes by jackg">
+      <created>1648582025748</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1648582025748</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Changes by jackg">
+      <created>1648582040561</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1648582040561</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java" />
+    <option featureType="dependencySupport" implementationName="java:edu.wpi.first.wpilibj:wpilibj-java" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -298,17 +619,34 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="mostly added comments and few super minor changes (most recommended by intelliJ)" />
-    <MESSAGE value="added phoenix and rev as dependencies" />
-    <MESSAGE value="made a lot of changes, mostly copying code from RedThunder7166" />
-    <MESSAGE value="updated it for our gyro" />
-    <MESSAGE value="updated can IDs" />
-    <MESSAGE value="changed some constants to try and get rid of chattering." />
-    <MESSAGE value="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller)." />
-    <MESSAGE value="Added Shooter Subsystem" />
-    <MESSAGE value="tuning first attempts" />
-    <MESSAGE value="updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)" />
-    <MESSAGE value="improved logging" />
-    <option name="LAST_COMMIT_MESSAGE" value="improved logging" />
+    <MESSAGE value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
+    <MESSAGE value="ClimbSubsystem initial code done. now for commands and then testing." />
+    <MESSAGE value="implementing climb testing" />
+    <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
+    <MESSAGE value="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
+    <MESSAGE value="updated CAN IDs" />
+    <MESSAGE value="added Angle Zero Offset" />
+    <MESSAGE value="idk" />
+    <MESSAGE value="changes from today, climb still not working" />
+    <MESSAGE value="deleted wrong comments" />
+    <MESSAGE value="added intake and restructured some things" />
+    <MESSAGE value="Need to fix one more problem with swerve" />
+    <MESSAGE value="most recent changes, still a work in progress" />
+    <MESSAGE value="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy." />
+    <MESSAGE value="most recent changes to climb subsystem and relevant constants" />
+    <MESSAGE value="ryan changes" />
+    <MESSAGE value="renamed climb retract hooks to make more sense" />
+    <MESSAGE value="swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now)." />
+    <MESSAGE value="we made our first shot!!! :D" />
+    <MESSAGE value="organized RobotContainer a bit." />
+    <MESSAGE value="shoot" />
+    <MESSAGE value="added low shot" />
+    <MESSAGE value="changes from sunday" />
+    <MESSAGE value="e" />
+    <MESSAGE value="Changes by jackg" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by jackg" />
+  </component>
+  <component name="WpiLibVersionService">
+    <option name="lastChecked" value="20220330120915" />
   </component>
 </project>
