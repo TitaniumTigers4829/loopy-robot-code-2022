@@ -21,7 +21,8 @@ public class FenderShot extends CommandBase {
   private int iteration = 0;
   private final boolean isFancyShooting = false;
 
-  public FenderShot2(TowerSubsystem tower, ShooterSubsystem shooter, boolean isFender) {
+  @Deprecated
+  public FenderShot(TowerSubsystem tower, ShooterSubsystem shooter, boolean isFender) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.tower = tower;
     this.shooter = shooter;

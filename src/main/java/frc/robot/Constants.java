@@ -137,12 +137,13 @@ public final class Constants {
 
     public static final int bottomTowerSensorPort = 1;
     public static final int topTowerSensorPort = 0;
+    public static final double towerMotorSpeed = 0.34;
   }
 
   public static final class ShooterConstants {
 
-    public static final int kFrontShooterMotorPort = 20;
-    public static final int kBackShooterMotorPort = 19;
+    public static final int kTopShooterMotorPort = 19;
+    public static final int kBottomShooterMotorPort = 20;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
     public static final double kShooterGearRatio = 7.13;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
@@ -151,7 +152,6 @@ public final class Constants {
     public static final double kShootertoMetersPerSecond =
         (10 * kWheelCircumferenceMeters) / (kShooterGearRatio * 2048);
     // Pre-programmed shoot values
-    public static final double towerMotorSpeed = 0.34;
     public static final double fenderShotSpeed = 0.57;
     public static final double tarmacShotSpeed = 0.6;
     public static final double lowShotSpeed = 0.2;
@@ -162,27 +162,50 @@ public final class Constants {
     public static double cameraAngle = 35; // Degrees
     public static double targetHeight = 2.67; // Meters
 
+//    public static double[][] topMotorValues = {
+//        //{distance, rpm}
+//        {Units.feetToMeters(5), 2193.75},
+//        {Units.feetToMeters(6.5), 2418.75},
+//        {Units.feetToMeters(8), 2812.5},
+//        {Units.feetToMeters(10), 3318.75},
+//        {Units.feetToMeters(11), 3768.75},
+//        {Units.feetToMeters(12), 4612.5},
+//        {Units.feetToMeters(13.5), 5512.5}
+//    };
+//
+//    public static double[][] bottomMotorValues = {
+//        //{distance, rpm}
+//        {Units.feetToMeters(5), 1687.5},
+//        {Units.feetToMeters(6.5), 1687.5},
+//        {Units.feetToMeters(8), 1631.2185},
+//        {Units.feetToMeters(10), 1518.75},
+//        {Units.feetToMeters(11), 1350},
+//        {Units.feetToMeters(12), 900},
+//        {Units.feetToMeters(13.5), 787.5}
+//    };
+
     public static double[][] topMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 2193.75},
-        {Units.feetToMeters(6.5), 2418.75},
-        {Units.feetToMeters(8), 2812.5},
-        {Units.feetToMeters(10), 3318.75},
-        {Units.feetToMeters(11), 3768.75},
-        {Units.feetToMeters(12), 4612.5},
-        {Units.feetToMeters(13.5), 5512.5}
+        {Units.feetToMeters(5), 2193.75 / 1.23},
+        {Units.feetToMeters(6.5), 2418.75 / 1.2},
+        {Units.feetToMeters(8), 2812.5  / 1.23},
+        {Units.feetToMeters(10), 3318.75 / 1.23},
+        {Units.feetToMeters(11), 3768.75 / 1.23},
+        {Units.feetToMeters(12), 4612.5 / 1.23},
+        {Units.feetToMeters(13.5), 5512.5 / 1.23}
     };
 
     public static double[][] bottomMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 1687.5},
-        {Units.feetToMeters(6.5), 1687.5},
-        {Units.feetToMeters(8), 1631.25},
-        {Units.feetToMeters(10), 1518.75},
-        {Units.feetToMeters(11), 1350},
-        {Units.feetToMeters(12), 900},
-        {Units.feetToMeters(13.5), 787.5}
+        {Units.feetToMeters(5), 1687.5 / 1.218},
+        {Units.feetToMeters(6.5), 1687.5 / 1.218},
+        {Units.feetToMeters(8), 1631.2185 / 1.218},
+        {Units.feetToMeters(10), 1518.75 / 1.218},
+        {Units.feetToMeters(11), 1350 / 1.218},
+        {Units.feetToMeters(12), 900 / 1.218},
+        {Units.feetToMeters(13.5), 787.5 / 1.218}
     };
+
     public static double turnkP = 0.175;
     public static double turnkI = 0;
     public static double turnkD = 0;

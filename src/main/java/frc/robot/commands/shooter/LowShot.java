@@ -7,6 +7,7 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
@@ -31,7 +32,7 @@ public class LowShot extends CommandBase {
 //    shooter.setHeight(ShooterConstants.lowShotHeight);
     shooter.setSpeed(ShooterConstants.lowShotSpeed);
     Timer.delay(1);
-    tower.setTopMotorOutputManual(ShooterConstants.towerMotorSpeed);
+    tower.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

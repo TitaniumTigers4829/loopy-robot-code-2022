@@ -215,8 +215,7 @@ public class LimelightSubsystem extends SubsystemBase {
     }
 
     // Shouldn't be necessary but just in case
-//    it caused errors
-//    if (table[-1][0] < distance) return table[-1][0];
+    if (table[table.length -1][0] < distance) return table[table.length -1][1];
 
     // Gets slope or line connecting points
     double linearSlope = (higherSpeed - lowerSpeed) / (higherDistance - lowerDistance);
@@ -224,8 +223,6 @@ public class LimelightSubsystem extends SubsystemBase {
     // Uses point slope form to get the xValue
     return (linearSlope * (distance - lowerDistance) + lowerSpeed);
   }
-
-
 
   /**
    * Enums allow for values to have labels. This is especially useful when a parameter takes a value

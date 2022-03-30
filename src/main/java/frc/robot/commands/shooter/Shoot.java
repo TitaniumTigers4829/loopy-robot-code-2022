@@ -14,6 +14,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.ShooterConstants;
+import frc.robot.Constants.TowerConstants;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.EastShooter;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
@@ -65,10 +67,10 @@ public class Shoot extends CommandBase {
   @Override
   public void initialize() {
 //    shooterSubsystem.setSpeed(limelight.calculateSpeed());
-//    eastShooter.setShooterRPM(
-//        limelight.calculateRPM(ShooterConstants.bottomMotorValues),
-//        limelight.calculateRPM(ShooterConstants.topMotorValues)
-//    );
+    eastShooter.setShooterRPM(
+        limelight.calculateRPM(ShooterConstants.bottomMotorValues),
+        limelight.calculateRPM(ShooterConstants.topMotorValues)
+    );
 
     double headingError = limelight.getTargetOffsetX();
 
@@ -79,16 +81,18 @@ public class Shoot extends CommandBase {
     driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
 
     Timer.delay(1);
-    towerSubsystem.setTowerMotorsSpeed(ShooterConstants.towerMotorSpeed);
+    towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-//    eastShooter.setShooterRPM(
-//        limelight.calculateRPM(ShooterConstants.bottomMotorValues),
-//        limelight.calculateRPM(ShooterConstants.topMotorValues)
-//    );
+    eastShooter.setShooterRPM(
+        limelight.calculateRPM(ShooterConstants.bottomMotorValues),
+        limelight.calculateRPM(ShooterConstants.topMotorValues)
+    );
+
+    SmartDashboard.putNumber("calculated bottom rpm: ", limelight.calculateRPM(ShooterConstants.bottomMotorValues));
 
     double headingError = limelight.getTargetOffsetX();
 

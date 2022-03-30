@@ -16,8 +16,8 @@ import frc.robot.Constants.ShooterConstants;
 
 public class EastShooter extends SubsystemBase {
 
-  private final TalonFX m_topMotor = new TalonFX(ShooterConstants.kTopShooterPort);
-  private final TalonFX m_bottomMotor = new TalonFX(ShooterConstants.kBottomShooterPort);
+  private final TalonFX m_topMotor = new TalonFX(ShooterConstants.kTopShooterMotorPort);
+  private final TalonFX m_bottomMotor = new TalonFX(ShooterConstants.kBottomShooterMotorPort);
   private double topMotorTargetRPM;
   private double bottomMotorTargetRPM;
   private double targetRPM;
@@ -32,8 +32,8 @@ public class EastShooter extends SubsystemBase {
     m_topMotor.configVoltageCompSaturation(12);
     m_topMotor.enableVoltageCompensation(true);
 
-    m_bottomMotor.setInverted(false);
-    m_topMotor.setInverted(false);
+    m_bottomMotor.setInverted(true);
+    m_topMotor.setInverted(true);
 
     m_bottomMotor.setNeutralMode(NeutralMode.Coast);
     m_topMotor.setNeutralMode(NeutralMode.Coast);
@@ -53,9 +53,8 @@ public class EastShooter extends SubsystemBase {
   }
 
   public void setShooterRPM(double bottomMotorRPM, double topMotorRPM) {
-    targetRPM = bottomMotorRPM;
-    topMotorRPM /= 2;
-    bottomMotorRPM *= 0-9;
+    topMotorTargetRPM = topMotorRPM;
+    bottomMotorTargetRPM = bottomMotorRPM;
     // 2048 ticks per revolution, ticks per .10 second, 1 / 2048 * 60
     double speed_FalconUnits1 = bottomMotorRPM / (600.0) * 2048.0;
     double speed_FalconUnits2 = topMotorRPM / (600.0) * 2048.0;
@@ -71,6 +70,8 @@ public class EastShooter extends SubsystemBase {
     } else {
       m_topMotor.set(ControlMode.PercentOutput, 0);
     }
+    SmartDashboard.putNumber("Top target RPM", topMotorTargetRPM);
+    SmartDashboard.putNumber("Bottom target RPM", bottomMotorTargetRPM);
   }
 
   public void increaseTopRPM() {
@@ -97,8 +98,8 @@ public class EastShooter extends SubsystemBase {
     return (m_topMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
   }
 
-  public double getTargetRPM() {
-    return targetRPM;
+  public double getBottomRPM() {
+    return (m_bottomMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
   }
 
   @Override

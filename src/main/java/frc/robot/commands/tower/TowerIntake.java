@@ -33,12 +33,12 @@ public class TowerIntake extends CommandBase {
         tower.setBottomMotorOutputManual(0);
       }
       else{
-        tower.setBottomMotorOutputManual(0.34);
+        tower.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);
       }
     }
     else{
-      tower.setTopMotorOutputManual(0.34);
-      tower.setBottomMotorOutputManual(0.34);
+      tower.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
+      tower.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);
     }
   }
 
