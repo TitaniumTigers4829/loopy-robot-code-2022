@@ -18,7 +18,8 @@ public class EastShooter extends SubsystemBase {
 
   private final TalonFX m_topMotor = new TalonFX(ShooterConstants.kTopShooterPort);
   private final TalonFX m_bottomMotor = new TalonFX(ShooterConstants.kBottomShooterPort);
-  private double targetRPM;
+  private double topMotorTargetRPM;
+  private double bottomMotorTargetRPM;
 
   public EastShooter() {
     m_bottomMotor.configFactoryDefault();
@@ -50,12 +51,6 @@ public class EastShooter extends SubsystemBase {
     m_topMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
   }
 
-  public void setShooterPower(double speedMain, double speedTop) {
-    targetRPM = 0;
-    m_bottomMotor.set(ControlMode.PercentOutput, speedMain);
-    m_topMotor.set(ControlMode.PercentOutput, speedTop);
-  }
-
   public void setShooterRPM(double bottomMotorRPM, double topMotorRPM) {
     targetRPM = bottomMotorRPM;
     topMotorRPM /= 2;
@@ -64,7 +59,7 @@ public class EastShooter extends SubsystemBase {
     double speed_FalconUnits1 = bottomMotorRPM / (600.0) * 2048.0;
     double speed_FalconUnits2 = topMotorRPM / (600.0) * 2048.0;
 
-    if (Math.abs(getMainRPM()) < Math.abs(bottomMotorRPM) * 1.1) {
+    if (Math.abs(getBottomRPM()) < Math.abs(bottomMotorRPM) * 1.1) {
       m_bottomMotor.set(TalonFXControlMode.Velocity, speed_FalconUnits1);
     } else {
       m_bottomMotor.set(ControlMode.PercentOutput, 0);
@@ -77,8 +72,24 @@ public class EastShooter extends SubsystemBase {
     }
   }
 
-  public double getMainRPM() {
-    return (m_bottomMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
+  public void increaseTopRPM() {
+    topMotorTargetRPM += 10;
+    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
+  }
+
+  public void decreaseTopRPM() {
+    topMotorTargetRPM -= 10;
+    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
+  }
+
+  public void increaseBottomRPM() {
+    bottomMotorTargetRPM += 10;
+    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
+  }
+
+  public void decreaseBottomRPM() {
+    bottomMotorTargetRPM -= 10;
+    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
   }
 
   public double getTopRPM() {
@@ -91,7 +102,7 @@ public class EastShooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Top speed", getTopRPM());
-    SmartDashboard.putNumber("Bottom speed", getMainRPM());
+    SmartDashboard.putNumber("Top RPM", getTopRPM());
+    SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
   }
 }

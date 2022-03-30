@@ -172,16 +172,14 @@ public class RobotContainer {
 //            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
 
     // Manual control for getting shoot values
-//    RIGHT_TRIGGER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::increaseBackSpeed));
-//    LEFT_TRIGGER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::decreaseBackSpeed));
-//    RIGHT_BUMPER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::increaseFrontSpeed));
-//    LEFT_BUMPER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::decreaseFrontSpeed));
-
-
+    RIGHT_TRIGGER.whenPressed(
+        new InstantCommand(shooter::increaseTopRPM));
+    LEFT_TRIGGER.whenPressed(
+        new InstantCommand(shooter::decreaseTopRPM));
+    RIGHT_BUMPER.whenPressed(
+        new InstantCommand(shooter::increaseBottomRPM));
+    LEFT_BUMPER.whenPressed(
+        new InstantCommand(shooter::decreaseBottomRPM));
 
     // Fender Shot
 //    new JoystickButton(m_buttonController, 5).whileHeld(
@@ -194,19 +192,7 @@ public class RobotContainer {
     // While held for intake
     RIGHT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
 
-//    A_BUTTON.whileHeld(new TestShot(m_tower, new EastShooter()));
     A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight));
-
-//     Toggle for climb solenoids
-////     Intake down
-//    new JoystickButton(m_buttonController, 7).whenPressed(
-//        new InstantCommand(m_intakeSubsystem::setSolenoidDeployed));
-//    // Intake up
-//    new JoystickButton(m_buttonController, 6).whenPressed(
-//        new InstantCommand(m_intakeSubsystem::setSolenoidRetracted));
-
-    //X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
-//Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
   }
 
   private void configureButtonBindingsTest() {
