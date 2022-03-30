@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 /**
@@ -140,8 +141,8 @@ public final class Constants {
 
   public static final class ShooterConstants {
 
-    public static final int kFrontShooterMotorPort = 20;
-    public static final int kBackShooterMotorPort = 19;
+    public static final int kBottomShooterPort = 20;
+    public static final int kTopShooterPort = 19;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
     public static final double kShooterGearRatio = 7.13;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
@@ -163,24 +164,24 @@ public final class Constants {
 
     public static double[][] topMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 1950},
-        {Units.feetToMeters(6.5), 2150},
-        {Units.feetToMeters(8), 2500},
-        {Units.feetToMeters(10), 2950},
-        {Units.feetToMeters(11), 3350},
-        {Units.feetToMeters(12), 4100},
-        {Units.feetToMeters(13.5), 4900}
+        {Units.feetToMeters(5), 2193.75},
+        {Units.feetToMeters(6.5), 2418.75},
+        {Units.feetToMeters(8), 2812.5},
+        {Units.feetToMeters(10), 3318.75},
+        {Units.feetToMeters(11), 3768.75},
+        {Units.feetToMeters(12), 4612.5},
+        {Units.feetToMeters(13.5), 5512.5}
     };
 
     public static double[][] bottomMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 1500},
-        {Units.feetToMeters(6.5), 1500},
-        {Units.feetToMeters(8), 1450},
-        {Units.feetToMeters(10), 1350},
-        {Units.feetToMeters(11), 1250},
-        {Units.feetToMeters(12), 800},
-        {Units.feetToMeters(13.5), 700}
+        {Units.feetToMeters(5), 1687.5},
+        {Units.feetToMeters(6.5), 1687.5},
+        {Units.feetToMeters(8), 1631.25},
+        {Units.feetToMeters(10), 1518.75},
+        {Units.feetToMeters(11), 1350},
+        {Units.feetToMeters(12), 900},
+        {Units.feetToMeters(13.5), 787.5}
     };
 
   }
