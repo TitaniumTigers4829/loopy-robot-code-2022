@@ -14,7 +14,7 @@ import frc.robot.subsystems.TowerSubsystem;
 public class TestShot extends CommandBase {
 
   /**
-   * Creates a new FenderShot2.
+   * Creates a new FenderShot.
    */
   private final TowerSubsystem tower;
 //  private final ShooterSubsystem shooter;

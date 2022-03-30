@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimbSubsystem;
 
 public class ClimbAngleToggle extends CommandBase {
-  /** Creates a new FenderShot2. */
+  /** Creates a new FenderShot. */
 
   private final ClimbSubsystem m_climb;
 
