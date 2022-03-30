@@ -164,12 +164,12 @@ public class RobotContainer {
 
 //    // Manual Climb
 //    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
-    JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
-    JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
-    JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
-    JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 7);
-    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 6);
+//    JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
+//    JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
+//    JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
+//    JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
+//    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 7);
+//    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 6);
 
 //    new JoystickButton(m_buttonController, 9).toggleWhenPressed(
 //        new ClimbWithButtons(m_climbSubsystem,
@@ -177,14 +177,14 @@ public class RobotContainer {
 //            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
 
     // Manual control for getting shoot values
-//    RIGHT_TRIGGER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::increaseBackSpeed));
-//    LEFT_TRIGGER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::decreaseBackSpeed));
-//    RIGHT_BUMPER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::increaseFrontSpeed));
-//    LEFT_BUMPER.whenPressed(
-//        new InstantCommand(m_shooterSubsystem::decreaseFrontSpeed));
+    RIGHT_TRIGGER.whenPressed(
+        new InstantCommand(m_shooterSubsystem::increaseBackSpeed));
+    LEFT_TRIGGER.whenPressed(
+        new InstantCommand(m_shooterSubsystem::decreaseBackSpeed));
+    RIGHT_TRIGGER.whenPressed(
+        new InstantCommand(m_shooterSubsystem::increaseFrontSpeed));
+    LEFT_TRIGGER.whenPressed(
+        new InstantCommand(m_shooterSubsystem::decreaseFrontSpeed));
 
 
 
@@ -197,10 +197,14 @@ public class RobotContainer {
 //
 
     // While held for intake
-    RIGHT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
+    LEFT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
 
 //    A_BUTTON.whileHeld(new TestShot(m_tower, new EastShooter()));
-    A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight));
+    A_BUTTON.toggleWhenPressed(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive,
+        () -> modifyAxis(LEFT_STICK_Y) * -1 // xAxis
+        * DriveConstants.kMaxSpeedMetersPerSecond,
+        () -> modifyAxis(LEFT_STICK_X) * -1 // yAxis
+            * DriveConstants.kMaxSpeedMetersPerSecond, RIGHT_BUMPER));
 
 //     Toggle for climb solenoids
 ////     Intake down

@@ -16,8 +16,8 @@ import frc.robot.Constants.ShooterConstants;
 
 public class EastShooter extends SubsystemBase {
 
-  private final TalonFX m_topMotor = new TalonFX(ShooterConstants.kTopShooterPort);
-  private final TalonFX m_bottomMotor = new TalonFX(ShooterConstants.kBottomShooterPort);
+  private final TalonFX m_topMotor = new TalonFX(ShooterConstants.kTopShooterMotorPort);
+  private final TalonFX m_bottomMotor = new TalonFX(ShooterConstants.kBottomShooterMotorPort);
   private double targetRPM;
 
   public EastShooter() {

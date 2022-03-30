@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 /**
@@ -140,8 +141,8 @@ public final class Constants {
 
   public static final class ShooterConstants {
 
-    public static final int kFrontShooterMotorPort = 20;
-    public static final int kBackShooterMotorPort = 19;
+    public static final int kBottomShooterMotorPort = 20;
+    public static final int kTopShooterMotorPort = 19;
     // TODO: This reuses constants, probably a good idea to make these constants have a bigger scope
     public static final double kShooterGearRatio = 7.13;
     public static final double kWheelDiameterMeters = 0.1016; // 4 inches
@@ -182,7 +183,13 @@ public final class Constants {
         {Units.feetToMeters(12), 800},
         {Units.feetToMeters(13.5), 700}
     };
-
+    public static double turnkP = 0.175;
+    public static double turnkI = 0;
+    public static double turnkD = 0;
+    public static double kMaxTurnAngularSpeedRadiansPerSecond = 2 * Math.PI;
+    public static double kMaxTurnAngularAccelerationRadiansPerSecondSquared = 4 * Math.PI;
+    public static double ksTurning = 0.0;
+    public static double kvTurning = 0.0;
   }
 
 

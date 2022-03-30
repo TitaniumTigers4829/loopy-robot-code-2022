@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="e" />
-    <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Changes by jackg">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" afterDir="false" />
+    </list>
+    <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
+    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,6 +95,17 @@
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java">
+      <ranges>
+        <range start1="6" end1="6" start2="6" end2="7" changelist="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" />
+        <range start1="193" end1="199" start2="194" end2="202" changelist="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" />
+        <range start1="200" end1="200" start2="203" end2="214" changelist="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" />
+        <range start1="203" end1="204" start2="217" end2="219" changelist="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" />
+        <range start1="249" end1="249" start2="264" end2="265" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
+      </ranges>
+    </file>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -114,7 +131,7 @@
       <recent name="frc.robot.commands.shooter" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
+  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -267,7 +284,7 @@
       <workItem from="1648424759169" duration="771000" />
       <workItem from="1648486156367" duration="800000" />
       <workItem from="1648510293870" duration="3857000" />
-      <workItem from="1648567972372" duration="8578000" />
+      <workItem from="1648567972372" duration="21307000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -549,7 +566,21 @@
       <option name="project" value="LOCAL" />
       <updated>1648577961807</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Changes by jackg">
+      <created>1648582025748</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1648582025748</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Changes by jackg">
+      <created>1648582040561</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1648582040561</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +602,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Almost entirely implemented Climb Subsystem" />
     <MESSAGE value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
     <MESSAGE value="ClimbSubsystem initial code done. now for commands and then testing." />
     <MESSAGE value="implementing climb testing" />
@@ -596,6 +626,7 @@
     <MESSAGE value="added low shot" />
     <MESSAGE value="changes from sunday" />
     <MESSAGE value="e" />
-    <option name="LAST_COMMIT_MESSAGE" value="e" />
+    <MESSAGE value="Changes by jackg" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changes by jackg" />
   </component>
 </project>

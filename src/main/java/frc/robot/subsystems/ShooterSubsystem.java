@@ -19,8 +19,8 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Creates the Shooter subsystem. */
   public ShooterSubsystem() {
     // Initialize Motors
-    m_topMotor = new WPI_TalonFX(ShooterConstants.kBottomShooterPort);
-    m_bottomMotor = new WPI_TalonFX(ShooterConstants.kTopShooterPort);
+    m_topMotor = new WPI_TalonFX(ShooterConstants.kBottomShooterMotorPort);
+    m_bottomMotor = new WPI_TalonFX(ShooterConstants.kTopShooterMotorPort);
 
     m_topMotor.setInverted(true);
     m_bottomMotor.setInverted(true);

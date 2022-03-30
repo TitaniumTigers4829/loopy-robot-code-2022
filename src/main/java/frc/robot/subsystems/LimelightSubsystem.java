@@ -247,5 +247,6 @@ public class LimelightSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("Distance ", calculateDistance());
     SmartDashboard.putNumber("Distance (ft)", Units.metersToFeet(calculateDistance()));
+    SmartDashboard.putNumber("Limelight OffsetX: ", getTargetOffsetX());
   }
 }
