@@ -4,6 +4,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
@@ -191,17 +192,31 @@ public class LimelightSubsystem extends SubsystemBase {
 
     // Gets the closest values below and above the desired value
     for (int i = 0; i < table.length; i++) {
-      if (table[i][0] <= distance && table[i + 1][0] > distance) {
-        lowerDistance = table[i][0];
-        lowerSpeed = table[i][1];
-        higherDistance = table[i + 1][0];
-        higherSpeed = table[i + 1][1];
-        break;
+      try {
+        if (table[i][0] <= distance && table[i + 1][0] > distance) {
+          lowerDistance = table[i][0];
+          lowerSpeed = table[i][1];
+          higherDistance = table[i + 1][0];
+          higherSpeed = table[i + 1][1];
+          break;
+        }
+      }
+      catch(Exception e){
+//        Shouldn't be called, but...
+//        Error handling is a thing
+        assert table[0] != null;
+        lowerDistance = table[0][0];
+        lowerSpeed = table[0][1];
+        assert table[1] != null;
+        higherDistance = table[1][0];
+        higherSpeed = table[0][1];
+        DriverStation.reportWarning("Error in LimelightSubsystem.calculateRPM(), error: " + e, true);
       }
     }
 
     // Shouldn't be necessary but just in case
-    if (table[-1][0] < distance) return table[-1][0];
+//    it caused errors
+//    if (table[-1][0] < distance) return table[-1][0];
 
     // Gets slope or line connecting points
     double linearSlope = (higherSpeed - lowerSpeed) / (higherDistance - lowerDistance);
