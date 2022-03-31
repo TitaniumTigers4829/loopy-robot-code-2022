@@ -168,10 +168,10 @@ public class RobotContainer {
 //
 
     // While held for intake
-    RIGHT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
+    new JoystickButton(m_buttonController, 12).whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
 
 //    A_BUTTON.whileHeld(new TestShot(m_tower, new ShooterSubsystem()));
-    A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, RIGHT_BUMPER, m_LEDs));
+    new JoystickButton(m_buttonController, 5).whileHeld(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, RIGHT_BUMPER, m_LEDs));
 
 //     Toggle for climb solenoids
 ////     Intake down
