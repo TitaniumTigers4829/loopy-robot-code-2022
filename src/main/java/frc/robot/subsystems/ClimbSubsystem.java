@@ -94,7 +94,6 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public double getLeftEncoderValue() {
     return m_leftEncoder.getPosition();
-//    return 0;
   }
 
   /**
@@ -133,7 +132,6 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   private double getRightEncoderValue() {
     return m_rightEncoder.getPosition();
-//    return 0;
   }
 
   /**
@@ -226,8 +224,6 @@ public class ClimbSubsystem extends SubsystemBase {
     double leftOutput = m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(),
         height);
     m_leftMotor.set(leftOutput);
-    SmartDashboard.putNumber("left height: ", height);
-    SmartDashboard.putNumber("leftOutput PID: ", leftOutput);
   }
 
   /**
@@ -240,8 +236,6 @@ public class ClimbSubsystem extends SubsystemBase {
     double rightOutput = m_climbRightProfiledPIDController.calculate(getRightHookHeight(),
         height);
     m_rightMotor.set(rightOutput);
-    SmartDashboard.putNumber("right height: ", height);
-    SmartDashboard.putNumber("rightOutput PID: ", rightOutput);
   }
 
   public void setPos(double height) {

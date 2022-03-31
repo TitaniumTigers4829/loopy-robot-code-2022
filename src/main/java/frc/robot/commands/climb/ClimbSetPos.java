@@ -15,34 +15,28 @@ public class ClimbSetPos extends CommandBase {
 
   /** Creates a new ClimbSetPos. */
   public ClimbSetPos(ClimbSubsystem climbSubsystem, int motorPos) {
-    // Use addRequirements() here to declare subsystem dependencies.
     this.climbSubsystem = climbSubsystem;
     this.motorPos = motorPos;
     addRequirements(climbSubsystem);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     climbSubsystem.setPos(motorPos);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     climbSubsystem.setPos(motorPos);
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putBoolean("Climb Pos Running", false);
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    SmartDashboard.putNumberArray("FInished encoder position", climbSubsystem.getBothPositions());
-    return Math.abs(climbSubsystem.getPosition() - motorPos) <= 10;
+    return Math.abs(climbSubsystem.getLeftEncoderValue() - motorPos) <= 10;
   }
 }

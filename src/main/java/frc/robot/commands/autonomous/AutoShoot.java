@@ -2,13 +2,12 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.shooter;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.ShooterConstants;
@@ -21,15 +20,12 @@ import frc.robot.subsystems.TowerSubsystem;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-public class Shoot extends CommandBase {
+public class AutoShoot extends CommandBase {
 
   private final ShooterSubsystem shooterSubsystem;
   private final TowerSubsystem towerSubsystem;
   private final LimelightSubsystem limelight;
   private final DriveSubsystem driveSubsystem;
-  private final DoubleSupplier leftStickY;
-  private final DoubleSupplier leftStickX;
-  private final BooleanSupplier rightBumper;
   private final LEDsSubsystem LEDS;
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
       ShooterConstants.turnkP,
@@ -46,18 +42,14 @@ public class Shoot extends CommandBase {
   /**
    * Creates a new Shoot.
    */
-  public Shoot(ShooterSubsystem shooterSubsystem,
+  public AutoShoot(ShooterSubsystem shooterSubsystem,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
-      DoubleSupplier leftStickY, DoubleSupplier leftStickX, JoystickButton rightBumper,
       LEDsSubsystem leds) {
 
     this.shooterSubsystem = shooterSubsystem;
     this.towerSubsystem = towerSubsystem;
     this.limelight = limelight;
     this.driveSubsystem = driveSubsystem;
-    this.leftStickY = leftStickY;
-    this.leftStickX = leftStickX;
-    this.rightBumper = rightBumper;
     this.LEDS = leds;
     addRequirements(shooterSubsystem, limelight, leds);
   }
@@ -71,14 +63,15 @@ public class Shoot extends CommandBase {
 
     double headingError = limelight.getTargetOffsetX();
 
+    if (Math.abs(headingError) <= 1) headingError = 0;
+
     double turnRobotOutput =
         turnProfiledPIDController.calculate(headingError, 0)
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
-    driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
+    driveSubsystem.drive(0, 0, turnRobotOutput, true);
 
     Timer.delay(1);
-    towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
   }
 
   @Override
@@ -97,7 +90,7 @@ public class Shoot extends CommandBase {
         turnProfiledPIDController.calculate(headingError, 0)
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
-    driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
+    driveSubsystem.drive(0, 0, turnRobotOutput, true);
 
     if (headingError < 3 && shooterSubsystem.getShooterAverageRPMError() < 200) {
       LEDS.setLEDsReadyToShoot();
