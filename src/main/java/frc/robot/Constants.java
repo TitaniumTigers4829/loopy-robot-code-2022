@@ -23,6 +23,7 @@ public final class Constants {
   public static final class ElectronicsConstants {
 
     public static PneumaticsModuleType kPneumaticsModuleType = PneumaticsModuleType.CTREPCM;
+    public static int kLEDPort = 0;
   }
 
 

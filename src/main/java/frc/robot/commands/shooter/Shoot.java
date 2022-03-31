@@ -11,15 +11,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.DriveConstants;
-import frc.robot.Constants.ModuleConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.EastShooter;
-import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.TowerSubsystem;
-import java.awt.color.ProfileDataException;
+import frc.robot.subsystems.*;
+
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
@@ -33,6 +28,7 @@ public class Shoot extends CommandBase {
   private final DoubleSupplier leftStickY;
   private final DoubleSupplier leftStickX;
   private final BooleanSupplier rightBumper;
+  private final LEDsSubsystem LEDS;
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
       ShooterConstants.turnkP,
       ShooterConstants.turnkI,
@@ -50,7 +46,7 @@ public class Shoot extends CommandBase {
    */
   public Shoot(/*ShooterSubsystem shooterSubsystem*/EastShooter eastShooter,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
-      DoubleSupplier leftStickY, DoubleSupplier leftStickX, JoystickButton rightBumper) {
+      DoubleSupplier leftStickY, DoubleSupplier leftStickX, JoystickButton rightBumper, LEDsSubsystem leds) {
 
 //    this.shooterSubsystem = shooterSubsystem;
     this.eastShooter = eastShooter;
@@ -60,7 +56,8 @@ public class Shoot extends CommandBase {
     this.leftStickY = leftStickY;
     this.leftStickX = leftStickX;
     this.rightBumper = rightBumper;
-    addRequirements(/*shooterSubsystem*/eastShooter, limelight);
+    this.LEDS = leds;
+    addRequirements(/*shooterSubsystem*/eastShooter, limelight, leds);
   }
 
   // Called when the command is initially scheduled.
@@ -103,6 +100,12 @@ public class Shoot extends CommandBase {
     driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
 
     SmartDashboard.putNumber("turnRobotOutput: ", turnRobotOutput);
+    if (headingError<3 && eastShooter.getShooterAverageRPMError()<200) {
+      LEDS.setLEDsReadyToShoot();
+    }
+    else {
+      LEDS.setLEDsShooterLiningUp();
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -112,6 +115,7 @@ public class Shoot extends CommandBase {
     eastShooter.setShooterRPM(0, 0);
     driveSubsystem.getDefaultCommand().schedule();
     towerSubsystem.setTowerOff();
+    LEDS.setLEDsDefault();
   }
 
   // Returns true when the command should end.

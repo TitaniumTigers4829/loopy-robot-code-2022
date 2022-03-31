@@ -25,12 +25,8 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Shoot;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.EastShooter;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.TowerSubsystem;
+import frc.robot.subsystems.*;
+
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
@@ -51,7 +47,7 @@ public class RobotContainer {
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
   private final EastShooter shooter = new EastShooter();
-//  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
+  private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
   private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
@@ -173,7 +169,7 @@ public class RobotContainer {
     RIGHT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
 
 //    A_BUTTON.whileHeld(new TestShot(m_tower, new EastShooter()));
-    A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, RIGHT_BUMPER));
+    A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, RIGHT_BUMPER, m_LEDs));
 
 //     Toggle for climb solenoids
 ////     Intake down
