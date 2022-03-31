@@ -20,7 +20,7 @@ public class AutoDriveIntake extends ParallelCommandGroup {
 
     addCommands(
         new IntakeWithTower(intake, tower),
-        new SetDriveSpeed(drive, -1.2, 0)
+        new SetDriveSpeed(drive, 1.2, 0)
     );
   }
 }

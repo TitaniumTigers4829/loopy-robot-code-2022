@@ -97,6 +97,13 @@ public class AutoShoot extends CommandBase {
     } else {
       LEDS.setLEDsShooterLiningUp();
     }
+
+    if ((Math.abs(headingError) < 3) && (limelight.hasValidTarget())) {
+      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+    } else {
+      towerSubsystem.setTowerMotorsSpeed(0);
+    }
+
   }
 
   @Override

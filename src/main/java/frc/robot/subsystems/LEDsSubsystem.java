@@ -29,7 +29,7 @@ public class LEDsSubsystem extends SubsystemBase {
     }
 
     public void setLEDsDefault() {
-        m_leds.set(0.65); //Orange
+        m_leds.set(0.63); //Orange
 
     }
 

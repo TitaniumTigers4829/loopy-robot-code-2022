@@ -66,6 +66,10 @@ public class LimelightSubsystem extends SubsystemBase {
     return tx.getDouble(0.0);
   }
 
+  public boolean hasValidTarget() {
+    return (tv.getDouble(0.0) == 1);
+  }
+
   /**
    * Vertical offset from crosshair to target.
    *
@@ -259,6 +263,7 @@ public class LimelightSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("Distance ", calculateDistance());
     SmartDashboard.putNumber("Distance (ft)", Units.metersToFeet(calculateDistance()));
-    SmartDashboard.putNumber("Limelight OffsetX: ", getTargetOffsetX());
+//    SmartDashboard.putNumber("Limelight OffsetX: ", getTargetOffsetX());
+    SmartDashboard.putBoolean("Valid target", hasValidTarget());
   }
 }

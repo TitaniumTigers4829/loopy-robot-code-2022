@@ -159,7 +159,7 @@ public final class Constants {
     public static int kMaxShooterSpeedMetersPerSecond = 0 - 9;
 
     // Limelight constants
-    public static double cameraHeight = 0.6604; // Meters
+    public static double cameraHeight = Units.inchesToMeters(28.5); //0.6604; // Meters
     public static double cameraAngle = 35; // Degrees
     public static double targetHeight = 2.67; // Meters
 
@@ -187,24 +187,26 @@ public final class Constants {
 
     public static double[][] topMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 2193.75 / 1.23},
-        {Units.feetToMeters(6.5), 2418.75 / 1.2},
-        {Units.feetToMeters(8), 2812.5  / 1.23},
-        {Units.feetToMeters(10), 3318.75 / 1.23},
-        {Units.feetToMeters(11), 3768.75 / 1.23},
-        {Units.feetToMeters(12), 4612.5 / 1.23},
-        {Units.feetToMeters(13.5), 5512.5 / 1.23}
+        {Units.feetToMeters(5), 1800},
+        {Units.feetToMeters(6.5), 1980},
+        {Units.feetToMeters(8), 2450},
+        {Units.feetToMeters(9.5), 2950},
+        {Units.feetToMeters(11), 3600},
+        {Units.feetToMeters(12.5), 4100},
+        {Units.feetToMeters(14), 4100},
+        {Units.feetToMeters(15.5), 4100}
     };
 
     public static double[][] bottomMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 1687.5 / 1.218},
-        {Units.feetToMeters(6.5), 1687.5 / 1.218},
-        {Units.feetToMeters(8), 1631.2185 / 1.218},
-        {Units.feetToMeters(10), 1518.75 / 1.218},
-        {Units.feetToMeters(11), 1350 / 1.218},
-        {Units.feetToMeters(12), 900 / 1.218},
-        {Units.feetToMeters(13.5), 787.5 / 1.218}
+        {Units.feetToMeters(5), 1770},
+        {Units.feetToMeters(6.5), 1730},
+        {Units.feetToMeters(8), 1615},
+        {Units.feetToMeters(9.5), 1350},
+        {Units.feetToMeters(11), 1350},
+        {Units.feetToMeters(12.5), 1400},
+        {Units.feetToMeters(14), 4100},
+        {Units.feetToMeters(15.5), 4100}
     };
 
     public static double turnkP = 0.175;

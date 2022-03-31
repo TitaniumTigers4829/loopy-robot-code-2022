@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.subsystems.*;
@@ -131,22 +132,22 @@ public class RobotContainer {
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
                         * DriveConstants.kMaxRotationalSpeed,
-                    !RIGHT_BUMPER.get()),
+                    !RIGHT_TRIGGER.get()),
             m_robotDrive));
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
     // Manual Climb
-//    JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
-//    JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
-//    JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
-//    JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-//    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 7);
-//    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 6);
+    JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
+    JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
+    JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
+    JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
+    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 7);
+    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 6);
 
-//    new JoystickButton(m_buttonController, 9).toggleWhenPressed(
-//        new ClimbWithButtons(m_climbSubsystem,
-//            LClimbUp::get, LClimbDown::get, RClimbUp::get,
-//            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
+    new JoystickButton(m_buttonController, 9).toggleWhenPressed(
+        new ClimbWithButtons(m_climbSubsystem,
+            LClimbUp::get, LClimbDown::get, RClimbUp::get,
+            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
 
     // Manual control for getting shoot values
 //    RIGHT_TRIGGER.whenPressed(

@@ -77,8 +77,6 @@ public class Shoot extends CommandBase {
 
     driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
 
-    Timer.delay(1);
-    towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
   }
 
   @Override
@@ -97,13 +95,22 @@ public class Shoot extends CommandBase {
         turnProfiledPIDController.calculate(headingError, 0)
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
-    driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
+    driveSubsystem.drive(-1 * leftStickY.getAsDouble(), -1 * leftStickX.getAsDouble(), turnRobotOutput, true);
+
+    if ((Math.abs(headingError) < 3) && (limelight.hasValidTarget())) {
+      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+    } else {
+      towerSubsystem.setTowerMotorsSpeed(0);
+    }
 
     if (headingError < 3 && shooterSubsystem.getShooterAverageRPMError() < 200) {
       LEDS.setLEDsReadyToShoot();
     } else {
       LEDS.setLEDsShooterLiningUp();
     }
+
+//    SmartDashboard.putNumber("Target offset X: ", limelight.getTargetOffsetX());
+//    SmartDashboard.putBoolean("Has valid target: ", limelight.hasValidTarget());
   }
 
   @Override
