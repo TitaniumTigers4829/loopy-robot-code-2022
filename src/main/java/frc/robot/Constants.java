@@ -261,6 +261,11 @@ public final class Constants {
     // Solenoid constants
     public static final int kClimbVerticalSolenoidPort = 7;
     public static final int kClimbAngledSolenoidPort = 5;
+
+    public static int kFirstBarPos = 48124;
+    public static int kSecondBarPos = 471289;
+    public static int kFinalBarPos = 5741240;
+    public static int kSlightlyExtended = 0-9;
   }
 
   public static final class LEDsConstants {

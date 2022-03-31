@@ -13,15 +13,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
-import frc.robot.subsystems.*;
-
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LEDsSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TowerSubsystem;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 public class Shoot extends CommandBase {
 
-  //  private final ShooterSubsystem shooterSubsystem;
-  private final EastShooter eastShooter;
+  private final ShooterSubsystem shooterSubsystem;
   private final TowerSubsystem towerSubsystem;
   private final LimelightSubsystem limelight;
   private final DriveSubsystem driveSubsystem;
@@ -44,12 +46,12 @@ public class Shoot extends CommandBase {
   /**
    * Creates a new Shoot.
    */
-  public Shoot(/*ShooterSubsystem shooterSubsystem*/EastShooter eastShooter,
+  public Shoot(ShooterSubsystem shooterSubsystem,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
-      DoubleSupplier leftStickY, DoubleSupplier leftStickX, JoystickButton rightBumper, LEDsSubsystem leds) {
+      DoubleSupplier leftStickY, DoubleSupplier leftStickX, JoystickButton rightBumper,
+      LEDsSubsystem leds) {
 
-//    this.shooterSubsystem = shooterSubsystem;
-    this.eastShooter = eastShooter;
+    this.shooterSubsystem = shooterSubsystem;
     this.towerSubsystem = towerSubsystem;
     this.limelight = limelight;
     this.driveSubsystem = driveSubsystem;
@@ -57,14 +59,12 @@ public class Shoot extends CommandBase {
     this.leftStickX = leftStickX;
     this.rightBumper = rightBumper;
     this.LEDS = leds;
-    addRequirements(/*shooterSubsystem*/eastShooter, limelight, leds);
+    addRequirements(shooterSubsystem, limelight, leds);
   }
 
-  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-//    shooterSubsystem.setSpeed(limelight.calculateSpeed());
-    eastShooter.setShooterRPM(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
@@ -73,7 +73,7 @@ public class Shoot extends CommandBase {
 
     double turnRobotOutput =
         turnProfiledPIDController.calculate(headingError, 0)
-        + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
+            + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
     driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
 
@@ -81,15 +81,12 @@ public class Shoot extends CommandBase {
     towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    eastShooter.setShooterRPM(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
-
-    SmartDashboard.putNumber("calculated bottom rpm: ", limelight.calculateRPM(ShooterConstants.bottomMotorValues));
 
     double headingError = limelight.getTargetOffsetX();
 
@@ -100,25 +97,21 @@ public class Shoot extends CommandBase {
     driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
 
     SmartDashboard.putNumber("turnRobotOutput: ", turnRobotOutput);
-    if (headingError<3 && eastShooter.getShooterAverageRPMError()<200) {
+    if (headingError < 3 && shooterSubsystem.getShooterAverageRPMError() < 200) {
       LEDS.setLEDsReadyToShoot();
-    }
-    else {
+    } else {
       LEDS.setLEDsShooterLiningUp();
     }
   }
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-//    shooterSubsystem.setSpeed(0);
-    eastShooter.setShooterRPM(0, 0);
+    shooterSubsystem.setShooterRPM(0, 0);
     driveSubsystem.getDefaultCommand().schedule();
     towerSubsystem.setTowerOff();
     LEDS.setLEDsDefault();
   }
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

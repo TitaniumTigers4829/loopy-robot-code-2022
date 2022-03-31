@@ -21,8 +21,8 @@ public class ClimbSubsystem extends SubsystemBase {
   private final WPI_TalonFX m_leftMotor;
   private final WPI_TalonFX m_rightMotor;
 
-//  private final CANCoder m_leftEncoder;
-//  private final CANCoder m_rightEncoder;
+  private final CANCoder m_leftEncoder;
+  private final CANCoder m_rightEncoder;
 
   private final DigitalInput m_leftLimitSwitch;
   private final DigitalInput m_rightLimitSwitch;
@@ -73,13 +73,10 @@ public class ClimbSubsystem extends SubsystemBase {
     m_rightMotor.setNeutralMode(NeutralMode.Brake);
 
     // Initialize Encoders
-//    m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
-//    m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
+    m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
+    m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
 
-//    m_rightEncoder.configSensorDirection(true);
-
-    // m_leftEncoder.configMagnetOffset(ClimbConstants.kLeftClimbEncoderOffsetForTopPos);
-    // m_rightEncoder.configMagnetOffset(ClimbConstants.kRightClimbEncoderOffsetForTopPos);
+    m_rightEncoder.configSensorDirection(true);
 
     // Initialize Limit Switches
     m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
@@ -96,8 +93,8 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return encoder value
    */
   public double getLeftEncoderValue() {
-//    return m_leftEncoder.getPosition();
-    return 0;
+    return m_leftEncoder.getPosition();
+//    return 0;
   }
 
   /**
@@ -135,8 +132,8 @@ public class ClimbSubsystem extends SubsystemBase {
    * @return encoder value
    */
   private double getRightEncoderValue() {
-//    return m_rightEncoder.getPosition();
-    return 0;
+    return m_rightEncoder.getPosition();
+//    return 0;
   }
 
   /**
@@ -247,6 +244,11 @@ public class ClimbSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("rightOutput PID: ", rightOutput);
   }
 
+  public void setPos(double height) {
+    setDesiredLeftHookHeight(height);
+    setDesiredRightHookHeight(height);
+  }
+
   /**
    * Sets left hook to bottom position
    */
@@ -329,8 +331,8 @@ public class ClimbSubsystem extends SubsystemBase {
   }
 
   public void resetEncoders() {
-//    m_leftEncoder.setPosition(0);
-//    m_rightEncoder.setPosition(0);
+    m_leftEncoder.setPosition(0);
+    m_rightEncoder.setPosition(0);
   }
 
   @Override

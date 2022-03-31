@@ -1,8 +1,6 @@
 package frc.robot.commands.testing;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterSubsystem;
-import java.util.function.DoubleSupplier;
 
 /** An example command that uses an example subsystem. */
 public class ShooterManualControl extends CommandBase {

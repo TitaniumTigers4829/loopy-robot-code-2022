@@ -46,7 +46,7 @@ public class RobotContainer {
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
-  private final EastShooter shooter = new EastShooter();
+  private final ShooterSubsystem shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
   // The driver's controller
@@ -102,6 +102,7 @@ public class RobotContainer {
     DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
     DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
 
+    // Logitech buttons
     JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
     JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
     JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
@@ -116,7 +117,7 @@ public class RobotContainer {
     POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
     JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
 
-    /**
+    /*
      * Sets the default command and joystick bindings for the drive train.
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
@@ -168,7 +169,7 @@ public class RobotContainer {
     // While held for intake
     RIGHT_BUMPER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
 
-//    A_BUTTON.whileHeld(new TestShot(m_tower, new EastShooter()));
+//    A_BUTTON.whileHeld(new TestShot(m_tower, new ShooterSubsystem()));
     A_BUTTON.whileHeld(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, RIGHT_BUMPER, m_LEDs));
 
 //     Toggle for climb solenoids
