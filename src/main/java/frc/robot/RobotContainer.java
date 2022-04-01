@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.autonomous.AutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Shoot;
@@ -304,8 +305,8 @@ public class RobotContainer {
     m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
-    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
-//    return new AutonomousCommand(m_shooterSubsystem, m_tower, m_robotDrive);
+//    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+    return new AutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 //    return new FenderShot(m_tower, m_shooterSubsystem).withTimeout(5)
 //        .andThen(
 //            new RunCommand(() -> m_robotDrive.drive(-0.2, 0, 0, false))
