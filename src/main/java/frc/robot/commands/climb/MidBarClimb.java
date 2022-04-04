@@ -9,7 +9,7 @@ public class MidBarClimb extends SequentialCommandGroup {
     * step 1: (button 1) set climb hook above the second bar
     *   commands: ClimbVertical, ClimbFullExtension (MidBarLatchHooks)                                    CHECK
     * step 2: (button2) climb up // MID BAR ACHIEVED
-    *   commands: ClimbBottomPositon                                                                       CHECK
+    *   commands: ClimbBottomPosition                                                                       CHECK
     * step 3: (button3) Hooks up a little, arms back, arms all the way up, arms vertical again (solenoids)
     *   commands: ClimbSlightlyExtended, ClimbAngled, ClimbFullExtension, ClimbVertical (MidBarClimb)     CHECK
     * step 4: (button 2) climb up // HIGH BAR ACHIEVED

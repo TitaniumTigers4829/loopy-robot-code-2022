@@ -21,7 +21,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intake) {
     addCommands(
         // Moves backwards
-        new AutoDriveIntake(driveSubsystem, intake, towerSubsystem).withTimeout(2.5),
+        new AutoDriveIntake(driveSubsystem, intake, towerSubsystem).withTimeout(2.25),
         // Stops the robot
         new SetDriveSpeed(driveSubsystem, 0, 0).withTimeout(0.5),
         // drive forward a bit

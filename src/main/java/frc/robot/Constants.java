@@ -29,7 +29,7 @@ public final class Constants {
 
   public static final class DriveConstants {
 
-    public static final int kFrontLeftDriveMotorPort = 24;
+    public static final int kFrontLeftDriveMotorPort = 18;
     public static final int kRearLeftDriveMotorPort = 6;
     public static final int kFrontRightDriveMotorPort = 4;
     public static final int kRearRightDriveMotorPort = 23;
@@ -138,7 +138,7 @@ public final class Constants {
 
     public static final int bottomTowerSensorPort = 1;
     public static final int topTowerSensorPort = 0;
-    public static final double towerMotorSpeed = 0.34;
+    public static final double towerMotorSpeed = 0.5;
   }
 
   public static final class ShooterConstants {
@@ -185,14 +185,17 @@ public final class Constants {
 //        {Units.feetToMeters(13.5), 787.5}
 //    };
 
+    public static double kTopEjectRPM = 700;
+    public static double kBottomEjectRPM = 700;
+
     public static double[][] topMotorValues = {
         //{distance, rpm}
         {Units.feetToMeters(5), 1800},
         {Units.feetToMeters(6.5), 1980},
-        {Units.feetToMeters(8), 2450},
+        {Units.feetToMeters(8), 2350}, // 2400  // 2450
         {Units.feetToMeters(9.5), 2950},
-        {Units.feetToMeters(11), 3600},
-        {Units.feetToMeters(12.5), 4100},
+        {Units.feetToMeters(11), 3150},
+        {Units.feetToMeters(12.5), 3700},
         {Units.feetToMeters(14), 4100},
         {Units.feetToMeters(15.5), 4100}
     };
@@ -201,12 +204,12 @@ public final class Constants {
         //{distance, rpm}
         {Units.feetToMeters(5), 1770},
         {Units.feetToMeters(6.5), 1730},
-        {Units.feetToMeters(8), 1615},
+        {Units.feetToMeters(8), 1560}, // 1600  // 1615
         {Units.feetToMeters(9.5), 1350},
-        {Units.feetToMeters(11), 1350},
-        {Units.feetToMeters(12.5), 1400},
-        {Units.feetToMeters(14), 4100},
-        {Units.feetToMeters(15.5), 4100}
+        {Units.feetToMeters(11), 1300},
+        {Units.feetToMeters(12.5), 1260},
+        {Units.feetToMeters(14), 1220},
+        {Units.feetToMeters(15.5), 1180}
     };
 
     public static double turnkP = 0.175;
@@ -261,13 +264,13 @@ public final class Constants {
     public static final int kLeftClimbLimitSwitchPort = 2;
     public static final int kRightClimbLimitSwitchPort = 3;
     // Solenoid constants
-    public static final int kClimbVerticalSolenoidPort = 7;
-    public static final int kClimbAngledSolenoidPort = 5;
+    public static final int kClimbVerticalSolenoidPort = 5;
+    public static final int kClimbAngledSolenoidPort = 7;
 
     public static int kFirstBarPos = 48124;
     public static int kSecondBarPos = 471289;
     public static int kFinalBarPos = 5741240;
-    public static int kSlightlyExtended = 0-9;
+    public static double kSlightlyExtended = kClimbMinHeight + 0.2;
   }
 
   public static final class LEDsConstants {

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
+import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -81,6 +82,9 @@ public class ClimbSubsystem extends SubsystemBase {
     // Initialize Limit Switches
     m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
     m_rightLimitSwitch = new DigitalInput(ClimbConstants.kRightClimbLimitSwitchPort);
+
+    m_leftEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 50);
+    m_rightEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 50);
 
     // Initialize Solenoid
     m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
@@ -200,7 +204,6 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setLeftMotorOutputManual(double output) {
     m_leftMotor.set(output);
-    SmartDashboard.putNumber("leftOutput: ", output);
   }
 
   /**
@@ -211,7 +214,6 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setRightMotorOutputManual(double output) {
     m_rightMotor.set(output);
-    SmartDashboard.putNumber("rightOutput: ", output);
   }
 
   /**

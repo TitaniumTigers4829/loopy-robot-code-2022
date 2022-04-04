@@ -26,9 +26,17 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.AutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
+import frc.robot.commands.shooter.Eject;
+import frc.robot.commands.shooter.EmergencyShoot;
 import frc.robot.commands.shooter.Shoot;
-import frc.robot.subsystems.*;
-
+import frc.robot.commands.tower.TowerIntake;
+import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LEDsSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TowerSubsystem;
 import java.util.List;
 import java.util.function.DoubleSupplier;
 
@@ -44,12 +52,17 @@ public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-//  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  //  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
   private final ShooterSubsystem shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
+
+//  private final Command twoBallAuto;
+//  private final Command noAuto;
+
+//  private final SendableChooser<Command> chooser = new SendableChooser<Command>();
 
   // The driver's controller
   private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
@@ -59,9 +72,17 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+//    twoBallAuto = new AutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    noAuto = null;
+
     // Turn off the limelight lights because they are very bright
 //    m_Limelight.turnOffLED();
     m_Limelight.turnOnLED();
+    m_LEDs.setLEDsDefault();
+
+//    chooser.setDefaultOption("2 Ball Auto", twoBallAuto);
+//    chooser.addOption("No auto", noAuto);
+//    chooser.
     // m_LEDs.setLEDsRaw(-0.39); // will normally be handled by commands, just for testing.
 
     configureButtonBindings();
@@ -89,6 +110,14 @@ public class RobotContainer {
     value = Math.copySign(value * value, value);
 
     return value;
+  }
+
+  public void setLEDsDefault() {
+    m_LEDs.setLEDsDefault();
+  }
+
+  public void setLEDsDisabled() {
+    m_LEDs.setLEDsOrange();
   }
 
   /**
@@ -148,7 +177,10 @@ public class RobotContainer {
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
             LClimbUp::get, LClimbDown::get, RClimbUp::get,
-            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get)); // This works
+            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get, m_LEDs)); // This works
+//    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbFullExtension(m_climbSubsystem));
+//    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbBottomPosition(m_climbSubsystem))
+//    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbNextBar(m_climbSubsystem));;
 
     // Manual control for getting shoot values
 //    RIGHT_TRIGGER.whenPressed(
@@ -168,11 +200,21 @@ public class RobotContainer {
 //        new LowShot(m_tower, m_shooterSubsystem));
 //
 
+
+    JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
     // While held for intake
-    new JoystickButton(m_buttonController, 12).whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
+    SUCC_BUTTON.whileHeld(
+        new IntakeWithTower(m_intakeSubsystem, m_tower));
+    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
 //    A_BUTTON.whileHeld(new TestShot(m_tower, new ShooterSubsystem()));
-    new JoystickButton(m_buttonController, 5).whileHeld(new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, RIGHT_BUMPER, m_LEDs));
+    new JoystickButton(m_buttonController, 5).whileHeld(
+        new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+            RIGHT_BUMPER, m_LEDs));
+    new JoystickButton(m_buttonController, 8).whileHeld(
+        new EmergencyShoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+            RIGHT_BUMPER, m_LEDs));
+    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(shooter, m_tower));
 
 //     Toggle for climb solenoids
 ////     Intake down
@@ -307,7 +349,9 @@ public class RobotContainer {
     // Run path following command, then stop at the end.
 //    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
     return new AutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
-//    return new FenderShot(m_tower, m_shooterSubsystem).withTimeout(5)
+//      return chooser.getSelected()
+//      return twoBallAuto;
+//    return new FenderShot(m_tower,m_shooterSubsystem).withTimeout(5)
 //        .andThen(
 //            new RunCommand(() -> m_robotDrive.drive(-0.2, 0, 0, false))
 //                .withTimeout(1)

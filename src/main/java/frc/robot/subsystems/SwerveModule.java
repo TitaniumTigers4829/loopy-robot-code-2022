@@ -5,11 +5,13 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoder;
 
+import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -107,7 +109,14 @@ public class SwerveModule {
     m_turnEncoder.configAbsoluteSensorRange(AbsoluteSensorRange.Signed_PlusMinus180);
     m_turnEncoder.configMagnetOffset(angleZero);
     m_turnEncoder.configSensorDirection(encoderReversed);
+    m_turnEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
+    m_turnEncoder.setStatusFramePeriod(CANCoderStatusFrame.VbatAndFaults, 250);
 
+    m_turningMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
+    m_turningMotor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 250);
+
+    m_driveMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
+    m_driveMotor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 20);
 
     // Limit the PID Controller's input range between -pi and pi and set the input
     // to be continuous.

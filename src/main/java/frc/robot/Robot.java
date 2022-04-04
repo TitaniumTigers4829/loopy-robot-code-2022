@@ -33,6 +33,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     SmartDashboard.putData(CommandScheduler.getInstance());
     CameraServer.startAutomaticCapture();
+    m_robotContainer.setLEDsDefault();
   }
 
   /**
@@ -54,10 +55,14 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    m_robotContainer.setLEDsDisabled();
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+//    m_robotContainer.setLEDsDisabled();
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
@@ -87,6 +92,7 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
+    m_robotContainer.setLEDsDefault();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
@@ -94,7 +100,9 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during operator control. */
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+//    m_robotContainer.setLEDsDefault();
+  }
 
   @Override
   public void testInit() {

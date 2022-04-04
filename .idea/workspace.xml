@@ -4,21 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Changes by jackg">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LEDsSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbNextBar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Eject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/EmergencyShoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/zuntue2022.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutonomousCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutonomousCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/SetDriveSpeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/SetDriveSpeed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbBottomPositon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbBottomPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbSetPos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbSetPos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbWithButtons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbWithButtons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/MidBarClimb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/MidBarClimb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/TowerIntake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/TowerIntake.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/IntakeSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/IntakeSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LEDsSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LEDsSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
-    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
+    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="Changes by Ryan" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -91,10 +99,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -116,14 +124,13 @@
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="frc.robot.commands.shooter" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
+  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -277,6 +284,9 @@
       <workItem from="1648486156367" duration="800000" />
       <workItem from="1648510293870" duration="3857000" />
       <workItem from="1648567972372" duration="21307000" />
+      <workItem from="1648768107118" duration="14527000" />
+      <workItem from="1648909272872" duration="14141000" />
+      <workItem from="1648993099188" duration="7753000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -572,7 +582,14 @@
       <option name="project" value="LOCAL" />
       <updated>1648582040561</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="changes">
+      <created>1648825382906</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1648825382906</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -594,7 +611,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
     <MESSAGE value="ClimbSubsystem initial code done. now for commands and then testing." />
     <MESSAGE value="implementing climb testing" />
     <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
@@ -619,6 +635,7 @@
     <MESSAGE value="changes from sunday" />
     <MESSAGE value="e" />
     <MESSAGE value="Changes by jackg" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changes by jackg" />
+    <MESSAGE value="changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="changes" />
   </component>
 </project>
