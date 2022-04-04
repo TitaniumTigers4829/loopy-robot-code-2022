@@ -12,12 +12,12 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
-public class AutonomousCommand extends SequentialCommandGroup {
+public class TwoBallAutonomousCommand extends SequentialCommandGroup {
 
   /**
    * Add your docs here.
    */
-  public AutonomousCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,
+  public TwoBallAutonomousCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intake) {
     addCommands(
         // Moves backwards

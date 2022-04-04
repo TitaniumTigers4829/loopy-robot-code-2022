@@ -70,6 +70,7 @@ public class ShooterSubsystem extends SubsystemBase {
     } else {
       m_topMotor.set(ControlMode.PercentOutput, 0);
     }
+
     SmartDashboard.putNumber("Top target RPM", topMotorTargetRPM);
     SmartDashboard.putNumber("Bottom target RPM", bottomMotorTargetRPM);
   }
@@ -78,25 +79,6 @@ public class ShooterSubsystem extends SubsystemBase {
     return (m_bottomMotor.getClosedLoopError()+m_topMotor.getClosedLoopError())/2;
   }
 
-//  public void increaseTopRPM() {
-//    topMotorTargetRPM += 10;
-//    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
-//  }
-//
-//  public void decreaseTopRPM() {
-//    topMotorTargetRPM -= 10;
-//    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
-//  }
-//
-//  public void increaseBottomRPM() {
-//    bottomMotorTargetRPM += 10;
-//    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
-//  }
-//
-//  public void decreaseBottomRPM() {
-//    bottomMotorTargetRPM -= 10;
-//    setShooterRPM(bottomMotorTargetRPM, topMotorTargetRPM);
-//  }
 
   public double getTopRPM() {
     return (m_topMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
