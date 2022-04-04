@@ -49,7 +49,7 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setMotorFullPowerIn() {
-    m_motor.set(0.65);
+    m_motor.set(0.5);
   }
 
   public void setMotorFullPowerOut() {

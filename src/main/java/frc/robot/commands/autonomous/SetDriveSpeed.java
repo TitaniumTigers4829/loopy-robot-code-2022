@@ -24,6 +24,7 @@ public class SetDriveSpeed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    driveSubsystem.zeroHeading();
     driveSubsystem.drive(xSpeed, ySpeed, 0, false);
   }
 

@@ -10,11 +10,11 @@ import frc.robot.subsystems.ClimbSubsystem;
 
 public class ClimbSetPos extends CommandBase {
   
-  public int motorPos;
+  public double motorPos;
   private final ClimbSubsystem climbSubsystem;
 
   /** Creates a new ClimbSetPos. */
-  public ClimbSetPos(ClimbSubsystem climbSubsystem, int motorPos) {
+  public ClimbSetPos(ClimbSubsystem climbSubsystem, double motorPos) {
     this.climbSubsystem = climbSubsystem;
     this.motorPos = motorPos;
     addRequirements(climbSubsystem);
@@ -22,7 +22,7 @@ public class ClimbSetPos extends CommandBase {
 
   @Override
   public void initialize() {
-    climbSubsystem.setPos(motorPos);
+    SmartDashboard.putBoolean("Climb Pos Running", true);
   }
 
   @Override
@@ -33,6 +33,8 @@ public class ClimbSetPos extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putBoolean("Climb Pos Running", false);
+    climbSubsystem.setLeftMotorOutputManual(0);
+    climbSubsystem.setRightMotorOutputManual(0);
   }
 
   @Override

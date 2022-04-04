@@ -6,6 +6,7 @@ package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.LEDsSubsystem;
 import java.util.function.BooleanSupplier;
 
 public class ClimbWithButtons extends CommandBase {
@@ -21,10 +22,11 @@ public class ClimbWithButtons extends CommandBase {
   private final BooleanSupplier Rdown;
   private final BooleanSupplier Armvert;
   private final BooleanSupplier Armdown;
+  private final LEDsSubsystem leds;
 
 
   public ClimbWithButtons(ClimbSubsystem climb, BooleanSupplier Lup, BooleanSupplier Ldown,
-      BooleanSupplier Rup, BooleanSupplier Rdown, BooleanSupplier Armvert, BooleanSupplier Armdown) {
+      BooleanSupplier Rup, BooleanSupplier Rdown, BooleanSupplier Armvert, BooleanSupplier Armdown, LEDsSubsystem leds) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.climb = climb;
     this.Lup = Lup;
@@ -33,12 +35,14 @@ public class ClimbWithButtons extends CommandBase {
     this.Rdown = Rdown;
     this.Armvert = Armvert;
     this.Armdown = Armdown;
+    this.leds = leds;
     addRequirements(climb);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    leds.setLEDsClimbing();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -73,6 +77,7 @@ public class ClimbWithButtons extends CommandBase {
   public void end(boolean interrupted) {
     climb.setLeftMotorOutputManual(0);
     climb.setRightMotorOutputManual(0);
+    leds.setLEDsDefault();
   }
 
   // Returns true when the command should end.
