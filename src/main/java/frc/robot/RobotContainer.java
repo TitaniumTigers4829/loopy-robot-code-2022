@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.autonomous.AutonomousCommand;
+import frc.robot.commands.autonomous.AutoCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
@@ -32,6 +32,7 @@ import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.*;
 
+import java.util.List;
 import java.util.function.DoubleSupplier;
 
 /*
@@ -204,11 +205,9 @@ public class RobotContainer {
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
     new JoystickButton(m_buttonController, 5).whileHeld(
-        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
-            RIGHT_BUMPER, m_LEDs));
+        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
     new JoystickButton(m_buttonController, 8).whileHeld(
-        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
-            RIGHT_BUMPER, m_LEDs));
+        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
     new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
 //     Toggle for climb solenoids
@@ -322,7 +321,7 @@ public class RobotContainer {
 
 //    return new TwoBallAutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
-    return new AutoCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+    return new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
 //    SwerveControllerCommand swerveControllerCommand =
 //        new SwerveControllerCommand(
@@ -353,6 +352,5 @@ public class RobotContainer {
 //            new RunCommand(() -> m_robotDrive.drive(0, 0, 0, false))
 //                .withTimeout(1)
 //        );
-    return null;
   }
 }
