@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -16,27 +17,21 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.autonomous.AutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
 import frc.robot.commands.shooter.EmergencyShoot;
-import frc.robot.commands.shooter.FenderShot;
 import frc.robot.commands.shooter.Shoot;
-import frc.robot.commands.testing.ShooterPIDtesting;
 import frc.robot.commands.tower.TowerIntake;
-import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.LEDsSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.TowerSubsystem;
-import java.util.List;
+import frc.robot.subsystems.*;
+
 import java.util.function.DoubleSupplier;
 
 /*
@@ -51,7 +46,7 @@ public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-    private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  //  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
@@ -325,10 +320,9 @@ public class RobotContainer {
             new Pose2d(3, 0, new Rotation2d(0)),
             config);
 
-    ProfiledPIDController thetaController =
-        new ProfiledPIDController(
-            AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+//    return new TwoBallAutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+
+    return new AutoCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
 //    SwerveControllerCommand swerveControllerCommand =
 //        new SwerveControllerCommand(

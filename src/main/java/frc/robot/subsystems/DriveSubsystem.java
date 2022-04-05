@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class DriveSubsystem extends SubsystemBase {
+
   private ShuffleboardTab moduleTab = Shuffleboard.getTab("Module Info");
 
    // Don't really know why this is necessary

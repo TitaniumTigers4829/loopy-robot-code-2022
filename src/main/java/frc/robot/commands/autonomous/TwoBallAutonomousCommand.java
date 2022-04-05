@@ -12,16 +12,16 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
-public class AutonomousCommand extends SequentialCommandGroup {
+public class TwoBallAutonomousCommand extends SequentialCommandGroup {
 
   /**
    * Add your docs here.
    */
-  public AutonomousCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,
+  public TwoBallAutonomousCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intake) {
     addCommands(
         // Moves backwards
-        new AutoDriveIntake(driveSubsystem, intake, towerSubsystem).withTimeout(2.25),
+        new AutoDriveIntake(driveSubsystem, intake, towerSubsystem, 1.2).withTimeout(2.25),
         // Stops the robot
         new SetDriveSpeed(driveSubsystem, 0, 0).withTimeout(0.5),
         // drive forward a bit

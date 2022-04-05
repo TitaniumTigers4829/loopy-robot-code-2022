@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -308,5 +309,13 @@ public final class Constants {
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
         new TrapezoidProfile.Constraints(
             kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+  }
+
+  public static final class PathWeaverConstants {
+    // Blue Auto Paths TODO: Work on adding a path for red
+    public static final String firstPath = "PathWeaver/output/firstPath.wpilib.json";
+    public static final String secondPath = "PathWeaver/output/secondPath.wpilib.json";
+    public static final String thirdPath = "PathWeaver/output/thirdPath.wpilib.json";
+    public static final String fourthPath = "PathWeaver/output/fourthPath.wpilib.json";
   }
 }

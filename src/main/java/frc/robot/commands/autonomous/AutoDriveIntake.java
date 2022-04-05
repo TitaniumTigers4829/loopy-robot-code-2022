@@ -14,13 +14,13 @@ import frc.robot.subsystems.TowerSubsystem;
 public class AutoDriveIntake extends ParallelCommandGroup {
 
   /**
-   * Creates a new DriveAndIntake.
+   * This command has the robot back up while intaking
    */
-  public AutoDriveIntake(DriveSubsystem drive, IntakeSubsystem intake, TowerSubsystem tower) {
+  public AutoDriveIntake(DriveSubsystem drive, IntakeSubsystem intake, TowerSubsystem tower, double backupSpeed) {
 
     addCommands(
         new IntakeWithTower(intake, tower),
-        new SetDriveSpeed(drive, 1.2, 0)
+        new SetDriveSpeed(drive, backupSpeed, 0)
     );
   }
 }
