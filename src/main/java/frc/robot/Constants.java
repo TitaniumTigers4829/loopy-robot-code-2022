@@ -203,7 +203,7 @@ public final class Constants {
     public static double[][] bottomMotorValues = {
         //{distance, rpm}
         {Units.feetToMeters(5), 1770},
-        {Units.feetToMeters(6.5), 1730},
+        {Units.feetToMeters(6.5), 1665},
         {Units.feetToMeters(8), 1560}, // 1600  // 1615
         {Units.feetToMeters(9.5), 1350},
         {Units.feetToMeters(11), 1300},
@@ -212,7 +212,7 @@ public final class Constants {
         {Units.feetToMeters(15.5), 1180}
     };
 
-    public static double turnkP = 0.175;
+    public static double turnkP = 0.2;
     public static double turnkI = 0;
     public static double turnkD = 0;
     public static double kMaxTurnAngularSpeedRadiansPerSecond = 2 * Math.PI;

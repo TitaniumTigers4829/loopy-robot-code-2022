@@ -9,7 +9,6 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.DriveSubsystem;
@@ -17,8 +16,6 @@ import frc.robot.subsystems.LEDsSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
 
 public class AutoShoot extends CommandBase {
 
@@ -92,7 +89,7 @@ public class AutoShoot extends CommandBase {
 
     driveSubsystem.drive(0, 0, turnRobotOutput, false);
 
-    if (Math.abs(headingError) < 3 && shooterSubsystem.getShooterAverageRPMError() < 200) {
+    if (Math.abs(headingError) < 3 && shooterSubsystem.getShooterTotalAbsError() < 200) {
       LEDS.setLEDsReadyToShoot();
     } else {
       LEDS.setLEDsShooterLiningUp();

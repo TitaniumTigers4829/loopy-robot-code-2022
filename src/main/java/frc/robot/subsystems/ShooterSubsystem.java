@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -50,6 +51,9 @@ public class ShooterSubsystem extends SubsystemBase {
     m_topMotor.config_kP(0, 0.07, 0);
     m_topMotor.config_kI(0, 0.0001, 0);
     m_topMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
+
+    m_bottomMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
+    m_topMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
   }
 
   public void setShooterRPM(double bottomMotorRPM, double topMotorRPM) {
@@ -74,8 +78,25 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Bottom target RPM", bottomMotorTargetRPM);
   }
 
-  public double getShooterAverageRPMError() {
-    return (m_bottomMotor.getClosedLoopError()+m_topMotor.getClosedLoopError())/2;
+  public void setShooterRPMWithoutFreeSpin(double bottomMotorRPM, double topMotorRPM) {
+    topMotorTargetRPM = topMotorRPM;
+    bottomMotorTargetRPM = bottomMotorRPM;
+    // 2048 ticks per revolution, ticks per .10 second, 1 / 2048 * 600
+    double speedBottom_FalconUnits = bottomMotorRPM / (600.0) * 2048.0;
+    double speedTop_FalconUnits = topMotorRPM / (600.0) * 2048.0;
+
+    m_bottomMotor.set(TalonFXControlMode.Velocity, speedBottom_FalconUnits);
+    m_topMotor.set(TalonFXControlMode.Velocity, speedTop_FalconUnits );
+
+    SmartDashboard.putNumber("i Top target RPM", topMotorTargetRPM);
+    SmartDashboard.putNumber("i Bot target RPM", bottomMotorTargetRPM);
+//    SmartDashboard.putNumber("i Top RPM", getTopRPM());
+//    SmartDashboard.putNumber("i Bot RPM", getBottomRPM());
+
+  }
+
+  public double getShooterTotalAbsError() {
+    return (Math.abs(m_bottomMotor.getClosedLoopError()) + Math.abs(m_topMotor.getClosedLoopError()));
   }
 
 //  public void increaseTopRPM() {

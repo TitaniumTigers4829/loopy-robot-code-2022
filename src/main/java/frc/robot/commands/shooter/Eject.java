@@ -42,7 +42,6 @@ public class Eject extends CommandBase {
         ShooterConstants.kTopEjectRPM
     );
   }
-
   @Override
   public void execute() {
     shooterSubsystem.setShooterRPM(

@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -15,23 +14,17 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.autonomous.AutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
-import frc.robot.commands.shooter.EmergencyShoot;
-import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.testing.ShooterPIDtesting;
 import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.ClimbSubsystem;
-import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDsSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
@@ -50,13 +43,13 @@ import java.util.function.DoubleSupplier;
 public class RobotContainer {
 
   // The robot's subsystems
-  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+//  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   //  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
-  private final ShooterSubsystem shooter = new ShooterSubsystem();
+  private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
 //  private final Command twoBallAuto;
@@ -72,7 +65,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-//    twoBallAuto = new AutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    twoBallAuto = new AutonomousCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 //    noAuto = null;
 
     // Turn off the limelight lights because they are very bright
@@ -152,19 +145,21 @@ public class RobotContainer {
      * Sets the default command and joystick bindings for the drive train.
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
-    m_robotDrive.setDefaultCommand(
-        new RunCommand(
-            () ->
-                m_robotDrive.drive(
-                    modifyAxis(LEFT_STICK_Y) * -1 // xAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
-                        * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-                        * DriveConstants.kMaxRotationalSpeed,
-                    !RIGHT_TRIGGER.get()),
-            m_robotDrive));
-    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
+//    m_robotDrive.setDefaultCommand(
+//        new RunCommand(
+//            () ->
+//                m_robotDrive.drive(
+//                    modifyAxis(LEFT_STICK_Y) * -1 // xAxis
+//                        * DriveConstants.kMaxSpeedMetersPerSecond,
+//                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
+//                        * DriveConstants.kMaxSpeedMetersPerSecond,
+//                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
+//                        * DriveConstants.kMaxRotationalSpeed,
+//                    !RIGHT_TRIGGER.get()),
+//            m_robotDrive));
+//    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
+
+    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
 
     // Manual Climb
     JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
@@ -184,13 +179,13 @@ public class RobotContainer {
 
     // Manual control for getting shoot values
 //    RIGHT_TRIGGER.whenPressed(
-//        new InstantCommand(shooter::increaseTopRPM));
+//        new InstantCommand(m_shooter::increaseTopRPM));
 //    LEFT_TRIGGER.whenPressed(
-//        new InstantCommand(shooter::decreaseTopRPM));
+//        new InstantCommand(m_shooter::decreaseTopRPM));
 //    RIGHT_BUMPER.whenPressed(
-//        new InstantCommand(shooter::increaseBottomRPM));
+//        new InstantCommand(m_shooter::increaseBottomRPM));
 //    LEFT_BUMPER.whenPressed(
-//        new InstantCommand(shooter::decreaseBottomRPM));
+//        new InstantCommand(m_shooter::decreaseBottomRPM));
 
     // Fender Shot
 //    new JoystickButton(m_buttonController, 5).whileHeld(
@@ -208,13 +203,13 @@ public class RobotContainer {
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
 //    A_BUTTON.whileHeld(new TestShot(m_tower, new ShooterSubsystem()));
-    new JoystickButton(m_buttonController, 5).whileHeld(
-        new Shoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
-            RIGHT_BUMPER, m_LEDs));
-    new JoystickButton(m_buttonController, 8).whileHeld(
-        new EmergencyShoot(shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
-            RIGHT_BUMPER, m_LEDs));
-    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(shooter, m_tower));
+//    new JoystickButton(m_buttonController, 5).whileHeld(
+//        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+//            RIGHT_BUMPER, m_LEDs));
+//    new JoystickButton(m_buttonController, 8).whileHeld(
+//        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+//            RIGHT_BUMPER, m_LEDs));
+    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
 //     Toggle for climb solenoids
 ////     Intake down
@@ -330,25 +325,25 @@ public class RobotContainer {
             AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    SwerveControllerCommand swerveControllerCommand =
-        new SwerveControllerCommand(
-            exampleTrajectory,
-            m_robotDrive::getPose, // Functional interface to feed supplier
-            DriveConstants.kDriveKinematics,
-
-            // Position controllers
-            new PIDController(AutoConstants.kPXController, 0, 0),
-            new PIDController(AutoConstants.kPYController, 0, 0),
-            thetaController,
-            m_robotDrive::setModuleStates,
-            m_robotDrive);
+//    SwerveControllerCommand swerveControllerCommand =
+//        new SwerveControllerCommand(
+//            exampleTrajectory,
+//            m_robotDrive::getPose, // Functional interface to feed supplier
+//            DriveConstants.kDriveKinematics,
+//
+//            // Position controllers
+//            new PIDController(AutoConstants.kPXController, 0, 0),
+//            new PIDController(AutoConstants.kPYController, 0, 0),
+//            thetaController,
+//            m_robotDrive::setModuleStates,
+//            m_robotDrive);
 
     // Reset odometry to the starting pose of the trajectory.
-    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
+//    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
 
     // Run path following command, then stop at the end.
 //    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
-    return new AutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    return new AutonomousCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 //      return chooser.getSelected()
 //      return twoBallAuto;
 //    return new FenderShot(m_tower,m_shooterSubsystem).withTimeout(5)
@@ -359,5 +354,6 @@ public class RobotContainer {
 //            new RunCommand(() -> m_robotDrive.drive(0, 0, 0, false))
 //                .withTimeout(1)
 //        );
+    return null;
   }
 }

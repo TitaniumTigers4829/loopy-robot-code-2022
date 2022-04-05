@@ -7,10 +7,10 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.*;
@@ -40,6 +40,12 @@ public class Shoot extends CommandBase {
       ShooterConstants.ksTurning, ShooterConstants.kvTurning
   );
 
+  private int initialBallCount = 0;
+  private int ballcount = 0;
+  private double towerSpeed = TowerConstants.towerMotorSpeed;
+  private double headingError = 0;
+  private boolean shotOne = false;
+
   /**
    * Creates a new Shoot.
    */
@@ -56,7 +62,7 @@ public class Shoot extends CommandBase {
     this.leftStickX = leftStickX;
     this.rightBumper = rightBumper;
     this.LEDS = leds;
-    addRequirements(shooterSubsystem, limelight, leds);
+    addRequirements(shooterSubsystem, limelight, leds, driveSubsystem);
   }
 
   @Override
@@ -66,14 +72,19 @@ public class Shoot extends CommandBase {
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
 
-    double headingError = limelight.getTargetOffsetX();
+    headingError = limelight.getTargetOffsetX();
 
     double turnRobotOutput =
         turnProfiledPIDController.calculate(headingError, 0)
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
-    driveSubsystem.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnRobotOutput, true);
-
+    if (towerSubsystem.getIsBallInBottom()){
+      ballcount += 1;
+    }
+    if (towerSubsystem.getIsBallInTop()){
+      ballcount += 1;
+    }
+    initialBallCount = ballcount;
   }
 
   @Override
@@ -82,6 +93,32 @@ public class Shoot extends CommandBase {
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
+//    old:
+
+//    if ((towerSubsystem.getIsBallInBottom()) && (towerSubsystem.getIsBallInTop())) {
+//      ballcount = 2;
+//    } else if ((towerSubsystem.getIsBallInTop()) && !(towerSubsystem.getIsBallInBottom())) {
+//      ballcount = 1;
+//    } else if ((towerSubsystem.getIsBallInBottom()) && !(towerSubsystem.getIsBallInTop())) {
+//      ballcount = 1;
+//    } else {
+//      ballcount = 0;
+//    }
+    if ((initialBallCount == 2) && !(towerSubsystem.getIsBallInBottom())) {
+      ballcount = 1;
+    }
+    if (initialBallCount == 1) {
+      shotOne = true;
+    } else if ((initialBallCount == 2) && (ballcount == 1)) {
+      shotOne = true;
+    }
+
+//    towerSpeed = (shotOne ? 0.34 : TowerConstants.towerMotorSpeed);
+    if (isReadyToShoot()) {
+      towerSpeed = 0.5;
+    } else {
+      towerSpeed = 0.34;
+    }
 
     double headingError = limelight.getTargetOffsetX();
 
@@ -92,18 +129,16 @@ public class Shoot extends CommandBase {
         turnProfiledPIDController.calculate(headingError, 0)
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
-    driveSubsystem.drive(-1 * leftStickY.getAsDouble(), -1 * leftStickX.getAsDouble(), turnRobotOutput, true);
+    driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
 
-    if ((Math.abs(headingError) < 3) && (limelight.hasValidTarget())) {
-      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
-    } else {
-      towerSubsystem.setTowerMotorsSpeed(0);
-    }
-
-    if (headingError < 3 && shooterSubsystem.getShooterAverageRPMError() < 200) {
+    if (isReadyToShoot()) {
       LEDS.setLEDsReadyToShoot();
+      towerSubsystem.setTowerMotorsSpeed(towerSpeed);
+      SmartDashboard.putBoolean("Ready to shoot", true);
     } else {
       LEDS.setLEDsShooterLiningUp();
+      towerSubsystem.setTowerMotorsSpeed(0);
+      SmartDashboard.putBoolean("Ready to shoot", false);
     }
 
 //    SmartDashboard.putNumber("Target offset X: ", limelight.getTargetOffsetX());
@@ -113,7 +148,6 @@ public class Shoot extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     shooterSubsystem.setShooterRPM(0, 0);
-    driveSubsystem.getDefaultCommand().schedule();
     towerSubsystem.setTowerOff();
     LEDS.setLEDsDefault();
   }
@@ -123,4 +157,11 @@ public class Shoot extends CommandBase {
     return false;
   }
 
+  private boolean isReadyToShoot() {
+    // If low offset, has a valid target, and shooter flywheels are spun up.
+    // FIXME: what is going on with the 1.1 stuff in the shooterSubsystem?  Is that permanent?
+    // FIXME: Can we re tune the PID loop now that we have better CAN utilization? (It kinda gets it right now, but it should be better.)
+    // We want to never miss any shots.
+    return (((Math.abs(headingError) < 3) && (limelight.hasValidTarget()) && shooterSubsystem.getShooterTotalAbsError() < 50));
+  }
 }

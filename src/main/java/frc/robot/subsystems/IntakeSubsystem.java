@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -25,10 +26,10 @@ public class IntakeSubsystem extends SubsystemBase {
      m_motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
 
     m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType, IntakeConstants.kIntakeDeployedSolenoidPort, IntakeConstants.kIntakeRetractedSolenoidPort);
-  }
 
-  private double getIntakeVelocity() {
-    return m_motor.getSelectedSensorVelocity(); // encoder units per 100ms
+
+    m_motor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
+    m_motor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 250);
   }
 
 //  public boolean getIsIntakeDeployed() {

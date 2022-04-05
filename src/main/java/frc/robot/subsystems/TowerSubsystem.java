@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -35,6 +36,12 @@ public class TowerSubsystem extends SubsystemBase {
 
     m_bottomTowerMotor.setInverted(true);
     m_topTowerMotor.setInverted(true);
+
+    m_bottomTowerMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
+    m_bottomTowerMotor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 250);
+
+    m_topTowerMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
+    m_topTowerMotor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 250);
   }
 
   public void setTowerMotorsSpeed(double speed) {
