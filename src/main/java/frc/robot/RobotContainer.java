@@ -14,6 +14,8 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
@@ -22,9 +24,13 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
+import frc.robot.commands.shooter.EmergencyShoot;
+import frc.robot.commands.shooter.FenderShot;
+import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.testing.ShooterPIDtesting;
 import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDsSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
@@ -43,9 +49,9 @@ import java.util.function.DoubleSupplier;
 public class RobotContainer {
 
   // The robot's subsystems
-//  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
-  //  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+    private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
@@ -145,21 +151,21 @@ public class RobotContainer {
      * Sets the default command and joystick bindings for the drive train.
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
-//    m_robotDrive.setDefaultCommand(
-//        new RunCommand(
-//            () ->
-//                m_robotDrive.drive(
-//                    modifyAxis(LEFT_STICK_Y) * -1 // xAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-//                        * DriveConstants.kMaxRotationalSpeed,
-//                    !RIGHT_TRIGGER.get()),
-//            m_robotDrive));
-//    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
+    m_robotDrive.setDefaultCommand(
+        new RunCommand(
+            () ->
+                m_robotDrive.drive(
+                    modifyAxis(LEFT_STICK_Y) * -1 // xAxis
+                        * DriveConstants.kMaxSpeedMetersPerSecond,
+                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
+                        * DriveConstants.kMaxSpeedMetersPerSecond,
+                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
+                        * DriveConstants.kMaxRotationalSpeed,
+                    !RIGHT_TRIGGER.get()),
+            m_robotDrive));
+    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
-    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
+//    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
 
     // Manual Climb
     JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
@@ -193,7 +199,7 @@ public class RobotContainer {
 //    // Low Shot
 //    new JoystickButton(m_buttonController, 8).whileHeld(
 //        new LowShot(m_tower, m_shooterSubsystem));
-//
+
 
 
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
@@ -202,13 +208,12 @@ public class RobotContainer {
         new IntakeWithTower(m_intakeSubsystem, m_tower));
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
-//    A_BUTTON.whileHeld(new TestShot(m_tower, new ShooterSubsystem()));
-//    new JoystickButton(m_buttonController, 5).whileHeld(
-//        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
-//            RIGHT_BUMPER, m_LEDs));
-//    new JoystickButton(m_buttonController, 8).whileHeld(
-//        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
-//            RIGHT_BUMPER, m_LEDs));
+    new JoystickButton(m_buttonController, 5).whileHeld(
+        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+            RIGHT_BUMPER, m_LEDs));
+    new JoystickButton(m_buttonController, 8).whileHeld(
+        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+            RIGHT_BUMPER, m_LEDs));
     new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
 //     Toggle for climb solenoids

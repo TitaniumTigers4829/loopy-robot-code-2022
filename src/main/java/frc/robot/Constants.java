@@ -44,10 +44,10 @@ public final class Constants {
     public static final int kFrontRightTurningEncoderPort = 9;
     public static final int kRearRightTurningEncoderPort = 8;
 
-    public static final double kFrontLeftAngleZero = 79.45; // FIXME: Add angle offset
-    public static final double kRearLeftAngleZero = 121.38; // FIXME: Add angle offset
-    public static final double kFrontRightAngleZero = -104.68; // FIXME: Add angle offset
-    public static final double kRearRightAngleZero = -118.30; // FIXME: Add angle offset
+    public static final double kFrontLeftAngleZero = 79.45;
+    public static final double kRearLeftAngleZero = 121.38;
+    public static final double kFrontRightAngleZero = -104.68;
+    public static final double kRearRightAngleZero = 23.54;
 
     public static final boolean kFrontLeftTurningEncoderReversed = false;
     public static final boolean kRearLeftTurningEncoderReversed = false;
@@ -219,6 +219,11 @@ public final class Constants {
     public static double kMaxTurnAngularAccelerationRadiansPerSecondSquared = 4 * Math.PI;
     public static double ksTurning = 0.0;
     public static double kvTurning = 0.0;
+
+    public static double topkP = 0.0017817;
+    public static double topkS = 0.71574;
+    public static double topkV = 0.11061;
+
   }
 
 

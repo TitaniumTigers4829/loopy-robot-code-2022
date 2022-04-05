@@ -122,6 +122,10 @@ public class DriveSubsystem extends SubsystemBase {
 //    SmartDashboard.putString("m_rearLeft", m_rearLeft.getState().toString());
 //    SmartDashboard.putString("m_frontRight", m_frontRight.getState().toString());
 //    SmartDashboard.putString("m_rearRight", m_rearRight.getState().toString());
+    m_frontLeft.periodic_func();
+    m_rearRight.periodic_func();
+    m_rearLeft.periodic_func();
+    m_frontRight.periodic_func();
     }
 
   /**
@@ -203,5 +207,8 @@ public class DriveSubsystem extends SubsystemBase {
 ////    return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
 //    return m_gyro.getRate();
 //  }
+  public void resetEncoders(){
+    m_rearRight.resetEncoders();
+  }
 
 }

@@ -11,6 +11,8 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
@@ -21,7 +23,10 @@ public class ShooterSubsystem extends SubsystemBase {
   private final TalonFX m_bottomMotor = new TalonFX(ShooterConstants.kBottomShooterMotorPort);
   private double topMotorTargetRPM;
   private double bottomMotorTargetRPM;
-  private double targetRPM;
+
+
+  private PIDController topPID = new PIDController(ShooterConstants.topkP, 0, 0);
+  private SimpleMotorFeedforward topFF = new SimpleMotorFeedforward(ShooterConstants.topkS, ShooterConstants.topkV);
 
   public ShooterSubsystem() {
     m_bottomMotor.configFactoryDefault();
@@ -34,7 +39,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_topMotor.enableVoltageCompensation(true);
 
     m_bottomMotor.setInverted(true);
-    m_topMotor.setInverted(true);
+    m_topMotor.setInverted(false);
 
     m_bottomMotor.setNeutralMode(NeutralMode.Coast);
     m_topMotor.setNeutralMode(NeutralMode.Coast);
@@ -42,15 +47,15 @@ public class ShooterSubsystem extends SubsystemBase {
     m_bottomMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     m_topMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
 
-    m_bottomMotor.config_kF(0, 0.0512, 0);
-    m_bottomMotor.config_kP(0, 0.07, 0);
-    m_bottomMotor.config_kI(0, 0.0001, 0);
-    m_bottomMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
-
-    m_topMotor.config_kF(0, 0.0512, 0);
-    m_topMotor.config_kP(0, 0.07, 0);
-    m_topMotor.config_kI(0, 0.0001, 0);
-    m_topMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
+//    m_bottomMotor.config_kF(0, 0.0512, 0);
+//    m_bottomMotor.config_kP(0, 0.07, 0);
+//    m_bottomMotor.config_kI(0, 0.0001, 0);
+//    m_bottomMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
+//
+//    m_topMotor.config_kF(0, 0.0512, 0);
+//    m_topMotor.config_kP(0, 0.07, 0);
+//    m_topMotor.config_kI(0, 0.0001, 0);
+//    m_topMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
 
     m_bottomMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
     m_topMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
@@ -78,25 +83,25 @@ public class ShooterSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Bottom target RPM", bottomMotorTargetRPM);
   }
 
-  public void setShooterRPMWithoutFreeSpin(double bottomMotorRPM, double topMotorRPM) {
+  public void setShooterRPMImproved(double bottomMotorRPM, double topMotorRPM) {
     topMotorTargetRPM = topMotorRPM;
     bottomMotorTargetRPM = bottomMotorRPM;
-    // 2048 ticks per revolution, ticks per .10 second, 1 / 2048 * 600
-    double speedBottom_FalconUnits = bottomMotorRPM / (600.0) * 2048.0;
-    double speedTop_FalconUnits = topMotorRPM / (600.0) * 2048.0;
-
-    m_bottomMotor.set(TalonFXControlMode.Velocity, speedBottom_FalconUnits);
-    m_topMotor.set(TalonFXControlMode.Velocity, speedTop_FalconUnits );
 
     SmartDashboard.putNumber("i Top target RPM", topMotorTargetRPM);
     SmartDashboard.putNumber("i Bot target RPM", bottomMotorTargetRPM);
-//    SmartDashboard.putNumber("i Top RPM", getTopRPM());
-//    SmartDashboard.putNumber("i Bot RPM", getBottomRPM());
 
+    double topOutput =
+        topPID.calculate(topMotorTargetRPM, getTopRPM());
+//            + topFF.calculate(topMotorTargetRPM)/10;
+
+    m_topMotor.set(ControlMode.PercentOutput, topOutput/12);
+    SmartDashboard.putNumber("topMotor output", topOutput/12);
   }
 
+
   public double getShooterTotalAbsError() {
-    return (Math.abs(m_bottomMotor.getClosedLoopError()) + Math.abs(m_topMotor.getClosedLoopError()));
+    return Math.abs(topMotorTargetRPM-getTopRPM());
+//    return (Math.abs(m_bottomMotor.getClosedLoopError()) + Math.abs(m_topMotor.getClosedLoopError()));
   }
 
 //  public void increaseTopRPM() {
@@ -125,6 +130,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getBottomRPM() {
     return (m_bottomMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
+  }
+
+  public void setShooterToNeutral() {
+    m_topMotor.set(ControlMode.PercentOutput, 0);
+    m_bottomMotor.set(ControlMode.PercentOutput, 0);
   }
 
   @Override

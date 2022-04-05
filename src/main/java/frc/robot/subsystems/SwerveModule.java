@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
+import java.util.Objects;
 
 public class SwerveModule {
   private final WPI_TalonFX m_driveMotor;
@@ -132,7 +133,7 @@ public class SwerveModule {
    * @return the absolute position of the CANCoder
    */
   public double getModuleHeading(){
-    return this.m_turnEncoder.getAbsolutePosition();
+    return this.m_turnEncoder.getAbsolutePosition() % 360;
   }
 
   /**
@@ -159,7 +160,7 @@ public class SwerveModule {
         ModuleConstants.kDrivetoMetersPerSecond * m_driveMotor.getSelectedSensorVelocity();
 
     double m_turnRadians =
-        ((2*Math.PI)/360) * m_turnEncoder.getAbsolutePosition();
+        ((2 * Math.PI)/360) * m_turnEncoder.getAbsolutePosition();
 
     // Optimize the reference state to avoid spinning further than 90 degrees
     SwerveModuleState state =
@@ -248,7 +249,14 @@ public class SwerveModule {
   @Deprecated
   /** Zeros all the SwerveModule encoders. */
   public void resetEncoders() {
-    m_turnEncoder.setPosition(0);
-    m_driveMotor.setSelectedSensorPosition(0);
+      m_turnEncoder.setPosition(0);
+      m_driveMotor.setSelectedSensorPosition(0);
   }
+
+  public void periodic_func() {
+//    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " ABS", m_turnEncoder.getAbsolutePosition());
+//    SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " pos", m_turnEncoder.getPosition());
+  }
+
+
 }

@@ -7,6 +7,8 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -89,10 +91,12 @@ public class Shoot extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPM(
+    shooterSubsystem.setShooterRPMImproved(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
+
+
 //    old:
 
 //    if ((towerSubsystem.getIsBallInBottom()) && (towerSubsystem.getIsBallInTop())) {
@@ -140,14 +144,13 @@ public class Shoot extends CommandBase {
       towerSubsystem.setTowerMotorsSpeed(0);
       SmartDashboard.putBoolean("Ready to shoot", false);
     }
-
 //    SmartDashboard.putNumber("Target offset X: ", limelight.getTargetOffsetX());
 //    SmartDashboard.putBoolean("Has valid target: ", limelight.hasValidTarget());
   }
 
   @Override
   public void end(boolean interrupted) {
-    shooterSubsystem.setShooterRPM(0, 0);
+    shooterSubsystem.setShooterToNeutral();
     towerSubsystem.setTowerOff();
     LEDS.setLEDsDefault();
   }
