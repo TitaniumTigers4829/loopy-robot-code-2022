@@ -26,7 +26,6 @@ public class Shoot extends CommandBase {
   private final DriveSubsystem driveSubsystem;
   private final DoubleSupplier leftStickY;
   private final DoubleSupplier leftStickX;
-  private final BooleanSupplier rightBumper;
   private final LEDsSubsystem LEDS;
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
       ShooterConstants.turnkP,
@@ -45,7 +44,7 @@ public class Shoot extends CommandBase {
    */
   public Shoot(ShooterSubsystem shooterSubsystem,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
-      DoubleSupplier leftStickY, DoubleSupplier leftStickX, JoystickButton rightBumper,
+      DoubleSupplier leftStickY, DoubleSupplier leftStickX,
       LEDsSubsystem leds) {
 
     this.shooterSubsystem = shooterSubsystem;
@@ -54,7 +53,6 @@ public class Shoot extends CommandBase {
     this.driveSubsystem = driveSubsystem;
     this.leftStickY = leftStickY;
     this.leftStickX = leftStickX;
-    this.rightBumper = rightBumper;
     this.LEDS = leds;
     addRequirements(shooterSubsystem, limelight, leds);
   }
