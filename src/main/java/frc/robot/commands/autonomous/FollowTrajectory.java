@@ -18,9 +18,8 @@ import java.nio.file.Path;
 public class FollowTrajectory extends CommandBase {
 
   private final DriveSubsystem drive;
-  private Trajectory trajectory;
   private final Timer timer = new Timer();
-  private final boolean done = false;
+  private Trajectory trajectory;
 
   public FollowTrajectory(DriveSubsystem drive, String trajectoryFilePath) {
     this.drive = drive;
@@ -28,7 +27,7 @@ public class FollowTrajectory extends CommandBase {
 
     try {
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryFilePath);
-      Trajectory trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+      trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
     } catch (IOException e) {
       DriverStation.reportError("Unable to open trajectory: " + trajectoryFilePath,
           e.getStackTrace());
@@ -53,24 +52,25 @@ public class FollowTrajectory extends CommandBase {
         new PIDController(AutoConstants.kPYController, 0, 0),
         thetaController,
         drive::setModuleStates,
-        drive).andThen(() -> drive.drive(0, 0, 0, false));
+        drive).andThen(() -> drive.drive(0, 0, 0, false)); // Stops the robot
 
     // Reset odometry to the starting pose of the trajectory.
     drive.resetOdometry(trajectory.getInitialPose());
   }
 
   @Override
-  public void execute() {
-
-  }
+  public void execute() {}
 
   @Override
-  public void end(boolean interrupted) {
-  }
+  public void end(boolean interrupted) {}
 
   @Override
   public boolean isFinished() {
-    return done;
+    if (trajectory != null) {
+      return timer.hasElapsed(trajectory.getTotalTimeSeconds());
+    } else {
+      return (timer.hasElapsed(15)); // This is just in case something gets wrong and trajectory is never loaded
+    }
   }
 
 }
