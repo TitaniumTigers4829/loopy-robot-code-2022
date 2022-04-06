@@ -52,7 +52,7 @@ public class FollowTrajectory extends CommandBase {
         new PIDController(AutoConstants.kPYController, 0, 0),
         thetaController,
         drive::setModuleStates,
-        drive).andThen(() -> drive.drive(0, 0, 0, false)); // Stops the robot
+        drive).andThen(() -> drive.drive(0, 0, 0, false)).schedule(); // Stops the robot
 
     // Reset odometry to the starting pose of the trajectory.
     drive.resetOdometry(trajectory.getInitialPose());
@@ -62,14 +62,16 @@ public class FollowTrajectory extends CommandBase {
   public void execute() {}
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    drive.drive(0, 0, 0, false);
+  }
 
   @Override
   public boolean isFinished() {
     if (trajectory != null) {
       return timer.hasElapsed(trajectory.getTotalTimeSeconds());
     } else {
-      return (timer.hasElapsed(15)); // This is just in case something gets wrong and trajectory is never loaded
+      return (timer.hasElapsed(5)); // This is just in case something gets wrong and trajectory is never loaded
     }
   }
 

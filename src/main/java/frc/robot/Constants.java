@@ -314,9 +314,9 @@ public final class Constants {
 
   public static final class PathWeaverConstants {
     // Blue Auto Paths TODO: Work on adding a path for red
-    public static final String firstPath = "PathWeaver/output/firstPath.wpilib.json";
-    public static final String secondPath = "PathWeaver/output/secondPath.wpilib.json";
-    public static final String thirdPath = "PathWeaver/output/thirdPath.wpilib.json";
-    public static final String fourthPath = "PathWeaver/output/fourthPath.wpilib.json";
+    public static final String firstPath = "output/firstPath.wpilib.json";
+    public static final String secondPath = "output/secondPath.wpilib.json";
+    public static final String thirdPath = "output/thirdPath.wpilib.json";
+    public static final String fourthPath = "output/fourthPath.wpilib.json";
   }
 }

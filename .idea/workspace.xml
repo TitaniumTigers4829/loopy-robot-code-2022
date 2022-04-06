@@ -4,13 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="changes so far, still working on tuning the shooter">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Changes by jackg">
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathWeaver/output/firstPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/firstPath.wpilib.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathWeaver/output/fourthPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/fourthPath.wpilib.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathWeaver/output/secondPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/secondPath.wpilib.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PathWeaver/output/thirdPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/thirdPath.wpilib.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/EmergencyShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/EmergencyShoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectory.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
-    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="Changes by Ryan" />
+    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
+    <list id="22b4c1c0-8530-4f35-9a5d-6f552df0d4ad" name="Changes by titan" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,12 +92,12 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -108,8 +118,13 @@
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\jackg\Desktop\Robot Code\zuntue\src\main\deploy" />
+      <recent name="D:\Users\jackg\Desktop\Robot Code\zuntue\src\main\java\frc\robot\commands\autonomous" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="frc.robot.commands.shooter" />
     </key>
@@ -220,6 +235,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Gradle.zuntue2022 [deploy]" />
+      <item itemvalue="Gradle.zuntue2022 [build]" />
+      <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
+      <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
+      <item itemvalue="Gradle.zuntue2022 [vendordep]" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.zuntue2022 [build]" />
@@ -268,11 +290,7 @@
       <workItem from="1648486156367" duration="800000" />
       <workItem from="1648510293870" duration="3857000" />
       <workItem from="1648567972372" duration="21307000" />
-      <workItem from="1648768107118" duration="14527000" />
-      <workItem from="1648909272872" duration="14141000" />
-      <workItem from="1648993099188" duration="7753000" />
-      <workItem from="1649103766720" duration="20117000" />
-      <workItem from="1649191971488" duration="10473000" />
+      <workItem from="1649253346215" duration="6290000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -568,35 +586,21 @@
       <option name="project" value="LOCAL" />
       <updated>1648582040561</updated>
     </task>
-    <task id="LOCAL-00043" summary="changes">
-      <created>1648825382906</created>
+    <task id="LOCAL-00043" summary="Finished AutoCommand">
+      <created>1649119889174</created>
       <option name="number" value="00043" />
       <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1648825382906</updated>
+      <updated>1649119889174</updated>
     </task>
-    <task id="LOCAL-00044" summary="Competition changes and CAN loop fixed">
-      <created>1649103829364</created>
+    <task id="LOCAL-00044" summary="Added eject command">
+      <created>1649254724202</created>
       <option name="number" value="00044" />
       <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1649103829364</updated>
+      <updated>1649254724202</updated>
     </task>
-    <task id="LOCAL-00045" summary="changes from today">
-      <created>1649128464781</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1649128464781</updated>
-    </task>
-    <task id="LOCAL-00046" summary="changes so far, still working on tuning the shooter">
-      <created>1649202340393</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1649202340393</updated>
-    </task>
-    <option name="localTasksCounter" value="47" />
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -616,8 +620,11 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="implementing climb testing" />
+    <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
     <MESSAGE value="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
     <MESSAGE value="updated CAN IDs" />
     <MESSAGE value="added Angle Zero Offset" />
@@ -639,20 +646,8 @@
     <MESSAGE value="changes from sunday" />
     <MESSAGE value="e" />
     <MESSAGE value="Changes by jackg" />
-    <MESSAGE value="changes" />
-    <MESSAGE value="Competition changes and CAN loop fixed" />
-    <MESSAGE value="changes from today" />
-    <MESSAGE value="changes so far, still working on tuning the shooter" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes so far, still working on tuning the shooter" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Finished AutoCommand" />
+    <MESSAGE value="Added eject command" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added eject command" />
   </component>
 </project>

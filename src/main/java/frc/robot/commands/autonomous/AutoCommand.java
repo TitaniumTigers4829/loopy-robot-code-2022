@@ -21,21 +21,25 @@ public class AutoCommand extends SequentialCommandGroup {
 
     addCommands( // FIXME: All of the numbers need to be tuned
         // 1. Backs up from the pad
-        new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath), // Will finish the path then the next command is called
+        new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath).withTimeout(3), // Will finish the path then the next command is called
         // 2. Intakes the ball behind it
         new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, 2).withTimeout(1.5),
         // 3. Goes to right in front of the third ball
-        new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath),
-        // 4. Shoots the two balls it is currently holding
-        new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem).withTimeout(2), // Can use ParallelCommandGroup or ParallelRacingGroup for optimization
-        // 5. Backs up and intakes the third ball
-        new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, 1.2).withTimeout(1), // FIXME: Measure how far it backs up so the correct location can be used for Pathweaver
+        new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(3),
+
+        new ParallelCommandGroup(
+            // 4. Shoots the two balls it is currently holding
+            new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
+            driveSubsystem, ledsSubsystem),
+            // 5. Backs up and intakes the third ball
+            new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, 1.2)
+        ).withTimeout(2),
+
         // 6. Shoots the third ball with the wheels still spinning from when the first two balls were shot
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem).withTimeout(1),
         // 7. Goes to the area where it can pick up cargo from human plays
-        new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath),
+        new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath).withTimeout(4),
         // 8. Intakes long enough for the human players to load 2 balls
         new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2),
         // 9. Drives closer to the hoop
