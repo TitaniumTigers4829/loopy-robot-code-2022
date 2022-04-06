@@ -116,7 +116,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
   public boolean isShooterWithinAcceptableError() {
-    return Math.abs(topMotorTargetRPM-getTopRPM()) < 75 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 50;
+    return Math.abs(topMotorTargetRPM-getTopRPM()) < 75 * 2 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 50 * 2;
 //    return (Math.abs(m_bottomMotor.getClosedLoopError()) + Math.abs(m_topMotor.getClosedLoopError()));
   }
 
