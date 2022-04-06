@@ -117,13 +117,8 @@ public class Shoot extends CommandBase {
     }
 
 //    towerSpeed = (shotOne ? 0.34 : TowerConstants.towerMotorSpeed);
-    if (isReadyToShoot()) {
-      towerSpeed = 0.5;
-    } else {
-      towerSpeed = 0.34;
-    }
 
-    double headingError = limelight.getTargetOffsetX();
+    headingError = limelight.getTargetOffsetX();
 
     // If heading error isn't off by much, it won't move
     if (Math.abs(headingError) < 1) headingError = 0;
@@ -134,14 +129,13 @@ public class Shoot extends CommandBase {
 
     driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
 
+    SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
     if (isReadyToShoot()) {
       LEDS.setLEDsReadyToShoot();
-      towerSubsystem.setTowerMotorsSpeed(towerSpeed);
-      SmartDashboard.putBoolean("Ready to shoot", true);
+      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
     } else {
       LEDS.setLEDsShooterLiningUp();
       towerSubsystem.setTowerMotorsSpeed(0);
-      SmartDashboard.putBoolean("Ready to shoot", false);
     }
 //    SmartDashboard.putNumber("Target offset X: ", limelight.getTargetOffsetX());
 //    SmartDashboard.putBoolean("Has valid target: ", limelight.hasValidTarget());
