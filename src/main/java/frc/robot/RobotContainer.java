@@ -25,6 +25,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.AutoCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
+import frc.robot.commands.intake.EjectCommand;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
 import frc.robot.commands.shooter.EmergencyShoot;
@@ -200,9 +201,10 @@ public class RobotContainer {
 
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
     // While held for intake
-    SUCC_BUTTON.whileHeld(
-        new IntakeWithTower(m_intakeSubsystem, m_tower));
+    SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
+    // While held for ejecting ball
+    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
 
     new JoystickButton(m_buttonController, 5).whileHeld(
         new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
