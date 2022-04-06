@@ -166,6 +166,6 @@ public class Shoot extends CommandBase {
     // We want to never miss any shots.
     SmartDashboard.putBoolean("rpm within range: ", shooterSubsystem.isShooterWithinAcceptableError());
     SmartDashboard.putNumber("limelight offset: ", Math.abs(limelight.getTargetOffsetX()));
-    return (((Math.abs(headingError) < 5) && (limelight.hasValidTarget()) && shooterSubsystem.isShooterWithinAcceptableError()));
+    return (((Math.abs(headingError) < 5) && (limelight.hasValidTarget()) && (shooterSubsystem.isShooterWithinAcceptableError())));
   }
 }
