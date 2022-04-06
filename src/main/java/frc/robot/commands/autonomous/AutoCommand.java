@@ -3,6 +3,7 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.PathWeaverConstants;
+import frc.robot.commands.intake.IntakeActiveTeleop;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -12,7 +13,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
 /**
- * This class is for the auto command for if the robot is blue TODO: Check if it will work with red, it probably will
+ * This class is for the auto command for if the robot is blue TODO: Check if it will work with red,
+ * it probably will
  */
 public class AutoCommand extends SequentialCommandGroup {
 
@@ -20,17 +22,19 @@ public class AutoCommand extends SequentialCommandGroup {
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intakeSubsystem) {
 
     addCommands( // FIXME: All of the numbers need to be tuned
-        // 1. Backs up from the pad
-        new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath).withTimeout(3), // Will finish the path then the next command is called
-        // 2. Intakes the ball behind it
-        new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, 2).withTimeout(1.5),
+        new ParallelCommandGroup(
+            // 1. Backs up from the pad
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath),
+            // 2. Intakes the ball behind it
+            new IntakeWithTower(intakeSubsystem, towerSubsystem)
+        ).withTimeout(2.5),
         // 3. Goes to right in front of the third ball
         new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(3),
 
         new ParallelCommandGroup(
             // 4. Shoots the two balls it is currently holding
             new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem),
+                driveSubsystem, ledsSubsystem),
             // 5. Backs up and intakes the third ball
             new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, 1.2)
         ).withTimeout(2),
@@ -47,7 +51,7 @@ public class AutoCommand extends SequentialCommandGroup {
         // 10. Shoots the two balls gotten from the human players
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem).withTimeout(2)
-        );
+    );
 
   }
 

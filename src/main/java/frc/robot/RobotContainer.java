@@ -24,6 +24,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.AutoCommand;
+import frc.robot.commands.autonomous.AutoShoot;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.EjectCommand;
 import frc.robot.commands.intake.IntakeWithTower;
@@ -204,7 +205,8 @@ public class RobotContainer {
     SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
     // While held for ejecting ball
-    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
+//    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
+    Y_BUTTON.whileHeld(new AutoShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, m_LEDs));
 
     new JoystickButton(m_buttonController, 5).whileHeld(
         new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
@@ -303,56 +305,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // Create config for trajectory
-//    TrajectoryConfig config =
-//        new TrajectoryConfig(
-//            AutoConstants.kMaxSpeedMetersPerSecond,
-//            AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-//            // Add kinematics to ensure max speed is actually obeyed
-//            .setKinematics(DriveConstants.kDriveKinematics);
-//
-//    // An example trajectory to follow.  All units in meters.
-//    Trajectory exampleTrajectory =
-//        TrajectoryGenerator.generateTrajectory(
-//            // Start at the origin facing the +X direction
-//            new Pose2d(0, 0, new Rotation2d(0)),
-//            // Pass through these two interior waypoints, making an 's' curve path
-//            List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-//            // End 3 meters straight ahead of where we started, facing forward
-//            new Pose2d(3, 0, new Rotation2d(0)),
-//            config);
-
 //    return new TwoBallAutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
     return new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
-//    SwerveControllerCommand swerveControllerCommand =
-//        new SwerveControllerCommand(
-//            exampleTrajectory,
-//            m_robotDrive::getPose, // Functional interface to feed supplier
-//            DriveConstants.kDriveKinematics,
-//
-//            // Position controllers
-//            new PIDController(AutoConstants.kPXController, 0, 0),
-//            new PIDController(AutoConstants.kPYController, 0, 0),
-//            thetaController,
-//            m_robotDrive::setModuleStates,
-//            m_robotDrive);
-
-    // Reset odometry to the starting pose of the trajectory.
-//    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
-
-    // Run path following command, then stop at the end.
-//    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
-//    return new AutonomousCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
-//      return chooser.getSelected()
-//      return twoBallAuto;
-//    return new FenderShot(m_tower,m_shooterSubsystem).withTimeout(5)
-//        .andThen(
-//            new RunCommand(() -> m_robotDrive.drive(-0.2, 0, 0, false))
-//                .withTimeout(1)
-//        ).andThen(
-//            new RunCommand(() -> m_robotDrive.drive(0, 0, 0, false))
-//                .withTimeout(1)
-//        );
   }
 }

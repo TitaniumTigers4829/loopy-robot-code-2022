@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Changes by jackg">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/output/firstPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/firstPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/output/fourthPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/fourthPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/output/secondPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/secondPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/output/thirdPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/thirdPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
     <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
@@ -290,7 +284,8 @@
       <workItem from="1648486156367" duration="800000" />
       <workItem from="1648510293870" duration="3857000" />
       <workItem from="1648567972372" duration="21307000" />
-      <workItem from="1649253346215" duration="6290000" />
+      <workItem from="1649253346215" duration="7702000" />
+      <workItem from="1649283840145" duration="387000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -600,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649254724202</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Updated auto">
+      <created>1649280279084</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1649280279084</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,7 +625,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="implementing climb testing" />
     <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
     <MESSAGE value="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
     <MESSAGE value="updated CAN IDs" />
@@ -648,6 +649,7 @@
     <MESSAGE value="Changes by jackg" />
     <MESSAGE value="Finished AutoCommand" />
     <MESSAGE value="Added eject command" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added eject command" />
+    <MESSAGE value="Updated auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated auto" />
   </component>
 </project>

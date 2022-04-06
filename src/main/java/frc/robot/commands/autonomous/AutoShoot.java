@@ -68,7 +68,7 @@ public class AutoShoot extends CommandBase {
 
     driveSubsystem.drive(0, 0, turnRobotOutput, true);
 
-    Timer.delay(1);
+//    Timer.delay(1);
   }
 
   @Override
@@ -89,18 +89,13 @@ public class AutoShoot extends CommandBase {
 
     driveSubsystem.drive(0, 0, turnRobotOutput, false);
 
-    if (Math.abs(headingError) < 3 && shooterSubsystem.isShooterWithinAcceptableError()) {
+    if (Math.abs(headingError) < 3 && shooterSubsystem.isShooterWithinAcceptableError() && (limelight.hasValidTarget())) {
+      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
       LEDS.setLEDsReadyToShoot();
     } else {
+      towerSubsystem.setTowerMotorsSpeed(0);
       LEDS.setLEDsShooterLiningUp();
     }
-
-    if ((Math.abs(headingError) < 3) && (limelight.hasValidTarget())) {
-      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
-    } else {
-      towerSubsystem.setTowerMotorsSpeed(0);
-    }
-
   }
 
   @Override
