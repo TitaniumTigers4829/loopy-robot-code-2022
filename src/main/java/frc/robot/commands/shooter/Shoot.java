@@ -29,6 +29,7 @@ public class Shoot extends CommandBase {
   private final DoubleSupplier leftStickY;
   private final DoubleSupplier leftStickX;
   private final LEDsSubsystem LEDS;
+
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
       ShooterConstants.turnkP,
       ShooterConstants.turnkI,
@@ -163,6 +164,8 @@ public class Shoot extends CommandBase {
     // FIXME: what is going on with the 1.1 stuff in the shooterSubsystem?  Is that permanent?
     // FIXME: Can we re tune the PID loop now that we have better CAN utilization? (It kinda gets it right now, but it should be better.)
     // We want to never miss any shots.
-    return (((Math.abs(headingError) < 3) && (limelight.hasValidTarget()) && shooterSubsystem.getShooterTotalAbsError() < 50));
+    SmartDashboard.putBoolean("rpm within range: ", shooterSubsystem.isShooterWithinAcceptableError());
+    SmartDashboard.putNumber("limelight offset: ", Math.abs(limelight.getTargetOffsetX()));
+    return (((Math.abs(headingError) < 5) && (limelight.hasValidTarget()) && shooterSubsystem.isShooterWithinAcceptableError()));
   }
 }

@@ -23,10 +23,16 @@ public class ShooterSubsystem extends SubsystemBase {
   private final TalonFX m_bottomMotor = new TalonFX(ShooterConstants.kBottomShooterMotorPort);
   private double topMotorTargetRPM;
   private double bottomMotorTargetRPM;
+  private double topOutput;
+  private double botOutput;
 
 
   private PIDController topPID = new PIDController(ShooterConstants.topkP, 0, 0);
   private SimpleMotorFeedforward topFF = new SimpleMotorFeedforward(ShooterConstants.topkS, ShooterConstants.topkV);
+
+  private PIDController bottomPID = new PIDController(ShooterConstants.bottomkP, 0, 0);
+  private SimpleMotorFeedforward bottomFF = new SimpleMotorFeedforward(ShooterConstants.bottomkS, ShooterConstants.bottomkV);
+
 
   public ShooterSubsystem() {
     m_bottomMotor.configFactoryDefault();
@@ -39,7 +45,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_topMotor.enableVoltageCompensation(true);
 
     m_bottomMotor.setInverted(true);
-    m_topMotor.setInverted(false);
+    m_topMotor.setInverted(true);
 
     m_bottomMotor.setNeutralMode(NeutralMode.Coast);
     m_topMotor.setNeutralMode(NeutralMode.Coast);
@@ -88,26 +94,35 @@ public class ShooterSubsystem extends SubsystemBase {
     topMotorTargetRPM = topMotorRPM;
     bottomMotorTargetRPM = bottomMotorRPM;
 
-    SmartDashboard.putNumber("i Top target RPM", topMotorTargetRPM);
-    SmartDashboard.putNumber("i Bot target RPM", bottomMotorTargetRPM);
+    SmartDashboard.putNumber("i BOT target RPM", getBottomRPM());
+//    SmartDashboard.putNumber("i Bot target RPM", bottomMotorTargetRPM);
+    SmartDashboard.putNumber("i BOT error", bottomMotorTargetRPM - getBottomRPM());
 
-    double topOutput =
-        topPID.calculate(topMotorTargetRPM, getTopRPM());
-//            + topFF.calculate(topMotorTargetRPM)/10;
+    SmartDashboard.putNumber("i TOP target RPM", getTopRPM());
+    SmartDashboard.putNumber("i TOP error", topMotorTargetRPM - getTopRPM());
+
+
+    topOutput =
+        topPID.calculate(getTopRPM(), topMotorTargetRPM) +
+             topFF.calculate(topMotorTargetRPM);
+
+    botOutput =
+        bottomPID.calculate(getBottomRPM(), bottomMotorTargetRPM) +
+            bottomFF.calculate(bottomMotorTargetRPM);
 
     m_topMotor.set(ControlMode.PercentOutput, topOutput/12);
-    SmartDashboard.putNumber("topMotor output", topOutput/12);
+    m_bottomMotor.set(ControlMode.PercentOutput, botOutput/12);
   }
 
 
-  public double getShooterTotalAbsError() {
-    return Math.abs(topMotorTargetRPM-getTopRPM());
+  public boolean isShooterWithinAcceptableError() {
+    return Math.abs(topMotorTargetRPM-getTopRPM()) < 75 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 50;
 //    return (Math.abs(m_bottomMotor.getClosedLoopError()) + Math.abs(m_topMotor.getClosedLoopError()));
   }
 
 
   public double getTopRPM() {
-    return (m_topMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
+    return ((m_topMotor.getSelectedSensorVelocity()) / 2048.0) * 600;
   }
 
   public double getBottomRPM() {
@@ -121,7 +136,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Top RPM", getTopRPM());
-    SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
+//    SmartDashboard.putNumber("Top RPM", getTopRPM());
+//    SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
+//    SmartDashboard.putNumber("topMotor output", topOutput/12);
+
   }
 }

@@ -6,7 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -213,7 +212,7 @@ public final class Constants {
         {Units.feetToMeters(15.5), 1180}
     };
 
-    public static double turnkP = 0.2;
+    public static double turnkP = 0.3;
     public static double turnkI = 0;
     public static double turnkD = 0;
     public static double kMaxTurnAngularSpeedRadiansPerSecond = 2 * Math.PI;
@@ -221,10 +220,12 @@ public final class Constants {
     public static double ksTurning = 0.0;
     public static double kvTurning = 0.0;
 
-    public static double topkP = 0.0017817;
-    public static double topkS = 0.71574;
-    public static double topkV = 0.11061;
-
+    public static double topkP = 0.0045; // 0.0045
+    public static double topkS = 0.47; // 0.71574
+    public static double topkV = 0.001825; // 0.11061
+    public static double bottomkP = 0.0002;
+    public static double bottomkS = 0.15;
+    public static double bottomkV = 0.001825;
   }
 
 

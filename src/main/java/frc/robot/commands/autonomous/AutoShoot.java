@@ -89,7 +89,7 @@ public class AutoShoot extends CommandBase {
 
     driveSubsystem.drive(0, 0, turnRobotOutput, false);
 
-    if (Math.abs(headingError) < 3 && shooterSubsystem.getShooterTotalAbsError() < 200) {
+    if (Math.abs(headingError) < 3 && shooterSubsystem.isShooterWithinAcceptableError()) {
       LEDS.setLEDsReadyToShoot();
     } else {
       LEDS.setLEDsShooterLiningUp();

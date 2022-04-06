@@ -99,7 +99,7 @@ public class EmergencyShoot extends CommandBase {
       towerSubsystem.setTowerMotorsSpeed(0);
     }
 
-    if (headingError < 3 && shooterSubsystem.getShooterTotalAbsError() < 200) {
+    if (headingError < 3 && shooterSubsystem.isShooterWithinAcceptableError()) {
       LEDS.setLEDsReadyToShoot();
     } else {
       LEDS.setLEDsShooterLiningUp();

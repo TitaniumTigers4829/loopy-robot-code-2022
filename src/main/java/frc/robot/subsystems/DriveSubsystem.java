@@ -208,8 +208,5 @@ public class DriveSubsystem extends SubsystemBase {
 ////    return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
 //    return m_gyro.getRate();
 //  }
-  public void resetEncoders(){
-    m_rearRight.resetEncoders();
-  }
 
 }
