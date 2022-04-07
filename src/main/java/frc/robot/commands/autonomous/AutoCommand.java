@@ -28,11 +28,11 @@ public class AutoCommand extends SequentialCommandGroup {
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath),
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
-        ).withTimeout(2.5),
+        ).withTimeout(1.5),
 
         // 2. Revs up the shooter while going in right in front of the third ball
         new ParallelRaceGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(3),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(2.5),
             new AutoRevShoot(shooterSubsystem, LimelightSubsystem.getInstance()).withTimeout(4)
         ),
 
@@ -41,13 +41,13 @@ public class AutoCommand extends SequentialCommandGroup {
             new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
                 driveSubsystem, ledsSubsystem),
             new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, 1.2)
-        ).withTimeout(2),
+        ).withTimeout(1.8),
 
         // 4. Shoots the third ball with the wheels still spinning from when the first two balls were shot
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem).withTimeout(1),
         // 5. Goes to the area where it can pick up cargo from human plays TODO: Make this into a ParallelCommandGroup
-        new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath).withTimeout(4),
+        new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath).withTimeout(3),
         // 6. Intakes long enough for the human players to load 2 balls
         new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2),
 
