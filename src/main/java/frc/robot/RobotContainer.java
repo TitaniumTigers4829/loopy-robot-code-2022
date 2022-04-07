@@ -31,6 +31,8 @@ import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
 import frc.robot.commands.shooter.EmergencyShoot;
 import frc.robot.commands.shooter.Shoot;
+import frc.robot.commands.testing.ClimbManualPairedPIDControl;
+import frc.robot.commands.testing.ShooterPIDtesting;
 import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.*;
 
@@ -163,7 +165,13 @@ public class RobotContainer {
             m_robotDrive));
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
+
+
 //    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
+    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
+//    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
+    Y_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
+
 
     // Manual Climb
     JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
@@ -177,9 +185,12 @@ public class RobotContainer {
         new ClimbWithButtons(m_climbSubsystem,
             LClimbUp::get, LClimbDown::get, RClimbUp::get,
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get, m_LEDs)); // This works
+
+
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbFullExtension(m_climbSubsystem));
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbBottomPosition(m_climbSubsystem))
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbNextBar(m_climbSubsystem));;
+
 
     // Manual control for getting shoot values
 //    RIGHT_TRIGGER.whenPressed(
@@ -206,14 +217,13 @@ public class RobotContainer {
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
     // While held for ejecting ball
 //    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
-    Y_BUTTON.whileHeld(new AutoShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, m_LEDs));
+//    Y_BUTTON.whileHeld(new AutoShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, m_LEDs));
 
     new JoystickButton(m_buttonController, 5).whileHeld(
         new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
     new JoystickButton(m_buttonController, 8).whileHeld(
         new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
     new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
-
 //     Toggle for climb solenoids
 ////     Intake down
 //    new JoystickButton(m_buttonController, 7).whenPressed(
@@ -223,8 +233,13 @@ public class RobotContainer {
 //        new InstantCommand(m_intakeSubsystem::setSolenoidRetracted));
 
     //X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
-//Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
+    //Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
   }
+
+
+
+
+
 
 //  private void configureButtonBindingsTest() {
 //    DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);

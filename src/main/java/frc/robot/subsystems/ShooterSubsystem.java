@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
+import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,11 +28,15 @@ public class ShooterSubsystem extends SubsystemBase {
   private double botOutput;
 
 
-  private PIDController topPID = new PIDController(ShooterConstants.topkP, 0, 0);
-  private SimpleMotorFeedforward topFF = new SimpleMotorFeedforward(ShooterConstants.topkS, ShooterConstants.topkV);
+  private final PIDController topPID = new PIDController(ShooterConstants.topkP, 0, 0);
+  private final SimpleMotorFeedforward topFF = new SimpleMotorFeedforward(ShooterConstants.topkS, ShooterConstants.topkV);
+//  private BangBangController topBangBang = new BangBangController();
 
-  private PIDController bottomPID = new PIDController(ShooterConstants.bottomkP, 0, 0);
-  private SimpleMotorFeedforward bottomFF = new SimpleMotorFeedforward(ShooterConstants.bottomkS, ShooterConstants.bottomkV);
+  private final PIDController bottomPID = new PIDController(ShooterConstants.bottomkP, 0, 0);
+  private final SimpleMotorFeedforward bottomFF = new SimpleMotorFeedforward(ShooterConstants.bottomkS, ShooterConstants.bottomkV);
+//  private BangBangController botBangBang = new BangBangController();
+
+
 
 
   public ShooterSubsystem() {
@@ -47,6 +52,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_bottomMotor.setInverted(true);
     m_topMotor.setInverted(true);
 
+    // MUST BE COAST MODE. BRAKE MODE COULD BREAK THE SHOOTER AND CREATE DANGEROUS OSCILLATIONS.
     m_bottomMotor.setNeutralMode(NeutralMode.Coast);
     m_topMotor.setNeutralMode(NeutralMode.Coast);
 
@@ -86,40 +92,51 @@ public class ShooterSubsystem extends SubsystemBase {
       m_topMotor.set(ControlMode.PercentOutput, 0);
     }
 
-    SmartDashboard.putNumber("Top target RPM", topMotorTargetRPM);
-    SmartDashboard.putNumber("Bottom target RPM", bottomMotorTargetRPM);
+//    SmartDashboard.putNumber("Top target RPM", topMotorTargetRPM);
+//    SmartDashboard.putNumber("Bottom target RPM", bottomMotorTargetRPM);
   }
 
   public void setShooterRPMImproved(double bottomMotorRPM, double topMotorRPM) {
     topMotorTargetRPM = topMotorRPM;
     bottomMotorTargetRPM = bottomMotorRPM;
-
-    SmartDashboard.putNumber("i BOT target RPM", getBottomRPM());
-//    SmartDashboard.putNumber("i Bot target RPM", bottomMotorTargetRPM);
+//
+    SmartDashboard.putNumber("i Bot target RPM", bottomMotorTargetRPM);
     SmartDashboard.putNumber("i BOT error", bottomMotorTargetRPM - getBottomRPM());
 
-    SmartDashboard.putNumber("i TOP target RPM", getTopRPM());
+    SmartDashboard.putNumber("i TOP target RPM", topMotorTargetRPM);
     SmartDashboard.putNumber("i TOP error", topMotorTargetRPM - getTopRPM());
 
 
-    topOutput =
-        topPID.calculate(getTopRPM(), topMotorTargetRPM) +
-             topFF.calculate(topMotorTargetRPM);
+    // Attempt at BangBang control did not go well
+//    topOutput =
+//        topBangBang.calculate(getTopRPM(), topMotorTargetRPM) +
+//            0.9 * topFF.calculate(topMotorTargetRPM)/12;
+//
+//    botOutput =
+//         botBangBang.calculate(getBottomRPM(), bottomMotorTargetRPM) +
+//            0.9 * bottomFF.calculate(bottomMotorTargetRPM)/12;
+
+
+    topOutput = topPID.calculate(getTopRPM(), topMotorTargetRPM)/12 +
+         topFF.calculate(topMotorTargetRPM)/12; //FIXME re tune top feedforward once in final config
 
     botOutput =
-        bottomPID.calculate(getBottomRPM(), bottomMotorTargetRPM) +
-            bottomFF.calculate(bottomMotorTargetRPM);
+        bottomPID.calculate(getBottomRPM(), bottomMotorTargetRPM)/12 +
+            bottomFF.calculate(bottomMotorTargetRPM)/12;
 
-    m_topMotor.set(ControlMode.PercentOutput, topOutput/12);
-    m_bottomMotor.set(ControlMode.PercentOutput, botOutput/12);
+
+    m_topMotor.set(ControlMode.PercentOutput, topOutput);
+    m_bottomMotor.set(ControlMode.PercentOutput, botOutput);
   }
 
 
   public boolean isShooterWithinAcceptableError() {
-    return Math.abs(topMotorTargetRPM-getTopRPM()) < 75 * 2 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 50 * 2;
-//    return (Math.abs(m_bottomMotor.getClosedLoopError()) + Math.abs(m_topMotor.getClosedLoopError()));
+    return Math.abs(topMotorTargetRPM-getTopRPM()) < 75 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 50;
   }
 
+  public boolean isShooterWithinAcceptableError(double topTargetRPM, double botTargetRpm) {
+    return Math.abs(topTargetRPM-getTopRPM()) < 30 && Math.abs(botTargetRpm-getBottomRPM()) < 20;
+  }
 
   public double getTopRPM() {
     return ((m_topMotor.getSelectedSensorVelocity()) / 2048.0) * 600;
@@ -136,9 +153,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-//    SmartDashboard.putNumber("Top RPM", getTopRPM());
-//    SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
-//    SmartDashboard.putNumber("topMotor output", topOutput/12);
-
+    SmartDashboard.putNumber("Top RPM", getTopRPM());
+    SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
+    SmartDashboard.putNumber("topMotor output", topOutput);
+    SmartDashboard.putNumber("botMotor output", botOutput);
   }
 }

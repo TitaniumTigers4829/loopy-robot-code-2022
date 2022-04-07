@@ -67,7 +67,7 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftMotor.configFactoryDefault();
     m_rightMotor.configFactoryDefault();
 
-    m_leftMotor.setInverted(false);
+    m_leftMotor.setInverted(true);
     m_rightMotor.setInverted(true);
 
     m_leftMotor.setNeutralMode(NeutralMode.Brake);

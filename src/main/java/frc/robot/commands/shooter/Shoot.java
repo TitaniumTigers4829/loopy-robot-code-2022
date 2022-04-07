@@ -7,6 +7,7 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
+import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.*;
 
 import java.util.function.BooleanSupplier;
@@ -29,6 +31,7 @@ public class Shoot extends CommandBase {
   private final DoubleSupplier leftStickY;
   private final DoubleSupplier leftStickX;
   private final LEDsSubsystem LEDS;
+  private int overshoot_elimination_counter = 0;
 
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
       ShooterConstants.turnkP,
@@ -47,6 +50,7 @@ public class Shoot extends CommandBase {
   private double towerSpeed = TowerConstants.towerMotorSpeed;
   private double headingError = 0;
   private boolean shotOne = false;
+  int iteration = 0;
 
   /**
    * Creates a new Shoot.
@@ -68,7 +72,7 @@ public class Shoot extends CommandBase {
 
   @Override
   public void initialize() {
-    shooterSubsystem.setShooterRPM(
+    shooterSubsystem.setShooterRPMImproved(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
@@ -94,7 +98,6 @@ public class Shoot extends CommandBase {
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
-
 
 //    old:
 
@@ -132,13 +135,16 @@ public class Shoot extends CommandBase {
     SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
     if (isReadyToShoot()) {
       LEDS.setLEDsReadyToShoot();
-      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+//      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+      towerSubsystem.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
+      if (towerSubsystem.getIsBallInTop()){
+        Timer.delay(0.3);
+      }
+      towerSubsystem.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed - 0.1);
     } else {
       LEDS.setLEDsShooterLiningUp();
       towerSubsystem.setTowerMotorsSpeed(0);
     }
-//    SmartDashboard.putNumber("Target offset X: ", limelight.getTargetOffsetX());
-//    SmartDashboard.putBoolean("Has valid target: ", limelight.hasValidTarget());
   }
 
   @Override
@@ -153,13 +159,16 @@ public class Shoot extends CommandBase {
     return false;
   }
 
+
+  // If limelight has low x-offset, has a valid target, and shooter flywheels have low RPM error.
   private boolean isReadyToShoot() {
-    // If low offset, has a valid target, and shooter flywheels are spun up.
-    // FIXME: what is going on with the 1.1 stuff in the shooterSubsystem?  Is that permanent?
-    // FIXME: Can we re tune the PID loop now that we have better CAN utilization? (It kinda gets it right now, but it should be better.)
-    // We want to never miss any shots.
-    SmartDashboard.putBoolean("rpm within range: ", shooterSubsystem.isShooterWithinAcceptableError());
+    if (shooterSubsystem.isShooterWithinAcceptableError()) {
+      overshoot_elimination_counter = overshoot_elimination_counter + 1;
+    } else {
+      overshoot_elimination_counter = 0;
+    }
+    SmartDashboard.putBoolean("overshoot_counter: ", overshoot_elimination_counter > 2);
     SmartDashboard.putNumber("limelight offset: ", Math.abs(limelight.getTargetOffsetX()));
-    return (((Math.abs(headingError) < 5) && (limelight.hasValidTarget()) && (shooterSubsystem.isShooterWithinAcceptableError())));
+    return (((Math.abs(headingError) < 3) && (limelight.hasValidTarget()) && (overshoot_elimination_counter > 2)));
   }
 }

@@ -163,54 +163,59 @@ public final class Constants {
     public static double cameraAngle = 35; // Degrees
     public static double targetHeight = 2.67; // Meters
 
+    public static double kTopEjectRPM = 700;
+    public static double kBottomEjectRPM = 700;
+
+//    // NOTE: min tuned value is 1500
 //    public static double[][] topMotorValues = {
 //        //{distance, rpm}
-//        {Units.feetToMeters(5), 2193.75},
-//        {Units.feetToMeters(6.5), 2418.75},
-//        {Units.feetToMeters(8), 2812.5},
-//        {Units.feetToMeters(10), 3318.75},
-//        {Units.feetToMeters(11), 3768.75},
-//        {Units.feetToMeters(12), 4612.5},
-//        {Units.feetToMeters(13.5), 5512.5}
+//        {Units.feetToMeters(5), 1800},
+//        {Units.feetToMeters(6.5), 1980},
+//        {Units.feetToMeters(8), 2350}, // 2400  // 2450
+//        {Units.feetToMeters(9.5), 2950},
+//        {Units.feetToMeters(11), 3150},
+//        {Units.feetToMeters(12.5), 3700},
+//        {Units.feetToMeters(14), 4100},
+//        {Units.feetToMeters(15.5), 4100}
 //    };
 //
 //    public static double[][] bottomMotorValues = {
 //        //{distance, rpm}
-//        {Units.feetToMeters(5), 1687.5},
-//        {Units.feetToMeters(6.5), 1687.5},
-//        {Units.feetToMeters(8), 1631.2185},
-//        {Units.feetToMeters(10), 1518.75},
-//        {Units.feetToMeters(11), 1350},
-//        {Units.feetToMeters(12), 900},
-//        {Units.feetToMeters(13.5), 787.5}
+//        {Units.feetToMeters(5), 1770},
+//        {Units.feetToMeters(6.5), 1665},
+//        {Units.feetToMeters(8), 1560}, // 1600  // 1615
+//        {Units.feetToMeters(9.5), 1350},
+//        {Units.feetToMeters(11), 1300},
+//        {Units.feetToMeters(12.5), 1260},
+//        {Units.feetToMeters(14), 1220},
+//        {Units.feetToMeters(15.5), 1180}
 //    };
 
-    public static double kTopEjectRPM = 700;
-    public static double kBottomEjectRPM = 700;
-
+    // NOTE: min tuned value is 1500
     public static double[][] topMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 1800},
-        {Units.feetToMeters(6.5), 1980},
-        {Units.feetToMeters(8), 2350}, // 2400  // 2450
-        {Units.feetToMeters(9.5), 2950},
-        {Units.feetToMeters(11), 3150},
-        {Units.feetToMeters(12.5), 3700},
-        {Units.feetToMeters(14), 4100},
-        {Units.feetToMeters(15.5), 4100}
+        {Units.feetToMeters(5.5), 1800},
+        {Units.feetToMeters(7), 2050},
+        {Units.feetToMeters(8.5), 2400}, // 2400  // 2450
+        {Units.feetToMeters(10), 3000},
+        {Units.feetToMeters(11.5), 3300},
+        {Units.feetToMeters(13), 3750},
+        {Units.feetToMeters(14.5), 4050},
+        {Units.feetToMeters(16), 4100}
     };
 
     public static double[][] bottomMotorValues = {
         //{distance, rpm}
-        {Units.feetToMeters(5), 1770},
-        {Units.feetToMeters(6.5), 1665},
-        {Units.feetToMeters(8), 1560}, // 1600  // 1615
-        {Units.feetToMeters(9.5), 1350},
-        {Units.feetToMeters(11), 1300},
-        {Units.feetToMeters(12.5), 1260},
-        {Units.feetToMeters(14), 1220},
-        {Units.feetToMeters(15.5), 1180}
+        {Units.feetToMeters(5.5), 1770},
+        {Units.feetToMeters(7), 1665},
+        {Units.feetToMeters(8.5), 1560}, // 1600  // 1615
+        {Units.feetToMeters(10), 1350},
+        {Units.feetToMeters(11.5), 1300},
+        {Units.feetToMeters(13), 1280},
+        {Units.feetToMeters(14.5), 1240},
+        {Units.feetToMeters(16), 1220}
     };
+
 
     public static double turnkP = 0.3;
     public static double turnkI = 0;
@@ -220,12 +225,12 @@ public final class Constants {
     public static double ksTurning = 0.0;
     public static double kvTurning = 0.0;
 
-    public static double topkP = 0.0045; // 0.0045
-    public static double topkS = 0.47; // 0.71574
-    public static double topkV = 0.001825; // 0.11061
-    public static double bottomkP = 0.0002;
-    public static double bottomkS = 0.15;
-    public static double bottomkV = 0.001825;
+    public static double topkP = 0.003; // 0.0045
+    public static double topkS = 0; // LEAVE AS 0
+    public static double topkV = 0.001925;
+    public static double bottomkP = 0.005;
+    public static double bottomkS = 0;
+    public static double bottomkV = 0.0019;
   }
 
 

@@ -33,7 +33,7 @@ public class ClimbManualPairedPIDControl extends CommandBase {
     height *= heightDiff;
     height += heightDiff;
     m_climbSubsystem.setDesiredLeftHookHeight(height);
-    m_climbSubsystem.setDesiredRightHookHeight(height);
+//    m_climbSubsystem.setDesiredRightHookHeight(height);
 //    m_climbSubsystem.setDesiredLeftHookHeight(m_rightStick.getAsDouble());
 //    m_climbSubsystem.setDesiredLeftHookHeight(m_rightStick.getAsDouble());
   }
