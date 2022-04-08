@@ -39,18 +39,17 @@ public class AutoCommand extends SequentialCommandGroup {
             new TowerIntake(towerSubsystem)
         ),
 
-        // 3. Shoots the two balls it is currently holding then backs up and intakes the third ball
+        // 3. Shoots the two balls it is currently holding, then intakes the third and shoots it
         new AutoShootIntake(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem, intakeSubsystem).withTimeout(4.3),
 
-        // 5. Goes to the area where it can pick up cargo from human plays
+        // 4. Intakes while going to pick up the fourth ball and going to get the fifth ball
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath),
-            // 6. Intakes long enough for the human players to load 2 balls
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
         ).withTimeout(2.5),
 
-        // 7. Revs up shooter while going closer to the hoop
+        // 5. Revs up shooter and intakes while going back towards the hoop
         new ParallelCommandGroup(
             new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2),
             new ParallelRaceGroup(
@@ -60,7 +59,7 @@ public class AutoCommand extends SequentialCommandGroup {
             )
         ),
 
-        // 8. Shoots the two balls gotten from the human players
+        // 6. Shoots the two balls gotten
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem).withTimeout(4)
     );
