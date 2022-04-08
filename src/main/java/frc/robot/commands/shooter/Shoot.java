@@ -137,10 +137,14 @@ public class Shoot extends CommandBase {
       LEDS.setLEDsReadyToShoot();
 //      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
       towerSubsystem.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
-      if (towerSubsystem.getIsBallInTop()){
-        Timer.delay(0.3);
-      }
+      Timer.delay(0.25);
       towerSubsystem.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed - 0.1);
+
+//      if (towerSubsystem.getIsBallInTop()){
+//        Timer.delay(0.2);
+//        towerSubsystem.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
+//      }
+//      towerSubsystem.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed - 0.1);
     } else {
       LEDS.setLEDsShooterLiningUp();
       towerSubsystem.setTowerMotorsSpeed(0);

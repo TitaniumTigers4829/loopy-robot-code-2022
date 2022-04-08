@@ -20,13 +20,14 @@ import frc.robot.subsystems.*;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-public class AutoShoot extends CommandBase {
+public class AutoShootIntake extends CommandBase {
 
   private final ShooterSubsystem shooterSubsystem;
   private final TowerSubsystem towerSubsystem;
   private final LimelightSubsystem limelight;
   private final DriveSubsystem driveSubsystem;
   private final LEDsSubsystem LEDS;
+  private final IntakeSubsystem intakeSubsystem;
 
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
       ShooterConstants.turnkP + 1,
@@ -49,15 +50,16 @@ public class AutoShoot extends CommandBase {
   /**
    .
    */
-  public AutoShoot(ShooterSubsystem shooterSubsystem,
+  public AutoShootIntake(ShooterSubsystem shooterSubsystem,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
-      LEDsSubsystem leds) {
+      LEDsSubsystem leds, IntakeSubsystem intakeSubsystem) {
 
     this.shooterSubsystem = shooterSubsystem;
     this.towerSubsystem = towerSubsystem;
     this.limelight = limelight;
     this.driveSubsystem = driveSubsystem;
     this.LEDS = leds;
+    this.intakeSubsystem = intakeSubsystem;
     addRequirements(shooterSubsystem, limelight, leds, driveSubsystem);
   }
 
@@ -90,6 +92,13 @@ public class AutoShoot extends CommandBase {
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
 
+    if (!towerSubsystem.getIsBallInBottom()) {
+      intakeSubsystem.setSolenoidDeployed();
+      intakeSubsystem.setMotorFullPowerIn();
+    } else {
+      intakeSubsystem.setSolenoidRetracted();
+      intakeSubsystem.setMotorStopped();
+    }
 
 //    old:
 

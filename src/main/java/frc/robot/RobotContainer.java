@@ -30,6 +30,7 @@ import frc.robot.commands.intake.EjectCommand;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
 import frc.robot.commands.shooter.EmergencyShoot;
+import frc.robot.commands.shooter.RevAndTurnShoot;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.testing.ClimbManualPairedPIDControl;
 import frc.robot.commands.testing.ShooterPIDtesting;
@@ -164,11 +165,11 @@ public class RobotContainer {
                     !RIGHT_TRIGGER.get()),
             m_robotDrive));
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
-
-
+    A_BUTTON.whileHeld(new RevAndTurnShoot(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
 
 //    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
-    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
+//    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
+//    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOnLED));
 //    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
     Y_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
@@ -186,30 +187,11 @@ public class RobotContainer {
             LClimbUp::get, LClimbDown::get, RClimbUp::get,
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get, m_LEDs)); // This works
 
-
+// auto climb stuff
+//
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbFullExtension(m_climbSubsystem));
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbBottomPosition(m_climbSubsystem))
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbNextBar(m_climbSubsystem));;
-
-
-    // Manual control for getting shoot values
-//    RIGHT_TRIGGER.whenPressed(
-//        new InstantCommand(m_shooter::increaseTopRPM));
-//    LEFT_TRIGGER.whenPressed(
-//        new InstantCommand(m_shooter::decreaseTopRPM));
-//    RIGHT_BUMPER.whenPressed(
-//        new InstantCommand(m_shooter::increaseBottomRPM));
-//    LEFT_BUMPER.whenPressed(
-//        new InstantCommand(m_shooter::decreaseBottomRPM));
-
-    // Fender Shot
-//    new JoystickButton(m_buttonController, 5).whileHeld(
-//        new FenderShot(m_tower, m_shooterSubsystem, false));
-//    // Low Shot
-//    new JoystickButton(m_buttonController, 8).whileHeld(
-//        new LowShot(m_tower, m_shooterSubsystem));
-
-
 
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
     // While held for intake
@@ -224,94 +206,7 @@ public class RobotContainer {
     new JoystickButton(m_buttonController, 8).whileHeld(
         new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
     new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
-//     Toggle for climb solenoids
-////     Intake down
-//    new JoystickButton(m_buttonController, 7).whenPressed(
-//        new InstantCommand(m_intakeSubsystem::setSolenoidDeployed));
-//    // Intake up
-//    new JoystickButton(m_buttonController, 6).whenPressed(
-//        new InstantCommand(m_intakeSubsystem::setSolenoidRetracted));
-
-    //X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
-    //Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
   }
-
-
-
-
-
-
-//  private void configureButtonBindingsTest() {
-//    DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
-//    DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
-//    DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
-//    DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
-//
-//    JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
-//    JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
-//    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
-//    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
-//    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
-//    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
-//    JoystickButton LEFT_TRIGGER = new JoystickButton(m_driverController, 7);
-//    JoystickButton RIGHT_TRIGGER = new JoystickButton(m_driverController, 8);
-//    POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
-//    POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
-//    POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
-//    POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
-//    JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
-//
-//    // Drive/Limelight Testing code
-//    RIGHT_BUMPER.toggleWhenPressed(new RunCommand(
-//        () ->
-//            m_robotDrive.drive(
-//                modifyAxis(LEFT_STICK_Y) * -1 // xAxis
-//                    * DriveConstants.kMaxSpeedMetersPerSecond,
-//                modifyAxis(LEFT_STICK_X) * -1 // yAxis
-//                    * DriveConstants.kMaxSpeedMetersPerSecond,
-//                modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-//                    * DriveConstants.kMaxRotationalSpeed,
-//                true),
-//        m_robotDrive));
-//
-//    LEFT_BUMPER.toggleWhenPressed(new RunCommand(
-//        () ->
-//            m_robotDrive.drive(
-//                modifyAxis(LEFT_STICK_Y) * -1 // xAxis
-//                    * DriveConstants.kMaxSpeedMetersPerSecond,
-//                modifyAxis(LEFT_STICK_X) * -1 // yAxis
-//                    * DriveConstants.kMaxSpeedMetersPerSecond,
-//                modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
-//                    * DriveConstants.kMaxRotationalSpeed,
-//                false),
-//        m_robotDrive));
-//
-//    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
-//    LEFT_STICK_DEPRESSED.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
-//
-//    // Intake command
-////    LEFT_TRIGGER.whileHeld(new IntakeActiveTeleop(m_intakeSubsystem));
-//
-////    LEFT_TRIGGER.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
-////    RIGHT_TRIGGER.whileHeld(new FenderShot(m_tower, m_shooterSubsystem));
-//    // Shooter/Tower Testing code
-////    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_tower::setTowerThirdPower));
-////    DOWN_DIRECTION_PAD.whenPressed(new InstantCommand(m_shooterSubsystem::setShooterFullSpeed));
-////    Y_BUTTON.whenPressed(new InstantCommand(m_tower::setTowerOff));
-////    A_BUTTON.whenPressed(new InstantCommand(m_shooterSubsystem::stopShooter));
-//
-//    // Climb Testing code
-//    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
-//    A_BUTTON.toggleWhenPressed(
-//        new ClimbManualIndependentControl(m_climbSubsystem, LEFT_STICK_Y, RIGHT_STICK_Y));
-//    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
-//    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbAngled));
-//    Y_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::setClimbVertical));
-//
-//    // Make sure hooks are latched when testing this part
-////    RIGHT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setRightHookToBottomPos));
-////    LEFT_BUMPER.whenPressed(new InstantCommand(m_climbSubsystem::setLeftHookToBottomPos));
-//  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
