@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShootIntake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShootIntake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/TowerIntake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/TowerIntake.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
     <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
@@ -286,28 +282,7 @@
       <workItem from="1648510293870" duration="3857000" />
       <workItem from="1648567972372" duration="21307000" />
       <workItem from="1649253346215" duration="7702000" />
-      <workItem from="1649283840145" duration="3716000" />
-    </task>
-    <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
-      <created>1645207484963</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1645207484963</updated>
-    </task>
-    <task id="LOCAL-00002" summary="added phoenix and rev as dependencies">
-      <created>1646458584096</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1646458584096</updated>
-    </task>
-    <task id="LOCAL-00003" summary="made a lot of changes, mostly copying code from RedThunder7166">
-      <created>1646462959732</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1646462959732</updated>
+      <workItem from="1649283840145" duration="4696000" />
     </task>
     <task id="LOCAL-00004" summary="updated it for our gyro">
       <created>1646463192150</created>
@@ -631,7 +606,28 @@
       <option name="project" value="LOCAL" />
       <updated>1649367339410</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Cleaned up code and added comments">
+      <created>1649382888105</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1649382888107</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Added subsystems to addRequirements()">
+      <created>1649382921843</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1649382921843</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Cleaned up code">
+      <created>1649382936595</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1649382936595</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,9 +650,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
-    <MESSAGE value="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
-    <MESSAGE value="updated CAN IDs" />
     <MESSAGE value="added Angle Zero Offset" />
     <MESSAGE value="idk" />
     <MESSAGE value="changes from today, climb still not working" />
@@ -679,6 +672,9 @@
     <MESSAGE value="Finished AutoCommand" />
     <MESSAGE value="Added eject command" />
     <MESSAGE value="Updated auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated auto" />
+    <MESSAGE value="Cleaned up code and added comments" />
+    <MESSAGE value="Added subsystems to addRequirements()" />
+    <MESSAGE value="Cleaned up code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up code" />
   </component>
 </project>

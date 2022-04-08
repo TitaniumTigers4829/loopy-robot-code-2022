@@ -68,11 +68,7 @@ public class FollowTrajectory extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (trajectory != null) {
-      return timer.hasElapsed(trajectory.getTotalTimeSeconds());
-    } else {
-      return (timer.hasElapsed(5)); // This is just in case something gets wrong and trajectory is never loaded
-    }
+    return false;
   }
 
 }
