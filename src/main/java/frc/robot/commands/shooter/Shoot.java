@@ -79,9 +79,9 @@ public class Shoot extends CommandBase {
 
     headingError = limelight.getTargetOffsetX();
 
-    double turnRobotOutput =
-        turnProfiledPIDController.calculate(headingError, 0)
-            + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
+//    double turnRobotOutput =
+//        turnProfiledPIDController.calculate(headingError, 0)
+//            + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
     if (towerSubsystem.getIsBallInBottom()){
       ballcount += 1;
@@ -110,14 +110,14 @@ public class Shoot extends CommandBase {
 //    } else {
 //      ballcount = 0;
 //    }
-    if ((initialBallCount == 2) && !(towerSubsystem.getIsBallInBottom())) {
-      ballcount = 1;
-    }
-    if (initialBallCount == 1) {
-      shotOne = true;
-    } else if ((initialBallCount == 2) && (ballcount == 1)) {
-      shotOne = true;
-    }
+//    if ((initialBallCount == 2) && !(towerSubsystem.getIsBallInBottom())) {
+//      ballcount = 1;
+//    }
+//    if (initialBallCount == 1) {
+//      shotOne = true;
+//    } else if ((initialBallCount == 2) && (ballcount == 1)) {
+//      shotOne = true;
+//    }
 
 //    towerSpeed = (shotOne ? 0.34 : TowerConstants.towerMotorSpeed);
 
@@ -135,10 +135,10 @@ public class Shoot extends CommandBase {
     SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
     if (isReadyToShoot()) {
       LEDS.setLEDsReadyToShoot();
-//      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
-      towerSubsystem.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
-      Timer.delay(0.25);
-      towerSubsystem.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed - 0.1);
+      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+//      towerSubsystem.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
+//      Timer.delay(0.25);
+//      towerSubsystem.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);
 
 //      if (towerSubsystem.getIsBallInTop()){
 //        Timer.delay(0.2);
@@ -166,13 +166,14 @@ public class Shoot extends CommandBase {
 
   // If limelight has low x-offset, has a valid target, and shooter flywheels have low RPM error.
   private boolean isReadyToShoot() {
-    if (shooterSubsystem.isShooterWithinAcceptableError()) {
-      overshoot_elimination_counter = overshoot_elimination_counter + 1;
-    } else {
-      overshoot_elimination_counter = 0;
-    }
-    SmartDashboard.putBoolean("overshoot_counter: ", overshoot_elimination_counter > 2);
-    SmartDashboard.putNumber("limelight offset: ", Math.abs(limelight.getTargetOffsetX()));
-    return (((Math.abs(headingError) < 3) && (limelight.hasValidTarget()) && (overshoot_elimination_counter > 2)));
+//    if (shooterSubsystem.isShooterWithinAcceptableError()) {
+//      overshoot_elimination_counter += 1;
+//    } else {
+//      overshoot_elimination_counter = 0;
+//    }
+//    SmartDashboard.putBoolean("overshoot_counter: ", overshoot_elimination_counter > 2);
+//    SmartDashboard.putNumber("limelight offset: ", Math.abs(limelight.getTargetOffsetX()));
+//    return shooterSubsystem.isShooterWithinAcceptableError();
+    return (((Math.abs(headingError) < 3) && (limelight.hasValidTarget()) && shooterSubsystem.isShooterWithinAcceptableError()));
   }
 }

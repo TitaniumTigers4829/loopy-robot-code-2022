@@ -14,6 +14,8 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -23,8 +25,10 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.autonomous.AutoCommand;
 import frc.robot.commands.autonomous.AutoShoot;
+import frc.robot.commands.autonomous.TwoBallAutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.EjectCommand;
 import frc.robot.commands.intake.IntakeWithTower;
@@ -34,6 +38,7 @@ import frc.robot.commands.shooter.RevAndTurnShoot;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.testing.ClimbManualPairedPIDControl;
 import frc.robot.commands.testing.ShooterPIDtesting;
+import frc.robot.commands.tower.SetTowerMotorSpeed;
 import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.*;
 
@@ -59,6 +64,10 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
+  private final Command fiveBallAuto = new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+  private final Command twoBallAuto = new TwoBallAutonomousCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+
 //  private final Command twoBallAuto;
 //  private final Command noAuto;
 
@@ -80,8 +89,9 @@ public class RobotContainer {
     m_Limelight.turnOnLED();
     m_LEDs.setLEDsDefault();
 
-//    chooser.setDefaultOption("2 Ball Auto", twoBallAuto);
-//    chooser.addOption("No auto", noAuto);
+    autoChooser.setDefaultOption("5 ball auto", fiveBallAuto);
+    autoChooser.addOption("2 ball auto", twoBallAuto);
+    SmartDashboard.putData(autoChooser);
 //    chooser.
     // m_LEDs.setLEDsRaw(-0.39); // will normally be handled by commands, just for testing.
 
@@ -120,33 +130,13 @@ public class RobotContainer {
     m_LEDs.setLEDsOrange();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling passing it to a
-   * {@link JoystickButton}.
-   */
-  private void configureButtonBindings() {
-//    TODO: figure out what will be mechanically done by competition and get that done in programming
+  public void teleopInitFunc() {
     DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
     DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
     DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
     DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
-
-    // Logitech buttons
-    JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
     JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
-    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
-    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
-    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
-    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
-    JoystickButton LEFT_TRIGGER = new JoystickButton(m_driverController, 7);
     JoystickButton RIGHT_TRIGGER = new JoystickButton(m_driverController, 8);
-    POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
-    POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
-    POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
-    POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
-    JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
 
     /*
      * Sets the default command and joystick bindings for the drive train.
@@ -164,14 +154,43 @@ public class RobotContainer {
                         * DriveConstants.kMaxRotationalSpeed,
                     !RIGHT_TRIGGER.get()),
             m_robotDrive));
-    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
     A_BUTTON.whileHeld(new RevAndTurnShoot(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
+
+    new JoystickButton(m_buttonController, 5).whileHeld(
+        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
+//    new JoystickButton(m_buttonController, 8).whileHeld(
+//        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
+    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
+  }
+
+  /**
+   * Use this method to define your button->command mappings. Buttons can be created by
+   * instantiating a {@link edu.wpi.first.wpilibj.GenericHID} or one of its subclasses ({@link
+   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then calling passing it to a
+   * {@link JoystickButton}.
+   */
+  private void configureButtonBindings() {
+//    TODO: figure out what will be mechanically done by competition and get that done in programming
+    // Logitech buttons
+    JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
+    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
+    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
+    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
+    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
+    JoystickButton LEFT_TRIGGER = new JoystickButton(m_driverController, 7);
+    POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
+    POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
+    POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
+    POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
+    JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
+
+    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
 //    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
 //    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
 //    UP_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOnLED));
 //    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
-    Y_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
+//    Y_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
 
     // Manual Climb
@@ -181,11 +200,15 @@ public class RobotContainer {
     JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
     JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 7);
     JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 6);
+    JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
             LClimbUp::get, LClimbDown::get, RClimbUp::get,
-            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get, m_LEDs)); // This works
+            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
+            is75Percent::get, m_LEDs)); // This works
+
+//    new JoystickButton(m_buttonController, 0-9).whileHeld(new SetTowerMotorSpeed(m_tower, -TowerConstants.towerMotorSpeed));
 
 // auto climb stuff
 //
@@ -193,19 +216,18 @@ public class RobotContainer {
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbBottomPosition(m_climbSubsystem))
 //    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbNextBar(m_climbSubsystem));;
 
+//    B_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
+
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
     // While held for intake
     SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
-    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
+    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(0.5));
+
+    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
+        TowerConstants.towerMotorSpeed));
     // While held for ejecting ball
 //    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
 //    Y_BUTTON.whileHeld(new AutoShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, m_LEDs));
-
-    new JoystickButton(m_buttonController, 5).whileHeld(
-        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
-    new JoystickButton(m_buttonController, 8).whileHeld(
-        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
-    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
   }
 
   /**
@@ -217,7 +239,8 @@ public class RobotContainer {
     // Create config for trajectory
 //    return new TwoBallAutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
-    return new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    return new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+    return autoChooser.getSelected();
 
   }
 }

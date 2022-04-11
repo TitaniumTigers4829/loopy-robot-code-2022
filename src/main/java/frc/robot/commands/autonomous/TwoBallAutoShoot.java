@@ -20,7 +20,7 @@ import frc.robot.subsystems.*;
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
-public class AutoShoot extends CommandBase {
+public class TwoBallAutoShoot extends CommandBase {
 
   private final ShooterSubsystem shooterSubsystem;
   private final TowerSubsystem towerSubsystem;
@@ -49,7 +49,7 @@ public class AutoShoot extends CommandBase {
   /**
    .
    */
-  public AutoShoot(ShooterSubsystem shooterSubsystem,
+  public TwoBallAutoShoot(ShooterSubsystem shooterSubsystem,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
       LEDsSubsystem leds) {
 

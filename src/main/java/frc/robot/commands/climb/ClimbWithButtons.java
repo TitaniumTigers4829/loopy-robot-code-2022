@@ -22,11 +22,12 @@ public class ClimbWithButtons extends CommandBase {
   private final BooleanSupplier Rdown;
   private final BooleanSupplier Armvert;
   private final BooleanSupplier Armdown;
+  private final BooleanSupplier isFullPower;
   private final LEDsSubsystem leds;
-
+  private double speed = 1;
 
   public ClimbWithButtons(ClimbSubsystem climb, BooleanSupplier Lup, BooleanSupplier Ldown,
-      BooleanSupplier Rup, BooleanSupplier Rdown, BooleanSupplier Armvert, BooleanSupplier Armdown, LEDsSubsystem leds) {
+      BooleanSupplier Rup, BooleanSupplier Rdown, BooleanSupplier Armvert, BooleanSupplier Armdown, BooleanSupplier isFullPower, LEDsSubsystem leds) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.climb = climb;
     this.Lup = Lup;
@@ -35,6 +36,7 @@ public class ClimbWithButtons extends CommandBase {
     this.Rdown = Rdown;
     this.Armvert = Armvert;
     this.Armdown = Armdown;
+    this.isFullPower = isFullPower;
     this.leds = leds;
     addRequirements(climb);
   }
@@ -48,25 +50,30 @@ public class ClimbWithButtons extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (isFullPower.getAsBoolean()) {
+      speed = 0.5;
+    } else {
+      speed = 0.75;
+    }
+
     // Manually controlling climb arm height
     if (Lup.getAsBoolean()) {
-      climb.setLeftMotorOutputManual(0.75);
+      climb.setLeftMotorOutputManual(speed);
     } else if ((Ldown.getAsBoolean()) && (!climb.getIsLeftLimitSwitchPressed())) {
-      climb.setLeftMotorOutputManual(-0.75);
+      climb.setLeftMotorOutputManual(-speed);
     } else {
       climb.setLeftMotorOutputManual(0);
     }
     if (Rup.getAsBoolean()) {
-      climb.setRightMotorOutputManual(0.75);
+      climb.setRightMotorOutputManual(speed);
     } else if ((Rdown.getAsBoolean()) && (!climb.getIsRightLimitSwitchPressed())) {
-      climb.setRightMotorOutputManual(-0.75);
+      climb.setRightMotorOutputManual(-speed);
     } else {
       climb.setRightMotorOutputManual(0);
     }
 
     // Manually controlling climb arm angle
-    if (Armvert.getAsBoolean()) {
-      climb.setClimbVertical();
+    if (Armvert.getAsBoolean()) {climb.setClimbVertical();
     } else if (Armdown.getAsBoolean()) {
       climb.setClimbAngled();
     }

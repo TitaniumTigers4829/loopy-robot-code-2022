@@ -7,18 +7,13 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.DriveConstants;
+
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.*;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
 
 public class AutoShootIntake extends CommandBase {
 
@@ -30,7 +25,7 @@ public class AutoShootIntake extends CommandBase {
   private final IntakeSubsystem intakeSubsystem;
 
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
-      ShooterConstants.turnkP + 1,
+      ShooterConstants.turnkP,
       ShooterConstants.turnkI,
       ShooterConstants.turnkD,
       new TrapezoidProfile.Constraints(
@@ -70,12 +65,6 @@ public class AutoShootIntake extends CommandBase {
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
 
-    headingError = limelight.getTargetOffsetX();
-
-    double turnRobotOutput =
-        turnProfiledPIDController.calculate(headingError, 0)
-            + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
-
     if (towerSubsystem.getIsBallInBottom()){
       ballcount += 1;
     }
@@ -99,18 +88,6 @@ public class AutoShootIntake extends CommandBase {
       intakeSubsystem.setSolenoidRetracted();
       intakeSubsystem.setMotorStopped();
     }
-
-//    old:
-
-//    if ((towerSubsystem.getIsBallInBottom()) && (towerSubsystem.getIsBallInTop())) {
-//      ballcount = 2;
-//    } else if ((towerSubsystem.getIsBallInTop()) && !(towerSubsystem.getIsBallInBottom())) {
-//      ballcount = 1;
-//    } else if ((towerSubsystem.getIsBallInBottom()) && !(towerSubsystem.getIsBallInTop())) {
-//      ballcount = 1;
-//    } else {
-//      ballcount = 0;
-//    }
     if ((initialBallCount == 2) && !(towerSubsystem.getIsBallInBottom())) {
       ballcount = 1;
     }
@@ -119,8 +96,6 @@ public class AutoShootIntake extends CommandBase {
     } else if ((initialBallCount == 2) && (ballcount == 1)) {
       shotOne = true;
     }
-
-//    towerSpeed = (shotOne ? 0.34 : TowerConstants.towerMotorSpeed);
 
     headingError = limelight.getTargetOffsetX();
 

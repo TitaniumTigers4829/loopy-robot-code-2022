@@ -29,7 +29,7 @@ public class TwoBallAutonomousCommand extends SequentialCommandGroup {
         // Stops the robot
         new SetDriveSpeed(driveSubsystem, 0, 0).withTimeout(0.5),
         // shoots
-        new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
+        new TwoBallAutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem).withTimeout(5)
     );
   }

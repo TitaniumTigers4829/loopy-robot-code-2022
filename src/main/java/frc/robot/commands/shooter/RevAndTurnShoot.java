@@ -10,8 +10,10 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
-import frc.robot.subsystems.*;
-
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.LEDsSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import java.util.function.DoubleSupplier;
 
 public class RevAndTurnShoot extends CommandBase {
@@ -39,7 +41,8 @@ public class RevAndTurnShoot extends CommandBase {
   /**
    * Creates a new Shoot.
    */
-  public RevAndTurnShoot(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
+  public RevAndTurnShoot(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight,
+      DriveSubsystem driveSubsystem,
       DoubleSupplier leftStickY, DoubleSupplier leftStickX,
       LEDsSubsystem leds) {
 
@@ -70,17 +73,23 @@ public class RevAndTurnShoot extends CommandBase {
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
 
-
     headingError = limelight.getTargetOffsetX();
 
     // If heading error isn't off by much, it won't move
-    if (Math.abs(headingError) < 1) headingError = 0;
+    if (Math.abs(headingError) < 1) {
+      headingError = 0;
+    }
 
     double turnRobotOutput =
         turnProfiledPIDController.calculate(headingError, 0)
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
-    driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
+    driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond,
+        leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
+
+    if (limelight.hasValidTarget()) {
+      LEDS.setLEDsShooterLiningUp();
+    }
 
   }
 
@@ -95,4 +104,9 @@ public class RevAndTurnShoot extends CommandBase {
     return false;
   }
 
+
+  private boolean isReadyToShoot() {
+    return (((Math.abs(headingError) < 3) && (limelight.hasValidTarget())
+        && shooterSubsystem.isShooterWithinAcceptableError()));
+  }
 }

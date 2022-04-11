@@ -23,8 +23,6 @@ public class AutoCommand extends SequentialCommandGroup {
   public AutoCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intakeSubsystem) {
 
-    // TODO: Tune all of the .withTimeouts
-
     addCommands(
         // 1. Backs up from the pad and intakes
         new ParallelCommandGroup(
@@ -34,28 +32,28 @@ public class AutoCommand extends SequentialCommandGroup {
 
         // 2. Revs up the shooter while going in right in front of the third ball
         new ParallelRaceGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(1.8),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(2.36),
             new AutoRevShoot(shooterSubsystem, LimelightSubsystem.getInstance()),
             new TowerIntake(towerSubsystem)
         ),
 
-        // 3. Shoots the two balls it is currently holding then backs up and intakes the third ball
+        // 3. Shoots the two balls it is currently holding then intakes the third ball
         new AutoShootIntake(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem, intakeSubsystem).withTimeout(4.3),
+            driveSubsystem, ledsSubsystem, intakeSubsystem).withTimeout(3.5),
 
         // 5. Goes to the area where it can pick up cargo from human plays
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath),
             // 6. Intakes long enough for the human players to load 2 balls
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
-        ).withTimeout(2.5),
+        ).withTimeout(3.6),
 
         // 7. Revs up shooter while going closer to the hoop
         new ParallelCommandGroup(
             new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2),
             new ParallelRaceGroup(
                 new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath).withTimeout(
-                    2.7),
+                    2.4),
                 new AutoRevShoot(shooterSubsystem, LimelightSubsystem.getInstance())
             )
         ),

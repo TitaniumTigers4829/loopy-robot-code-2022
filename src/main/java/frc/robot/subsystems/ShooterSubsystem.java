@@ -17,6 +17,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
+import javax.naming.ldap.Control;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -29,11 +30,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
   private final PIDController topPID = new PIDController(ShooterConstants.topkP, 0, 0);
-  private final SimpleMotorFeedforward topFF = new SimpleMotorFeedforward(ShooterConstants.topkS, ShooterConstants.topkV);
+  private final SimpleMotorFeedforward topFF = new SimpleMotorFeedforward(ShooterConstants.topkS, ShooterConstants.topkV, ShooterConstants.topkA);
 //  private BangBangController topBangBang = new BangBangController();
 
   private final PIDController bottomPID = new PIDController(ShooterConstants.bottomkP, 0, 0);
-  private final SimpleMotorFeedforward bottomFF = new SimpleMotorFeedforward(ShooterConstants.bottomkS, ShooterConstants.bottomkV);
+  private final SimpleMotorFeedforward bottomFF = new SimpleMotorFeedforward(ShooterConstants.bottomkS, ShooterConstants.bottomkV,ShooterConstants.bottomkA );
 //  private BangBangController botBangBang = new BangBangController();
 
 
@@ -131,11 +132,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
   public boolean isShooterWithinAcceptableError() {
-    return Math.abs(topMotorTargetRPM-getTopRPM()) < 75 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 50;
+    return Math.abs(topMotorTargetRPM-getTopRPM()) < 65 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 45;
   }
 
   public boolean isShooterWithinAcceptableError(double topTargetRPM, double botTargetRpm) {
-    return Math.abs(topTargetRPM-getTopRPM()) < 30 && Math.abs(botTargetRpm-getBottomRPM()) < 20;
+    return Math.abs(topTargetRPM-getTopRPM()) < 60 && Math.abs(botTargetRpm-getBottomRPM()) < 40;
   }
 
   public double getTopRPM() {
@@ -144,6 +145,11 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public double getBottomRPM() {
     return (m_bottomMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
+  }
+
+  public void setSpeed1(double topSpeed, double bottomSpeed) {
+    m_topMotor.set(ControlMode.PercentOutput, topSpeed);
+    m_bottomMotor.set(ControlMode.PercentOutput, bottomSpeed);
   }
 
   public void setShooterToNeutral() {
@@ -155,7 +161,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("Top RPM", getTopRPM());
     SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
-    SmartDashboard.putNumber("topMotor output", topOutput);
-    SmartDashboard.putNumber("botMotor output", botOutput);
+//    SmartDashboard.putNumber("topMotor output", topOutput);
+//    SmartDashboard.putNumber("botMotor output", botOutput);
   }
 }

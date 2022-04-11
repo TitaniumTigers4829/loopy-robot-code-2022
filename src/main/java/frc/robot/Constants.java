@@ -197,11 +197,11 @@ public final class Constants {
         {Units.feetToMeters(5.5), 1800},
         {Units.feetToMeters(7), 2050},
         {Units.feetToMeters(8.5), 2400}, // 2400  // 2450
-        {Units.feetToMeters(10), 3000},
-        {Units.feetToMeters(11.5), 3300},
-        {Units.feetToMeters(13), 3750},
-        {Units.feetToMeters(14.5), 4050},
-        {Units.feetToMeters(16), 4100}
+        {Units.feetToMeters(10), 3100},
+        {Units.feetToMeters(11.5), 3450},
+        {Units.feetToMeters(13), 3850},
+        {Units.feetToMeters(14.5), 4100},
+        {Units.feetToMeters(16), 4250}
     };
 
     public static double[][] bottomMotorValues = {
@@ -212,8 +212,8 @@ public final class Constants {
         {Units.feetToMeters(10), 1350},
         {Units.feetToMeters(11.5), 1300},
         {Units.feetToMeters(13), 1280},
-        {Units.feetToMeters(14.5), 1240},
-        {Units.feetToMeters(16), 1220}
+        {Units.feetToMeters(14.5), 1260},
+        {Units.feetToMeters(16), 1300}
     };
 
 
@@ -225,12 +225,14 @@ public final class Constants {
     public static double ksTurning = 0.0;
     public static double kvTurning = 0.0;
 
-    public static double topkP = 0.003; // 0.0045
+    public static double topkP = 0.0015; //0.003 // 0.0045
     public static double topkS = 0; // LEAVE AS 0
     public static double topkV = 0.001925;
-    public static double bottomkP = 0.005;
+    public static double topkA = 0;
+    public static double bottomkP = 0.0025; // 0.005
     public static double bottomkS = 0;
     public static double bottomkV = 0.0019;
+    public static double bottomkA = 0;
   }
 
 

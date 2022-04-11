@@ -29,13 +29,17 @@ public class ShooterPIDtesting extends CommandBase {
   public void initialize() {
     SmartDashboard.putNumber("Set bottomRPM", 0);
     SmartDashboard.putNumber("Set topRPM", 0);
-    SmartDashboard.putNumber("Set Distance: ", 0);
+    SmartDashboard.putNumber("Set Distance:", 0);
+
   }
 
   public void execute() {
     top_target = SmartDashboard.getNumber("Set topRPM", 0);
     bottom_target = SmartDashboard.getNumber("Set bottomRPM", 0);
-    distance = Units.feetToMeters(SmartDashboard.getNumber("Set Distance: ", 0));
+    distance = Units.feetToMeters(SmartDashboard.getNumber("Set Distance:", 0));
+
+    SmartDashboard.putNumber("Top Shooter Error: ", shooterSubsystem.getTopRPM()-top_target);
+    SmartDashboard.putNumber("Bottom Shooter Error: ", shooterSubsystem.getBottomRPM()-bottom_target);
 
     top_target = calculateRPM(ShooterConstants.topMotorValues, distance);
     bottom_target = calculateRPM(ShooterConstants.bottomMotorValues, distance);
@@ -57,15 +61,13 @@ public class ShooterPIDtesting extends CommandBase {
 
   private boolean isReadyToShoot() {
 
-    if (shooterSubsystem.isShooterWithinAcceptableError(top_target, bottom_target)) {
-      overshoot_elimination_counter = overshoot_elimination_counter + 1;
-    } else {
-      overshoot_elimination_counter = 0;
-    }
-    SmartDashboard.putNumber("overshoot_counter: ", overshoot_elimination_counter);
-    return overshoot_elimination_counter > 2;
-
-//    return (shooterSubsystem.isShooterWithinAcceptableError(top_target, bottom_target));
+//    if (shooterSubsystem.isShooterWithinAcceptableError(top_target, bottom_target)) {
+//      overshoot_elimination_counter = overshoot_elimination_counter + 1;
+//    } else {
+//      overshoot_elimination_counter = 0;
+//    }
+//    SmartDashboard.putNumber("overshoot_counter: ", overshoot_elimination_counter);
+    return shooterSubsystem.isShooterWithinAcceptableError(top_target, bottom_target);
   }
 
   private double calculateRPM(double[][] table, double distance) {
