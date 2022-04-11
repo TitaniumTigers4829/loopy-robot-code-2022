@@ -1,0 +1,9 @@
+{
+  "lengthUnit": "Meter",
+  "exportUnit": "Always Meters",
+  "maxVelocity": 4.5,
+  "maxAcceleration": 3.25,
+  "trackWidth": 0.57785,
+  "gameName": "Rapid React",
+  "outputDir": "../../../IdeaProjects/zuntue2022/src/main/deploy"
+}
