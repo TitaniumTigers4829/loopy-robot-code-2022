@@ -4,15 +4,15 @@
 
 package frc.robot.commands.tower;
 
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.TowerSubsystem;
 
 public class TowerIntake extends CommandBase {
+
   /** Creates a new TowerIntake. */
-  private TowerSubsystem tower;
+
+  private final TowerSubsystem tower;
   public TowerIntake(TowerSubsystem tower) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.tower = tower;

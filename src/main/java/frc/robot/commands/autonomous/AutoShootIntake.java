@@ -55,7 +55,7 @@ public class AutoShootIntake extends CommandBase {
     this.driveSubsystem = driveSubsystem;
     this.LEDS = leds;
     this.intakeSubsystem = intakeSubsystem;
-    addRequirements(shooterSubsystem, limelight, leds, driveSubsystem);
+    addRequirements(shooterSubsystem, towerSubsystem, limelight, driveSubsystem, leds, intakeSubsystem);
   }
 
   @Override

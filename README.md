@@ -5,4 +5,4 @@ Our robot has:
 - A swerve drive
 - Traversal climb
 - A shooter that uses limelight 2 for distance
-- Hopefully a 5 ball auto
+- 5 ball auto
