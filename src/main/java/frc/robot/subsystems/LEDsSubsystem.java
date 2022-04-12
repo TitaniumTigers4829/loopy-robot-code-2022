@@ -33,6 +33,10 @@ public class LEDsSubsystem extends SubsystemBase {
         m_leds.set(0.93); //White
     }
 
+    public void setLEDsBackward() {
+        m_leds.set(0.61); // Orange
+    }
+
     public void setLEDsBlue(){
         m_leds.set(0.87);
     }
@@ -47,10 +51,6 @@ public class LEDsSubsystem extends SubsystemBase {
             setLEDsBlue();
         }
 
-    }
-
-    public void setLEDsOrange() {
-        m_leds.set(0.61); // Orange
     }
 
     public void setLEDsClimbing() {

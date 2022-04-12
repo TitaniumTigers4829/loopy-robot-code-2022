@@ -46,7 +46,7 @@ public class SpinUpAndAim extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMImproved(
+    shooterSubsystem.setShooterRPMNotImproved(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );

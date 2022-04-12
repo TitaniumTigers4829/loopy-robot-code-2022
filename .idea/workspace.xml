@@ -4,26 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="5 ball auto :)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutoShoot.java" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Added path weaver">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/firstPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/firstPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/fourthPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/fourthPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/secondPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/secondPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/thirdPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/thirdPath.wpilib.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WPILib-License.md" beforeDir="false" afterPath="$PROJECT_DIR$/WPILib-License.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoRevShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoRevShoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShootIntake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoShootIntake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbWithButtons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/climb/ClimbWithButtons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutoShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutoShoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RevAndTurnShoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/RevAndTurnShoot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/SpinUpAndAim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/SpinUpAndAim.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ShooterPIDtesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/testing/ShooterPIDtesting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/SetTowerMotorSpeed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/SetTowerMotorSpeed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LEDsSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LEDsSubsystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
@@ -125,10 +120,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="configurable.group.tools" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zuntue\IdeaProjects\zuntue2022" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Users\jackg\Desktop\Robot Code\zuntue\src\main\deploy" />
       <recent name="D:\Users\jackg\Desktop\Robot Code\zuntue\src\main\java\frc\robot\commands\autonomous" />
@@ -303,7 +301,10 @@
       <workItem from="1649455236968" duration="5109000" />
       <workItem from="1649507856073" duration="16591000" />
       <workItem from="1649527191940" duration="21615000" />
-      <workItem from="1649613238332" duration="4393000" />
+      <workItem from="1649613238332" duration="5990000" />
+      <workItem from="1649695249854" duration="13000" />
+      <workItem from="1649706167924" duration="597000" />
+      <workItem from="1649711205948" duration="10554000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -634,7 +635,21 @@
       <option name="project" value="LOCAL" />
       <updated>1649379901422</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="post DCMP">
+      <created>1649691839065</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1649691839066</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Added path weaver">
+      <created>1649711468924</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1649711468924</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,8 +671,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated CAN IDs" />
-    <MESSAGE value="added Angle Zero Offset" />
     <MESSAGE value="idk" />
     <MESSAGE value="changes from today, climb still not working" />
     <MESSAGE value="deleted wrong comments" />
@@ -681,7 +694,9 @@
     <MESSAGE value="Updated auto" />
     <MESSAGE value="more auto and shoot tuning" />
     <MESSAGE value="5 ball auto :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="5 ball auto :)" />
+    <MESSAGE value="post DCMP" />
+    <MESSAGE value="Added path weaver" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added path weaver" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

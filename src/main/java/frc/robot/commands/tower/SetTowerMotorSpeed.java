@@ -6,6 +6,7 @@ package frc.robot.commands.tower;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LEDsSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
@@ -13,13 +14,15 @@ public class SetTowerMotorSpeed extends CommandBase {
   
   private TowerSubsystem towerSubsystem;
   private ShooterSubsystem shooterSubsystem;
+  private LEDsSubsystem leds;
   private final double speed;
   
   /** Creates a new SetTowerMotorSpeed. */
-  public SetTowerMotorSpeed(TowerSubsystem towerSubsystem, ShooterSubsystem shooterSubsystem, double speed) {
+  public SetTowerMotorSpeed(TowerSubsystem towerSubsystem, ShooterSubsystem shooterSubsystem, LEDsSubsystem leds, double speed) {
     this.towerSubsystem = towerSubsystem;
-    this.speed = speed;
     this.shooterSubsystem = shooterSubsystem;
+    this.leds = leds;
+    this.speed = speed;
     addRequirements(towerSubsystem, shooterSubsystem);
   }
   
@@ -34,6 +37,7 @@ public class SetTowerMotorSpeed extends CommandBase {
   public void execute() {
     towerSubsystem.setTowerMotorsSpeed(-speed);
     shooterSubsystem.setSpeed1(-0.4, -0.4);
+    leds.setLEDsBackward();
   }
   
   // Called once the command ends or is interrupted.
@@ -46,6 +50,6 @@ public class SetTowerMotorSpeed extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

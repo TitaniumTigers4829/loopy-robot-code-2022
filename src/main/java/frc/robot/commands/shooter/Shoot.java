@@ -7,19 +7,13 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
-import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.*;
 
-import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 
 public class Shoot extends CommandBase {
@@ -72,7 +66,7 @@ public class Shoot extends CommandBase {
 
   @Override
   public void initialize() {
-    shooterSubsystem.setShooterRPMImproved(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
@@ -94,7 +88,7 @@ public class Shoot extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMImproved(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
@@ -131,7 +125,6 @@ public class Shoot extends CommandBase {
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
     driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
-
     SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
     if (isReadyToShoot()) {
       LEDS.setLEDsReadyToShoot();

@@ -11,13 +11,11 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 
-import edu.wpi.first.math.controller.BangBangController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
-import javax.naming.ldap.Control;
 
 public class ShooterSubsystem extends SubsystemBase {
 
@@ -60,44 +58,52 @@ public class ShooterSubsystem extends SubsystemBase {
     m_bottomMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
     m_topMotor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
 
-//    m_bottomMotor.config_kF(0, 0.0512, 0);
-//    m_bottomMotor.config_kP(0, 0.07, 0);
-//    m_bottomMotor.config_kI(0, 0.0001, 0);
-//    m_bottomMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
-//
-//    m_topMotor.config_kF(0, 0.0512, 0);
-//    m_topMotor.config_kP(0, 0.07, 0);
-//    m_topMotor.config_kI(0, 0.0001, 0);
-//    m_topMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
+    m_bottomMotor.config_kF(0, ShooterConstants.bottomkV, 0);
+    m_bottomMotor.config_kP(0, ShooterConstants.bottomkP, 0);
+    m_bottomMotor.config_kI(0, 0.0001, 0);
+    m_bottomMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
+
+    m_topMotor.config_kF(0, ShooterConstants.topkV, 0);
+    m_topMotor.config_kP(0, ShooterConstants.topkP, 0);
+    m_topMotor.config_kI(0, 0.0001, 0);
+    m_topMotor.config_IntegralZone(0, 150.0 / (600.0) * 2048.0);
 
     m_bottomMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
     m_topMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
   }
 
   public void setShooterRPM(double bottomMotorRPM, double topMotorRPM) {
-    topMotorTargetRPM = topMotorRPM;
+//    topMotorTargetRPM = topMotorRPM;
+//    bottomMotorTargetRPM = bottomMotorRPM;
+//    // 2048 ticks per revolution, ticks per .10 second, 1 / 2048 * 60
+//    double speed_FalconUnits1 = bottomMotorRPM / (600.0) * 2048.0;
+//    double speed_FalconUnits2 = topMotorRPM / (600.0) * 2048.0;
+//
+//    if (Math.abs(getBottomRPM()) < Math.abs(bottomMotorRPM) * 1.1) {
+//      m_bottomMotor.set(TalonFXControlMode.Velocity, speed_FalconUnits1);
+//    } else {
+//      m_bottomMotor.set(ControlMode.PercentOutput, 0);
+//    }
+//
+//    if (Math.abs(getTopRPM()) < Math.abs(topMotorRPM) * 1.1) {
+//      m_topMotor.set(TalonFXControlMode.Velocity, speed_FalconUnits2);
+//    } else {
+//      m_topMotor.set(ControlMode.PercentOutput, 0);
+//
+
     bottomMotorTargetRPM = bottomMotorRPM;
-    // 2048 ticks per revolution, ticks per .10 second, 1 / 2048 * 60
-    double speed_FalconUnits1 = bottomMotorRPM / (600.0) * 2048.0;
-    double speed_FalconUnits2 = topMotorRPM / (600.0) * 2048.0;
+    topMotorTargetRPM = topMotorRPM;
 
-    if (Math.abs(getBottomRPM()) < Math.abs(bottomMotorRPM) * 1.1) {
-      m_bottomMotor.set(TalonFXControlMode.Velocity, speed_FalconUnits1);
-    } else {
-      m_bottomMotor.set(ControlMode.PercentOutput, 0);
-    }
-
-    if (Math.abs(getTopRPM()) < Math.abs(topMotorRPM) * 1.1) {
-      m_topMotor.set(TalonFXControlMode.Velocity, speed_FalconUnits2);
-    } else {
-      m_topMotor.set(ControlMode.PercentOutput, 0);
-    }
+    double bottomEncoderUnits = bottomMotorRPM / (600.0) * 2048.0;
+    double topEncoderUnits = topMotorRPM / (600.0) * 2048.0;
+    m_bottomMotor.set(ControlMode.Velocity, bottomEncoderUnits);
+    m_topMotor.set(ControlMode.Velocity, topEncoderUnits);
 
 //    SmartDashboard.putNumber("Top target RPM", topMotorTargetRPM);
 //    SmartDashboard.putNumber("Bottom target RPM", bottomMotorTargetRPM);
   }
 
-  public void setShooterRPMImproved(double bottomMotorRPM, double topMotorRPM) {
+  public void setShooterRPMNotImproved(double bottomMotorRPM, double topMotorRPM) {
     topMotorTargetRPM = topMotorRPM;
     bottomMotorTargetRPM = bottomMotorRPM;
 //
@@ -132,7 +138,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
   public boolean isShooterWithinAcceptableError() {
-    return Math.abs(topMotorTargetRPM-getTopRPM()) < 65 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 45;
+    return Math.abs(topMotorTargetRPM-getTopRPM()) < 30 && Math.abs(bottomMotorTargetRPM-getBottomRPM()) < 20;
   }
 
   public boolean isShooterWithinAcceptableError(double topTargetRPM, double botTargetRpm) {
@@ -144,7 +150,7 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public double getBottomRPM() {
-    return (m_bottomMotor.getSelectedSensorVelocity()) / 2048.0 * 600;
+    return ((m_bottomMotor.getSelectedSensorVelocity() / 2048.0) * 600);
   }
 
   public void setSpeed1(double topSpeed, double bottomSpeed) {
@@ -161,7 +167,9 @@ public class ShooterSubsystem extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putNumber("Top RPM", getTopRPM());
     SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
-//    SmartDashboard.putNumber("topMotor output", topOutput);
-//    SmartDashboard.putNumber("botMotor output", botOutput);
+    SmartDashboard.putNumber("Top Target RPM", topMotorTargetRPM);
+    SmartDashboard.putNumber("Bottom Target RPM", bottomMotorTargetRPM);
+    SmartDashboard.putNumber("Top Error: ", topMotorTargetRPM-getTopRPM());
+    SmartDashboard.putNumber("Bottom Error: ", bottomMotorTargetRPM-getBottomRPM());
   }
 }

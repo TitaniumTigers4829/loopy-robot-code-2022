@@ -127,7 +127,7 @@ public class RobotContainer {
   }
 
   public void setLEDsDisabled() {
-    m_LEDs.setLEDsOrange();
+//    m_LEDs.setLEDsOrange();
   }
 
   public void teleopInitFunc() {
@@ -221,9 +221,9 @@ public class RobotContainer {
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
     // While held for intake
     SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
-    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(0.5));
+    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
-    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
+    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, m_LEDs,
         TowerConstants.towerMotorSpeed));
     // While held for ejecting ball
 //    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want

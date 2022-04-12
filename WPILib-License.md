@@ -12,6 +12,8 @@ modification, are permitted provided that the following conditions are met:
      contributors may be used to endorse or promote products derived from
      this software without specific prior written permission.
 
+BEANS
+
 THIS SOFTWARE IS PROVIDED BY FIRST AND OTHER WPILIB CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY NONINFRINGEMENT AND FITNESS FOR A PARTICULAR

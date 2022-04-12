@@ -7,18 +7,11 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.subsystems.*;
-
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
 
 public class TwoBallAutoShoot extends CommandBase {
 
@@ -85,7 +78,7 @@ public class TwoBallAutoShoot extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMImproved(
+    shooterSubsystem.setShooterRPMNotImproved(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
