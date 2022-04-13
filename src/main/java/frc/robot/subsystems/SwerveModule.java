@@ -62,7 +62,7 @@ public class SwerveModule {
 //  private final SimpleMotorFeedforward m_turnFeedforward = new SimpleMotorFeedforward(1, 0.5);
 
   SimpleMotorFeedforward driveFeedforward = new SimpleMotorFeedforward(
-      DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter);
+      DriveConstants.ksVolts, DriveConstants.kvVoltSecondsPerMeter, DriveConstants.kaVoltSecondsSquaredPerMeter);
 
   SimpleMotorFeedforward turnFeedForward = new SimpleMotorFeedforward(
       DriveConstants.ksTurning, DriveConstants.kvTurning, DriveConstants.kaTurning);
@@ -210,7 +210,7 @@ public class SwerveModule {
 //          () -> m_turnPIDController.getSetpoint().velocity);
 //      done = true;
 //    }
-//    SmartDashboard.putString(shuffleboardContainer.getTitle() + " desired state: ", state.toString());
+    SmartDashboard.putString(shuffleboardContainer.getTitle() + " desired state: ", state.toString());
     // Calculate the turning motor output from the turning PID controller.
     m_driveMotor.set(driveOutput/12);
     m_turningMotor.set(turnOutput/12);

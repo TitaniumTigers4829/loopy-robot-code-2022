@@ -4,14 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -19,30 +11,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.PathWeaverConstants;
 import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.autonomous.AutoCommand;
-import frc.robot.commands.autonomous.AutoShoot;
+import frc.robot.commands.autonomous.FollowTrajectory;
 import frc.robot.commands.autonomous.TwoBallAutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
-import frc.robot.commands.intake.EjectCommand;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
-import frc.robot.commands.shooter.EmergencyShoot;
 import frc.robot.commands.shooter.RevAndTurnShoot;
 import frc.robot.commands.shooter.Shoot;
-import frc.robot.commands.testing.ClimbManualPairedPIDControl;
-import frc.robot.commands.testing.ShooterPIDtesting;
 import frc.robot.commands.tower.SetTowerMotorSpeed;
 import frc.robot.commands.tower.TowerIntake;
-import frc.robot.subsystems.*;
-
-import java.util.List;
+import frc.robot.subsystems.ClimbSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LEDsSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TowerSubsystem;
 import java.util.function.DoubleSupplier;
 
 /*
@@ -64,8 +55,10 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
-  private final Command fiveBallAuto = new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
-  private final Command twoBallAuto = new TwoBallAutonomousCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+  private final Command fiveBallAuto = new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+      m_intakeSubsystem);
+  private final Command twoBallAuto = new TwoBallAutonomousCommand(m_shooter, m_tower, m_robotDrive,
+      m_LEDs, m_intakeSubsystem);
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 //  private final Command twoBallAuto;
@@ -154,10 +147,13 @@ public class RobotContainer {
                         * DriveConstants.kMaxRotationalSpeed,
                     !RIGHT_TRIGGER.get()),
             m_robotDrive));
-    A_BUTTON.whileHeld(new RevAndTurnShoot(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
+    A_BUTTON.whileHeld(
+        new RevAndTurnShoot(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+            m_LEDs));
 
     new JoystickButton(m_buttonController, 5).whileHeld(
-        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
+        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+            m_LEDs));
 //    new JoystickButton(m_buttonController, 8).whileHeld(
 //        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
     new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
@@ -193,6 +189,8 @@ public class RobotContainer {
 //    Y_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
 
+    X_BUTTON.whenPressed(new FollowTrajectory(m_robotDrive, PathWeaverConstants.testingPath1).withTimeout(2));
+
     // Manual Climb
     JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
     JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
@@ -220,7 +218,7 @@ public class RobotContainer {
 
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
     // While held for intake
-    SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
+    SUCC_BUTTON.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
     new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, m_LEDs,

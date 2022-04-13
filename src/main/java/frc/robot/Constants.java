@@ -82,10 +82,9 @@ public final class Constants {
     // These characterization values MUST be determined either experimentally or theoretically
     // for *your* robot's drive.
     // The SysId tool provides a convenient method for obtaining these values for your robot.
-    public static final double ksVolts = 0.2; // FIXME with sysid
-    public static final double kvVoltSecondsPerMeter = 2.75; // FIXME with sysid
-    public static final double kaVoltSecondsSquaredPerMeter = 0.15; // FIXME with sysid
-
+    public static final double ksVolts = 0.73394;
+    public static final double kvVoltSecondsPerMeter = 2.4068;
+    public static final double kaVoltSecondsSquaredPerMeter = 0.28749;
 
     public static final double ksTurning = 0.77; // LOCKED IN!  -----  old 0.66202
     public static final double kvTurning = 0.75; // 3.0052
@@ -165,31 +164,6 @@ public final class Constants {
 
     public static double kTopEjectRPM = 700;
     public static double kBottomEjectRPM = 700;
-
-//    // NOTE: min tuned value is 1500
-//    public static double[][] topMotorValues = {
-//        //{distance, rpm}
-//        {Units.feetToMeters(5), 1800},
-//        {Units.feetToMeters(6.5), 1980},
-//        {Units.feetToMeters(8), 2350}, // 2400  // 2450
-//        {Units.feetToMeters(9.5), 2950},
-//        {Units.feetToMeters(11), 3150},
-//        {Units.feetToMeters(12.5), 3700},
-//        {Units.feetToMeters(14), 4100},
-//        {Units.feetToMeters(15.5), 4100}
-//    };
-//
-//    public static double[][] bottomMotorValues = {
-//        //{distance, rpm}
-//        {Units.feetToMeters(5), 1770},
-//        {Units.feetToMeters(6.5), 1665},
-//        {Units.feetToMeters(8), 1560}, // 1600  // 1615
-//        {Units.feetToMeters(9.5), 1350},
-//        {Units.feetToMeters(11), 1300},
-//        {Units.feetToMeters(12.5), 1260},
-//        {Units.feetToMeters(14), 1220},
-//        {Units.feetToMeters(15.5), 1180}
-//    };
 
     // NOTE: min tuned value is 1500
     public static double[][] topMotorValues = {
@@ -325,5 +299,7 @@ public final class Constants {
     public static final String secondPath = "output/secondPath.wpilib.json";
     public static final String thirdPath = "output/thirdPath.wpilib.json";
     public static final String fourthPath = "output/fourthPath.wpilib.json";
+
+    public static final String testingPath1 = "output/testing.wpilib.json";
   }
 }

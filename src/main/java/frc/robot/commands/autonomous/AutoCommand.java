@@ -15,8 +15,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
 /**
- * This class is for the auto command for if the robot is blue TODO: Check if it will work with red,
- * it probably will
+ * This class is for the auto command
  */
 public class AutoCommand extends SequentialCommandGroup {
 
