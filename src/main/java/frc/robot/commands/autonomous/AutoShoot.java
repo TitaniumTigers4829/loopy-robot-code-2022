@@ -110,6 +110,9 @@ public class AutoShoot extends CommandBase {
     if (isReadyToShoot()) {
       LEDS.setLEDsReadyToShoot();
       towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+    } else if (!limelight.hasValidTarget()) {
+      LEDS.setLEDsNoValidTarget();
+      towerSubsystem.setTowerMotorsSpeed(0);
     } else {
       LEDS.setLEDsShooterLiningUp();
       towerSubsystem.setTowerMotorsSpeed(0);

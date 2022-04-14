@@ -17,7 +17,7 @@ public class ClimbNextBar extends SequentialCommandGroup {
         // wait a sec
         new RunCommand(()-> Timer.delay(1.5)),
         // extend
-        new ClimbSetPos(climb, ClimbConstants.kClimbMaxHeight),
+        new ClimbSetPos(climb, ClimbConstants.kClimbMaxHeight + ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
         // set solenoid retracted
         new ClimbVertical(climb)
         // Retract climb

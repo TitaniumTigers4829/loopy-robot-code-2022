@@ -37,6 +37,18 @@ public class LEDsSubsystem extends SubsystemBase {
         m_leds.set(0.61); // Orange
     }
 
+    public void setLEDsRobotRelative() {
+        m_leds.set(0.99);
+    }
+
+    public void setLEDsAButton() {
+        m_leds.set(-0.05);
+    }
+
+    public void setLEDsNoValidTarget() {
+        m_leds.set(0.35);
+    }
+
     public void setLEDsBlue(){
         m_leds.set(0.87);
     }
@@ -54,6 +66,15 @@ public class LEDsSubsystem extends SubsystemBase {
     }
 
     public void setLEDsClimbing() {
-        m_leds.set(0.73);
+        m_leds.set(-0.19);
     }
+
+    public void setLEDsAutoClimbEngaged() {
+        m_leds.set(0.95);
+    }
+
+    public void setLEDsManual(double value) {
+        m_leds.set(value);
+    }
+
 }

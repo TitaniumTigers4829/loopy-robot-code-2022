@@ -1,6 +1,5 @@
 package frc.robot.commands.autonomous;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -32,7 +31,7 @@ public class AutoCommand extends SequentialCommandGroup {
         // 2. Revs up the shooter while going in right in front of the third ball
         new ParallelRaceGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(2.36),
-            new AutoRevShoot(shooterSubsystem, LimelightSubsystem.getInstance()),
+            new AutoRevAndAim(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem),
             new TowerIntake(towerSubsystem)
         ),
 
@@ -53,7 +52,7 @@ public class AutoCommand extends SequentialCommandGroup {
             new ParallelRaceGroup(
                 new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath).withTimeout(
                     2.4),
-                new AutoRevShoot(shooterSubsystem, LimelightSubsystem.getInstance())
+                new AutoRevAndAim(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem)
             )
         ),
 

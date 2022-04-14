@@ -16,7 +16,7 @@ import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import java.util.function.DoubleSupplier;
 
-public class RevAndTurnShoot extends CommandBase {
+public class RevAndAim extends CommandBase {
 
   private final ShooterSubsystem shooterSubsystem;
   private final LimelightSubsystem limelight;
@@ -41,7 +41,7 @@ public class RevAndTurnShoot extends CommandBase {
   /**
    * Creates a new Shoot.
    */
-  public RevAndTurnShoot(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight,
+  public RevAndAim(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight,
       DriveSubsystem driveSubsystem,
       DoubleSupplier leftStickY, DoubleSupplier leftStickX,
       LEDsSubsystem leds) {
@@ -63,7 +63,6 @@ public class RevAndTurnShoot extends CommandBase {
     );
 
     headingError = limelight.getTargetOffsetX();
-
   }
 
   @Override
@@ -87,8 +86,10 @@ public class RevAndTurnShoot extends CommandBase {
     driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond,
         leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
 
-    if (limelight.hasValidTarget()) {
+    if (!limelight.hasValidTarget()) {
       LEDS.setLEDsShooterLiningUp();
+    } else {
+      LEDS.setLEDsAButton();
     }
 
   }

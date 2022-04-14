@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderStatusFrame;
 import edu.wpi.first.math.controller.ProfiledPIDController;
+import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -56,6 +57,17 @@ public class ClimbSubsystem extends SubsystemBase {
               ClimbConstants.kMaxClimbSpeedMetersPerSecond,
               ClimbConstants.kMaxClimbAccelerationMetersPerSecondSquared));
 
+  private final SimpleMotorFeedforward m_leftFeedForward = new SimpleMotorFeedforward(
+      0.3,
+      0.7,
+      0
+  );
+  private final SimpleMotorFeedforward m_rightFeedForward = new SimpleMotorFeedforward(
+      0.3,
+      0.7,
+      0
+  );
+
   /**
    * Creates the climb subsystem.
    */
@@ -77,14 +89,14 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
     m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
 
-    m_rightEncoder.configSensorDirection(true);
+    m_leftEncoder.configSensorDirection(true);
 
     // Initialize Limit Switches
     m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
     m_rightLimitSwitch = new DigitalInput(ClimbConstants.kRightClimbLimitSwitchPort);
 
-    m_leftEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 50);
-    m_rightEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 50);
+    m_leftEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
+    m_rightEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
 
     // Initialize Solenoid
     m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
@@ -224,7 +236,11 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setDesiredLeftHookHeight(double height) {
     double leftOutput = m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(),
-        height);
+        height)
+        + m_leftFeedForward.calculate(m_climbLeftProfiledPIDController.getGoal().velocity);
+    SmartDashboard.putNumber("leftOutput", leftOutput);
+    SmartDashboard.putNumber("leftVelocity", m_climbLeftProfiledPIDController.getGoal().velocity);
+    SmartDashboard.putNumber("Vel Error", m_climbLeftProfiledPIDController.getVelocityError());
     m_leftMotor.set(leftOutput);
   }
 
@@ -236,7 +252,10 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setDesiredRightHookHeight(double height) {
     double rightOutput = m_climbRightProfiledPIDController.calculate(getRightHookHeight(),
-        height);
+        height)
+        + m_rightFeedForward.calculate(m_climbRightProfiledPIDController.getSetpoint().velocity);
+//    SmartDashboard.putNumber("rightOutput", rightOutput);
+//    SmartDashboard.putNumber("rightVelocity", m_climbRightProfiledPIDController.getSetpoint().velocity);
     m_rightMotor.set(rightOutput);
   }
 
@@ -263,6 +282,7 @@ public class ClimbSubsystem extends SubsystemBase {
         ClimbConstants.kClimbMinHeight);
     setHookToBottomPos(rightOutput, m_climbRightProfiledPIDController.getPositionError(),
         m_rightMotor);
+//    m_rightMotor.set(rightOutput);
   }
 
   /**
@@ -343,19 +363,16 @@ public class ClimbSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
 //    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
 //    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
-//    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
+    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
 //    SmartDashboard.putNumber("Right Climb PID Error: ", getRightPIDError());
-//    SmartDashboard.putNumber("Left Climb PID setpoint:", m_climbLeftProfiledPIDController.getGoal().position);
-//    SmartDashboard.putNumber("Right Climb PID setpoint:", m_climbRightProfiledPIDController.getGoal().position);
-//    SmartDashboard.putNumber("Left Climb PID velocity: ", m_climbLeftProfiledPIDController.getSetpoint().velocity);
-//    SmartDashboard.putNumber("Right Climb PID velocity: ", m_climbRightProfiledPIDController.getSetpoint().velocity);
-//    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
-//    SmartDashboard.putNumber("Right Hook Height: ", getRightHookHeight());
-//    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
-  }
+    SmartDashboard.putNumber("Left Climb PID setpoint: ", m_climbLeftProfiledPIDController.getGoal().position);
+//    SmartDashboard.putNumber("Right Climb PID setpoint: ", m_climbRightProfiledPIDController.getGoal().position);
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
+//    SmartDashboard.putNumber("Left Climb PID velocity: ", m_climbLeftProfiledPIDController.getGoal().velocity);
+//    SmartDashboard.putNumber("Right Climb PID velocity: ", m_climbRightProfiledPIDController.getGoal().velocity);
+    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
+//    SmartDashboard.putNumber("RIGHT", getRightHookHeight());
+//    SmartDashboard.putNumber("Right Hook Height:", getRightHookHeight());
+//    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 }

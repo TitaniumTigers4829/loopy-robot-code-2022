@@ -169,6 +169,9 @@ public class DriveSubsystem extends SubsystemBase {
     m_frontRight.setDesiredState(swerveModuleStates[1]);
     m_rearLeft.setDesiredState(swerveModuleStates[2]);
     m_rearRight.setDesiredState(swerveModuleStates[3]);
+    SmartDashboard.putString("Front Left desired state: ", swerveModuleStates[0].toString());
+    SmartDashboard.putString("Front Right desired state: ", swerveModuleStates[1].toString());
+
   }
 
   /**

@@ -21,9 +21,14 @@ import frc.robot.commands.autonomous.AutoCommand;
 import frc.robot.commands.autonomous.FollowTrajectory;
 import frc.robot.commands.autonomous.TwoBallAutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
+import frc.robot.commands.shooter.RevAndAim;
+import frc.robot.commands.testing.ClimbManualPairedPIDControl;
+import frc.robot.commands.testing.setClimbToPos;
+import frc.robot.commands.testing.testLEDs;
+import frc.robot.subsystems.*;
+
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
-import frc.robot.commands.shooter.RevAndTurnShoot;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.tower.SetTowerMotorSpeed;
 import frc.robot.commands.tower.TowerIntake;
@@ -148,7 +153,7 @@ public class RobotContainer {
                     !RIGHT_TRIGGER.get()),
             m_robotDrive));
     A_BUTTON.whileHeld(
-        new RevAndTurnShoot(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+        new RevAndAim(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
             m_LEDs));
 
     new JoystickButton(m_buttonController, 5).whileHeld(
@@ -179,6 +184,8 @@ public class RobotContainer {
     POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
     POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
     JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
+//    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
+    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
@@ -188,6 +195,8 @@ public class RobotContainer {
 //    B_BUTTON.toggleWhenPressed(new ClimbManualPairedPIDControl(m_climbSubsystem, RIGHT_STICK_Y));
 //    Y_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
+//    double led_value = 0;
+//    LEFT_DIRECTION_PAD.toggleWhenPressed(new testLEDs(m_LEDs, led_value));
 
     X_BUTTON.whenPressed(new FollowTrajectory(m_robotDrive, PathWeaverConstants.testingPath1).withTimeout(2));
 
@@ -196,8 +205,8 @@ public class RobotContainer {
     JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
     JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
     JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 7);
-    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 6);
+    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 12);
+    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 5);
     JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
@@ -210,15 +219,17 @@ public class RobotContainer {
 
 // auto climb stuff
 //
-//    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbFullExtension(m_climbSubsystem));
-//    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbBottomPosition(m_climbSubsystem))
-//    new JoystickButton(m_buttonController, 0-9).whenPressed(new ClimbNextBar(m_climbSubsystem));;
+//    new JoystickButton(m_buttonController, 8).whenPressed(new ClimbFullExtension(m_climbSubsystem));
+//    new JoystickButton(m_buttonController, 7).whenPressed(new ClimbBottomPosition(m_climbSubsystem));
+//    new JoystickButton(m_buttonController, 6).whenPressed(new ClimbNextBar(m_climbSubsystem));
+//    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+
 
 //    B_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
     // While held for intake
-    SUCC_BUTTON.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
+    SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
     new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, m_LEDs,
@@ -239,6 +250,5 @@ public class RobotContainer {
 
 //    return new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
     return autoChooser.getSelected();
-
   }
 }

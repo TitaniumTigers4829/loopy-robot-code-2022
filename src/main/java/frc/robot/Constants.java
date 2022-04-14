@@ -87,7 +87,7 @@ public final class Constants {
     public static final double kaVoltSecondsSquaredPerMeter = 0.28749;
 
     public static final double ksTurning = 0.77; // LOCKED IN!  -----  old 0.66202
-    public static final double kvTurning = 0.75; // 3.0052
+    public static final double kvTurning = 0.75; //0.75 // 3.0052
     public static final double kaTurning = 0; // Default to zero
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI * 2;
   }
@@ -96,7 +96,7 @@ public final class Constants {
 
     public static final double kDriveGearRatio = 7.13;
 
-    public static final double kPModuleTurnController = 8.3; // TUNE: 8.2142
+    public static final double kPModuleTurnController = 9; //8.3 // TUNE: 8.2142
     public static final double kIModuleTurnController = 0; // DO NOT USE
     public static final double kDModuleTurnController = 0; // TUNE
 
@@ -107,7 +107,7 @@ public final class Constants {
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = 3 * Math.PI;
     public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 6 * Math.PI;
 
-    public static final double kPModuleDriveController = 0; // TUNE
+    public static final double kPModuleDriveController = 0.5; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
     public static final double kDModuleDriveController = 0;
 
@@ -222,8 +222,8 @@ public final class Constants {
     // 'zeroed' in the top position. The bottom position values are just estimates because
     // there is the unpredictable nature of how the climb rope winds up.
 
-    public static final double kClimbLeftMinHeightEncoderEstimate = -3764.00390625; // FIXME
-    public static final double kClimbRightMinHeightEncoderEstimate = -3756.97; // FIXME
+    public static final double kClimbLeftMinHeightEncoderEstimate = -3904.27734375; // FIXME
+    public static final double kClimbRightMinHeightEncoderEstimate = -3583.037109375; // FIXME
 
     // in meters, when do we switch to pure voltage control.
     public static final double kClimbMinPosPIDErrorThreshold = 0.10;
@@ -236,11 +236,11 @@ public final class Constants {
 
 
     // ProfiledPID controller constants
-    public static final double kPClimbController = 0.3; // FIXME, TUNE
+    public static final double kPClimbController = 0.55; // FIXME, TUNE
     public static final double kIClimbController = 0; // DO NOT USE
     public static final double kDClimbController = 0;
-    public static final double kMaxClimbSpeedMetersPerSecond = 0.1; // FIXME, TUNE
-    public static final double kMaxClimbAccelerationMetersPerSecondSquared = 0.05; // FIXME, TUNE
+    public static final double kMaxClimbSpeedMetersPerSecond = 0.6; // FIXME, TUNE
+    public static final double kMaxClimbAccelerationMetersPerSecondSquared = 0.4; // FIXME, TUNE
 
     // Motor constants
     public static final int kLeftClimbMotorPort = 12;
@@ -249,8 +249,8 @@ public final class Constants {
     public static final int kLeftClimbEncoderPort = 11;
     public static final int kRightClimbEncoderPort = 29;
     // Limit Switch constants
-    public static final int kLeftClimbLimitSwitchPort = 2;
-    public static final int kRightClimbLimitSwitchPort = 3;
+    public static final int kLeftClimbLimitSwitchPort = 3;
+    public static final int kRightClimbLimitSwitchPort = 2;
     // Solenoid constants
     public static final int kClimbVerticalSolenoidPort = 5;
     public static final int kClimbAngledSolenoidPort = 7;
