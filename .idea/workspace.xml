@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
+    </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
     <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
     <list id="22b4c1c0-8530-4f35-9a5d-6f552df0d4ad" name="Changes by titan" comment="" />
@@ -285,6 +289,9 @@
       <workItem from="1649527191940" duration="21615000" />
       <workItem from="1649613238332" duration="4393000" />
       <workItem from="1649882208073" duration="6467000" />
+      <workItem from="1649967416786" duration="1282000" />
+      <workItem from="1649969356749" duration="1637000" />
+      <workItem from="1649972651556" duration="1590000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -622,7 +629,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649891051883</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="working on auto">
+      <created>1649967559106</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1649967559106</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
