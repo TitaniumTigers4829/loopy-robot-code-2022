@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Fixed">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/Autos/Blue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/Autos/Four" beforeDir="false" afterPath="$PROJECT_DIR$/PathWeaver/Autos/Four" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/pathweaver.json" beforeDir="false" afterPath="$PROJECT_DIR$/PathWeaver/pathweaver.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/firstPath.wpilib.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/fourthPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/fourthPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/secondPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/secondPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/thirdPath.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/thirdPath.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/AutoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" afterDir="false" />
-    </list>
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="" />
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
     <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
     <list id="22b4c1c0-8530-4f35-9a5d-6f552df0d4ad" name="Changes by titan" comment="" />
@@ -298,7 +284,7 @@
       <workItem from="1649507856073" duration="16591000" />
       <workItem from="1649527191940" duration="21615000" />
       <workItem from="1649613238332" duration="4393000" />
-      <workItem from="1649882208073" duration="6398000" />
+      <workItem from="1649882208073" duration="6467000" />
     </task>
     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
       <created>1645207484963</created>
@@ -629,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649379901422</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="working on auto">
+      <created>1649891051882</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1649891051883</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +645,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated CAN IDs" />
     <MESSAGE value="added Angle Zero Offset" />
     <MESSAGE value="idk" />
     <MESSAGE value="changes from today, climb still not working" />
@@ -677,7 +669,8 @@
     <MESSAGE value="Updated auto" />
     <MESSAGE value="more auto and shoot tuning" />
     <MESSAGE value="5 ball auto :)" />
-    <option name="LAST_COMMIT_MESSAGE" value="5 ball auto :)" />
+    <MESSAGE value="working on auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
