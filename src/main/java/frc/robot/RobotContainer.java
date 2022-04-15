@@ -22,10 +22,6 @@ import frc.robot.commands.autonomous.FollowTrajectory;
 import frc.robot.commands.autonomous.TwoBallAutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.shooter.RevAndAim;
-import frc.robot.commands.testing.ClimbManualPairedPIDControl;
-import frc.robot.commands.testing.setClimbToPos;
-import frc.robot.commands.testing.testLEDs;
-import frc.robot.subsystems.*;
 
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
@@ -72,8 +68,8 @@ public class RobotContainer {
 //  private final SendableChooser<Command> chooser = new SendableChooser<Command>();
 
   // The driver's controller
-  private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
+  private final XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
+  private final Joystick buttonController = new Joystick(OIConstants.kButtonControllerPort);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -129,12 +125,16 @@ public class RobotContainer {
   }
 
   public void teleopInitFunc() {
-    DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
-    DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
-    DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
-    DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
-    JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
-    JoystickButton RIGHT_TRIGGER = new JoystickButton(m_driverController, 8);
+//    DoubleSupplier LEFT_STICK_X = () -> driverController.getRawAxis(0);
+    DoubleSupplier LEFT_STICK_X = driverController::getLeftX;
+//    DoubleSupplier LEFT_STICK_Y = () -> driverController.getRawAxis(1);
+    DoubleSupplier LEFT_STICK_Y = driverController::getLeftY;
+//    DoubleSupplier RIGHT_STICK_X = () -> driverController.getRawAxis(2);
+    DoubleSupplier RIGHT_STICK_X = driverController::getRightX;
+//    DoubleSupplier RIGHT_STICK_Y = () -> driverController.getRawAxis(3);
+    DoubleSupplier RIGHT_STICK_Y = driverController::getRightY;
+    JoystickButton A_BUTTON = new JoystickButton(driverController, 1);
+    JoystickButton RIGHT_BUMPER = new JoystickButton(driverController, 6);
 
     /*
      * Sets the default command and joystick bindings for the drive train.
@@ -150,18 +150,18 @@ public class RobotContainer {
                         * DriveConstants.kMaxSpeedMetersPerSecond,
                     modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
                         * DriveConstants.kMaxRotationalSpeed,
-                    !RIGHT_TRIGGER.get()),
+                    !RIGHT_BUMPER.get()),
             m_robotDrive));
     A_BUTTON.whileHeld(
         new RevAndAim(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
             m_LEDs));
 
-    new JoystickButton(m_buttonController, 5).whileHeld(
+    new JoystickButton(buttonController, 5).whileHeld(
         new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
             m_LEDs));
-//    new JoystickButton(m_buttonController, 8).whileHeld(
+//    new JoystickButton(buttonController, 8).whileHeld(
 //        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
-    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
+    new JoystickButton(buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
   }
 
   /**
@@ -173,17 +173,17 @@ public class RobotContainer {
   private void configureButtonBindings() {
 //    TODO: figure out what will be mechanically done by competition and get that done in programming
     // Logitech buttons
-    JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
-    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
-    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
-    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
-    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
-    JoystickButton LEFT_TRIGGER = new JoystickButton(m_driverController, 7);
-    POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
-    POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
-    POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
-    POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
-    JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
+    JoystickButton X_BUTTON = new JoystickButton(driverController, 3);
+    JoystickButton B_BUTTON = new JoystickButton(driverController, 2);
+    JoystickButton Y_BUTTON = new JoystickButton(driverController, 4);
+    JoystickButton LEFT_BUMPER = new JoystickButton(driverController, 5);
+//    JoystickButton RIGHT_BUMPER = new JoystickButton(driverController, 6);
+//    JoystickButton LEFT_TRIGGER = new JoystickButton(driverController, 7);
+    POVButton UP_DIRECTION_PAD = new POVButton(driverController, 0);
+    POVButton RIGHT_DIRECTION_PAD = new POVButton(driverController, 90);
+    POVButton LEFT_DIRECTION_PAD = new POVButton(driverController, 270);
+    POVButton DOWN_DIRECTION_PAD = new POVButton(driverController, 180);
+    JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(driverController, 9);
 //    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
     B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
@@ -201,38 +201,38 @@ public class RobotContainer {
     X_BUTTON.whenPressed(new FollowTrajectory(m_robotDrive, PathWeaverConstants.testingPath1).withTimeout(2));
 
     // Manual Climb
-    JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
-    JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
-    JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
-    JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 12);
-    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 5);
-    JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
+    JoystickButton LClimbUp = new JoystickButton(buttonController, 3);
+    JoystickButton RClimbUp = new JoystickButton(buttonController, 4);
+    JoystickButton LClimbDown = new JoystickButton(buttonController, 1);
+    JoystickButton RClimbDown = new JoystickButton(buttonController, 2);
+    JoystickButton PneumaticsVertical = new JoystickButton(buttonController, 12);
+    JoystickButton PneumaticsDown = new JoystickButton(buttonController, 5);
+    JoystickButton is75Percent = new JoystickButton(buttonController, 10);
 
-    new JoystickButton(m_buttonController, 9).toggleWhenPressed(
+    new JoystickButton(buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
             LClimbUp::get, LClimbDown::get, RClimbUp::get,
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
             is75Percent::get, m_LEDs)); // This works
 
-//    new JoystickButton(m_buttonController, 0-9).whileHeld(new SetTowerMotorSpeed(m_tower, -TowerConstants.towerMotorSpeed));
+//    new JoystickButton(buttonController, 0-9).whileHeld(new SetTowerMotorSpeed(m_tower, -TowerConstants.towerMotorSpeed));
 
 // auto climb stuff
 //
-//    new JoystickButton(m_buttonController, 8).whenPressed(new ClimbFullExtension(m_climbSubsystem));
-//    new JoystickButton(m_buttonController, 7).whenPressed(new ClimbBottomPosition(m_climbSubsystem));
-//    new JoystickButton(m_buttonController, 6).whenPressed(new ClimbNextBar(m_climbSubsystem));
+//    new JoystickButton(buttonController, 8).whenPressed(new ClimbFullExtension(m_climbSubsystem));
+//    new JoystickButton(buttonController, 7).whenPressed(new ClimbBottomPosition(m_climbSubsystem));
+//    new JoystickButton(buttonController, 6).whenPressed(new ClimbNextBar(m_climbSubsystem));
 //    X_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
 
 //    B_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
-    JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
+    JoystickButton SUCC_BUTTON = new JoystickButton(buttonController, 12);
     // While held for intake
     SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
     SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
 
-    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, m_LEDs,
+    new JoystickButton(buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, m_LEDs,
         TowerConstants.towerMotorSpeed));
     // While held for ejecting ball
 //    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
