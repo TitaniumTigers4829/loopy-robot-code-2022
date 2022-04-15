@@ -14,23 +14,23 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
 /**
- * This class is for the auto command
+ * This class is for the 5 Ball Auto Command
  */
-public class AutoCommand extends SequentialCommandGroup {
+public class FiveBallAutoCommand extends SequentialCommandGroup {
 
-  public AutoCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,
+  public FiveBallAutoCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intakeSubsystem) {
 
     addCommands(
         // 1. Backs up from the pad and intakes
         new ParallelCommandGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath5Ball),
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
         ).withTimeout(1.4),
 
         // 2. Revs up the shooter while going in right in front of the third ball
         new ParallelRaceGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath).withTimeout(2.36),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath5Ball).withTimeout(2.36),
             new AutoRevAndAim(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem),
             new TowerIntake(towerSubsystem)
         ),
@@ -41,7 +41,7 @@ public class AutoCommand extends SequentialCommandGroup {
 
         // 5. Goes to the area where it can pick up cargo from human plays
         new ParallelCommandGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath5Ball),
             // 6. Intakes long enough for the human players to load 2 balls
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
         ).withTimeout(3.6),
@@ -50,7 +50,7 @@ public class AutoCommand extends SequentialCommandGroup {
         new ParallelCommandGroup(
             new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2),
             new ParallelRaceGroup(
-                new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath).withTimeout(
+                new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball).withTimeout(
                     2.4),
                 new AutoRevAndAim(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem)
             )

@@ -13,17 +13,16 @@ public class IntakeActiveTeleop extends CommandBase {
   /**
    * Creates IntakeActiveTeleop. By default, a "while held" command.
    *
-   * @param subsystem The climb subsystem used by this command.
+   * @param m_intakeSubsystem The climb subsystem used by this command.
    */
-  public IntakeActiveTeleop(IntakeSubsystem subsystem) {
-    m_intakeSubsystem = subsystem;
+  public IntakeActiveTeleop(IntakeSubsystem m_intakeSubsystem) {
+    this.m_intakeSubsystem = m_intakeSubsystem;
     addRequirements(m_intakeSubsystem);  // Use addRequirements() to declare subsystem dependencies.
   }
 
   @Override
   public void initialize() {
     m_intakeSubsystem.setSolenoidDeployed();
-//    Timer.delay(0.25);
     m_intakeSubsystem.setMotorFullPowerIn();
   }
 
@@ -35,7 +34,6 @@ public class IntakeActiveTeleop extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_intakeSubsystem.setMotorStopped();
-//    Timer.delay(0.25);
     m_intakeSubsystem.setSolenoidRetracted();
   }
 

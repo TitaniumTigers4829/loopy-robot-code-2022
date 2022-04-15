@@ -17,9 +17,10 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.Constants.PathWeaverConstants;
 import frc.robot.Constants.TowerConstants;
-import frc.robot.commands.autonomous.AutoCommand;
+import frc.robot.commands.autonomous.FiveBallAutoCommand;
 import frc.robot.commands.autonomous.FollowTrajectory;
-import frc.robot.commands.autonomous.TwoBallAutonomousCommand;
+import frc.robot.commands.autonomous.OldTwoBallAutoCommand;
+import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.shooter.RevAndAim;
 
@@ -57,10 +58,6 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
-  private final Command fiveBallAuto = new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
-      m_intakeSubsystem);
-  private final Command twoBallAuto = new TwoBallAutonomousCommand(m_shooter, m_tower, m_robotDrive,
-      m_LEDs, m_intakeSubsystem);
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 //  private final Command twoBallAuto;
@@ -76,16 +73,20 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-//    twoBallAuto = new AutonomousCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
-//    noAuto = null;
 
-    // Turn off the limelight lights because they are very bright
-//    m_Limelight.turnOffLED();
     m_Limelight.turnOnLED();
     m_LEDs.setLEDsDefault();
 
+    Command fiveBallAuto = new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+        m_intakeSubsystem);
+    Command twoBallAuto = new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+        m_intakeSubsystem);
+    Command oldTwoBallAuto = new OldTwoBallAutoCommand(m_shooter, m_tower, m_robotDrive,
+        m_LEDs, m_intakeSubsystem);
+
     autoChooser.setDefaultOption("5 ball auto", fiveBallAuto);
     autoChooser.addOption("2 ball auto", twoBallAuto);
+    autoChooser.addOption("Old 2 ball auto", oldTwoBallAuto);
     SmartDashboard.putData(autoChooser);
 //    chooser.
     // m_LEDs.setLEDsRaw(-0.39); // will normally be handled by commands, just for testing.
@@ -150,11 +151,11 @@ public class RobotContainer {
                     !RIGHT_TRIGGER.get()),
             m_robotDrive));
     A_BUTTON.whileHeld(
-        new RevAndAim(m_shooter, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+        new RevAndAim(m_shooter, m_Limelight, m_robotDrive, ()-> modifyAxis(LEFT_STICK_Y), ()-> modifyAxis(LEFT_STICK_X),
             m_LEDs));
 
     new JoystickButton(m_buttonController, 5).whileHeld(
-        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X,
+        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxis(LEFT_STICK_Y), ()-> modifyAxis(LEFT_STICK_X),
             m_LEDs));
 //    new JoystickButton(m_buttonController, 8).whileHeld(
 //        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
@@ -243,9 +244,9 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // Create config for trajectory
-//    return new TwoBallAutonomousCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    return new OldTwoBallAutoCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
-//    return new AutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    return new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
     return autoChooser.getSelected();
   }
 }

@@ -294,10 +294,16 @@ public final class Constants {
   }
 
   public static final class PathWeaverConstants {
-    public static final String firstPath = "output/firstPath5Ball.wpilib.json";
-    public static final String secondPath = "output/secondPath5Ball.wpilib.json";
-    public static final String thirdPath = "output/thirdPath5Ball.wpilib.json";
-    public static final String fourthPath = "output/fourthPath5Ball.wpilib.json";
+    // 5 Ball Auto Paths
+    public static final String firstPath5Ball = "output/firstPath5Ball.wpilib.json";
+    public static final String secondPath5Ball = "output/secondPath5Ball.wpilib.json";
+    public static final String thirdPath5Ball = "output/thirdPath5Ball.wpilib.json";
+    public static final String fourthPath5Ball = "output/fourthPath5Ball.wpilib.json";
+
+    // 2 Ball Auto Paths
+    public static final String firstPath2Ball = "output/firstPath2Ball.wpilib.json";
+    public static final String secondPath2Ball = "output/secondPath2Ball.wpilib.json";
+    public static final String thirdPath2Ball = "output/thirdPath2Ball.wpilib.json";
 
     public static final String testingPath1 = "output/testing.wpilib.json";
   }
