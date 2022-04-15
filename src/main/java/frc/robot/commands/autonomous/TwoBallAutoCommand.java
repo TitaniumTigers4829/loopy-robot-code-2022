@@ -40,7 +40,7 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
         ),
 
         // 4. Ejects the enemy ball
-        new EjectCommand(towerSubsystem, intakeSubsystem).withTimeout(1.5),
+        new EjectCommand(towerSubsystem).withTimeout(1.5),
 
         // 5. Goes near white line in the direction of a ball and the direction to reset the gyro at
         new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath2Ball).withTimeout(3)
