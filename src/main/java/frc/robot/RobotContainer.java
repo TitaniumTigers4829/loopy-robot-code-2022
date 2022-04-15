@@ -22,10 +22,7 @@ import frc.robot.commands.autonomous.FollowTrajectory;
 import frc.robot.commands.autonomous.TwoBallAutonomousCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.shooter.RevAndAim;
-import frc.robot.commands.testing.ClimbManualPairedPIDControl;
-import frc.robot.commands.testing.setClimbToPos;
-import frc.robot.commands.testing.testLEDs;
-import frc.robot.subsystems.*;
+
 
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
