@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -15,10 +17,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Constants.PathWeaverConstants;
-import frc.robot.Constants.TowerConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
-import frc.robot.commands.autonomous.FollowTrajectory;
 import frc.robot.commands.autonomous.OldTwoBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
@@ -106,14 +105,26 @@ public class RobotContainer {
     }
   }
 
-  private static double modifyAxis(DoubleSupplier supplierValue) {
+  private static double modifyAxisCubed(DoubleSupplier supplierValue) {
     double value = supplierValue.getAsDouble();
 
     // Deadband
     value = deadband(value, OIConstants.kDriverControllerDeadband);
 
-    // Square the axis
-    value = Math.copySign(value * value, value);
+    // Cube the axis
+    value = Math.copySign(value * value * value, value);
+
+    return value;
+  }
+
+  private static double modifyAxisQuartic(DoubleSupplier supplierValue) {
+    double value = supplierValue.getAsDouble();
+
+    // Deadband
+    value = deadband(value, OIConstants.kDriverControllerDeadband);
+
+    // Cube the axis
+    value = Math.copySign(value * value * value * value, value);
 
     return value;
   }
@@ -142,21 +153,23 @@ public class RobotContainer {
         new RunCommand(
             () ->
                 m_robotDrive.drive(
-                    modifyAxis(LEFT_STICK_Y) * -1 // xAxis
+                    modifyAxisQuartic(LEFT_STICK_Y) * -1 // xAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(LEFT_STICK_X) * -1 // yAxis
+                    modifyAxisQuartic(LEFT_STICK_X) * -1 // yAxis
                         * DriveConstants.kMaxSpeedMetersPerSecond,
-                    modifyAxis(RIGHT_STICK_X) * -1 // rot CCW positive
+                    modifyAxisCubed(RIGHT_STICK_X) * -1 // rot CCW positive
                         * DriveConstants.kMaxRotationalSpeed,
                     !RIGHT_TRIGGER.get()),
             m_robotDrive));
     A_BUTTON.whileHeld(
-        new RevAndAim(m_shooter, m_Limelight, m_robotDrive, ()-> modifyAxis(LEFT_STICK_Y), ()-> modifyAxis(LEFT_STICK_X),
+        new RevAndAim(m_shooter, m_Limelight, m_robotDrive, ()-> modifyAxisQuartic(LEFT_STICK_Y), ()-> modifyAxisQuartic(LEFT_STICK_X),
             m_LEDs));
+//    A_BUTTON.whenReleased(new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxisQuartic(LEFT_STICK_Y), ()-> modifyAxisQuartic(LEFT_STICK_X),
+//        m_LEDs).withTimeout(0.2));
 
     new JoystickButton(m_buttonController, 5).whileHeld(
-        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxis(LEFT_STICK_Y), ()-> modifyAxis(LEFT_STICK_X),
-            m_LEDs));
+        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxisQuartic(LEFT_STICK_Y), ()-> modifyAxisQuartic(LEFT_STICK_X),
+            m_LEDs, m_intakeSubsystem));
 //    new JoystickButton(m_buttonController, 8).whileHeld(
 //        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
     new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
@@ -169,7 +182,6 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-//    TODO: figure out what will be mechanically done by competition and get that done in programming
     // Logitech buttons
     JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
     JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
@@ -183,7 +195,7 @@ public class RobotContainer {
     POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
     JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
 //    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
-    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+//    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
     RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
@@ -196,15 +208,13 @@ public class RobotContainer {
 //    double led_value = 0;
 //    LEFT_DIRECTION_PAD.toggleWhenPressed(new testLEDs(m_LEDs, led_value));
 
-    X_BUTTON.whenPressed(new FollowTrajectory(m_robotDrive, PathWeaverConstants.testingPath1).withTimeout(2));
-
     // Manual Climb
     JoystickButton LClimbUp = new JoystickButton(m_buttonController, 3);
     JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
     JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
     JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 12);
-    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 5);
+    JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 6);
+    JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 7);
     JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
@@ -226,12 +236,14 @@ public class RobotContainer {
 //    B_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
     JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
-    // While held for intake
+//    // While held for intake
     SUCC_BUTTON.whileHeld( new IntakeWithTower(m_intakeSubsystem, m_tower));
-    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(3));
+    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(1));
 
-    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, m_LEDs,
-        TowerConstants.towerMotorSpeed));
+    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
+        -1));
+
+    Y_BUTTON.whenPressed(new InstantCommand(()->m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
     // While held for ejecting ball
 //    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
 //    Y_BUTTON.whileHeld(new AutoShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, m_LEDs));
@@ -247,6 +259,7 @@ public class RobotContainer {
 //    return new OldTwoBallAutoCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 
 //    return new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    return new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
     return autoChooser.getSelected();
   }
 }

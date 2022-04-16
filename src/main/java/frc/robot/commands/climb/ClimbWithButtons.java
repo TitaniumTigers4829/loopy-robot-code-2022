@@ -51,7 +51,7 @@ public class ClimbWithButtons extends CommandBase {
   @Override
   public void execute() {
     if (isFullPower.getAsBoolean()) {
-      speed = 0.5;
+      speed = 1;
     } else {
       speed = 0.75;
     }

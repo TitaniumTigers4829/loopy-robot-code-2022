@@ -210,7 +210,7 @@ public class SwerveModule {
 //          () -> m_turnPIDController.getSetpoint().velocity);
 //      done = true;
 //    }
-    SmartDashboard.putString(shuffleboardContainer.getTitle() + " desired state: ", state.toString());
+//    SmartDashboard.putString(shuffleboardContainer.getTitle() + " desired state: ", state.toString());
     // Calculate the turning motor output from the turning PID controller.
     m_driveMotor.set(driveOutput/12);
     m_turningMotor.set(turnOutput/12);

@@ -22,6 +22,7 @@ public class Shoot extends CommandBase {
   private final TowerSubsystem towerSubsystem;
   private final LimelightSubsystem limelight;
   private final DriveSubsystem driveSubsystem;
+  private final IntakeSubsystem intakeSubsystem;
   private final DoubleSupplier leftStickY;
   private final DoubleSupplier leftStickX;
   private final LEDsSubsystem LEDS;
@@ -52,12 +53,13 @@ public class Shoot extends CommandBase {
   public Shoot(ShooterSubsystem shooterSubsystem,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
       DoubleSupplier leftStickY, DoubleSupplier leftStickX,
-      LEDsSubsystem leds) {
+      LEDsSubsystem leds, IntakeSubsystem intakeSubsystem) {
 
     this.shooterSubsystem = shooterSubsystem;
     this.towerSubsystem = towerSubsystem;
     this.limelight = limelight;
     this.driveSubsystem = driveSubsystem;
+    this.intakeSubsystem = intakeSubsystem;
     this.leftStickY = leftStickY;
     this.leftStickX = leftStickX;
     this.LEDS = leds;
@@ -138,10 +140,15 @@ public class Shoot extends CommandBase {
 //        towerSubsystem.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
 //      }
 //      towerSubsystem.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed - 0.1);
+    } else if (!limelight.hasValidTarget()) {
+      LEDS.setLEDsNoValidTarget();
+      towerSubsystem.setTowerMotorsSpeed(0);
     } else {
       LEDS.setLEDsShooterLiningUp();
       towerSubsystem.setTowerMotorsSpeed(0);
     }
+
+    intakeSubsystem.setMotorCustomPower(0.15);
   }
 
   @Override
@@ -149,6 +156,7 @@ public class Shoot extends CommandBase {
     shooterSubsystem.setShooterToNeutral();
     towerSubsystem.setTowerOff();
     LEDS.setLEDsDefault();
+    intakeSubsystem.setMotorCustomPower(0);
   }
 
   @Override

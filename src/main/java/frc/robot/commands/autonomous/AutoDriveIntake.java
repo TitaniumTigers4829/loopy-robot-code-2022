@@ -19,7 +19,7 @@ public class AutoDriveIntake extends ParallelCommandGroup {
   public AutoDriveIntake(DriveSubsystem drive, IntakeSubsystem intake, TowerSubsystem tower, double backupSpeed) {
 
     addCommands(
-        new IntakeWithTower(intake, tower),
+//        new IntakeWithTower(intake, tower),
         new SetDriveSpeed(drive, backupSpeed, 0)
     );
   }

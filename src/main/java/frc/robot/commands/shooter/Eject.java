@@ -4,20 +4,12 @@
 
 package frc.robot.commands.shooter;
 
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.Constants.TowerConstants;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.subsystems.LEDsSubsystem;
-import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
 
 public class Eject extends CommandBase {
 
@@ -37,19 +29,25 @@ public class Eject extends CommandBase {
 
   @Override
   public void initialize() {
-    shooterSubsystem.setShooterRPM(
-        ShooterConstants.kBottomEjectRPM,
-        ShooterConstants.kTopEjectRPM
+//    shooterSubsystem.setShooterRPM(
+//        ShooterConstants.kBottomEjectRPM,
+//        ShooterConstants.kTopEjectRPM
+//    );
+    shooterSubsystem.setSpeed1(
+        0.1,
+        0.1
     );
+    Timer.delay(1);
+    towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
   }
+
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPM(
-        ShooterConstants.kBottomEjectRPM,
-        ShooterConstants.kTopEjectRPM
+    shooterSubsystem.setSpeed1(
+        0.1,
+        0.1
     );
 //    if (Math.abs(shooterSubsystem.getShooterAverageRPMError()) <= 150){
-      towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
 //    }
 
 //    SmartDashboard.putNumber("Target offset X: ", limelight.getTargetOffsetX());
@@ -58,7 +56,7 @@ public class Eject extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    shooterSubsystem.setShooterRPM(0, 0);
+    shooterSubsystem.setSpeed1(0, 0);
     towerSubsystem.setTowerOff();
   }
 

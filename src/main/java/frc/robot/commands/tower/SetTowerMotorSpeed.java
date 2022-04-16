@@ -14,14 +14,14 @@ public class SetTowerMotorSpeed extends CommandBase {
   
   private TowerSubsystem towerSubsystem;
   private ShooterSubsystem shooterSubsystem;
-  private LEDsSubsystem leds;
+//  private LEDsSubsystem leds;
   private final double speed;
   
   /** Creates a new SetTowerMotorSpeed. */
-  public SetTowerMotorSpeed(TowerSubsystem towerSubsystem, ShooterSubsystem shooterSubsystem, LEDsSubsystem leds, double speed) {
+  public SetTowerMotorSpeed(TowerSubsystem towerSubsystem, ShooterSubsystem shooterSubsystem, double speed) {
     this.towerSubsystem = towerSubsystem;
     this.shooterSubsystem = shooterSubsystem;
-    this.leds = leds;
+//    this.leds = leds;
     this.speed = speed;
     addRequirements(towerSubsystem, shooterSubsystem);
   }
@@ -29,15 +29,16 @@ public class SetTowerMotorSpeed extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    towerSubsystem.setTowerMotorsSpeed(-speed);
+    towerSubsystem.setTowerMotorsSpeed(speed);
   }
   
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    towerSubsystem.setTowerMotorsSpeed(-speed);
-    shooterSubsystem.setSpeed1(-0.4, -0.4);
-    leds.setLEDsBackward();
+    towerSubsystem.setTowerMotorsSpeed(speed);
+//    towerSubsystem.setBottomMotorOutputManual(speed);
+//    shooterSubsystem.setSpeed1(-0.4, -0.4);
+//    leds.setLEDsBackward();
   }
   
   // Called once the command ends or is interrupted.
@@ -45,6 +46,7 @@ public class SetTowerMotorSpeed extends CommandBase {
   public void end(boolean interrupted) {
     towerSubsystem.setTowerMotorsSpeed(0);
     shooterSubsystem.setSpeed1(0, 0);
+//    leds.setLEDsDefault();
   }
   
   // Returns true when the command should end.

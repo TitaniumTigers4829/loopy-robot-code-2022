@@ -78,7 +78,7 @@ public class TwoBallAutoShoot extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMNotImproved(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );

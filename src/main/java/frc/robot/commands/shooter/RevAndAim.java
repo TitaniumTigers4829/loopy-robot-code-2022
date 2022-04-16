@@ -67,7 +67,7 @@ public class RevAndAim extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMNotImproved(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
@@ -87,11 +87,10 @@ public class RevAndAim extends CommandBase {
         leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
 
     if (!limelight.hasValidTarget()) {
-      LEDS.setLEDsShooterLiningUp();
+      LEDS.setLEDsNoValidTarget();
     } else {
       LEDS.setLEDsAButton();
     }
-
   }
 
   @Override
