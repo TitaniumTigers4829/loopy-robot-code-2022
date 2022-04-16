@@ -34,11 +34,11 @@ public class AutoShoot extends CommandBase {
       ShooterConstants.ksTurning, ShooterConstants.kvTurning
   );
 
-  private int initialBallCount = 0;
-  private int ballcount = 0;
+//  private int initialBallCount = 0;
+//  private int ballcount = 0;
   private double towerSpeed = TowerConstants.towerMotorSpeed;
   private double headingError = 0;
-  private boolean shotOne = false;
+//  private boolean shotOne = false;
 
   /**
    .
@@ -61,50 +61,25 @@ public class AutoShoot extends CommandBase {
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
-
-    headingError = limelight.getTargetOffsetX();
-
-    double turnRobotOutput =
-        turnProfiledPIDController.calculate(headingError, 0)
-            + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
-
-    if (towerSubsystem.getIsBallInBottom()) {
-      ballcount += 1;
-    }
-    if (towerSubsystem.getIsBallInTop()) {
-      ballcount += 1;
-    }
-    initialBallCount = ballcount;
   }
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMNotImproved(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
 
-    if ((initialBallCount == 2) && !(towerSubsystem.getIsBallInBottom())) {
-      ballcount = 1;
-    }
-    if (initialBallCount == 1) {
-      shotOne = true;
-    } else if ((initialBallCount == 2) && (ballcount == 1)) {
-      shotOne = true;
-    }
-
-//    towerSpeed = (shotOne ? 0.34 : TowerConstants.towerMotorSpeed);
-
     headingError = limelight.getTargetOffsetX();
 
     // If heading error isn't off by much, it won't move
-//    if (Math.abs(headingError) < 1) headingError = 0;
+    if (Math.abs(headingError) < 1) headingError = 0;
 
     double turnRobotOutput =
         turnProfiledPIDController.calculate(headingError, 0)
             + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
 
-    driveSubsystem.drive(0, 0, turnRobotOutput, true);
+    driveSubsystem.drive(0, 0, turnRobotOutput, false);
 
     SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
     if (isReadyToShoot()) {
@@ -136,9 +111,8 @@ public class AutoShoot extends CommandBase {
   private boolean isReadyToShoot() {
     // If low offset, has a valid target, and shooter flywheels are spun up.
     // FIXME: Can we re tune the PID loop now that we have better CAN utilization? (It kinda gets it right now, but it should be better.)
-    // We want to never miss any shots. duh
     SmartDashboard.putBoolean("rpm within range: ", shooterSubsystem.isShooterWithinAcceptableError());
     SmartDashboard.putNumber("limelight offset: ", Math.abs(limelight.getTargetOffsetX()));
-    return (((Math.abs(headingError) < 5) && (limelight.hasValidTarget()) && (shooterSubsystem.isShooterWithinAcceptableError())));
+    return (((Math.abs(headingError) < 3) && (limelight.hasValidTarget()) && (shooterSubsystem.isShooterWithinAcceptableError())));
   }
 }

@@ -20,9 +20,11 @@ public class FollowTrajectory extends CommandBase {
   private final DriveSubsystem drive;
   private final Timer timer = new Timer();
   private Trajectory trajectory;
+  private boolean toReset = false;
 
-  public FollowTrajectory(DriveSubsystem drive, String trajectoryFilePath) {
+  public FollowTrajectory(DriveSubsystem drive, String trajectoryFilePath, boolean toReset) {
     this.drive = drive;
+    this.toReset = toReset;
     addRequirements(drive);
 
     try {
@@ -36,6 +38,9 @@ public class FollowTrajectory extends CommandBase {
 
   @Override
   public void initialize() {
+    if (toReset) {
+      drive.resetOdometry(trajectory.getInitialPose());
+    }
 
     final ProfiledPIDController thetaController =
         new ProfiledPIDController(

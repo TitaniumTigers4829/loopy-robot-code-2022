@@ -36,11 +36,7 @@ public class AutoShootIntake extends CommandBase {
       ShooterConstants.ksTurning, ShooterConstants.kvTurning
   );
 
-  private int initialBallCount = 0;
-  private int ballcount = 0;
-  private double towerSpeed = TowerConstants.towerMotorSpeed;
   private double headingError = 0;
-  private boolean shotOne = false;
 
   /**
    .
@@ -64,39 +60,22 @@ public class AutoShootIntake extends CommandBase {
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
-
-    if (towerSubsystem.getIsBallInBottom()){
-      ballcount += 1;
-    }
-    if (towerSubsystem.getIsBallInTop()){
-      ballcount += 1;
-    }
-    initialBallCount = ballcount;
   }
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMNotImproved(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
 
-    if (!towerSubsystem.getIsBallInBottom()) {
+    if (!towerSubsystem.getIsBallInTop()) {
       intakeSubsystem.setSolenoidDeployed();
       intakeSubsystem.setMotorFullPowerIn();
     } else {
       intakeSubsystem.setSolenoidRetracted();
       intakeSubsystem.setMotorStopped();
     }
-    if ((initialBallCount == 2) && !(towerSubsystem.getIsBallInBottom())) {
-      ballcount = 1;
-    }
-    if (initialBallCount == 1) {
-      shotOne = true;
-    } else if ((initialBallCount == 2) && (ballcount == 1)) {
-      shotOne = true;
-    }
-
     headingError = limelight.getTargetOffsetX();
 
     // If heading error isn't off by much, it won't move

@@ -45,7 +45,7 @@ public class ShooterPIDtesting extends CommandBase {
     bottom_target = calculateRPM(ShooterConstants.bottomMotorValues, distance);
 
     if (!(top_target == 0 && bottom_target == 0)) {
-      shooterSubsystem.setShooterRPMNotImproved(bottom_target, top_target);
+      shooterSubsystem.setShooterRPM(bottom_target, top_target);
     } else {
       shooterSubsystem.setShooterToNeutral();
     }

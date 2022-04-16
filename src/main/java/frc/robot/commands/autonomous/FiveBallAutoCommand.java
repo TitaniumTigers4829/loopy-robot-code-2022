@@ -1,9 +1,12 @@
 package frc.robot.commands.autonomous;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.PathWeaverConstants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.DriveSubsystem;
@@ -24,14 +27,15 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
     addCommands(
         // 1. Backs up from the pad and intakes
         new ParallelCommandGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath5Ball),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath5Ball, true),
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
         ).withTimeout(1.4),
 
         // 2. Revs up the shooter while going in right in front of the third ball
         new ParallelRaceGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath5Ball).withTimeout(2.36),
-            new AutoRevAndAim(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath5Ball,
+                false).withTimeout(2.1), // 2.36
+            new AutoRev(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem),
             new TowerIntake(towerSubsystem)
         ),
 
@@ -41,7 +45,7 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
 
         // 5. Goes to the area where it can pick up cargo from human plays
         new ParallelCommandGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath5Ball),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath5Ball, false),
             // 6. Intakes long enough for the human players to load 2 balls
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
         ).withTimeout(3.6),
@@ -50,15 +54,21 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
         new ParallelCommandGroup(
             new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2),
             new ParallelRaceGroup(
-                new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball).withTimeout(
+                new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball,
+                    false).withTimeout(
                     2.4),
-                new AutoRevAndAim(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem)
+                new InstantCommand(() -> shooterSubsystem.setShooterRPM(
+                    ShooterConstants.bottomMotorValues[1][1],
+                    ShooterConstants.topMotorValues[1][1]
+                ))
             )
         ),
 
         // 8. Shoots the two balls gotten from the human players
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem).withTimeout(4)
+            driveSubsystem, ledsSubsystem).withTimeout(4),
+        new RunCommand(() ->
+            driveSubsystem.drive(0, 0, 0, false))
     );
 
   }

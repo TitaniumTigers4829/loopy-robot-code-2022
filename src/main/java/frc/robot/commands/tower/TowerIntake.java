@@ -10,9 +10,12 @@ import frc.robot.subsystems.TowerSubsystem;
 
 public class TowerIntake extends CommandBase {
 
-  /** Creates a new TowerIntake. */
+  /**
+   * Creates a new TowerIntake.
+   */
 
   private final TowerSubsystem tower;
+
   public TowerIntake(TowerSubsystem tower) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.tower = tower;
@@ -22,23 +25,19 @@ public class TowerIntake extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-//    tower.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
-//    tower.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (tower.getIsBallInTop()){
+    if (tower.getIsBallInTop()) {
       tower.setTopMotorOutputManual(0);
-      if (tower.getIsBallInBottom()){
+      if (tower.getIsBallInBottom()) {
         tower.setBottomMotorOutputManual(0);
-      }
-      else{
+      } else {
         tower.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);
       }
-    }
-    else{
+    } else {
       tower.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
       tower.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);
     }
@@ -47,7 +46,6 @@ public class TowerIntake extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-//    Timer.delay(3);
     tower.setTopMotorOutputManual(0);
     tower.setBottomMotorOutputManual(0);
   }

@@ -76,7 +76,7 @@ public final class Constants {
     // Values to scale joystick inputs to desired states.
     public static final double kMaxSpeedMetersPerSecond = 4.5; // LOCKED IN
     public static final double kMaxRotationalSpeed =
-        3 * Math.PI; // TODO: make sure this is right... (maybe should be radians)
+        3 * Math.PI;
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically
@@ -96,7 +96,7 @@ public final class Constants {
 
     public static final double kDriveGearRatio = 7.13;
 
-    public static final double kPModuleTurnController = 9; //8.3 // TUNE: 8.2142
+    public static final double kPModuleTurnController = 8.1; //8.3 // TUNE: 8.2142
     public static final double kIModuleTurnController = 0; // DO NOT USE
     public static final double kDModuleTurnController = 0; // TUNE
 
@@ -107,7 +107,7 @@ public final class Constants {
     public static final double kMaxModuleAngularSpeedRadiansPerSecond = 3 * Math.PI;
     public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 6 * Math.PI;
 
-    public static final double kPModuleDriveController = 0.5; // TUNE
+    public static final double kPModuleDriveController = 1; // TUNE
     public static final double kIModuleDriveController = 0; // DO NOT USE
     public static final double kDModuleDriveController = 0;
 
@@ -199,11 +199,11 @@ public final class Constants {
     public static double ksTurning = 0.0;
     public static double kvTurning = 0.0;
 
-    public static double topkP = 0.1; // 0.0015 // 0.003 // 0.0045
+    public static double topkP = 0.085; // 0.0015 // 0.003 // 0.0045
     public static double topkS = 0; // LEAVE AS 0
     public static double topkV = 0.0485; // 0.001925
     public static double topkA = 0;
-    public static double bottomkP = 0.1; //0.0025 // 0.005
+    public static double bottomkP = 0.085; //0.0025 // 0.005
     public static double bottomkS = 0;
     public static double bottomkV = 0.0483; //0.0019
     public static double bottomkA = 0;
@@ -283,9 +283,9 @@ public final class Constants {
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
 
-    public static final double kPXController = 1;
-    public static final double kPYController = 1;
-    public static final double kPThetaController = 1;
+    public static final double kPXController = 1.25;
+    public static final double kPYController = 1.25;
+    public static final double kPThetaController = 3;
 
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
@@ -304,6 +304,7 @@ public final class Constants {
     public static final String firstPath2Ball = "output/firstPath2Ball.wpilib.json";
     public static final String secondPath2Ball = "output/secondPath2Ball.wpilib.json";
     public static final String thirdPath2Ball = "output/thirdPath2Ball.wpilib.json";
+    public static final String fourthPath2Ball = "output/fourthPath2Ball.wpilib.json";
 
     public static final String testingPath1 = "output/testing.wpilib.json";
   }

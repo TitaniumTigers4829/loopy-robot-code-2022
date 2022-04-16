@@ -9,13 +9,13 @@ import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.*;
 
 
-public class AutoRevAndAim extends CommandBase {
+public class AutoRev extends CommandBase {
 
   private final ShooterSubsystem shooterSubsystem;
   private final LimelightSubsystem limelight;
   private final LEDsSubsystem leds;
 
-  public AutoRevAndAim(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight, LEDsSubsystem leds) {
+  public AutoRev(ShooterSubsystem shooterSubsystem, LimelightSubsystem limelight, LEDsSubsystem leds) {
     this.shooterSubsystem = shooterSubsystem;
     this.limelight = limelight;
     this.leds = leds;
@@ -32,7 +32,7 @@ public class AutoRevAndAim extends CommandBase {
 
   @Override
   public void execute() {
-    shooterSubsystem.setShooterRPMNotImproved(
+    shooterSubsystem.setShooterRPM(
         limelight.calculateRPM(ShooterConstants.bottomMotorValues),
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );

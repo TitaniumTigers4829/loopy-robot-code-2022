@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.RemoteFeedbackDevice;
+import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderStatusFrame;
@@ -77,8 +79,14 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftMotor = new WPI_TalonFX(ClimbConstants.kLeftClimbMotorPort);
     m_rightMotor = new WPI_TalonFX(ClimbConstants.kRightClimbMotorPort);
 
-    m_leftMotor.configFactoryDefault();
-    m_rightMotor.configFactoryDefault();
+    // Initialize Encoders
+    m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
+    m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
+
+    m_leftEncoder.configSensorDirection(true);
+
+    m_leftEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
+    m_rightEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
 
     m_leftMotor.setInverted(true);
     m_rightMotor.setInverted(true);
@@ -86,18 +94,10 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftMotor.setNeutralMode(NeutralMode.Brake);
     m_rightMotor.setNeutralMode(NeutralMode.Brake);
 
-    // Initialize Encoders
-    m_leftEncoder = new CANCoder(ClimbConstants.kLeftClimbEncoderPort);
-    m_rightEncoder = new CANCoder(ClimbConstants.kRightClimbEncoderPort);
-
-    m_leftEncoder.configSensorDirection(true);
-
     // Initialize Limit Switches
     m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
     m_rightLimitSwitch = new DigitalInput(ClimbConstants.kRightClimbLimitSwitchPort);
 
-    m_leftEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
-    m_rightEncoder.setStatusFramePeriod(CANCoderStatusFrame.SensorData, 20);
 
     // Initialize Solenoid
     m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
@@ -364,14 +364,14 @@ public class ClimbSubsystem extends SubsystemBase {
     SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
 //    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
 //    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
-    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
+//    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
 //    SmartDashboard.putNumber("Right Climb PID Error: ", getRightPIDError());
-    SmartDashboard.putNumber("Left Climb PID setpoint: ", m_climbLeftProfiledPIDController.getGoal().position);
+//    SmartDashboard.putNumber("Left Climb PID setpoint: ", m_climbLeftProfiledPIDController.getGoal().position);
 //    SmartDashboard.putNumber("Right Climb PID setpoint: ", m_climbRightProfiledPIDController.getGoal().position);
 
 //    SmartDashboard.putNumber("Left Climb PID velocity: ", m_climbLeftProfiledPIDController.getGoal().velocity);
 //    SmartDashboard.putNumber("Right Climb PID velocity: ", m_climbRightProfiledPIDController.getGoal().velocity);
-    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
+//    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
 //    SmartDashboard.putNumber("RIGHT", getRightHookHeight());
 //    SmartDashboard.putNumber("Right Hook Height:", getRightHookHeight());
 //    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());

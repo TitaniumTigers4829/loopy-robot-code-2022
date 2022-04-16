@@ -6,27 +6,26 @@ import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElectronicsConstants;
 import frc.robot.Constants.IntakeConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
-   private final WPI_TalonFX m_motor;
+
+  private final WPI_TalonFX m_motor;
   private final DoubleSolenoid m_solenoid;
-  private int m_stallCounter = 1;
+  private final int m_stallCounter = 1;
 
 
   public IntakeSubsystem() {
 
-     m_motor = new WPI_TalonFX(IntakeConstants.kIntakeMotorPort);
-     m_motor.setInverted(false); // should make sure motor.set(1.0) means we are intaking.
-     m_motor.setNeutralMode(NeutralMode.Coast);
-     m_motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
+    m_motor = new WPI_TalonFX(IntakeConstants.kIntakeMotorPort);
+    m_motor.setInverted(false); // should make sure motor.set(1.0) means we are intaking.
+    m_motor.setNeutralMode(NeutralMode.Coast);
+    m_motor.configSelectedFeedbackSensor(TalonFXFeedbackDevice.IntegratedSensor, 0, 0);
 
-    m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType, IntakeConstants.kIntakeDeployedSolenoidPort, IntakeConstants.kIntakeRetractedSolenoidPort);
-
+    m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
+        IntakeConstants.kIntakeDeployedSolenoidPort, IntakeConstants.kIntakeRetractedSolenoidPort);
 
     m_motor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
     m_motor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 250);
@@ -45,7 +44,7 @@ public class IntakeSubsystem extends SubsystemBase {
 //    return true;
 //  }
 
-  public void setMotorStopped(){
+  public void setMotorStopped() {
     m_motor.set(0);
   }
 
@@ -54,13 +53,13 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void setMotorFullPowerOut() {
-    m_motor.set(-0.5);
+    m_motor.set(-1);
   }
 
 //
-//  public void setMotorCustomPowerIn(double customPower) {
-//    m_motor.set(customPower);
-//  }
+  public void setMotorCustomPower(double customPower) {
+    m_motor.set(customPower);
+  }
 //
 //  public void setMotorCustomPowerOut(double customPower) {
 //    m_motor.set(-customPower);
@@ -73,7 +72,8 @@ public class IntakeSubsystem extends SubsystemBase {
   public void setSolenoidDeployed() {
     m_solenoid.set(Value.kForward);
   }
-//
+
+  //
   @Override
   public void periodic() {
 //    // Smart Dashboard Debugging

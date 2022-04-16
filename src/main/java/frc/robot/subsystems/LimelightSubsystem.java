@@ -189,6 +189,9 @@ public class LimelightSubsystem extends SubsystemBase {
   public double calculateRPM(double[][] table) {
     double distance = calculateDistance();
 
+    // Handles if the distance recorded is more than the max distance
+    if (table[table.length - 1][0] < distance) return table[table.length - 1][1];
+
     double lowerDistance = 0;
     double lowerSpeed = 0;
     double higherDistance = 0.1; // Shouldn't be necessary but just in case
@@ -217,9 +220,6 @@ public class LimelightSubsystem extends SubsystemBase {
         DriverStation.reportWarning("Error in LimelightSubsystem.calculateRPM(), error: " + e, true);
       }
     }
-
-    // Shouldn't be necessary but just in case
-    if (table[table.length -1][0] < distance) return table[table.length -1][1];
 
     // Gets slope or line connecting points
     double linearSlope = (higherSpeed - lowerSpeed) / (higherDistance - lowerDistance);
