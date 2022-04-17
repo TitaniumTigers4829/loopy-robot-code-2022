@@ -2,14 +2,12 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.PathWeaverConstants;
 import frc.robot.commands.intake.EjectCommand;
 import frc.robot.commands.intake.IntakeWithTower;
-import frc.robot.commands.tower.TowerIntake;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDsSubsystem;
@@ -33,29 +31,30 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
             new AutoRev(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem)
         ).withTimeout(2),
 
+        // 2. Moves closer to the hoop
         new ParallelCommandGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath2Ball, true),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath2Ball, false),
             new IntakeWithTower(intakeSubsystem, towerSubsystem),
             new AutoRev(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem)
         ).withTimeout(1.2),
 
-        // 2. Shoots two balls
+        // 3. Shoots two balls
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem).withTimeout(4),
 
-        // 3. Picks up an enemy ball, then goes into the hangar
+        // 4. Picks up an enemy ball, then goes into the hangar
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath2Ball, false).withTimeout(3.3),
             new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2.4)
         ),
 
-        // 4. Waits for a second
+        // 5. Waits so when the ball is ejected it doesn't have any sideways momentum
         new WaitCommand(.6),
 
-        // 5. Ejects the enemy ball
+        // 6. Ejects the enemy ball
         new EjectCommand(towerSubsystem, intakeSubsystem).withTimeout(2),
 
-        // 6. Goes near white line in the direction of a ball and the direction to reset the gyro at
+        // 7. Goes near white line in the direction of a ball and the direction to reset the gyro at
         new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath2Ball, false).withTimeout(2.5),
 
         new RunCommand(
