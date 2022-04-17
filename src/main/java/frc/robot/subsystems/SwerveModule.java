@@ -173,8 +173,6 @@ public class SwerveModule {
       return;
     }
 
-//    SwerveModuleState state = desiredState;
-
     // Calculate the drive output from the drive PID controller.
     final double driveOutput =
         m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond)
@@ -184,50 +182,8 @@ public class SwerveModule {
     final double turnOutput =
         m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians())
             + turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity);
-
-//    if (!done) {
-//      shuffleboardContainer.addNumber(
-//          shuffleboardContainer.getTitle() + " currentState (speedMetersPerSecond)",
-//          () -> getState().speedMetersPerSecond);
-//      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " currentState: (degrees)",
-//          () -> getState().angle.getDegrees());
-//      shuffleboardContainer.addNumber(
-//          shuffleboardContainer.getTitle() + " desiredState (speedMetersPerSecond)",
-//          () -> desiredState.speedMetersPerSecond);
-//      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " desiredState: (degrees)",
-//          () -> desiredState.angle.getDegrees());
-//      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " driveOutput (PID)",
-//          () -> m_drivePIDController.calculate(m_speedMetersPerSecond));
-//      shuffleboardContainer.addNumber(
-//          shuffleboardContainer.getTitle() + " driveOutput (Feedforward)",
-//          () -> driveFeedforward.calculate(state.speedMetersPerSecond));
-//      shuffleboardContainer.addNumber(shuffleboardContainer.getTitle() + " turnOutput (PID)",
-//          () -> m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()));
-//      shuffleboardContainer.addNumber(
-//          shuffleboardContainer.getTitle() + " turnOutput (Feedforward)",
-//          () -> turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity));
-//      shuffleboardContainer.addNumber("turnPID Setpoint Velocity",
-//          () -> m_turnPIDController.getSetpoint().velocity);
-//      done = true;
-//    }
-//    SmartDashboard.putString(shuffleboardContainer.getTitle() + " desired state: ", state.toString());
-    // Calculate the turning motor output from the turning PID controller.
     m_driveMotor.set(driveOutput/12);
     m_turningMotor.set(turnOutput/12);
-//    if (shuffleboardContainer.getTitle().equals("Rear Right Module")) {
-//      SmartDashboard.putNumber("Rear Right PID", m_turnPIDController.calculate(m_turnRadians, state.angle.getRadians()));
-//      SmartDashboard.putNumber("Rear Right setpoint velocity", m_turnPIDController.getSetpoint().velocity);
-//      SmartDashboard.putNumber("Rear Right velocity error", m_turnPIDController.getVelocityError());
-//      SmartDashboard.putNumber("Rear Right FeedForward", turnFeedForward.calculate(m_turnPIDController.getSetpoint().velocity));
-//      SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " D", driveOutput/12);
-//      SmartDashboard.putNumber(shuffleboardContainer.getTitle() + " T", turnOutput/12);
-//    }
-
-//    this.shuffleboardContainer.add("turnPID Setpoint Velocity", m_turnPIDController.getSetpoint().velocity);
-//    this.shuffleboardContainer.add("PID driveOutput", driveOutput);
-//    this.shuffleboardContainer.add("PID turnOutput", turnOutput);
-//    this.shuffleboardContainer.add("Feedforward", driveFeedforward.calculate(desiredState.speedMetersPerSecond));
-//    this.shuffleboardContainer.add("PID Output", m_drivePIDController.calculate(m_speedMetersPerSecond, state.speedMetersPerSecond));
   }
 
   /**

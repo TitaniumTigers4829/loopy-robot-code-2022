@@ -18,7 +18,7 @@ public class FollowTrajectory extends CommandBase {
 
   private final DriveSubsystem drive;
   private Trajectory trajectory;
-  private boolean toReset = false;
+  private boolean toReset;
 
   public FollowTrajectory(DriveSubsystem drive, String trajectoryFilePath, boolean toReset) {
     this.drive = drive;
