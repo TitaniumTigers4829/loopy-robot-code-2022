@@ -47,7 +47,7 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath5Ball, false),
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
-        ).withTimeout(3.8),
+        ).withTimeout(3.7),
 
         // 5. Revs up shooter while going closer to the hoop
         new ParallelCommandGroup(

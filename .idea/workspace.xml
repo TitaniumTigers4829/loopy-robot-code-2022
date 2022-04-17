@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="changes after practice w/ hedgehogs">
-      <change beforePath="$PROJECT_DIR$/PathWeaver/Paths/fourthPath2Ball" beforeDir="false" afterPath="$PROJECT_DIR$/PathWeaver/Paths/fourthPath2Ball" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PathWeaver/Paths/thirdPath2Ball" beforeDir="false" afterPath="$PROJECT_DIR$/PathWeaver/Paths/thirdPath2Ball" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/fourthPath2Ball.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/fourthPath2Ball.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/secondPath2Ball.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/secondPath2Ball.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/deploy/output/thirdPath2Ball.wpilib.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/deploy/output/thirdPath2Ball.wpilib.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/TwoBallAutoCommand.java" afterDir="false" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
     <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
@@ -125,7 +120,7 @@
       <recent name="frc.robot.commands.shooter" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
+  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -299,13 +294,6 @@
       <workItem from="1650049504334" duration="5757000" />
       <workItem from="1650059414133" duration="4516000" />
       <workItem from="1650120009073" duration="19926000" />
-    </task>
-    <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
-      <created>1645207484963</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1645207484963</updated>
     </task>
     <task id="LOCAL-00002" summary="added phoenix and rev as dependencies">
       <created>1646458584096</created>
@@ -643,7 +631,14 @@
       <option name="project" value="LOCAL" />
       <updated>1649967559106</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Updated 2 Ball auto">
+      <created>1650156158939</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1650156158939</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +661,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added Angle Zero Offset" />
     <MESSAGE value="idk" />
     <MESSAGE value="changes from today, climb still not working" />
     <MESSAGE value="deleted wrong comments" />
@@ -692,7 +686,8 @@
     <MESSAGE value="5 ball auto :)" />
     <MESSAGE value="working on auto" />
     <MESSAGE value="changes after practice w/ hedgehogs" />
-    <option name="LAST_COMMIT_MESSAGE" value="changes after practice w/ hedgehogs" />
+    <MESSAGE value="Updated 2 Ball auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated 2 Ball auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
