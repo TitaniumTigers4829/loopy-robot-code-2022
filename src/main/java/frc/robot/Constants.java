@@ -306,6 +306,12 @@ public final class Constants {
     public static final String thirdPath2Ball = "output/thirdPath2Ball.wpilib.json";
     public static final String fourthPath2Ball = "output/fourthPath2Ball.wpilib.json";
 
+    // 3 Ball Auto Paths
+    public static final String firstPath3Ball = "output/firstPath3Ball.wpilib.json";
+    public static final String secondPath3Ball = "output/secondPath3Ball.wpilib.json";
+    public static final String thirdPath3Ball = "output/thirdPath3Ball.wpilib.json";
+    public static final String fourthPath3Ball = "output/fourthPath3Ball.wpilib.json";
+
     public static final String testingPath1 = "output/testing.wpilib.json";
   }
 }

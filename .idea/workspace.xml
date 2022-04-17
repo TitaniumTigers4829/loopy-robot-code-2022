@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PathWeaver/Paths/firstPath3Ball" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PathWeaver/Paths/fourthPath3Ball" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PathWeaver/Paths/secondPath3Ball" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PathWeaver/Paths/thirdPath3Ball" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/deploy/output/firstPath3Ball.wpilib.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/deploy/output/fourthPath3Ball.wpilib.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/deploy/output/secondPath3Ball.wpilib.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/deploy/output/thirdPath3Ball.wpilib.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/ThreeBallAutoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
     <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
@@ -294,13 +305,6 @@
       <workItem from="1650049504334" duration="5757000" />
       <workItem from="1650059414133" duration="4516000" />
       <workItem from="1650120009073" duration="19926000" />
-    </task>
-    <task id="LOCAL-00002" summary="added phoenix and rev as dependencies">
-      <created>1646458584096</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1646458584096</updated>
     </task>
     <task id="LOCAL-00003" summary="made a lot of changes, mostly copying code from RedThunder7166">
       <created>1646462959732</created>
@@ -638,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650156158939</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Updated 5 Ball Auto">
+      <created>1650156539531</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1650156539531</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -661,7 +672,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="idk" />
     <MESSAGE value="changes from today, climb still not working" />
     <MESSAGE value="deleted wrong comments" />
     <MESSAGE value="added intake and restructured some things" />
@@ -687,7 +697,8 @@
     <MESSAGE value="working on auto" />
     <MESSAGE value="changes after practice w/ hedgehogs" />
     <MESSAGE value="Updated 2 Ball auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated 2 Ball auto" />
+    <MESSAGE value="Updated 5 Ball Auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated 5 Ball Auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

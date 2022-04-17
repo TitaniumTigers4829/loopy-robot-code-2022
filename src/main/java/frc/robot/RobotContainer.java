@@ -19,6 +19,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
 import frc.robot.commands.autonomous.OldTwoBallAutoCommand;
+import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.shooter.RevAndAim;
@@ -80,11 +81,14 @@ public class RobotContainer {
         m_intakeSubsystem);
     Command twoBallAuto = new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
         m_intakeSubsystem);
+    Command threeBallAuto = new ThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+        m_intakeSubsystem);
     Command oldTwoBallAuto = new OldTwoBallAutoCommand(m_shooter, m_tower, m_robotDrive,
         m_LEDs, m_intakeSubsystem);
 
     autoChooser.setDefaultOption("5 ball auto", fiveBallAuto);
     autoChooser.addOption("2 ball auto", twoBallAuto);
+    autoChooser.addOption("3 ball auto", threeBallAuto);
     autoChooser.addOption("Old 2 ball auto", oldTwoBallAuto);
     SmartDashboard.putData(autoChooser);
 //    chooser.
@@ -257,8 +261,8 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // Create config for trajectory
 //    return new OldTwoBallAutoCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
-
 //    return new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    return new ThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 //    return new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
     return autoChooser.getSelected();
   }
