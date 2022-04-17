@@ -175,10 +175,13 @@ public class RobotContainer {
 //        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
         new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
+        // Moves the robot to zeroing position, then zeroes it
         if (autoChooser.getSelected() == fiveBallAuto) {
             new FaceDegree(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
                 () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_TRIGGER.get(), -128).withTimeout(2).schedule();
+            new InstantCommand(m_robotDrive::zeroHeading).schedule();
         }
+
     }
 
     /**
