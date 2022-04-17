@@ -44,7 +44,7 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
 
         // 4. Picks up an enemy ball, then goes into the hangar
         new ParallelCommandGroup(
-            new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath2Ball, false).withTimeout(3.3),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath2Ball, false).withTimeout(3.61),
             new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2.4)
         ),
 
@@ -52,7 +52,7 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
         new WaitCommand(.6),
 
         // 6. Ejects the enemy ball
-        new EjectCommand(towerSubsystem, intakeSubsystem).withTimeout(2),
+        new EjectCommand(towerSubsystem, intakeSubsystem).withTimeout(1.6),
 
         // 7. Goes near white line in the direction of a ball and the direction to reset the gyro at
         new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath2Ball, false).withTimeout(2.5),
