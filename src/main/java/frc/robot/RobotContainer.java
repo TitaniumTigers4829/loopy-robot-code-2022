@@ -52,6 +52,15 @@ public class RobotContainer {
     private final ShooterSubsystem m_shooter = new ShooterSubsystem();
     private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
 
+    private final Command fiveBallAuto = new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+        m_intakeSubsystem);
+    private final Command twoBallAuto = new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+        m_intakeSubsystem);
+    private final Command threeBallAuto = new ThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+        m_intakeSubsystem);
+    private final Command oldTwoBallAuto = new OldTwoBallAutoCommand(m_shooter, m_tower, m_robotDrive,
+        m_LEDs, m_intakeSubsystem);
+
     private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
 //  private final Command twoBallAuto;
@@ -70,15 +79,6 @@ public class RobotContainer {
 
         m_Limelight.turnOnLED();
         m_LEDs.setLEDsDefault();
-
-        Command fiveBallAuto = new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
-                m_intakeSubsystem);
-        Command twoBallAuto = new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
-                m_intakeSubsystem);
-        Command threeBallAuto = new ThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
-                m_intakeSubsystem);
-        Command oldTwoBallAuto = new OldTwoBallAutoCommand(m_shooter, m_tower, m_robotDrive,
-                m_LEDs, m_intakeSubsystem);
 
         autoChooser.setDefaultOption("5 ball auto", fiveBallAuto);
         autoChooser.addOption("2 ball auto", twoBallAuto);
@@ -174,6 +174,11 @@ public class RobotContainer {
 //    new JoystickButton(m_buttonController, 8).whileHeld(
 //        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
         new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
+
+        if (autoChooser.getSelected() == fiveBallAuto) {
+            new FaceDegree(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
+                () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_TRIGGER.get(), -128).withTimeout(2).schedule();
+        }
     }
 
     /**

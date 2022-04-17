@@ -40,7 +40,7 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
 
         // 3. Shoots two balls
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem).withTimeout(4),
+            driveSubsystem, ledsSubsystem).withTimeout(3.3),
 
         // 4. Picks up an enemy ball, then goes into the hangar
         new ParallelCommandGroup(
@@ -49,7 +49,7 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
         ),
 
         // 5. Waits so when the ball is ejected it doesn't have any sideways momentum
-        new WaitCommand(.6),
+        new WaitCommand(.3),
 
         // 6. Ejects the enemy ball
         new EjectCommand(towerSubsystem, intakeSubsystem).withTimeout(1.6),
