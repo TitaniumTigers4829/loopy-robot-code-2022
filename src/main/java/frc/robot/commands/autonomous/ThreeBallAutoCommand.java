@@ -2,6 +2,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants.PathWeaverConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -29,10 +30,10 @@ public class ThreeBallAutoCommand extends SequentialCommandGroup {
         // 2. Intakes for a while to suck the ball in
         new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(5),
 
-        // 3. Goes back towards the hoop while bumping an enemy ball and reving up the shooter
+        // 3. Goes back towards the hoop while bumping an enemy ball and revving up the shooter
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.secondPath3Ball, false),
-            new InstantCommand(() -> shooterSubsystem.setShooterRPM(
+            new RunCommand(() -> shooterSubsystem.setShooterRPM(
                 ShooterConstants.bottomMotorValues[0][1], // Sets the RPMs for 5.5 feet away
                 ShooterConstants.topMotorValues[0][1]
             ))
@@ -51,7 +52,7 @@ public class ThreeBallAutoCommand extends SequentialCommandGroup {
         // 6. Goes closer to the tower while reving up the shooter
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath3Ball, false),
-            new InstantCommand(() -> shooterSubsystem.setShooterRPM(
+            new RunCommand(() -> shooterSubsystem.setShooterRPM(
                 ShooterConstants.bottomMotorValues[0][1], // Sets the RPMs for 5.5 feet away
                 ShooterConstants.topMotorValues[0][1]
             ))
