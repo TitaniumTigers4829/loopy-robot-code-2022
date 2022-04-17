@@ -1,5 +1,7 @@
 package frc.robot.commands.autonomous;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
@@ -25,6 +27,9 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intakeSubsystem) {
 
     addCommands(
+        // 0. Sets the Gyro to the correct position
+        new InstantCommand(() -> driveSubsystem.resetOdometry(new Pose2d(0, 0, new Rotation2d(90)))),
+
         // 1. Backs up from the pad and intakes
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath5Ball, true),

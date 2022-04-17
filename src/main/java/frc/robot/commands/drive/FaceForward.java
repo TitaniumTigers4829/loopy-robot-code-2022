@@ -18,6 +18,7 @@ public class FaceForward extends CommandBase {
                     ShooterConstants.kMaxTurnAngularSpeedRadiansPerSecond,
                     ShooterConstants.kMaxTurnAngularAccelerationRadiansPerSecondSquared)
     );
+
     private final DriveSubsystem drive;
     private final DoubleSupplier leftStickY;
     private final DoubleSupplier leftStickX;
