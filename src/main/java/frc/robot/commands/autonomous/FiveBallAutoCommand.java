@@ -41,34 +41,27 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
 
         // 3. Shoots the two balls it is currently holding then intakes the third ball
         new AutoShootIntake(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem, intakeSubsystem).withTimeout(3.5),
+            driveSubsystem, ledsSubsystem, intakeSubsystem).withTimeout(3.3),
 
-        // 5. Goes to the area where it can pick up cargo from human plays
+        // 4. Goes to the area where it can pick up cargo from human player while intaking
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath5Ball, false),
-            // 6. Intakes long enough for the human players to load 2 balls
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
-        ).withTimeout(3.6),
+        ).withTimeout(3.8),
 
-        // 7. Revs up shooter while going closer to the hoop
+        // 5. Revs up shooter while going closer to the hoop
         new ParallelCommandGroup(
-            new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(2),
-            new ParallelRaceGroup(
-                new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball,
-                    false).withTimeout(
-                    2.4),
-                new InstantCommand(() -> shooterSubsystem.setShooterRPM(
-                    ShooterConstants.bottomMotorValues[1][1],
-                    ShooterConstants.topMotorValues[1][1]
-                ))
-            )
-        ),
+            new IntakeWithTower(intakeSubsystem, towerSubsystem),
+            new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball, false),
+            new InstantCommand(() -> shooterSubsystem.setShooterRPM(
+                ShooterConstants.bottomMotorValues[1][1],
+                ShooterConstants.topMotorValues[1][1]
+            ))
+        ).withTimeout(2.65),
 
-        // 8. Shoots the two balls gotten from the human players
+        // 6. Shoots the two balls gotten from the human player and corner
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem).withTimeout(4),
-        new RunCommand(() ->
-            driveSubsystem.drive(0, 0, 0, false))
+            driveSubsystem, ledsSubsystem)
     );
 
   }

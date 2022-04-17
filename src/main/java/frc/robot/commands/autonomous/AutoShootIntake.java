@@ -23,6 +23,7 @@ public class AutoShootIntake extends CommandBase {
   private final DriveSubsystem driveSubsystem;
   private final LEDsSubsystem LEDS;
   private final IntakeSubsystem intakeSubsystem;
+  private boolean intakedThirdBall = false;
 
   private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
       ShooterConstants.turnkP,
@@ -39,7 +40,7 @@ public class AutoShootIntake extends CommandBase {
   private double headingError = 0;
 
   /**
-   .
+   Command that shoots and intakes for autonomous
    */
   public AutoShootIntake(ShooterSubsystem shooterSubsystem,
       TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
@@ -69,13 +70,23 @@ public class AutoShootIntake extends CommandBase {
         limelight.calculateRPM(ShooterConstants.topMotorValues)
     );
 
-    if (!towerSubsystem.getIsBallInTop()) {
+//    if (!towerSubsystem.getIsBallInTop()) {
+//      intakeSubsystem.setSolenoidDeployed();
+//      intakeSubsystem.setMotorFullPowerIn();
+//    } else {
+//      intakeSubsystem.setSolenoidRetracted();
+//      intakeSubsystem.setMotorStopped();
+//    }
+
+    if (!towerSubsystem.getIsBallInTop() || intakedThirdBall) {
       intakeSubsystem.setSolenoidDeployed();
       intakeSubsystem.setMotorFullPowerIn();
+      intakedThirdBall = true;
     } else {
       intakeSubsystem.setSolenoidRetracted();
       intakeSubsystem.setMotorStopped();
     }
+
     headingError = limelight.getTargetOffsetX();
 
     // If heading error isn't off by much, it won't move
@@ -98,8 +109,6 @@ public class AutoShootIntake extends CommandBase {
       LEDS.setLEDsShooterLiningUp();
       towerSubsystem.setTowerMotorsSpeed(0);
     }
-//    SmartDashboard.putNumber("Target offset X: ", limelight.getTargetOffsetX());
-//    SmartDashboard.putBoolean("Has valid target: ", limelight.hasValidTarget());
   }
 
   @Override

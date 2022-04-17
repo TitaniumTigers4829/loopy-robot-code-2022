@@ -6,7 +6,6 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutoConstants;
@@ -18,7 +17,6 @@ import java.nio.file.Path;
 public class FollowTrajectory extends CommandBase {
 
   private final DriveSubsystem drive;
-  private final Timer timer = new Timer();
   private Trajectory trajectory;
   private boolean toReset = false;
 
@@ -60,7 +58,7 @@ public class FollowTrajectory extends CommandBase {
         drive).andThen(() -> drive.drive(0, 0, 0, false)).schedule(); // Stops the robot
 
     // Reset odometry to the starting pose of the trajectory.
-    drive.resetOdometry(trajectory.getInitialPose());
+    // drive.resetOdometry(trajectory.getInitialPose());
   }
 
   @Override
@@ -73,11 +71,6 @@ public class FollowTrajectory extends CommandBase {
 
   @Override
   public boolean isFinished() {
-//    if (trajectory != null) {
-//      return timer.hasElapsed(trajectory.getTotalTimeSeconds());
-//    } else {
-//      return (timer.hasElapsed(5)); // This is just in case something gets wrong and trajectory is never loaded
-//    }
     return false;
   }
 
