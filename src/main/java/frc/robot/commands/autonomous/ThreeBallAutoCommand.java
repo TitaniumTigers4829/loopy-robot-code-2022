@@ -1,5 +1,6 @@
 package frc.robot.commands.autonomous;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -36,6 +37,8 @@ public class ThreeBallAutoCommand extends SequentialCommandGroup {
             new SetDriveSpeed(driveSubsystem, .5, 0),
             new AutoIntakeBlow(intakeSubsystem)
         ).withTimeout(2),
+
+        new InstantCommand(() -> driveSubsystem.drive(0, 0, 0, false)), // Stops the robot
 
         // 4. Gives the intake a little time to start spinning the other way
         new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(1),
