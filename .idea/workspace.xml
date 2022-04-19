@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="">
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Decent Changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/drive/FaceForward.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/drive/FaceForward.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/ThreeBallAutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/ThreeBallAutoCommand.java" afterDir="false" />
     </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
-    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
+    <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FiveBallAutoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/drive/FaceForward.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/drive/FaceDegree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
+    </list>
     <list id="22b4c1c0-8530-4f35-9a5d-6f552df0d4ad" name="Changes by titan" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +123,7 @@
       <recent name="D:\Users\jackg\Desktop\Robot Code\zuntue\src\main\java\frc\robot\commands\autonomous" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="frc.robot.commands.autonomous" />
       <recent name="frc.robot.commands.shooter" />
     </key>
   </component>
@@ -296,34 +301,6 @@
       <workItem from="1650049504334" duration="5757000" />
       <workItem from="1650059414133" duration="4516000" />
       <workItem from="1650120009073" duration="19926000" />
-    </task>
-    <task id="LOCAL-00004" summary="updated it for our gyro">
-      <created>1646463192150</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1646463192150</updated>
-    </task>
-    <task id="LOCAL-00005" summary="updated can IDs">
-      <created>1646464760658</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1646464760658</updated>
-    </task>
-    <task id="LOCAL-00006" summary="changed some constants to try and get rid of chattering.">
-      <created>1646465532000</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1646465532000</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Added Limelight subsystem. And minor improvements to constant (adding deadband for controller).">
-      <created>1646498274607</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1646498274607</updated>
     </task>
     <task id="LOCAL-00008" summary="Added Shooter Subsystem">
       <created>1646512318831</created>
@@ -640,7 +617,35 @@
       <option name="project" value="LOCAL" />
       <updated>1650174946414</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Decent Changes">
+      <created>1650217394114</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1650217394114</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Decent Changes">
+      <created>1650222269519</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1650222269519</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Decent Changes">
+      <created>1650227918949</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1650227918949</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Made a new 3 ball auto">
+      <created>1650342576131</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1650342576131</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,9 +668,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="deleted wrong comments" />
-    <MESSAGE value="added intake and restructured some things" />
-    <MESSAGE value="Need to fix one more problem with swerve" />
     <MESSAGE value="most recent changes, still a work in progress" />
     <MESSAGE value="finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy." />
     <MESSAGE value="most recent changes to climb subsystem and relevant constants" />
@@ -689,7 +691,9 @@
     <MESSAGE value="Updated 2 Ball auto" />
     <MESSAGE value="Updated 5 Ball Auto" />
     <MESSAGE value="Added 3 Ball Auto" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added 3 Ball Auto" />
+    <MESSAGE value="Decent Changes" />
+    <MESSAGE value="Made a new 3 ball auto" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made a new 3 ball auto" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
