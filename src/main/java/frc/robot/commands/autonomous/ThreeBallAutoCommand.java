@@ -15,7 +15,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 
 /**
- * This class is for the Old 3 Ball Auto Command
+ * This class is for the 3 Ball Auto Command
  */
 public class ThreeBallAutoCommand extends SequentialCommandGroup {
 
