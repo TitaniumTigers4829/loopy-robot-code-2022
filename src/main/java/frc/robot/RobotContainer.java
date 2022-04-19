@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
-import frc.robot.commands.autonomous.OldTwoBallAutoCommand;
-import frc.robot.commands.autonomous.ThreeBallAutoCommand;
+import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
+import frc.robot.commands.autonomous.deprecated.OldTwoBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.drive.FaceForward;
@@ -56,9 +56,11 @@ public class RobotContainer {
         m_intakeSubsystem);
     private final Command twoBallAuto = new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
         m_intakeSubsystem);
-    private final Command threeBallAuto = new ThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+    private final Command threeBallAuto = new OldThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
         m_intakeSubsystem);
     private final Command oldTwoBallAuto = new OldTwoBallAutoCommand(m_shooter, m_tower, m_robotDrive,
+        m_LEDs, m_intakeSubsystem);
+    private final Command oldThreeBallAuto = new OldThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive,
         m_LEDs, m_intakeSubsystem);
 
     private final SendableChooser<Command> autoChooser = new SendableChooser<>();
@@ -84,6 +86,7 @@ public class RobotContainer {
         autoChooser.addOption("2 ball auto", twoBallAuto);
         autoChooser.addOption("3 ball auto", threeBallAuto);
         autoChooser.addOption("Old 2 ball auto", oldTwoBallAuto);
+        autoChooser.addOption("Old 3 ball auto", oldThreeBallAuto);
         SmartDashboard.putData(autoChooser);
 //    chooser.
         // m_LEDs.setLEDsRaw(-0.39); // will normally be handled by commands, just for testing.
@@ -178,10 +181,14 @@ public class RobotContainer {
         // Moves the robot to zeroing position, then zeroes it
         if (autoChooser.getSelected() == fiveBallAuto) {
             new FaceDegree(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
-                () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_TRIGGER.get(), -128).withTimeout(2).schedule();
+                () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_TRIGGER.get(), -128).withTimeout(1.5).schedule();
+            new InstantCommand(m_robotDrive::zeroHeading).schedule();
+        } else if (autoChooser.getSelected() == threeBallAuto) {
+            new FaceDegree(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
+                () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_TRIGGER.get(),
+                -145).withTimeout(1.5).schedule();
             new InstantCommand(m_robotDrive::zeroHeading).schedule();
         }
-
     }
 
     /**
@@ -271,7 +278,7 @@ public class RobotContainer {
         // Create config for trajectory
 //    return new OldTwoBallAutoCommand(shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 //    return new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
-//    return new ThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
+//    return new OldThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
 //    return new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs, m_intakeSubsystem);
         return autoChooser.getSelected();
     }

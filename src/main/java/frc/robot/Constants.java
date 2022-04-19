@@ -310,7 +310,13 @@ public final class Constants {
     public static final String firstPath3Ball = "output/firstPath3Ball.wpilib.json";
     public static final String secondPath3Ball = "output/secondPath3Ball.wpilib.json";
     public static final String thirdPath3Ball = "output/thirdPath3Ball.wpilib.json";
-    public static final String fourthPath3Ball = "output/fourthPath3Ball.wpilib.json";
+    public static final String fourthPath3Ball = "output/fourthPathBall.wpilib.json";
+
+    // Old 3 Ball Auto Paths
+    public static final String firstPathOld3Ball = "output/firstPathOld3Ball.wpilib.json";
+    public static final String secondPathOld3Ball = "output/secondPathOld3Ball.wpilib.json";
+    public static final String thirdPathOld3Ball = "output/thirdPathOld3Ball.wpilib.json";
+    public static final String fourthPathOld3Ball = "output/fourthPathOld3Ball.wpilib.json";
 
     public static final String testingPath1 = "output/testing.wpilib.json";
   }
