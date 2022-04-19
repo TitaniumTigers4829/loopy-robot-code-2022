@@ -2,7 +2,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -27,9 +27,6 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
       DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intakeSubsystem) {
 
     addCommands(
-        // 0. Sets the Gyro to the correct position
-        new InstantCommand(() -> driveSubsystem.resetOdometry(new Pose2d(0, 0, new Rotation2d(90)))),
-
         // 1. Backs up from the pad and intakes
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath5Ball, true),
@@ -58,7 +55,7 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
         new ParallelCommandGroup(
             new IntakeWithTower(intakeSubsystem, towerSubsystem),
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball, false),
-            new InstantCommand(() -> shooterSubsystem.setShooterRPM(
+            new RunCommand(() -> shooterSubsystem.setShooterRPM(
                 ShooterConstants.bottomMotorValues[0][1], // Sets the RPMs for 5.5 feet away
                 ShooterConstants.topMotorValues[0][1]
             ))
