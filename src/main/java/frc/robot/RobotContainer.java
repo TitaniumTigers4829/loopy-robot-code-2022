@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
+import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldTwoBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
@@ -56,7 +57,7 @@ public class RobotContainer {
         m_intakeSubsystem);
     private final Command twoBallAuto = new TwoBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
         m_intakeSubsystem);
-    private final Command threeBallAuto = new OldThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
+    private final Command threeBallAuto = new ThreeBallAutoCommand(m_shooter, m_tower, m_robotDrive, m_LEDs,
         m_intakeSubsystem);
     private final Command oldTwoBallAuto = new OldTwoBallAutoCommand(m_shooter, m_tower, m_robotDrive,
         m_LEDs, m_intakeSubsystem);
