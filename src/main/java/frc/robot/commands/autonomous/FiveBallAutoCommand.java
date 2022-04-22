@@ -56,7 +56,7 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
             new IntakeWithTower(intakeSubsystem, towerSubsystem),
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball, false),
             new RunCommand(() -> shooterSubsystem.setShooterRPM(
-                ShooterConstants.bottomMotorValues[2][1], // Sets the RPMs for 5.5 feet away
+                ShooterConstants.bottomMotorValues[2][1], // Sets the RPMs for 8.5 feet away
                 ShooterConstants.topMotorValues[2][1]
             ))
         ).withTimeout(2.5),
