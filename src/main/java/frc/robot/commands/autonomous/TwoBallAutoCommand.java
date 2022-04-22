@@ -27,8 +27,7 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
         // 1. Backs up from the pad and intakes the second ball
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.firstPath2Ball, true),
-            new IntakeWithTower(intakeSubsystem, towerSubsystem),
-            new AutoRev(shooterSubsystem, LimelightSubsystem.getInstance(), ledsSubsystem)
+            new IntakeWithTower(intakeSubsystem, towerSubsystem)
         ).withTimeout(2),
 
         // 2. Moves closer to the hoop
@@ -40,7 +39,7 @@ public class TwoBallAutoCommand extends SequentialCommandGroup {
 
         // 3. Shoots two balls
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem).withTimeout(3.3),
+            driveSubsystem, ledsSubsystem).withTimeout(3.6),
 
         // 4. Picks up an enemy ball, then goes into the hangar
         new ParallelCommandGroup(

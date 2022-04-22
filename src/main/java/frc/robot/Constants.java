@@ -199,11 +199,11 @@ public final class Constants {
     public static double ksTurning = 0.0;
     public static double kvTurning = 0.0;
 
-    public static double topkP = 0.085; // 0.0015 // 0.003 // 0.0045
+    public static double topkP = 0.08; // 0.0015 // 0.003 // 0.0045
     public static double topkS = 0; // LEAVE AS 0
     public static double topkV = 0.0485; // 0.001925
     public static double topkA = 0;
-    public static double bottomkP = 0.085; //0.0025 // 0.005
+    public static double bottomkP = 0.08; //0.0025 // 0.005
     public static double bottomkS = 0;
     public static double bottomkV = 0.0483; //0.0019
     public static double bottomkA = 0;
@@ -252,8 +252,8 @@ public final class Constants {
     public static final int kLeftClimbLimitSwitchPort = 3;
     public static final int kRightClimbLimitSwitchPort = 2;
     // Solenoid constants
-    public static final int kClimbVerticalSolenoidPort = 5;
-    public static final int kClimbAngledSolenoidPort = 7;
+    public static final int kClimbVerticalSolenoidPort = 7;
+    public static final int kClimbAngledSolenoidPort = 5;
 
     public static int kFirstBarPos = 48124;
     public static int kSecondBarPos = 471289;

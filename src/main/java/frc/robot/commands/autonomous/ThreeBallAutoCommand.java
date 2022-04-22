@@ -34,7 +34,7 @@ public class ThreeBallAutoCommand extends SequentialCommandGroup {
 
         // 3. Slowly moves towards the ball while running the intake backwards
         new ParallelCommandGroup(
-            new SetDriveSpeed(driveSubsystem, .5, 0), // TODO: Tune Values
+            new SetDriveSpeed(driveSubsystem, .15, 0), // TODO: Tune Values
             new AutoIntakeBlow(intakeSubsystem)
         ).withTimeout(2),
 
@@ -44,7 +44,7 @@ public class ThreeBallAutoCommand extends SequentialCommandGroup {
         new IntakeWithTower(intakeSubsystem, towerSubsystem).withTimeout(1),
 
         // 5. Slowly moves towards the ball while intaking
-        new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, .8).withTimeout(1.2), // TODO: Tune Values
+        new AutoDriveIntake(driveSubsystem, intakeSubsystem, towerSubsystem, .622).withTimeout(1), // TODO: Tune Values
 
         // 6. Goes back towards the hoop while bumping an enemy ball and revving up the shooter
         new ParallelCommandGroup(

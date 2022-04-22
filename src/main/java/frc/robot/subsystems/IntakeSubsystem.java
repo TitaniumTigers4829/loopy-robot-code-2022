@@ -4,8 +4,11 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.TalonFXFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.I2C.Port;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ElectronicsConstants;
 import frc.robot.Constants.IntakeConstants;
@@ -14,8 +17,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
   private final WPI_TalonFX m_motor;
   private final DoubleSolenoid m_solenoid;
+//  private final ColorSensorV3 colorSensor;
   private final int m_stallCounter = 1;
-
 
   public IntakeSubsystem() {
 
@@ -29,6 +32,8 @@ public class IntakeSubsystem extends SubsystemBase {
 
     m_motor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
     m_motor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 250);
+
+//    colorSensor = new ColorSensorV3(Port.kMXP);
   }
 
 //  public boolean getIsIntakeDeployed() {
@@ -91,5 +96,9 @@ public class IntakeSubsystem extends SubsystemBase {
 //    }
 //
 //    SmartDashboard.putBoolean("Is Intake Deployed?: ", getIsIntakeDeployed());
+//    SmartDashboard.put
+//    SmartDashboard.putNumber("Blue", colorSensor.getColor().blue);
+//    SmartDashboard.putNumber("Red", colorSensor.getColor().red);
+//    SmartDashboard.putNumber("Green", colorSensor.getColor().green);
   }
 }

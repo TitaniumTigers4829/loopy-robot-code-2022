@@ -35,9 +35,6 @@ public class ShooterSubsystem extends SubsystemBase {
   private final SimpleMotorFeedforward bottomFF = new SimpleMotorFeedforward(ShooterConstants.bottomkS, ShooterConstants.bottomkV,ShooterConstants.bottomkA );
 //  private BangBangController botBangBang = new BangBangController();
 
-
-
-
   public ShooterSubsystem() {
     m_bottomMotor.configFactoryDefault();
     m_topMotor.configFactoryDefault();
@@ -70,6 +67,9 @@ public class ShooterSubsystem extends SubsystemBase {
 
     m_bottomMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
     m_topMotor.setStatusFramePeriod(StatusFrame.Status_1_General, 250);
+
+    m_bottomMotor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 10);
+    m_topMotor.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 10);
   }
 
   public void setShooterRPM(double bottomMotorRPM, double topMotorRPM) {

@@ -43,23 +43,23 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
 
         // 3. Shoots the two balls it is currently holding then intakes the third ball
         new AutoShootIntake(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem, intakeSubsystem).withTimeout(3.3),
+            driveSubsystem, ledsSubsystem, intakeSubsystem).withTimeout(3.45),
 
         // 4. Goes to the area where it can pick up cargo from human player while intaking
         new ParallelCommandGroup(
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.thirdPath5Ball, false),
             new IntakeWithTower(intakeSubsystem, towerSubsystem)
-        ).withTimeout(3.7),
+        ).withTimeout(3.6),
 
         // 5. Revs up shooter while going closer to the hoop
         new ParallelCommandGroup(
             new IntakeWithTower(intakeSubsystem, towerSubsystem),
             new FollowTrajectory(driveSubsystem, PathWeaverConstants.fourthPath5Ball, false),
             new RunCommand(() -> shooterSubsystem.setShooterRPM(
-                ShooterConstants.bottomMotorValues[0][1], // Sets the RPMs for 5.5 feet away
-                ShooterConstants.topMotorValues[0][1]
+                ShooterConstants.bottomMotorValues[2][1], // Sets the RPMs for 5.5 feet away
+                ShooterConstants.topMotorValues[2][1]
             ))
-        ).withTimeout(2.65),
+        ).withTimeout(2.5),
 
         // 6. Shoots the two balls gotten from the human player and corner
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),

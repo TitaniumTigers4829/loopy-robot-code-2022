@@ -34,8 +34,8 @@ public class Eject extends CommandBase {
 //        ShooterConstants.kTopEjectRPM
 //    );
     shooterSubsystem.setSpeed1(
-        0.1,
-        0.1
+        0.3,
+        0.3
     );
     Timer.delay(1);
     towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
@@ -44,8 +44,8 @@ public class Eject extends CommandBase {
   @Override
   public void execute() {
     shooterSubsystem.setSpeed1(
-        0.1,
-        0.1
+        0.3,
+        0.3
     );
 //    if (Math.abs(shooterSubsystem.getShooterAverageRPMError()) <= 150){
 //    }
