@@ -23,7 +23,6 @@ public class TeleopAutoShoot extends CommandBase {
   private final TowerSubsystem towerSubsystem;
   private final LimelightSubsystem limelight;
   private final DriveSubsystem driveSubsystem;
-  private final IntakeSubsystem intakeSubsystem;
   private final DoubleSupplier leftStickY;
   private final DoubleSupplier leftStickX;
   private final DoubleSupplier rightStickY;
@@ -51,18 +50,17 @@ public class TeleopAutoShoot extends CommandBase {
   private boolean[] arrayOfBalls = new boolean[2];
   private double currentDriveSpeed;
   /**
-   * Creates a new Shoot.
+   * Creates a new TeleopAutoShoot.
    */
   public TeleopAutoShoot(ShooterSubsystem shooterSubsystem,
                          TowerSubsystem towerSubsystem, LimelightSubsystem limelight, DriveSubsystem driveSubsystem,
                          DoubleSupplier leftStickY, DoubleSupplier leftStickX, DoubleSupplier rightStickY, BooleanSupplier isFieldRelative,
-                         LEDsSubsystem leds, IntakeSubsystem intakeSubsystem) {
+                         LEDsSubsystem leds) {
 
     this.shooterSubsystem = shooterSubsystem;
     this.towerSubsystem = towerSubsystem;
     this.limelight = limelight;
     this.driveSubsystem = driveSubsystem;
-    this.intakeSubsystem = intakeSubsystem;
     this.leftStickY = leftStickY;
     this.leftStickX = leftStickX;
     this.rightStickY = rightStickY;
@@ -87,36 +85,43 @@ public class TeleopAutoShoot extends CommandBase {
   @Override
   public void execute() {
     updateBallCount();
-    if (ballcount < 2) {
-      driveSubsystem.drive(-leftStickY.getAsDouble(), -leftStickX.getAsDouble(), -rightStickY.getAsDouble(), isFieldRelative.getAsBoolean());
-    } else {
-      if (isLimelightInRange()) {
-        shooterSubsystem.setShooterRPM(
-                limelight.calculateRPM(ShooterConstants.bottomMotorValues),
-                limelight.calculateRPM(ShooterConstants.topMotorValues)
-        );
-        headingError = limelight.getTargetOffsetX();
+//    if (ballcount < 2) {
+//    If speed is faster than we think is OK to shoot (TUNE) or limelight is not in range or there are no balls in the tower:
+//    drive normally
+//    FIXME: tune speed
+    if ((driveSubsystem.speed() > ShooterConstants.maxAutoShootSpeed) || (!isLimelightInRange()) || (ballcount == 0)) {
+      driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, rightStickY.getAsDouble() * -DriveConstants.kMaxRotationalSpeed, isFieldRelative.getAsBoolean());
+    // if the speed is slow and limelight is in range and there is at least 1 ball in:
+    } else if ((driveSubsystem.speed() <= ShooterConstants.maxAutoShootSpeed) && (isLimelightInRange()) && (ballcount > 0)) {
+      shooterSubsystem.setShooterRPM(
+              limelight.calculateRPM(ShooterConstants.bottomMotorValues),
+              limelight.calculateRPM(ShooterConstants.topMotorValues)
+      );
 
-        // If heading error isn't off by much, it won't move
-        if (Math.abs(headingError) < 1) headingError = 0;
+      // get heading error
+      headingError = limelight.getTargetOffsetX();
 
-        double turnRobotOutput =
-                turnProfiledPIDController.calculate(headingError, 0)
-                        + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
+      // If heading error isn't off by much, it won't move
+      if (Math.abs(headingError) < 1) headingError = 0;
 
-        driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, isFieldRelative.getAsBoolean());
-        SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
-        if (isReadyToShoot()) {
-          intakeSubsystem.setMotorCustomPower(0.15);
-          LEDS.setLEDsReadyToShoot();
-          towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
-        } else if (!limelight.hasValidTarget()) {
-          LEDS.setLEDsNoValidTarget();
-          towerSubsystem.setTowerMotorsSpeed(0);
-        } else {
-          LEDS.setLEDsShooterLiningUp();
-          towerSubsystem.setTowerMotorsSpeed(0);
-        }
+      // calculate turn
+      double turnRobotOutput =
+              turnProfiledPIDController.calculate(headingError, 0)
+                      + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
+
+      // do turn
+      driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, isFieldRelative.getAsBoolean());
+      // update shuffleboard... comment out?
+//      SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
+      if (isReadyToShoot()) {
+        LEDS.setLEDsReadyToShoot();
+        towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+      } else if (!limelight.hasValidTarget()) {
+        LEDS.setLEDsNoValidTarget();
+        towerSubsystem.setTowerMotorsSpeed(0);
+      } else {
+        LEDS.setLEDsShooterLiningUp();
+        towerSubsystem.setTowerMotorsSpeed(0);
       }
     }
   }
@@ -126,7 +131,6 @@ public class TeleopAutoShoot extends CommandBase {
     shooterSubsystem.setShooterToNeutral();
     towerSubsystem.setTowerOff();
     LEDS.setLEDsDefault();
-    intakeSubsystem.setMotorCustomPower(0);
   }
 
   @Override
