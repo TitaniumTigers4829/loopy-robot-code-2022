@@ -25,6 +25,8 @@ public class DriveSubsystem extends SubsystemBase {
     // The gyro sensor
     private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
 
+    private int gyroOffset = 0;
+
     // Don't really know why this is necessary
 //  private NetworkTableEntry xSpeedEntry =
 //      swerveTab.add("xBox xSpeed", 0)
@@ -126,7 +128,11 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public double heading() {
-        return m_gyro.getAngle() % 360;
+        return (m_gyro.getAngle() + this.gyroOffset) % 360;
+    }
+
+    public void setGyroOffset(int gyroOffset) {
+        this.gyroOffset = gyroOffset;
     }
 
     /**

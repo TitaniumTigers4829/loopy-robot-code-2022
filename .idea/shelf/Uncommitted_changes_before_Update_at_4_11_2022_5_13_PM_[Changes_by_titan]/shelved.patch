@@ -1,0 +1,18 @@
+Index: src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// Copyright (c) FIRST and other WPILib contributors.\r\n// Open Source Software; you can modify and/or share it under the terms of\r\n// the WPILib BSD license file in the root directory of this project.\r\n\r\npackage frc.robot.commands.autonomous;\r\n\r\nimport edu.wpi.first.wpilibj2.command.SequentialCommandGroup;\r\nimport frc.robot.subsystems.DriveSubsystem;\r\nimport frc.robot.subsystems.IntakeSubsystem;\r\nimport frc.robot.subsystems.LEDsSubsystem;\r\nimport frc.robot.subsystems.LimelightSubsystem;\r\nimport frc.robot.subsystems.ShooterSubsystem;\r\nimport frc.robot.subsystems.TowerSubsystem;\r\n\r\npublic class TwoBallAutonomousCommand extends SequentialCommandGroup {\r\n\r\n  /**\r\n   * Add your docs here.\r\n   */\r\n  public TwoBallAutonomousCommand(ShooterSubsystem shooterSubsystem, TowerSubsystem towerSubsystem,\r\n      DriveSubsystem driveSubsystem, LEDsSubsystem ledsSubsystem, IntakeSubsystem intake) {\r\n    addCommands(\r\n        // Moves backwards\r\n        new AutoDriveIntake(driveSubsystem, intake, towerSubsystem, 1.2).withTimeout(2.25),\r\n        // Stops the robot\r\n        new SetDriveSpeed(driveSubsystem, 0, 0).withTimeout(0.5),\r\n        // drive forward a bit\r\n        new SetDriveSpeed(driveSubsystem, -1, 0).withTimeout(1.5),\r\n        // Stops the robot\r\n        new SetDriveSpeed(driveSubsystem, 0, 0).withTimeout(0.5),\r\n        // shoots\r\n        new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),\r\n            driveSubsystem, ledsSubsystem).withTimeout(5)\r\n    );\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java b/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java
+--- a/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java	(revision 82fc5b989c0216c18d61b300cf11049522cc92dd)
++++ b/src/main/java/frc/robot/commands/autonomous/TwoBallAutonomousCommand.java	(date 1649253518545)
+@@ -11,6 +11,7 @@
+ import frc.robot.subsystems.LimelightSubsystem;
+ import frc.robot.subsystems.ShooterSubsystem;
+ import frc.robot.subsystems.TowerSubsystem;
++import frc.robot.subsystems.IntakeSubsystem;
+ 
+ public class TwoBallAutonomousCommand extends SequentialCommandGroup {
+ 

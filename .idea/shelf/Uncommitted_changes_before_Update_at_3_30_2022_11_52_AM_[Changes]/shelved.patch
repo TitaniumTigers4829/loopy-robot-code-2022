@@ -1,0 +1,262 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"2cba656b-0875-4993-8864-34528a70bc39\" name=\"Changes\" comment=\"e\" />\r\n    <list id=\"be6ecede-5820-491c-8c48-71048fa5dbff\" name=\"Changes by jackg\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/frc/robot/Constants.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/frc/robot/Constants.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"ExternalProjectsData\">\r\n    <projectState path=\"$PROJECT_DIR$\">\r\n      <ProjectState />\r\n    </projectState>\r\n  </component>\r\n  <component name=\"ExternalProjectsManager\">\r\n    <system id=\"GRADLE\">\r\n      <state>\r\n        <task path=\"$PROJECT_DIR$\">\r\n          <activation />\r\n        </task>\r\n        <projects_view>\r\n          <tree_state>\r\n            <expand>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"zuntue2022\" type=\"f1a62948:ProjectNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"zuntue2022\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"zuntue2022\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n                <item name=\"build\" type=\"c8890929:TasksNode$1\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"zuntue2022\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Tasks\" type=\"e4a08cd1:TasksNode\" />\r\n                <item name=\"deployutils\" type=\"c8890929:TasksNode$1\" />\r\n              </path>\r\n              <path>\r\n                <item name=\"\" type=\"6a2764b6:ExternalProjectsStructure$RootNode\" />\r\n                <item name=\"zuntue2022\" type=\"f1a62948:ProjectNode\" />\r\n                <item name=\"Dependencies\" type=\"6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode\" />\r\n              </path>\r\n            </expand>\r\n            <select />\r\n          </tree_state>\r\n        </projects_view>\r\n      </state>\r\n    </system>\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java\" root0=\"FORCE_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"25I8vs1nY94LAG4hfCytLjiLQJC\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\r\n    <property name=\"codeWithMe.voiceChat.enabledByDefault\" value=\"false\" />\r\n    <property name=\"extract.method.default.visibility\" value=\"private\" />\r\n    <property name=\"last_opened_file_path\" value=\"$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"frc.robot.commands.shooter\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Gradle.zuntue2022 [deploy]\">\r\n    <configuration name=\"zuntue2022 [ShuffleBoard]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"ShuffleBoard\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"zuntue2022 [buildDependents]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"buildDependents\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"zuntue2022 [build]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"build\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"zuntue2022 [deploy]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"deploy\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"zuntue2022 [vendordep]\" type=\"GradleRunConfiguration\" factoryName=\"Gradle\" temporary=\"true\">\r\n      <ExternalSystemSettings>\r\n        <option name=\"executionName\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"externalSystemIdString\" value=\"GRADLE\" />\r\n        <option name=\"scriptParameters\" />\r\n        <option name=\"taskDescriptions\">\r\n          <list />\r\n        </option>\r\n        <option name=\"taskNames\">\r\n          <list>\r\n            <option value=\"vendordep\" />\r\n          </list>\r\n        </option>\r\n        <option name=\"vmOptions\" />\r\n      </ExternalSystemSettings>\r\n      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>\r\n      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>\r\n      <DebugAllEnabled>false</DebugAllEnabled>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Gradle.zuntue2022 [build]\" />\r\n        <item itemvalue=\"Gradle.zuntue2022 [ShuffleBoard]\" />\r\n        <item itemvalue=\"Gradle.zuntue2022 [buildDependents]\" />\r\n        <item itemvalue=\"Gradle.zuntue2022 [vendordep]\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"2cba656b-0875-4993-8864-34528a70bc39\" name=\"Changes\" comment=\"init commit\" />\r\n      <created>1645203483233</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1645203483233</updated>\r\n      <workItem from=\"1645203487217\" duration=\"4943000\" />\r\n      <workItem from=\"1646339277127\" duration=\"2813000\" />\r\n      <workItem from=\"1646456082887\" duration=\"11888000\" />\r\n      <workItem from=\"1646493368604\" duration=\"43411000\" />\r\n      <workItem from=\"1646690712318\" duration=\"36433000\" />\r\n      <workItem from=\"1647144886205\" duration=\"15535000\" />\r\n      <workItem from=\"1647215434845\" duration=\"12970000\" />\r\n      <workItem from=\"1647364674542\" duration=\"12797000\" />\r\n      <workItem from=\"1647462967505\" duration=\"5647000\" />\r\n      <workItem from=\"1647487999931\" duration=\"1233000\" />\r\n      <workItem from=\"1647548605126\" duration=\"6000\" />\r\n      <workItem from=\"1647548646641\" duration=\"4000\" />\r\n      <workItem from=\"1647548736966\" duration=\"2205000\" />\r\n      <workItem from=\"1647561642027\" duration=\"3221000\" />\r\n      <workItem from=\"1647568818646\" duration=\"9803000\" />\r\n      <workItem from=\"1647725994031\" duration=\"59000\" />\r\n      <workItem from=\"1647726206377\" duration=\"4692000\" />\r\n      <workItem from=\"1647749007140\" duration=\"5921000\" />\r\n      <workItem from=\"1647789675427\" duration=\"21586000\" />\r\n      <workItem from=\"1647898496660\" duration=\"11186000\" />\r\n      <workItem from=\"1648000305945\" duration=\"8039000\" />\r\n      <workItem from=\"1648065965136\" duration=\"16152000\" />\r\n      <workItem from=\"1648120904439\" duration=\"3010000\" />\r\n      <workItem from=\"1648156094152\" duration=\"26379000\" />\r\n      <workItem from=\"1648257088166\" duration=\"1316000\" />\r\n      <workItem from=\"1648297625106\" duration=\"9683000\" />\r\n      <workItem from=\"1648311355522\" duration=\"26807000\" />\r\n      <workItem from=\"1648424759169\" duration=\"771000\" />\r\n      <workItem from=\"1648486156367\" duration=\"800000\" />\r\n      <workItem from=\"1648510293870\" duration=\"3857000\" />\r\n      <workItem from=\"1648567972372\" duration=\"8578000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"mostly added comments and few super minor changes (most recommended by intelliJ)\">\r\n      <created>1645207484963</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1645207484963</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"added phoenix and rev as dependencies\">\r\n      <created>1646458584096</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646458584096</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"made a lot of changes, mostly copying code from RedThunder7166\">\r\n      <created>1646462959732</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646462959732</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"updated it for our gyro\">\r\n      <created>1646463192150</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646463192150</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"updated can IDs\">\r\n      <created>1646464760658</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646464760658</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"changed some constants to try and get rid of chattering.\">\r\n      <created>1646465532000</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646465532000</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Added Limelight subsystem. And minor improvements to constant (adding deadband for controller).\">\r\n      <created>1646498274607</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646498274607</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Added Shooter Subsystem\">\r\n      <created>1646512318831</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646512318831</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"tuning first attempts\">\r\n      <created>1646521526569</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646521526569</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"updated feedforward values for the robot as it is currently configured. (will need to be done again after the robot if fully assembled.)\">\r\n      <created>1646683949141</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646683949141</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"improved logging\">\r\n      <created>1646686577773</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646686577773</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"changes from Ryan and I's session\">\r\n      <created>1646774717812</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1646774717812</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"Almost entirely implemented Climb Subsystem\">\r\n      <created>1647110287099</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647110287099</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem\">\r\n      <created>1647110437890</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647110437890</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"ClimbSubsystem initial code done. now for commands and then testing.\">\r\n      <created>1647110787297</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647110787297</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"implementing climb testing\">\r\n      <created>1647116759163</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647116759163</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"implementing climb testing\">\r\n      <created>1647117376842</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647117376842</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"made sure swerve wont freak out when i enable the robot\">\r\n      <created>1647118340809</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647118340809</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably.\">\r\n      <created>1647128878641</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647128878641</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"updated CAN IDs\">\r\n      <created>1647144969291</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647144969291</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00021\" summary=\"idk\">\r\n      <created>1647186316920</created>\r\n      <option name=\"number\" value=\"00021\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00021\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647186316920</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00022\" summary=\"changes from today, climb still not working\">\r\n      <created>1647217269888</created>\r\n      <option name=\"number\" value=\"00022\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00022\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647217269888</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00023\" summary=\"deleted wrong comments\">\r\n      <created>1647290174674</created>\r\n      <option name=\"number\" value=\"00023\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00023\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647290174674</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00024\" summary=\"added intake and restructured some things\">\r\n      <created>1647368997228</created>\r\n      <option name=\"number\" value=\"00024\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00024\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647368997228</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00025\" summary=\"Need to fix one more problem with swerve\">\r\n      <created>1647463719118</created>\r\n      <option name=\"number\" value=\"00025\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00025\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647463719118</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00026\" summary=\"most recent changes, still a work in progress\">\r\n      <created>1647727925197</created>\r\n      <option name=\"number\" value=\"00026\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00026\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647727925197</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00027\" summary=\"finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy.\">\r\n      <created>1647754369887</created>\r\n      <option name=\"number\" value=\"00027\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00027\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647754369887</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00028\" summary=\"most recent changes to climb subsystem and relevant constants\">\r\n      <created>1647789716329</created>\r\n      <option name=\"number\" value=\"00028\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00028\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647789716329</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00029\" summary=\"ryan changes\">\r\n      <created>1647810219137</created>\r\n      <option name=\"number\" value=\"00029\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00029\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647810219137</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00030\" summary=\"renamed climb retract hooks to make more sense\">\r\n      <created>1647899116279</created>\r\n      <option name=\"number\" value=\"00030\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00030\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647899116279</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00031\" summary=\"swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now).\">\r\n      <created>1647904404554</created>\r\n      <option name=\"number\" value=\"00031\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00031\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1647904404554</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00032\" summary=\"we made our first shot!!! :D\">\r\n      <created>1648121363793</created>\r\n      <option name=\"number\" value=\"00032\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00032\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648121363793</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00033\" summary=\"organized RobotContainer a bit.\">\r\n      <created>1648126412963</created>\r\n      <option name=\"number\" value=\"00033\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00033\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648126412963</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00034\" summary=\"organized RobotContainer a bit.\">\r\n      <created>1648158187768</created>\r\n      <option name=\"number\" value=\"00034\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00034\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648158187768</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00035\" summary=\"shoot\">\r\n      <created>1648232865222</created>\r\n      <option name=\"number\" value=\"00035\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00035\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648232865223</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00036\" summary=\"e\">\r\n      <created>1648319757767</created>\r\n      <option name=\"number\" value=\"00036\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00036\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648319757767</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00037\" summary=\"shoot\">\r\n      <created>1648332852017</created>\r\n      <option name=\"number\" value=\"00037\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00037\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648332852017</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00038\" summary=\"added low shot\">\r\n      <created>1648396575805</created>\r\n      <option name=\"number\" value=\"00038\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00038\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648396575805</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00039\" summary=\"changes from sunday\">\r\n      <created>1648486338552</created>\r\n      <option name=\"number\" value=\"00039\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00039\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648486338552</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00040\" summary=\"e\">\r\n      <created>1648577961807</created>\r\n      <option name=\"number\" value=\"00040\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00040\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1648577961807</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"41\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"UnknownFeatures\">\r\n    <option featureType=\"dependencySupport\" implementationName=\"java:edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java\" />\r\n    <option featureType=\"dependencySupport\" implementationName=\"java:edu.wpi.first.wpilibj:wpilibj-java\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Almost entirely implemented Climb Subsystem\" />\r\n    <MESSAGE value=\"deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem\" />\r\n    <MESSAGE value=\"ClimbSubsystem initial code done. now for commands and then testing.\" />\r\n    <MESSAGE value=\"implementing climb testing\" />\r\n    <MESSAGE value=\"made sure swerve wont freak out when i enable the robot\" />\r\n    <MESSAGE value=\"probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably.\" />\r\n    <MESSAGE value=\"updated CAN IDs\" />\r\n    <MESSAGE value=\"added Angle Zero Offset\" />\r\n    <MESSAGE value=\"idk\" />\r\n    <MESSAGE value=\"changes from today, climb still not working\" />\r\n    <MESSAGE value=\"deleted wrong comments\" />\r\n    <MESSAGE value=\"added intake and restructured some things\" />\r\n    <MESSAGE value=\"Need to fix one more problem with swerve\" />\r\n    <MESSAGE value=\"most recent changes, still a work in progress\" />\r\n    <MESSAGE value=\"finished implementing climb subsystem, ready for testing and tuning now. after that just need to implement various climb commands, but that should be easy.\" />\r\n    <MESSAGE value=\"most recent changes to climb subsystem and relevant constants\" />\r\n    <MESSAGE value=\"ryan changes\" />\r\n    <MESSAGE value=\"renamed climb retract hooks to make more sense\" />\r\n    <MESSAGE value=\"swerve works pretty good with these values (except kvTurn was 1.5, about to test 1 now).\" />\r\n    <MESSAGE value=\"we made our first shot!!! :D\" />\r\n    <MESSAGE value=\"organized RobotContainer a bit.\" />\r\n    <MESSAGE value=\"shoot\" />\r\n    <MESSAGE value=\"added low shot\" />\r\n    <MESSAGE value=\"changes from sunday\" />\r\n    <MESSAGE value=\"e\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"e\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -4,12 +4,30 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="e" />
+-    <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="">
++    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="e">
++      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_22_2022_9_52_PM_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3_22_2022_9_52_PM__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/zuntue2022.iml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" afterDir="false" />
++    </list>
++    <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="" />
++    <list id="60de798a-2872-4ca1-88d3-8a1e30ab7352" name="Changes by Ryan" comment="">
+       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/WaitCommand.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/auto/autoAimCommand.java" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/FenderShot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/FenderShot.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/LowShot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/LowShot.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/Shoot.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/shooter/TestShot.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/LimelightSubsystem.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/TowerIntake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/tower/TowerIntake.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ShooterSubsystem.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -82,12 +100,22 @@
+     </file-type-list>
+   </component>
+   <component name="HighlightingSettingsPerFile">
+-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" root0="FORCE_HIGHLIGHTING" />
+-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/RobotContainer.java" root0="FORCE_HIGHLIGHTING" />
+-    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/SwerveModule.java" root0="FORCE_HIGHLIGHTING" />
++    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" root0="FORCE_HIGHLIGHTING" />
++    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/ClimbSubsystem.java" root0="FORCE_HIGHLIGHTING" />
+     <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/TowerSubsystem.java" root0="FORCE_HIGHLIGHTING" />
++    <setting file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/DriveSubsystem.java" root0="FORCE_HIGHLIGHTING" />
++  </component>
++  <component name="LineStatusTrackerManager">
++    <file path="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/EastShooter.java">
++      <ranges>
++        <range start1="54" end1="57" start2="54" end2="56" changelist="60de798a-2872-4ca1-88d3-8a1e30ab7352" />
++        <range start1="72" end1="72" start2="71" end2="73" changelist="60de798a-2872-4ca1-88d3-8a1e30ab7352" />
++        <range start1="98" end1="100" start2="99" end2="101" changelist="60de798a-2872-4ca1-88d3-8a1e30ab7352" />
++        <range start1="108" end1="108" start2="109" end2="110" changelist="2cba656b-0875-4993-8864-34528a70bc39" />
++      </ranges>
++    </file>
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+@@ -103,18 +131,39 @@
+   <component name="PropertiesComponent">
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+     <property name="WebServerToolWindowFactoryState" value="false" />
+     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
+     <property name="extract.method.default.visibility" value="private" />
+     <property name="last_opened_file_path" value="$USER_HOME$/4829_code/2022--RapidReactTestingBot-Imported-master" />
++    <property name="project.structure.last.edited" value="SDKs" />
++    <property name="project.structure.proportion" value="0.17" />
++    <property name="project.structure.side.proportion" value="0.39320388" />
+   </component>
+   <component name="RecentsManager">
+     <key name="CopyClassDialog.RECENTS_KEY">
+       <recent name="frc.robot.commands.shooter" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Gradle.zuntue2022 [deploy]">
++  <component name="RunManager" selected="Gradle.zuntue">
++    <configuration name="zuntue" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
++      <ExternalSystemSettings>
++        <option name="executionName" />
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="externalSystemIdString" value="GRADLE" />
++        <option name="scriptParameters" value="build" />
++        <option name="taskDescriptions">
++          <list />
++        </option>
++        <option name="taskNames">
++          <list />
++        </option>
++        <option name="vmOptions" />
++      </ExternalSystemSettings>
++      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
++      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
++      <DebugAllEnabled>false</DebugAllEnabled>
++      <method v="2" />
++    </configuration>
+     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+       <ExternalSystemSettings>
+         <option name="executionName" />
+@@ -220,6 +269,27 @@
+       <DebugAllEnabled>false</DebugAllEnabled>
+       <method v="2" />
+     </configuration>
++    <configuration default="true" type="JetRunConfigurationType">
++      <module name="zuntue2022" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
++      <module name="zuntue2022" />
++      <option name="filePath" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <list>
++      <item itemvalue="Gradle.zuntue2022 [deploy]" />
++      <item itemvalue="Gradle.zuntue" />
++      <item itemvalue="Gradle.zuntue2022 [build]" />
++      <item itemvalue="Gradle.zuntue2022 [buildDependents]" />
++      <item itemvalue="Gradle.zuntue2022 [ShuffleBoard]" />
++      <item itemvalue="Gradle.zuntue2022 [vendordep]" />
++    </list>
+     <recent_temporary>
+       <list>
+         <item itemvalue="Gradle.zuntue2022 [build]" />
+@@ -268,6 +338,7 @@
+       <workItem from="1648486156367" duration="800000" />
+       <workItem from="1648510293870" duration="3857000" />
+       <workItem from="1648567972372" duration="8578000" />
++      <workItem from="1648606161316" duration="2932000" />
+     </task>
+     <task id="LOCAL-00001" summary="mostly added comments and few super minor changes (most recommended by intelliJ)">
+       <created>1645207484963</created>
+@@ -549,7 +620,28 @@
+       <option name="project" value="LOCAL" />
+       <updated>1648577961807</updated>
+     </task>
+-    <option name="localTasksCounter" value="41" />
++    <task id="LOCAL-00041" summary="Updated Constant values">
++      <created>1648606958313</created>
++      <option name="number" value="00041" />
++      <option name="presentableId" value="LOCAL-00041" />
++      <option name="project" value="LOCAL" />
++      <updated>1648606958313</updated>
++    </task>
++    <task id="LOCAL-00042" summary="Cleaned up project a bit">
++      <created>1648607908185</created>
++      <option name="number" value="00042" />
++      <option name="presentableId" value="LOCAL-00042" />
++      <option name="project" value="LOCAL" />
++      <updated>1648607908185</updated>
++    </task>
++    <task id="LOCAL-00043" summary="Getting things ready for testing">
++      <created>1648609043141</created>
++      <option name="number" value="00043" />
++      <option name="presentableId" value="LOCAL-00043" />
++      <option name="project" value="LOCAL" />
++      <updated>1648609043141</updated>
++    </task>
++    <option name="localTasksCounter" value="44" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -569,11 +661,9 @@
+         </entry>
+       </map>
+     </option>
++    <option name="oldMeFiltersMigrated" value="true" />
+   </component>
+   <component name="VcsManagerConfiguration">
+-    <MESSAGE value="Almost entirely implemented Climb Subsystem" />
+-    <MESSAGE value="deleted a ver confusing &quot;+0.1&quot; in the SwerveModule class. Continued work on ClimbSubsystem" />
+-    <MESSAGE value="ClimbSubsystem initial code done. now for commands and then testing." />
+     <MESSAGE value="implementing climb testing" />
+     <MESSAGE value="made sure swerve wont freak out when i enable the robot" />
+     <MESSAGE value="probably my stopping place for climb for the day, I realized that we are probably going to need to add a limit switch to the climb arms because the rope winds unpredictably." />
+@@ -596,6 +686,9 @@
+     <MESSAGE value="added low shot" />
+     <MESSAGE value="changes from sunday" />
+     <MESSAGE value="e" />
+-    <option name="LAST_COMMIT_MESSAGE" value="e" />
++    <MESSAGE value="Updated Constant values" />
++    <MESSAGE value="Cleaned up project a bit" />
++    <MESSAGE value="Getting things ready for testing" />
++    <option name="LAST_COMMIT_MESSAGE" value="Getting things ready for testing" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"FrameworkDetectionExcludesConfiguration\">\r\n    <file type=\"web\" url=\"file://$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" project-jdk-name=\"14\" project-jdk-type=\"JavaSDK\" />\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -4,5 +4,5 @@
+   <component name="FrameworkDetectionExcludesConfiguration">
+     <file type="web" url="file://$PROJECT_DIR$" />
+   </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="14" project-jdk-type="JavaSDK" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+ </project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleJvm\" value=\"openjdk-14\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	
++++ b/.idea/gradle.xml	
+@@ -6,7 +6,6 @@
+       <GradleProjectSettings>
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleJvm" value="openjdk-14" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
+Index: .idea/jarRepositories.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RemoteRepositoriesConfiguration\">\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"central\" />\r\n      <option name=\"name\" value=\"Maven Central repository\" />\r\n      <option name=\"url\" value=\"https://repo1.maven.org/maven2\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"jboss.community\" />\r\n      <option name=\"name\" value=\"JBoss Community repository\" />\r\n      <option name=\"url\" value=\"https://repository.jboss.org/nexus/content/repositories/public/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"WPIFRCMavenVendorCacheRelease\" />\r\n      <option name=\"name\" value=\"WPIFRCMavenVendorCacheRelease\" />\r\n      <option name=\"url\" value=\"https://frcmaven.wpi.edu/artifactory/vendor-mvn-release\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"WPIcb311d09-36e9-4143-a032-55bb2b94443b_0Release\" />\r\n      <option name=\"name\" value=\"WPIcb311d09-36e9-4143-a032-55bb2b94443b_0Release\" />\r\n      <option name=\"url\" value=\"https://repo1.maven.org/maven2/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"MavenRepo\" />\r\n      <option name=\"name\" value=\"MavenRepo\" />\r\n      <option name=\"url\" value=\"https://repo.maven.apache.org/maven2/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"WPIOfficialRelease\" />\r\n      <option name=\"name\" value=\"WPIOfficialRelease\" />\r\n      <option name=\"url\" value=\"https://frcmaven.wpi.edu/artifactory/release\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"WPIab676553-b602-441f-a38d-f1296eff6537_0Release\" />\r\n      <option name=\"name\" value=\"WPIab676553-b602-441f-a38d-f1296eff6537_0Release\" />\r\n      <option name=\"url\" value=\"https://maven.ctr-electronics.com/release/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"WPILocal\" />\r\n      <option name=\"name\" value=\"WPILocal\" />\r\n      <option name=\"url\" value=\"file:/$PROJECT_DIR$/../../../Public/wpilib/2022/maven/\" />\r\n    </remote-repository>\r\n    <remote-repository>\r\n      <option name=\"id\" value=\"WPI3f48eb8c-50fe-43a6-9cb7-44c86353c4cb_0Release\" />\r\n      <option name=\"name\" value=\"WPI3f48eb8c-50fe-43a6-9cb7-44c86353c4cb_0Release\" />\r\n      <option name=\"url\" value=\"https://maven.revrobotics.com/\" />\r\n    </remote-repository>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+--- a/.idea/jarRepositories.xml	
++++ b/.idea/jarRepositories.xml	
+@@ -46,5 +46,10 @@
+       <option name="name" value="WPI3f48eb8c-50fe-43a6-9cb7-44c86353c4cb_0Release" />
+       <option name="url" value="https://maven.revrobotics.com/" />
+     </remote-repository>
++    <remote-repository>
++      <option name="id" value="WPILocal" />
++      <option name="name" value="WPILocal" />
++      <option name="url" value="file:/C:/Users/Public/wpilib/2022/maven/" />
++    </remote-repository>
+   </component>
+ </project>
+\ No newline at end of file

@@ -3,6 +3,7 @@ package frc.robot.commands.autonomous;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -63,7 +64,10 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
 
         // 6. Shoots the two balls gotten from the human player and corner
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem)
+            driveSubsystem, ledsSubsystem),
+
+        // 7. Sets the gyro offset
+        new InstantCommand(() -> driveSubsystem.setGyroOffset(90))
     );
 
   }
