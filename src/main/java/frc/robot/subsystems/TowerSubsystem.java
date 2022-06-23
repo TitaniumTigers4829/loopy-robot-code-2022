@@ -84,7 +84,7 @@ public class TowerSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("Bottom Tower Sensor", getIsBallInBottom());
-    SmartDashboard.putBoolean("Top Tower Sensor", getIsBallInTop());
+//    SmartDashboard.putBoolean("Bottom Tower Sensor", getIsBallInBottom());
+//    SmartDashboard.putBoolean("Top Tower Sensor", getIsBallInTop());
   }
 }

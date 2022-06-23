@@ -27,14 +27,13 @@ public class ClimbSetPos extends CommandBase {
 
   @Override
   public void execute() {
-    climbSubsystem.setPos(motorPos);
+    climbSubsystem.setDesiredLeftHookHeight(motorPos);
   }
 
   @Override
   public void end(boolean interrupted) {
     SmartDashboard.putBoolean("Climb Pos Running", false);
     climbSubsystem.setLeftMotorOutputManual(0);
-    climbSubsystem.setRightMotorOutputManual(0);
   }
 
   @Override

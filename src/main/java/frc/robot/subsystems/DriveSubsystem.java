@@ -106,6 +106,10 @@ public class DriveSubsystem extends SubsystemBase {
     public DriveSubsystem() {
     }
 
+    public double speed() {
+        return 0;
+    }
+
     @Override
     public void periodic() {
         // Update the odometry in the periodic block

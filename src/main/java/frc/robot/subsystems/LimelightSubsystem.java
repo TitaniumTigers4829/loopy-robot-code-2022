@@ -261,9 +261,9 @@ public class LimelightSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Distance ", calculateDistance());
-    SmartDashboard.putNumber("Distance (ft)", Units.metersToFeet(calculateDistance()));
-    SmartDashboard.putNumber("Distance (ft) (robot relative)", Units.metersToFeet(calculateDistance()) - 2);
-    SmartDashboard.putBoolean("Valid target", hasValidTarget());
+//    SmartDashboard.putNumber("Distance ", calculateDistance());
+//    SmartDashboard.putNumber("Distance (ft)", Units.metersToFeet(calculateDistance()));
+//    SmartDashboard.putNumber("Distance (ft) (robot relative)", Units.metersToFeet(calculateDistance()) - 2);
+//    SmartDashboard.putBoolean("Valid target", hasValidTarget());
   }
 }

@@ -89,10 +89,10 @@ public class TeleopAutoShoot extends CommandBase {
 //    If speed is faster than we think is OK to shoot (TUNE) or limelight is not in range or there are no balls in the tower:
 //    drive normally
 //    FIXME: tune speed
-    if ((driveSubsystem.speed() > ShooterConstants.maxAutoShootSpeed) || (!isLimelightInRange()) || (ballcount == 0)) {
+    if ((driveSubsystem.speed() > 0.5) || (!isLimelightInRange()) || (ballcount == 0)) {
       driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, rightStickY.getAsDouble() * -DriveConstants.kMaxRotationalSpeed, isFieldRelative.getAsBoolean());
     // if the speed is slow and limelight is in range and there is at least 1 ball in:
-    } else if ((driveSubsystem.speed() <= ShooterConstants.maxAutoShootSpeed) && (isLimelightInRange()) && (ballcount > 0)) {
+    } else if ((driveSubsystem.speed() <= 0.5) && (isLimelightInRange()) && (ballcount > 0)) {
       shooterSubsystem.setShooterRPM(
               limelight.calculateRPM(ShooterConstants.bottomMotorValues),
               limelight.calculateRPM(ShooterConstants.topMotorValues)
@@ -145,7 +145,7 @@ public class TeleopAutoShoot extends CommandBase {
   }
 
   private boolean isLimelightInRange() {
-    return (limelight.hasValidTarget() && (limelight.calculateDistance() < ShooterConstants.maxDistance));
+    return (limelight.hasValidTarget() && (limelight.calculateDistance() < 13));
   }
 
   private void updateBallCount() {

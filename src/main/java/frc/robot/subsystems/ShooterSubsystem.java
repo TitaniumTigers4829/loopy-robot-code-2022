@@ -166,12 +166,12 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Top RPM", getTopRPM());
-    SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
-    SmartDashboard.putNumber("Top Target RPM", topMotorTargetRPM);
-    SmartDashboard.putNumber("Bottom Target RPM", bottomMotorTargetRPM);
-    SmartDashboard.putNumber("Top Error: ", topMotorTargetRPM-getTopRPM());
-    SmartDashboard.putNumber("Bottom Error: ", bottomMotorTargetRPM-getBottomRPM());
+//    SmartDashboard.putNumber("Top RPM", getTopRPM());
+//    SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
+//    SmartDashboard.putNumber("Top Target RPM", topMotorTargetRPM);
+//    SmartDashboard.putNumber("Bottom Target RPM", bottomMotorTargetRPM);
+//    SmartDashboard.putNumber("Top Error: ", topMotorTargetRPM-getTopRPM());
+//    SmartDashboard.putNumber("Bottom Error: ", bottomMotorTargetRPM-getBottomRPM());
     SmartDashboard.putBoolean("RPM within range", isShooterWithinAcceptableError());
   }
 }

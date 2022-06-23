@@ -58,9 +58,9 @@ public class ClimbWithButtons extends CommandBase {
 
     // Manually controlling climb arm height
     if (Lup.getAsBoolean()) {
-      climb.setLeftMotorOutputManual(speed);
-    } else if ((Ldown.getAsBoolean()) && (!climb.getIsLeftLimitSwitchPressed())) {
       climb.setLeftMotorOutputManual(-speed);
+    } else if ((Ldown.getAsBoolean()) && (!climb.getIsLeftLimitSwitchPressed())) {
+      climb.setLeftMotorOutputManual(speed);
     } else {
       climb.setLeftMotorOutputManual(0);
     }
