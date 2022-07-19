@@ -261,8 +261,11 @@ public class ClimbSubsystem extends SubsystemBase {
    * @param height desired hook height (meters)
    */
   public void setDesiredRightHookHeight(double height) {
-    // double rightOutput = getMotorOutput(height, getRightHookHeight(), m_climbRightProfiledPIDController, m_rightFeedForward);
-    // m_rightMotor.set(rightOutput);
+    m_climbRightProfiledPIDController.calculate(getRightHookHeight(), height);
+    double rightOutput = getMotorOutput(height - getRightHookHeight(), m_climbRightProfiledPIDController, m_rightFeedForward);
+    m_rightMotor.set(ControlMode.PercentOutput, rightOutput);
+    SmartDashboard.putNumber("Error_R", height - getRightHookHeight());
+    SmartDashboard.putNumber("Out_R", rightOutput);
   }
 
   public void setPos(double height) {
@@ -365,10 +368,10 @@ public class ClimbSubsystem extends SubsystemBase {
 //          "The climb hooks are not in sync. Manual control might be needed.", false);
 //    }
     // Smart Dashboard Debugging
-    SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
+    // SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
     // SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
 //    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
-   SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
+  //  SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
 //    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
     // SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
 //    SmartDashboard.putNumber("Right Climb PID Error: ", getRightPIDError());
@@ -378,7 +381,7 @@ public class ClimbSubsystem extends SubsystemBase {
 //    SmartDashboard.putNumber("Left Climb PID velocity: ", m_climbLeftProfiledPIDController.getGoal().velocity);
 //    SmartDashboard.putNumber("Right Climb PID velocity: ", m_climbRightProfiledPIDController.getGoal().velocity);
     SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
-//    SmartDashboard.putNumber("Right Hook Height:", getRightHookHeight());
+   SmartDashboard.putNumber("Right Hook Height:", getRightHookHeight());
 //    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 }

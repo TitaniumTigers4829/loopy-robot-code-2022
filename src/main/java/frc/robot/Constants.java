@@ -232,7 +232,7 @@ public final class Constants {
     public static final double kClimbVoltageToHoldBottomPosition = -1; // in volts
 
     // in meters, how much extra should we un-spool, just to be safe we are at max extension.
-    public static final double kClimbMaxPosConfirmationExtraHeight = 0.025;
+    public static final double kClimbMaxPosConfirmationExtraHeight = 0.1;
 
 
     // ProfiledPID controller constants
@@ -255,10 +255,8 @@ public final class Constants {
     public static final int kClimbVerticalSolenoidPort = 7;
     public static final int kClimbAngledSolenoidPort = 5;
 
-    public static int kFirstBarPos = 48124;
-    public static int kSecondBarPos = 471289;
-    public static int kFinalBarPos = 5741240;
-    public static double kSlightlyExtended = kClimbMinHeight + 0.2;
+    public static double kSlightlyAboveBar = 1.1;
+    public static double kSlightlyBelowBar = 0.75;
   }
 
   public static final class LEDsConstants {

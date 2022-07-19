@@ -4,7 +4,6 @@
 
 package frc.robot.commands.climb;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClimbSubsystem;
 
@@ -21,23 +20,35 @@ public class ClimbSetPos extends CommandBase {
   }
 
   @Override
-  public void initialize() {
-    SmartDashboard.putBoolean("Climb Pos Running", true);
-  }
+  public void initialize() {}
 
   @Override
   public void execute() {
-    climbSubsystem.setDesiredLeftHookHeight(motorPos);
+    if (climbSubsystem.getLeftHookHeight() > motorPos && climbSubsystem.getIsLeftLimitSwitchPressed()) {
+      climbSubsystem.setLeftMotorOutputManual(0);
+    }
+    else {
+      climbSubsystem.setDesiredLeftHookHeight(motorPos);
+    }
+
+    if (climbSubsystem.getRightHookHeight() > motorPos && climbSubsystem.getIsRightLimitSwitchPressed()) {
+      climbSubsystem.setRightMotorOutputManual(0);
+    }
+    else {
+      climbSubsystem.setDesiredRightHookHeight(motorPos);
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
-    SmartDashboard.putBoolean("Climb Pos Running", false);
     climbSubsystem.setLeftMotorOutputManual(0);
+    climbSubsystem.setRightMotorOutputManual(0);
   }
 
   @Override
   public boolean isFinished() {
-    return false;
+    return ((Math.abs(climbSubsystem.getLeftHookHeight() - motorPos) < .1 && Math.abs(climbSubsystem.getRightHookHeight() - motorPos) < .1)
+            || ((climbSubsystem.getLeftHookHeight() > motorPos && climbSubsystem.getIsLeftLimitSwitchPressed()) && 
+            (climbSubsystem.getRightHookHeight() > motorPos && climbSubsystem.getIsRightLimitSwitchPressed())));
   }
 }
