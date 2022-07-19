@@ -38,6 +38,6 @@ public class ClimbSetPos extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return Math.abs(climbSubsystem.getLeftEncoderValue() - motorPos) <= 10;
+    return false;
   }
 }

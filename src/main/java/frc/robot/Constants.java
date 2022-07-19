@@ -236,7 +236,7 @@ public final class Constants {
 
 
     // ProfiledPID controller constants
-    public static final double kPClimbController = 0.55; // FIXME, TUNE
+    public static final double kPClimbController = 2; // FIXME, TUNE
     public static final double kIClimbController = 0; // DO NOT USE
     public static final double kDClimbController = 0;
     public static final double kMaxClimbSpeedMetersPerSecond = 0.6; // FIXME, TUNE

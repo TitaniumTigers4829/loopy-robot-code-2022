@@ -231,10 +231,13 @@ public class ClimbSubsystem extends SubsystemBase {
 
 
 // haha jank code
-  private double getMotorOutput(double desiredHeight, double currentHeight, ProfiledPIDController controller, SimpleMotorFeedforward ff) {
-    double errorOut = (desiredHeight - currentHeight) * controller.getP();
-    controller.calculate(currentHeight, desiredHeight); // all this does is set setpoint
-    return errorOut + ff.calculate(controller.getSetpoint().velocity);
+  // private double getMotorOutput(double desiredHeight, double currentHeight, ProfiledPIDController controller, SimpleMotorFeedforward ff) {
+    // double errorOut = (desiredHeight - currentHeight) * controller.getP();
+    // controller.calculate(currentHeight, desiredHeight); // all this does is set setpoint
+    // return -(errorOut + ff.calculate(controller.getSetpoint().velocity));
+  // }
+  private double getMotorOutput(double error, ProfiledPIDController controller, SimpleMotorFeedforward ff) {
+    return (error * ClimbConstants.kPClimbController) + ff.calculate(controller.getGoal().velocity);
   }
 
   /**
@@ -244,13 +247,11 @@ public class ClimbSubsystem extends SubsystemBase {
    * @param height desired hook height (meters)
    */
   public void setDesiredLeftHookHeight(double height) {
-    double leftOutput = m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(),
-        height)
-        + m_leftFeedForward.calculate(m_climbLeftProfiledPIDController.getGoal().velocity);
-    SmartDashboard.putNumber("leftOutput", leftOutput);
-    SmartDashboard.putNumber("leftVelocity", m_climbLeftProfiledPIDController.getGoal().velocity);
-    SmartDashboard.putNumber("Vel Error", m_climbLeftProfiledPIDController.getVelocityError());
-    m_leftMotor.set(leftOutput);
+    m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(), height);
+    double leftOutput = getMotorOutput(height - getLeftHookHeight(), m_climbLeftProfiledPIDController, m_leftFeedForward);
+    m_leftMotor.set(ControlMode.PercentOutput, leftOutput);
+    SmartDashboard.putNumber("Error", height - getLeftHookHeight());
+    SmartDashboard.putNumber("Out", leftOutput);
   }
 
   /**
@@ -260,12 +261,8 @@ public class ClimbSubsystem extends SubsystemBase {
    * @param height desired hook height (meters)
    */
   public void setDesiredRightHookHeight(double height) {
-    double rightOutput = m_climbRightProfiledPIDController.calculate(getRightHookHeight(),
-        height)
-        + m_rightFeedForward.calculate(m_climbRightProfiledPIDController.getSetpoint().velocity);
-//    SmartDashboard.putNumber("rightOutput", rightOutput);
-//    SmartDashboard.putNumber("rightVelocity", m_climbRightProfiledPIDController.getSetpoint().velocity);
-    m_rightMotor.set(rightOutput);
+    // double rightOutput = getMotorOutput(height, getRightHookHeight(), m_climbRightProfiledPIDController, m_rightFeedForward);
+    // m_rightMotor.set(rightOutput);
   }
 
   public void setPos(double height) {
@@ -369,10 +366,11 @@ public class ClimbSubsystem extends SubsystemBase {
 //    }
     // Smart Dashboard Debugging
     SmartDashboard.putBoolean("Left Climb Limit Switch: ", getIsLeftLimitSwitchPressed());
+    // SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
 //    SmartDashboard.putBoolean("Right Climb Limit Switch: ", getIsRightLimitSwitchPressed());
-//    SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
+   SmartDashboard.putNumber("Left Climb Encoder: ", getLeftEncoderValue());
 //    SmartDashboard.putNumber("Right Climb Encoder: ", getRightEncoderValue());
-    SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
+    // SmartDashboard.putNumber("Left Climb PID Error: ", getLeftPIDError());
 //    SmartDashboard.putNumber("Right Climb PID Error: ", getRightPIDError());
 //    SmartDashboard.putNumber("Left Climb PID setpoint: ", m_climbLeftProfiledPIDController.getGoal().position);
 //    SmartDashboard.putNumber("Right Climb PID setpoint: ", m_climbRightProfiledPIDController.getGoal().position);

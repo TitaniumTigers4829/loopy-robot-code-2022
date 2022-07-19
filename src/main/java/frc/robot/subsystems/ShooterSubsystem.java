@@ -172,6 +172,6 @@ public class ShooterSubsystem extends SubsystemBase {
 //    SmartDashboard.putNumber("Bottom Target RPM", bottomMotorTargetRPM);
 //    SmartDashboard.putNumber("Top Error: ", topMotorTargetRPM-getTopRPM());
 //    SmartDashboard.putNumber("Bottom Error: ", bottomMotorTargetRPM-getBottomRPM());
-    SmartDashboard.putBoolean("RPM within range", isShooterWithinAcceptableError());
+    // SmartDashboard.putBoolean("RPM within range", isShooterWithinAcceptableError());
   }
 }
