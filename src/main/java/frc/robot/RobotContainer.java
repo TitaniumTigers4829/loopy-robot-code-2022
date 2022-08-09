@@ -89,6 +89,9 @@ public class RobotContainer {
       OIConstants.kDriverControllerPort);
   private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
 
+  private final Joystick playStationController = new Joystick(0);
+
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -282,6 +285,29 @@ public class RobotContainer {
     new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
     new JoystickButton(m_buttonController, 10).toggleWhenPressed(new ClimbCommand(m_climbSubsystem));
     new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+
+    JoystickButton triangleButton = new JoystickButton(playStationController, 4);
+
+    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
+
+       DoubleSupplier LEFT_STICK_X = () -> playStationController.getRawAxis(0);
+       DoubleSupplier LEFT_STICK_Y = () -> playStationController.getRawAxis(1);
+       DoubleSupplier RIGHT_STICK_X = () -> playStationController.getRawAxis(2);
+       DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
+
+       m_robotDrive.setDefaultCommand(
+       new RunCommand(
+           () ->
+               m_robotDrive.drive(
+                   modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
+                       * DriveConstants.kMaxSpeedMetersPerSecond,
+                   modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
+                       * DriveConstants.kMaxSpeedMetersPerSecond,
+                   modifyAxisCubed(RIGHT_STICK_X) * -1 // rot CCW positive
+                       * DriveConstants.kMaxRotationalSpeed,
+                   !RIGHT_BUMPER.get()),
+           m_robotDrive));
+
 
 //    new JoystickButton(m_buttonController, 0-9).whileHeld(new SetTowerMotorSpeed(m_tower, -TowerConstants.towerMotorSpeed));
 
