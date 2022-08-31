@@ -85,11 +85,12 @@ public class RobotContainer {
 
   // The driver's controller
 //    private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  private final XboxController m_driverController = new XboxController(
-      OIConstants.kDriverControllerPort);
-  private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
+  // private final XboxController m_driverController = new XboxController(
+  //     OIConstants.kDriverControllerPort);
+  // private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
+  private final Joystick m_buttonController = new Joystick(0);
 
-  private final Joystick playStationController = new Joystick(0);
+  // private final Joystick playStationController = new Joystick(0);
 
 
   /**
@@ -272,9 +273,11 @@ public class RobotContainer {
     JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
     JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
     JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
+    JoystickButton setClimbToButton = new JoystickButton(m_buttonController, 5);
     JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 6);
     JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 7);
     JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
+
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
@@ -282,31 +285,34 @@ public class RobotContainer {
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
             is75Percent::get, m_LEDs)); // This works
 
-    new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
-    new JoystickButton(m_buttonController, 10).toggleWhenPressed(new ClimbCommand(m_climbSubsystem));
+    setClimbToButton.whileHeld(new ClimbSetPos(m_climbSubsystem, 1));
     new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
-    JoystickButton triangleButton = new JoystickButton(playStationController, 4);
+    // new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
+    // new JoystickButton(m_buttonController, 10).toggleWhenPressed(new ClimbCommand(m_climbSubsystem));
+    // new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
-    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
+    // JoystickButton triangleButton = new JoystickButton(playStationController, 4);
 
-       DoubleSupplier LEFT_STICK_X = () -> playStationController.getRawAxis(0);
-       DoubleSupplier LEFT_STICK_Y = () -> playStationController.getRawAxis(1);
-       DoubleSupplier RIGHT_STICK_X = () -> playStationController.getRawAxis(2);
-       DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
+    // JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
 
-       m_robotDrive.setDefaultCommand(
-       new RunCommand(
-           () ->
-               m_robotDrive.drive(
-                   modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
-                       * DriveConstants.kMaxSpeedMetersPerSecond,
-                   modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
-                       * DriveConstants.kMaxSpeedMetersPerSecond,
-                   modifyAxisCubed(RIGHT_STICK_X) * -1 // rot CCW positive
-                       * DriveConstants.kMaxRotationalSpeed,
-                   !RIGHT_BUMPER.get()),
-           m_robotDrive));
+      //  DoubleSupplier LEFT_STICK_X = () -> playStationController.getRawAxis(0);
+      //  DoubleSupplier LEFT_STICK_Y = () -> playStationController.getRawAxis(1);
+      //  DoubleSupplier RIGHT_STICK_X = () -> playStationController.getRawAxis(2);
+      //  DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
+
+      //  m_robotDrive.setDefaultCommand(
+      //  new RunCommand(
+      //      () ->
+      //          m_robotDrive.drive(
+      //              modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
+      //                  * DriveConstants.kMaxSpeedMetersPerSecond,
+      //              modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
+      //                  * DriveConstants.kMaxSpeedMetersPerSecond,
+      //              modifyAxisCubed(RIGHT_STICK_X) * -1 // rot CCW positive
+      //                  * DriveConstants.kMaxRotationalSpeed,
+      //              !RIGHT_BUMPER.get()),
+      //      m_robotDrive));
 
 
 //    new JoystickButton(m_buttonController, 0-9).whileHeld(new SetTowerMotorSpeed(m_tower, -TowerConstants.towerMotorSpeed));

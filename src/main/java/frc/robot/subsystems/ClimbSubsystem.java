@@ -62,12 +62,12 @@ public class ClimbSubsystem extends SubsystemBase {
 
   private final SimpleMotorFeedforward m_leftFeedForward = new SimpleMotorFeedforward(
       0.3,
-      0.7,
+      8,
       0
   );
   private final SimpleMotorFeedforward m_rightFeedForward = new SimpleMotorFeedforward(
       0.3,
-      0.7,
+      8,
       0
   );
 
@@ -236,8 +236,9 @@ public class ClimbSubsystem extends SubsystemBase {
     // controller.calculate(currentHeight, desiredHeight); // all this does is set setpoint
     // return -(errorOut + ff.calculate(controller.getSetpoint().velocity));
   // }
-  private double getMotorOutput(double error, ProfiledPIDController controller, SimpleMotorFeedforward ff) {
-    return (error * ClimbConstants.kPClimbController) + ff.calculate(controller.getGoal().velocity);
+  private double getMotorOutput(ProfiledPIDController controller, SimpleMotorFeedforward ff, double desired, double current) {
+    controller.calculate(current, desired);
+    return ((desired - current) * controller.getP()) + ff.calculate(controller.getGoal().velocity);
   }
 
   /**
@@ -247,11 +248,11 @@ public class ClimbSubsystem extends SubsystemBase {
    * @param height desired hook height (meters)
    */
   public void setDesiredLeftHookHeight(double height) {
-    m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(), height);
-    double leftOutput = getMotorOutput(height - getLeftHookHeight(), m_climbLeftProfiledPIDController, m_leftFeedForward);
+    // m_climbLeftProfiledPIDController.calculate(getLeftHookHeight(), height);
+    double leftOutput = getMotorOutput(m_climbLeftProfiledPIDController, m_leftFeedForward, height, getLeftHookHeight());
     m_leftMotor.set(ControlMode.PercentOutput, leftOutput);
-    SmartDashboard.putNumber("Error", height - getLeftHookHeight());
-    SmartDashboard.putNumber("Out", leftOutput);
+    // SmartDashboard.putNumber("Error", height - getLeftHookHeight());
+    // SmartDashboard.putNumber("Out", leftOutput);
   }
 
   /**
@@ -261,11 +262,11 @@ public class ClimbSubsystem extends SubsystemBase {
    * @param height desired hook height (meters)
    */
   public void setDesiredRightHookHeight(double height) {
-    m_climbRightProfiledPIDController.calculate(getRightHookHeight(), height);
-    double rightOutput = getMotorOutput(height - getRightHookHeight(), m_climbRightProfiledPIDController, m_rightFeedForward);
+    // m_climbRightProfiledPIDController.calculate(getRightHookHeight(), height);
+    double rightOutput = getMotorOutput(m_climbRightProfiledPIDController, m_rightFeedForward, height, getRightHookHeight());
     m_rightMotor.set(ControlMode.PercentOutput, rightOutput);
-    SmartDashboard.putNumber("Error_R", height - getRightHookHeight());
-    SmartDashboard.putNumber("Out_R", rightOutput);
+    // SmartDashboard.putNumber("Error_R", height - getRightHookHeight());
+    // SmartDashboard.putNumber("Out_R", rightOutput);
   }
 
   public void setPos(double height) {
