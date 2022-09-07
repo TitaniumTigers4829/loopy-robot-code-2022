@@ -18,7 +18,9 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.ClimbConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.PathPlannerConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
+import frc.robot.commands.autonomous.FollowTrajectoryPathPlanner;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
@@ -278,6 +280,9 @@ public class RobotContainer {
     JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 7);
     JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
 
+    JoystickButton followPathPlannerPath = new JoystickButton(m_buttonController, 8);
+
+    followPathPlannerPath.whenPressed(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath));
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
