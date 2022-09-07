@@ -38,7 +38,7 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
   @Override
   public void initialize() {
     // Makes a trajectory                                                             Vel  Accel
-    Trajectory trajectoryToFollow = PathPlanner.loadPath(filePath, 4.5, 3.25);
+    PathPlannerTrajectory trajectoryToFollow = PathPlanner.loadPath(filePath, 4.5, 3.25);
 
     // PID controllers
     PIDController xController = new PIDController(PathPlannerConstants.kPXController, 0, 0);
@@ -51,7 +51,7 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
     // from the PathPlannerTrajectory to control the robot's rotation.
     // See the WPILib SwerveControllerCommand for more info on what you need to pass to the command
     followTrajectoryPathPlannerCommand = new PPSwerveControllerCommand(
-      (PathPlannerTrajectory) trajectoryToFollow,
+      trajectoryToFollow,
       driveSubsystem::getPose, // Functional interface to feed supplier
       DriveConstants.kDriveKinematics,
       xController,
