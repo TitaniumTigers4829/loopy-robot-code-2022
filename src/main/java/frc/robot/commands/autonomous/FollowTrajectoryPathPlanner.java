@@ -37,7 +37,7 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // Makes a trajectory                                                             Vel  Accel
+    // Makes a trajectory                                                     Vel  Accel
     PathPlannerTrajectory trajectoryToFollow = PathPlanner.loadPath(filePath, 4.5, 3.25);
 
     // PID controllers
@@ -78,6 +78,6 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return done;
+    return false;
   }
 }

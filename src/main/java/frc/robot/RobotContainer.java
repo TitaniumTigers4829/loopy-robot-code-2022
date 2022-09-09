@@ -87,10 +87,10 @@ public class RobotContainer {
 
   // The driver's controller
 //    private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  // private final XboxController m_driverController = new XboxController(
-  //     OIConstants.kDriverControllerPort);
-  // private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
-  private final Joystick m_buttonController = new Joystick(0);
+  private final XboxController m_driverController = new XboxController(
+      OIConstants.kDriverControllerPort);
+  private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
+  // private final Joystick m_buttonController = new Joystick(0);
 
   // private final Joystick playStationController = new Joystick(0);
 
@@ -161,17 +161,17 @@ public class RobotContainer {
 
   public void teleopInitFunc() {
 //        DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
-//    DoubleSupplier LEFT_STICK_X = m_driverController::getLeftX;
+   DoubleSupplier LEFT_STICK_X = m_driverController::getLeftX;
 //        DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
-//    DoubleSupplier LEFT_STICK_Y = m_driverController::getLeftY;
+   DoubleSupplier LEFT_STICK_Y = m_driverController::getLeftY;
 //        DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
-//    DoubleSupplier RIGHT_STICK_X = m_driverController::getRightX;
+   DoubleSupplier RIGHT_STICK_X = m_driverController::getRightX;
 //        DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
-//    DoubleSupplier RIGHT_STICK_Y = m_driverController::getRightY;
+   DoubleSupplier RIGHT_STICK_Y = m_driverController::getRightY;
 //        JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
-//    JoystickButton A_BUTTON = new JoystickButton(m_driverController, 1);
+   JoystickButton A_BUTTON = new JoystickButton(m_driverController, 1);
 //        JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 8);
-//    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
+   JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
 //        JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
 //    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 //    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
@@ -180,18 +180,18 @@ public class RobotContainer {
      * Sets the default command and joystick bindings for the drive train.
      * NOTE: The left stick controls translation of the robot. Turning is controlled by the X axis of the right stick.
      */
-//    m_robotDrive.setDefaultCommand(
-//        new RunCommand(
-//            () ->
-//                m_robotDrive.drive(
-//                    modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
-//                        * DriveConstants.kMaxSpeedMetersPerSecond,
-//                    modifyAxisCubed(RIGHT_STICK_X) * -1 // rot CCW positive
-//                        * DriveConstants.kMaxRotationalSpeed,
-//                    !RIGHT_BUMPER.get()),
-//            m_robotDrive));
+   m_robotDrive.setDefaultCommand(
+       new RunCommand(
+           () ->
+               m_robotDrive.drive(
+                   modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
+                       * DriveConstants.kMaxSpeedMetersPerSecond,
+                   modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
+                       * DriveConstants.kMaxSpeedMetersPerSecond,
+                   modifyAxisCubed(RIGHT_STICK_X) * -1 // rot CCW positive
+                       * DriveConstants.kMaxRotationalSpeed,
+                   !RIGHT_BUMPER.get()),
+           m_robotDrive));
 //    A_BUTTON.whileHeld(
 //        new RevAndAim(m_shooter, m_Limelight, m_robotDrive,
 //            () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
@@ -243,7 +243,7 @@ public class RobotContainer {
 //    JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
 //        JoystickButton X_BUTTON = new JoystickButton(m_driverController, 1);
 //    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
-//        JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
+       JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
 //        JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
 //    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
 //        JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
@@ -251,15 +251,15 @@ public class RobotContainer {
 //        JoystickButton LEFT_TRIGGER = new JoystickButton(m_driverController, 7);
 //    JoystickButton LEFT_TRIGGER = new JoystickButton(m_driverController, 7);
 //    POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
-//    POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
-//    POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
+   POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
+   POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
 //    POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
 //    JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 9);
 //        JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
 //    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
 //    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
-//    RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
+   RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
 //    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
 //    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
@@ -282,7 +282,7 @@ public class RobotContainer {
 
     JoystickButton followPathPlannerPath = new JoystickButton(m_buttonController, 8);
 
-    followPathPlannerPath.whenPressed(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath));
+    followPathPlannerPath.whileHeld(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath));
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
@@ -339,8 +339,8 @@ public class RobotContainer {
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
 
-//    Y_BUTTON.whenPressed(
-//        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
+   Y_BUTTON.whenPressed(
+       new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
     // While held for ejecting ball
 //    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want
 //    Y_BUTTON.whileHeld(new AutoShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, m_LEDs));

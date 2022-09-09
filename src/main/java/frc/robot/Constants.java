@@ -335,7 +335,7 @@ public final class Constants {
       new TrapezoidProfile.Constraints(kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
 
     // Test Auto File Paths
-    public static final String firstTestPath = "pathplanner/testPath1.path";
+    public static final String firstTestPath = "testPath1";
 
   }
 
