@@ -21,24 +21,30 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
 
   private DriveSubsystem driveSubsystem;
   private String filePath;
+  private boolean zeroInitialPose;
 
   PPSwerveControllerCommand followTrajectoryPathPlannerCommand;
   private boolean done = false;
 
   /** Creates a new FollowTrajectoryPathPlanner. */
-  public FollowTrajectoryPathPlanner(DriveSubsystem driveSubsystem, String filePath) {
+  public FollowTrajectoryPathPlanner(DriveSubsystem driveSubsystem, String filePath, boolean zeroInitialPose) {
     this.driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem);
     
     this.filePath = filePath;
-
+    this.zeroInitialPose = zeroInitialPose;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    // Makes a trajectory                                                     Vel  Accel
-    PathPlannerTrajectory trajectoryToFollow = PathPlanner.loadPath(filePath, 4.5, 3.25);
+    // Makes a trajectory                                                     
+    PathPlannerTrajectory trajectoryToFollow = PathPlanner.loadPath(filePath, PathPlannerConstants.autoMaxVelocity, PathPlannerConstants.autoMaxAcceleration);
+
+    // Resets the pose of the robot if true
+    if (zeroInitialPose) {
+      driveSubsystem.resetOdometry(trajectoryToFollow.getInitialPose());
+    }
 
     // PID controllers
     PIDController xController = new PIDController(PathPlannerConstants.kPXController, 0, 0);
@@ -47,9 +53,7 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
     PathPlannerConstants.kPThetaController, 0, 0, PathPlannerConstants.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI); // Makes it so wheels don't have to turn more than 90 degrees
 
-    // Create a PPSwerveControllerCommand. This is almost identical to WPILib's SwerveControllerCommand, but it uses the holonomic rotation
-    // from the PathPlannerTrajectory to control the robot's rotation.
-    // See the WPILib SwerveControllerCommand for more info on what you need to pass to the command
+    // Create a PPSwerveControllerCommand. This is almost identical to WPILib's SwerveControllerCommand, but it uses the holonomic rotation from the PathPlannerTrajectory to control the robot's rotation.
     followTrajectoryPathPlannerCommand = new PPSwerveControllerCommand(
       trajectoryToFollow,
       driveSubsystem::getPose, // Functional interface to feed supplier
@@ -78,6 +82,6 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return done;
   }
 }

@@ -282,7 +282,7 @@ public class RobotContainer {
 
     JoystickButton followPathPlannerPath = new JoystickButton(m_buttonController, 8);
 
-    followPathPlannerPath.whileHeld(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath));
+    followPathPlannerPath.whenPressed(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath, true));
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
