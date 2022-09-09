@@ -6,3 +6,7 @@ Our robot has:
 - Traversal climb
 - A shooter that uses limelight 2 for distance
 - 5 ball auto
+
+We are currently working on:
+- Fully Automating our climb
+- Computer vision assistance for cargo pickup
