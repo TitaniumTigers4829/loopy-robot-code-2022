@@ -77,4 +77,8 @@ public class LEDsSubsystem extends SubsystemBase {
         m_leds.set(value);
     }
 
+    public void setLEDsOutOfRange() {
+        m_leds.set(0.71);
+    }
+
 }

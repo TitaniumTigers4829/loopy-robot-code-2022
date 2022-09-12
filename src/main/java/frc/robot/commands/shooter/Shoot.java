@@ -7,6 +7,7 @@ package frc.robot.commands.shooter;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.DriveConstants;
@@ -129,8 +130,12 @@ public class Shoot extends CommandBase {
     driveSubsystem.drive(leftStickY.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, leftStickX.getAsDouble() * -DriveConstants.kMaxSpeedMetersPerSecond, turnRobotOutput, true);
     SmartDashboard.putBoolean("Ready to shoot", isReadyToShoot());
     if (isReadyToShoot()) {
-      LEDS.setLEDsReadyToShoot();
       towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+      if (Units.metersToFeet(limelight.calculateDistance()) >= 13) {
+        LEDS.setLEDsOutOfRange();
+      } else {
+        LEDS.setLEDsReadyToShoot();
+      }
 //      towerSubsystem.setTopMotorOutputManual(TowerConstants.towerMotorSpeed);
 //      Timer.delay(0.25);
 //      towerSubsystem.setBottomMotorOutputManual(TowerConstants.towerMotorSpeed);

@@ -31,6 +31,7 @@ import frc.robot.commands.climb.ClimbSetPos;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
+import frc.robot.commands.shooter.EmergencyShoot;
 import frc.robot.commands.shooter.RevAndAim;
 import frc.robot.commands.shooter.Shoot;
 import frc.robot.commands.tower.SetTowerMotorSpeed;
@@ -192,23 +193,23 @@ public class RobotContainer {
                        * DriveConstants.kMaxRotationalSpeed,
                    !RIGHT_BUMPER.get()),
            m_robotDrive));
-//    A_BUTTON.whileHeld(
-//        new RevAndAim(m_shooter, m_Limelight, m_robotDrive,
-//            () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
-//            m_LEDs), true);
+   A_BUTTON.whileHeld(
+       new RevAndAim(m_shooter, m_Limelight, m_robotDrive,
+           () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
+           m_LEDs), true);
 //    LEFT_BUMPER.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
 //        () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_BUMPER.get()));
 //
-//    A_BUTTON.whenReleased(new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxisQuartic(LEFT_STICK_Y), ()-> modifyAxisQuartic(LEFT_STICK_X),
-//        m_LEDs).withTimeout(0.2));
+  //  A_BUTTON.whenReleased(new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxisQuartic(LEFT_STICK_Y), ()-> modifyAxisQuartic(LEFT_STICK_X),
+  //      m_LEDs, m_intakeSubsystem).withTimeout(0.2));
 //
-//    new JoystickButton(m_buttonController, 5).whileHeld(
-//        new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive,
-//            () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
-//            m_LEDs, m_intakeSubsystem));
-//    new JoystickButton(m_buttonController, 8).whileHeld(
-//        new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
-//    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
+   new JoystickButton(m_buttonController, 5).whileHeld(
+       new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive,
+           () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
+           m_LEDs, m_intakeSubsystem));
+   new JoystickButton(m_buttonController, 8).whileHeld(
+       new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
+   new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
     // Moves the robot to zeroing position, then zeroes it
 //    if (autoChooser.getSelected() == fiveBallAuto) {
@@ -275,7 +276,7 @@ public class RobotContainer {
     JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
     JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
     JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-    JoystickButton setClimbToButton = new JoystickButton(m_buttonController, 5);
+    // JoystickButton setClimbToButton = new JoystickButton(m_buttonController, 5);
     JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 6);
     JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 7);
     JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
@@ -290,7 +291,7 @@ public class RobotContainer {
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
             is75Percent::get, m_LEDs)); // This works
 
-    setClimbToButton.whileHeld(new ClimbSetPos(m_climbSubsystem, 1));
+    // setClimbToButton.whileHeld(new ClimbSetPos(m_climbSubsystem, 1));
     new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
     // new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
@@ -331,10 +332,10 @@ public class RobotContainer {
 
 //    B_BUTTON.toggleWhenPressed(new ShooterPIDtesting(m_shooter,m_LEDs,m_tower));
 
-//    JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
+   JoystickButton SUCC_BUTTON = new JoystickButton(m_buttonController, 12);
 //    // While held for intake
-//    SUCC_BUTTON.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
-//    SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(1));
+   SUCC_BUTTON.whileHeld(new IntakeWithTower(m_intakeSubsystem, m_tower));
+   SUCC_BUTTON.whenReleased(new TowerIntake(m_tower).withTimeout(1));
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
