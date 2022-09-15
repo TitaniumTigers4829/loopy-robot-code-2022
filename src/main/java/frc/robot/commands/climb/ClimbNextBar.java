@@ -14,18 +14,18 @@ public class ClimbNextBar extends SequentialCommandGroup {
         // Raises the hooks so that the static hooks are on the bar
         new ClimbSetPos(climb, ClimbConstants.kSlightlyAboveBar + ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
         // Waits a little bit
-        new WaitCommand(1),
+        // new WaitCommand(1),
         // Sets the arms back
         new ClimbAngled(climb),
         // Waits a little bit
-        new WaitCommand(1),
+        // new WaitCommand(1),
         // Extends the arms to above the bar
         new ClimbSetPos(climb, ClimbConstants.kClimbMaxHeight + ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
         // Brings the arms back to the bar
         new WaitCommand(1),
         new ClimbVertical(climb),
          // Waits a little bit
-        new WaitCommand(1.5),
+        new WaitCommand(.8),
         // Pulls the robot up to the next bar
         new ClimbSetPos(climb, ClimbConstants.kSlightlyBelowBar - ClimbConstants.kClimbMaxPosConfirmationExtraHeight)
         // Static hooks click, done with this bar

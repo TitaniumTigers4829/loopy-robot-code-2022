@@ -203,13 +203,13 @@ public class RobotContainer {
   //  A_BUTTON.whenReleased(new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxisQuartic(LEFT_STICK_Y), ()-> modifyAxisQuartic(LEFT_STICK_X),
   //      m_LEDs, m_intakeSubsystem).withTimeout(0.2));
 //
-   new JoystickButton(m_buttonController, 5).whileHeld(
-       new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive,
-           () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
-           m_LEDs, m_intakeSubsystem));
-   new JoystickButton(m_buttonController, 8).whileHeld(
-       new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
-   new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
+  //  new JoystickButton(m_buttonController, 5).whileHeld(
+  //      new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive,
+  //          () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
+  //          m_LEDs, m_intakeSubsystem));
+  //  new JoystickButton(m_buttonController, 8).whileHeld(
+  //      new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
+  //  new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
     // Moves the robot to zeroing position, then zeroes it
 //    if (autoChooser.getSelected() == fiveBallAuto) {
@@ -276,14 +276,14 @@ public class RobotContainer {
     JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
     JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
     JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-    // JoystickButton setClimbToButton = new JoystickButton(m_buttonController, 5);
+    JoystickButton setClimbToButton = new JoystickButton(m_buttonController, 8);
     JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 6);
     JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 7);
     JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
 
-    JoystickButton followPathPlannerPath = new JoystickButton(m_buttonController, 8);
+    // JoystickButton followPathPlannerPath = new JoystickButton(m_buttonController, 8);
 
-    followPathPlannerPath.whenPressed(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath, true));
+    // followPathPlannerPath.whenPressed(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath, true));
 
     new JoystickButton(m_buttonController, 9).toggleWhenPressed(
         new ClimbWithButtons(m_climbSubsystem,
@@ -291,7 +291,7 @@ public class RobotContainer {
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
             is75Percent::get, m_LEDs)); // This works
 
-    // setClimbToButton.whileHeld(new ClimbSetPos(m_climbSubsystem, 1));
+    setClimbToButton.whileHeld(new ClimbCommand(m_climbSubsystem));
     new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
     // new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
