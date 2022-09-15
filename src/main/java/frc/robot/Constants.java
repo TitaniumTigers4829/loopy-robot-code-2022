@@ -211,12 +211,6 @@ public final class Constants {
 
 
   public static final class ClimbConstants {
-
-    // General constants
-    public static final double kClimbMaxHeight = 1.6081375; // in meters // FIXME
-    public static final double kClimbMinHeight = 0.815975; // in meters
-    public static final double kClimbSlightlyExtendedHeight = 0.9;
-
     // NOTE:
     // We only need estimates for the bottom position of the climb arms because they are
     // 'zeroed' in the top position. The bottom position values are just estimates because
@@ -255,8 +249,12 @@ public final class Constants {
     public static final int kClimbVerticalSolenoidPort = 7;
     public static final int kClimbAngledSolenoidPort = 5;
 
-    public static double kSlightlyAboveBar = 1.1;
-    public static double kSlightlyBelowBar = 0.75;
+    // Climb Height Constants
+    public static final double kSlightlyAboveBar = 1.1;
+    public static final double kSlightlyBelowBar = 0.75;
+    public static final double kClimbMaxHeight = 1.6081375; // in meters // FIXME
+    public static final double kClimbMinHeight = 0.815975; // in meters
+    public static final double kClimbSlightlyExtendedHeight = 0.9;
   }
 
   public static final class LEDsConstants {

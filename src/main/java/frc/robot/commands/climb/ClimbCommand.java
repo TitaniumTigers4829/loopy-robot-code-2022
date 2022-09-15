@@ -24,9 +24,9 @@ public class ClimbCommand extends SequentialCommandGroup {
       // Starts assuming the telescoping arms are slightly above the first bar
       new InstantCommand(climbSubsystem::resetEncoders),
       new ClimbSetPos(climbSubsystem, ClimbConstants.kSlightlyBelowBar - ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
-      new ClimbNextBar(climbSubsystem),
+      new ClimbToHighBar(climbSubsystem),
       new WaitCommand(.5),
-      new ClimbNextBar(climbSubsystem),
+      new ClimbToTraversalBar(climbSubsystem),
       new WaitCommand(.5)
     );
   }
