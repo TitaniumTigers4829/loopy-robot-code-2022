@@ -251,6 +251,8 @@ public final class Constants {
 
     // Climb Height Constants
     public static final double kSlightlyAboveBar = 1.1;
+    public static final double kSlightlyAboveHighBar = 1.17;
+    public static final double kTraversalBarFinalHeight = 1.3;
     public static final double kSlightlyBelowBar = 0.75;
     public static final double kClimbMaxHeight = 1.6081375; // in meters // FIXME
     public static final double kClimbMinHeight = 0.815975; // in meters

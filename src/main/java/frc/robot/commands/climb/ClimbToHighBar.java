@@ -16,16 +16,16 @@ public class ClimbToHighBar extends SequentialCommandGroup {
   public ClimbToHighBar(ClimbSubsystem climbSubsystem) {
     addCommands(
         // Raises the hooks so that the static hooks are on the bar
-        new ClimbSetPos(climbSubsystem, ClimbConstants.kSlightlyAboveBar + ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
+        new ClimbSetPos(climbSubsystem, ClimbConstants.kSlightlyAboveHighBar + ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
         // Sets the arms back
         new ClimbAngled(climbSubsystem),
         // Extends the arms to above the bar
         new ClimbSetPos(climbSubsystem, ClimbConstants.kClimbMaxHeight + ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
         // Brings the arms back to the bar
-        new WaitCommand(.3),
+        new WaitCommand(.5), // .3
         new ClimbVertical(climbSubsystem),
-         // Waits a little bit
-        new WaitCommand(.4),
+        // Waits a little bit
+        new WaitCommand(1), // .8
         // Pulls the robot up to the next bar
         new ClimbSetPos(climbSubsystem, ClimbConstants.kSlightlyBelowBar - ClimbConstants.kClimbMaxPosConfirmationExtraHeight)
         // Static hooks click, but robot is still being held by the telescoping arms

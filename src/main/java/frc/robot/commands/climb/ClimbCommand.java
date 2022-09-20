@@ -27,7 +27,7 @@ public class ClimbCommand extends SequentialCommandGroup {
       new ClimbToHighBar(climbSubsystem),
       new WaitCommand(.5),
       new ClimbToTraversalBar(climbSubsystem),
-      new WaitCommand(.5)
+      new WaitCommand(50)
     );
   }
 }
