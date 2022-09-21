@@ -257,6 +257,10 @@ public final class Constants {
     public static final double kClimbMaxHeight = 1.6081375; // in meters // FIXME
     public static final double kClimbMinHeight = 0.815975; // in meters
     public static final double kClimbSlightlyExtendedHeight = 0.9;
+
+    // File reading and writing Constants
+    public static final String kClimbTextFilePath = "climbZeroes";
+
   }
 
   public static final class LEDsConstants {
