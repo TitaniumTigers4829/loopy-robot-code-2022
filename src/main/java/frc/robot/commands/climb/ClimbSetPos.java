@@ -12,7 +12,9 @@ public class ClimbSetPos extends CommandBase {
   public double motorPos;
   private final ClimbSubsystem climbSubsystem;
 
-  /** Creates a new ClimbSetPos. */
+  /** Creates a new ClimbSetPos. 
+   * @param motorPos: height in meters
+  */
   public ClimbSetPos(ClimbSubsystem climbSubsystem, double motorPos) {
     this.climbSubsystem = climbSubsystem;
     this.motorPos = motorPos;

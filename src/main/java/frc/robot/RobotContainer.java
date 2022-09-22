@@ -26,9 +26,13 @@ import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldTwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbCommand;
+import frc.robot.commands.climb.ClimbHooksToSavedZero;
 import frc.robot.commands.climb.ClimbNextBar;
+import frc.robot.commands.climb.ClimbSaveHookZeroes;
 import frc.robot.commands.climb.ClimbSetPos;
 import frc.robot.commands.climb.ClimbWithButtons;
+import frc.robot.commands.climb.SaveClimbZeroes;
+import frc.robot.commands.drive.FaceForward;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
 import frc.robot.commands.shooter.EmergencyShoot;
@@ -91,6 +95,7 @@ public class RobotContainer {
   private final XboxController m_driverController = new XboxController(
       OIConstants.kDriverControllerPort);
   private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
+  private final Joystick m_extraButtons = new Joystick(2); // FIXME:make a constant
   // private final Joystick m_buttonController = new Joystick(0);
 
   // private final Joystick playStationController = new Joystick(0);
@@ -161,6 +166,9 @@ public class RobotContainer {
   }
 
   public void teleopInitFunc() {
+
+    SaveClimbZeroes.makeSureFileExists();
+
 //        DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
    DoubleSupplier LEFT_STICK_X = m_driverController::getLeftX;
 //        DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
@@ -176,6 +184,7 @@ public class RobotContainer {
 //        JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
 //    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 //    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
+    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
 //
     /*
      * Sets the default command and joystick bindings for the drive train.
@@ -197,6 +206,13 @@ public class RobotContainer {
        new RevAndAim(m_shooter, m_Limelight, m_robotDrive,
            () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
            m_LEDs), true);
+
+    Y_BUTTON.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
+              * DriveConstants.kMaxSpeedMetersPerSecond,
+          ()->modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
+              * DriveConstants.kMaxSpeedMetersPerSecond,
+          ()->!RIGHT_BUMPER.get())
+    );
 //    LEFT_BUMPER.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
 //        () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_BUMPER.get()));
 //
@@ -253,14 +269,15 @@ public class RobotContainer {
 //    JoystickButton LEFT_TRIGGER = new JoystickButton(m_driverController, 7);
 //    POVButton UP_DIRECTION_PAD = new POVButton(m_driverController, 0);
    POVButton RIGHT_DIRECTION_PAD = new POVButton(m_driverController, 90);
-   POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
+  //  POVButton LEFT_DIRECTION_PAD = new POVButton(m_driverController, 270);
 //    POVButton DOWN_DIRECTION_PAD = new POVButton(m_driverController, 180);
+
 //    JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 9);
 //        JoystickButton LEFT_STICK_DEPRESSED = new JoystickButton(m_driverController, 11);
 //    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
 //    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
-
-   RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
+  
+  RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
 //    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
 //    LEFT_DIRECTION_PAD.whenPressed(new InstantCommand(m_Limelight::turnOffLED));
@@ -276,7 +293,6 @@ public class RobotContainer {
     JoystickButton RClimbUp = new JoystickButton(m_buttonController, 4);
     JoystickButton LClimbDown = new JoystickButton(m_buttonController, 1);
     JoystickButton RClimbDown = new JoystickButton(m_buttonController, 2);
-    JoystickButton setClimbToButton = new JoystickButton(m_buttonController, 8);
     JoystickButton PneumaticsVertical = new JoystickButton(m_buttonController, 6);
     JoystickButton PneumaticsDown = new JoystickButton(m_buttonController, 7);
     JoystickButton is75Percent = new JoystickButton(m_buttonController, 10);
@@ -291,8 +307,16 @@ public class RobotContainer {
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
             is75Percent::get, m_LEDs)); // This works
 
-    setClimbToButton.whileHeld(new ClimbCommand(m_climbSubsystem));
     new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+
+    
+    JoystickButton saveZeroButton = new JoystickButton(m_extraButtons, 3);
+    JoystickButton goToZeroButton = new JoystickButton(m_extraButtons, 2);
+    JoystickButton autoClimbButton = new JoystickButton(m_extraButtons, 4);
+
+    saveZeroButton.whenPressed(new ClimbSaveHookZeroes(m_climbSubsystem));
+    goToZeroButton.whileHeld(new ClimbHooksToSavedZero(m_climbSubsystem));
+    // autoClimbButton.whileHeld(new ClimbCommand(m_climbSubsystem));
 
     // new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
     // new JoystickButton(m_buttonController, 10).toggleWhenPressed(new ClimbCommand(m_climbSubsystem));
