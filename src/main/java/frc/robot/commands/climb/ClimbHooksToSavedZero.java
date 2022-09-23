@@ -11,14 +11,10 @@ import frc.robot.subsystems.ClimbSubsystem;
 public class ClimbHooksToSavedZero extends CommandBase {
 
   private final ClimbSubsystem climbSubsystem;
-  private final double leftHookHeight;
-  private final double rightHookHeight;
 
   /** Creates a new ClimbHooksToSavedZero. */
   public ClimbHooksToSavedZero(ClimbSubsystem climbSubsystem) {
     this.climbSubsystem = climbSubsystem;
-    this.leftHookHeight = SaveClimbZeroes.readClimbZeroes()[0];
-    this.rightHookHeight = SaveClimbZeroes.readClimbZeroes()[1];
     addRequirements(this.climbSubsystem);
   }
 
@@ -30,8 +26,8 @@ public class ClimbHooksToSavedZero extends CommandBase {
   @Override
   public void execute() {
 
-    SmartDashboard.putNumber("Left hook saved height", SaveClimbZeroes.readClimbZeroes()[0]);
-    SmartDashboard.putNumber("Right hook saved height", SaveClimbZeroes.readClimbZeroes()[1]);
+    double leftHookHeight = climbSubsystem.getLeftClimbHookZeroValue();
+    double rightHookHeight = climbSubsystem.getRightClimbHookZeroValue();
 
     if (climbSubsystem.getLeftHookHeight() > leftHookHeight && climbSubsystem.getIsLeftLimitSwitchPressed()) {
       climbSubsystem.setLeftMotorOutputManual(0);
@@ -40,7 +36,7 @@ public class ClimbHooksToSavedZero extends CommandBase {
       climbSubsystem.setDesiredLeftHookHeight(leftHookHeight);
     }
 
-    if (climbSubsystem.getRightHookHeight() > rightHookHeight && climbSubsystem.getIsRightLimitSwitchPressed()) {
+    if (climbSubsystem.getLeftHookHeight() > rightHookHeight && climbSubsystem.getIsRightLimitSwitchPressed()) {
       climbSubsystem.setRightMotorOutputManual(0);
     }
     else {

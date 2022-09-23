@@ -28,10 +28,8 @@ import frc.robot.commands.autonomous.deprecated.OldTwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbCommand;
 import frc.robot.commands.climb.ClimbHooksToSavedZero;
 import frc.robot.commands.climb.ClimbNextBar;
-import frc.robot.commands.climb.ClimbSaveHookZeroes;
 import frc.robot.commands.climb.ClimbSetPos;
 import frc.robot.commands.climb.ClimbWithButtons;
-import frc.robot.commands.climb.SaveClimbZeroes;
 import frc.robot.commands.drive.FaceForward;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
@@ -166,8 +164,6 @@ public class RobotContainer {
   }
 
   public void teleopInitFunc() {
-
-    SaveClimbZeroes.makeSureFileExists();
 
 //        DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
    DoubleSupplier LEFT_STICK_X = m_driverController::getLeftX;
@@ -314,7 +310,6 @@ public class RobotContainer {
     JoystickButton goToZeroButton = new JoystickButton(m_extraButtons, 2);
     JoystickButton autoClimbButton = new JoystickButton(m_extraButtons, 4);
 
-    saveZeroButton.whenPressed(new ClimbSaveHookZeroes(m_climbSubsystem));
     goToZeroButton.whileHeld(new ClimbHooksToSavedZero(m_climbSubsystem));
     // autoClimbButton.whileHeld(new ClimbCommand(m_climbSubsystem));
 

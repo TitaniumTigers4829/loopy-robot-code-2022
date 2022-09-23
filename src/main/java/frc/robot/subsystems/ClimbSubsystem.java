@@ -18,6 +18,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimbConstants;
 import frc.robot.Constants.ElectronicsConstants;
+import edu.wpi.first.networktables.EntryListenerFlags;
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
 
 // TODO: Test to find out what voltage is needed to climb slowly, and what voltage is needed to hold position at bottom.
 
@@ -33,6 +37,19 @@ public class ClimbSubsystem extends SubsystemBase {
   private final DigitalInput m_rightLimitSwitch;
 
   private final DoubleSolenoid m_solenoid;
+
+  private NetworkTableInstance tableInstance;
+  private NetworkTable baseTable;
+  private NetworkTableEntry leftClimbHookZeroEntry;
+  private NetworkTableEntry leftClimbHookHeightEntry;
+  private NetworkTableEntry rightClimbHookZeroEntry;
+  private NetworkTableEntry rightClimbHookHeightEntry;
+  private NetworkTableEntry leftZeroReceivedSuccessfully;
+  private NetworkTableEntry rightZeroReceivedSuccessfully;
+
+  private double leftClimbHookZero = 1;
+  private double rightClimbHookZero = 1;
+
   /**
    * NOTE: According to the documentation, it is possible to use a single controller asynchronously,
    * but that it is not have any built in thread safety, and should only be done by advanced teams.
@@ -98,10 +115,38 @@ public class ClimbSubsystem extends SubsystemBase {
     m_leftLimitSwitch = new DigitalInput(ClimbConstants.kLeftClimbLimitSwitchPort);
     m_rightLimitSwitch = new DigitalInput(ClimbConstants.kRightClimbLimitSwitchPort);
 
-
     // Initialize Solenoid
     m_solenoid = new DoubleSolenoid(ElectronicsConstants.kPneumaticsModuleType,
         ClimbConstants.kClimbVerticalSolenoidPort, ClimbConstants.kClimbAngledSolenoidPort);
+
+    // Network Table Setup
+    this.tableInstance = NetworkTableInstance.getDefault();
+    this.baseTable = this.tableInstance.getTable("climbZerosTable");
+    this.leftClimbHookHeightEntry = this.baseTable.getEntry("leftClimbHookHeight");
+    this.leftClimbHookZeroEntry = this.baseTable.getEntry("leftClimbHookZero");
+    this.rightClimbHookHeightEntry = this.baseTable.getEntry("rightClimbHookHeight");
+    this.rightClimbHookZeroEntry = this.baseTable.getEntry("rightClimbHookZero");
+    this.leftZeroReceivedSuccessfully = this.baseTable.getEntry("leftZeroReceivedSuccessfully");
+    this.rightZeroReceivedSuccessfully = this.baseTable.getEntry("rightZeroReceivedSuccessfully");
+
+    this.leftClimbHookHeightEntry.setDouble(0.5);
+    this.rightClimbHookHeightEntry.setDouble(0.5);
+  }
+
+  public double getLeftClimbHookZeroValue() {
+    return this.leftClimbHookZero;
+  }
+
+  public void setLeftClimbHookZeroValue(double value) {
+    this.leftClimbHookZero = value;
+  }
+
+  public double getRightClimbHookZeroValue() {
+    return this.rightClimbHookZero;
+  }
+
+  public void setRightClimbHookZeroValue(double value) {
+    this.rightClimbHookZero = value;
   }
 
   /**
@@ -217,6 +262,7 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setLeftMotorOutputManual(double output) {
     m_leftMotor.set(output);
+    this.leftClimbHookHeightEntry.setDouble(getLeftHookHeight());
   }
 
   /**
@@ -227,6 +273,7 @@ public class ClimbSubsystem extends SubsystemBase {
    */
   public void setRightMotorOutputManual(double output) {
     m_rightMotor.set(output);
+    this.rightClimbHookHeightEntry.setDouble(getRightHookHeight());
   }
 
 
@@ -363,6 +410,18 @@ public class ClimbSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    double leftValue = this.leftClimbHookZeroEntry.getDouble(-1);
+    double rightValue = this.rightClimbHookZeroEntry.getDouble(-1);
+
+    if (leftValue != -1) {
+      setLeftClimbHookZeroValue(leftValue);
+    }
+    if (rightValue != -1) {
+      setRightClimbHookZeroValue(leftValue);
+    }
+
+    SmartDashboard.putNumber("Left climb zero", getLeftClimbHookZeroValue());
+    SmartDashboard.putNumber("Right climb zero", getRightClimbHookZeroValue());
     // Warn Drivers if the hooks are not near each other for some reason.
 //    if (Math.abs(getLeftHookHeight() - getRightHookHeight()) > 0.25) {
 //      DriverStation.reportWarning(
