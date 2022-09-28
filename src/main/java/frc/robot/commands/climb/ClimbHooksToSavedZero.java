@@ -6,6 +6,7 @@ package frc.robot.commands.climb;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.ClimbConstants;
 import frc.robot.subsystems.ClimbSubsystem;
 
 public class ClimbHooksToSavedZero extends CommandBase {
@@ -20,33 +21,33 @@ public class ClimbHooksToSavedZero extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    climbSubsystem.resetEncoders();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    double leftHookHeight = climbSubsystem.getLeftClimbHookZeroValue();
-    double rightHookHeight = climbSubsystem.getRightClimbHookZeroValue();
+    // double leftHookHeight = climbSubsystem.getLeftClimbHookZeroValue();
+    // double rightHookHeight = climbSubsystem.getRightClimbHookZeroValue();
 
-    if (climbSubsystem.getLeftHookHeight() > leftHookHeight && climbSubsystem.getIsLeftLimitSwitchPressed()) {
-      climbSubsystem.setLeftMotorOutputManual(0);
-    }
-    else {
-      climbSubsystem.setDesiredLeftHookHeight(leftHookHeight);
-    }
+    // double currentLeftHeight = climbSubsystem.getLeftHookHeightNoLimits();
+    // double currentRightHeight = climbSubsystem.getRightHookHeightNoLimits();
 
-    if (climbSubsystem.getLeftHookHeight() > rightHookHeight && climbSubsystem.getIsRightLimitSwitchPressed()) {
-      climbSubsystem.setRightMotorOutputManual(0);
-    }
-    else {
-      climbSubsystem.setDesiredRightHookHeight(rightHookHeight);
-    }
+    double neededLeftHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.09;
+    double neededRightHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.09;
+
+    climbSubsystem.setDesiredLeftHookHeight(neededLeftHeight);
+    climbSubsystem.setDesiredRightHookHeight(neededRightHeight);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    climbSubsystem.setLeftMotorOutputManual(0);
+    climbSubsystem.setRightMotorOutputManual(0);
+  }
 
   // Returns true when the command should end.
   @Override

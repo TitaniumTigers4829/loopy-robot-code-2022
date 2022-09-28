@@ -47,6 +47,10 @@ public class Eject extends CommandBase {
         0.3,
         0.3
     );
+    Timer.delay(1);
+    towerSubsystem.setTowerMotorsSpeed(TowerConstants.towerMotorSpeed);
+    Timer.delay(1);
+    towerSubsystem.setTowerMotorsSpeed(0);
 //    if (Math.abs(shooterSubsystem.getShooterAverageRPMError()) <= 150){
 //    }
 

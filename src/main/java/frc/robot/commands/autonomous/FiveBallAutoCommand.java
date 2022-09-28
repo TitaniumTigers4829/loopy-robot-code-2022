@@ -64,10 +64,10 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
 
         // 6. Shoots the two balls gotten from the human player and corner
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
-            driveSubsystem, ledsSubsystem),
+            driveSubsystem, ledsSubsystem)
 
         // 7. Sets the gyro offset
-        new InstantCommand(() -> driveSubsystem.setGyroOffset(90))
+        // new InstantCommand(() -> driveSubsystem.setGyroOffset(90))
     );
 
   }

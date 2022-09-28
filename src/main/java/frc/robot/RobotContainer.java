@@ -215,13 +215,14 @@ public class RobotContainer {
   //  A_BUTTON.whenReleased(new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive, ()-> modifyAxisQuartic(LEFT_STICK_Y), ()-> modifyAxisQuartic(LEFT_STICK_X),
   //      m_LEDs, m_intakeSubsystem).withTimeout(0.2));
 //
-  //  new JoystickButton(m_buttonController, 5).whileHeld(
-  //      new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive,
-  //          () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
-  //          m_LEDs, m_intakeSubsystem));
+   new JoystickButton(m_buttonController, 5).whileHeld(
+       new Shoot(m_shooter, m_tower, m_Limelight, m_robotDrive,
+           () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
+           m_LEDs, m_intakeSubsystem));
+    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, -1));
   //  new JoystickButton(m_buttonController, 8).whileHeld(
   //      new EmergencyShoot(m_shooter, m_tower, m_Limelight, m_robotDrive, LEFT_STICK_Y, LEFT_STICK_X, m_LEDs));
-  //  new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
+   new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
     // Moves the robot to zeroing position, then zeroes it
 //    if (autoChooser.getSelected() == fiveBallAuto) {
@@ -303,15 +304,15 @@ public class RobotContainer {
             RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
             is75Percent::get, m_LEDs)); // This works
 
-    new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
+    // new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
     
-    JoystickButton saveZeroButton = new JoystickButton(m_extraButtons, 3);
+    // JoystickButton saveZeroButton = new JoystickButton(m_extraButtons, 3);
     JoystickButton goToZeroButton = new JoystickButton(m_extraButtons, 2);
     JoystickButton autoClimbButton = new JoystickButton(m_extraButtons, 4);
 
     goToZeroButton.whileHeld(new ClimbHooksToSavedZero(m_climbSubsystem));
-    // autoClimbButton.whileHeld(new ClimbCommand(m_climbSubsystem));
+    autoClimbButton.whileHeld(new ClimbCommand(m_climbSubsystem));
 
     // new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
     // new JoystickButton(m_buttonController, 10).toggleWhenPressed(new ClimbCommand(m_climbSubsystem));

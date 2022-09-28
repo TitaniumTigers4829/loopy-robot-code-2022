@@ -187,6 +187,13 @@ public class ClimbSubsystem extends SubsystemBase {
     }
   }
 
+  public double getLeftHookHeightNoLimits() {
+    double multiplier = (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight)
+        / (0 - ClimbConstants.kClimbLeftMinHeightEncoderEstimate);
+    return multiplier * getLeftEncoderValue()
+        + ClimbConstants.kClimbMaxHeight;
+  }
+
   /**
    * Returns encoder values, but zeroing has already been taken care of.
    *
@@ -224,7 +231,12 @@ public class ClimbSubsystem extends SubsystemBase {
       return ClimbConstants.kClimbMinHeight;
     }
   }
-
+  public double getRightHookHeightNoLimits() {
+    double multiplier = (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight)
+        / (0 - ClimbConstants.kClimbRightMinHeightEncoderEstimate);
+    return multiplier * getRightEncoderValue()
+        + ClimbConstants.kClimbMaxHeight;
+  }
   public double getLeftPIDError() {
     return m_climbLeftProfiledPIDController.getPositionError();
   }
@@ -420,8 +432,8 @@ public class ClimbSubsystem extends SubsystemBase {
       setRightClimbHookZeroValue(leftValue);
     }
 
-    SmartDashboard.putNumber("Left climb zero", getLeftClimbHookZeroValue());
-    SmartDashboard.putNumber("Right climb zero", getRightClimbHookZeroValue());
+    // SmartDashboard.putNumber("Left climb zero", getLeftClimbHookZeroValue());
+    // SmartDashboard.putNumber("Right climb zero", getRightClimbHookZeroValue());
     // Warn Drivers if the hooks are not near each other for some reason.
 //    if (Math.abs(getLeftHookHeight() - getRightHookHeight()) > 0.25) {
 //      DriverStation.reportWarning(
@@ -440,8 +452,10 @@ public class ClimbSubsystem extends SubsystemBase {
 
 //    SmartDashboard.putNumber("Left Climb PID velocity: ", m_climbLeftProfiledPIDController.getGoal().velocity);
 //    SmartDashboard.putNumber("Right Climb PID velocity: ", m_climbRightProfiledPIDController.getGoal().velocity);
-    SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
-   SmartDashboard.putNumber("Right Hook Height:", getRightHookHeight());
+  
+//   SmartDashboard.putNumber("Left Hook Height: ", getLeftHookHeight());
+  //  SmartDashboard.putNumber("Right Hook Height:", getRightHookHeight());
+  
 //    SmartDashboard.putBoolean("Is Climb Vertical?: ", getIsClimbVertical());
   }
 }
