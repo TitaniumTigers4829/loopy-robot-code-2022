@@ -225,7 +225,10 @@ public class RobotContainer {
    new JoystickButton(m_buttonController, 11).whileHeld(new Eject(m_shooter, m_tower));
 
     // Moves the robot to zeroing position, then zeroes it
-//    if (autoChooser.getSelected() == fiveBallAuto) {
+    // TODO: stuff
+   if (autoChooser.getSelected() == fiveBallAuto) {
+    //  m_robotDrive.setGyroOffset(-123);
+   }
 //      new FaceDegree(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
 //          () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_BUMPER.get(), 128).withTimeout(1.5)
 //          .schedule();

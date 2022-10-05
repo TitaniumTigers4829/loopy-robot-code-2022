@@ -74,9 +74,9 @@ public final class Constants {
 
 
     // Values to scale joystick inputs to desired states.
-    public static final double kMaxSpeedMetersPerSecond = 4.5; // LOCKED IN
+    public static final double kMaxSpeedMetersPerSecond = 2.0; // LOCKED IN TA 4.5
     public static final double kMaxRotationalSpeed =
-        3 * Math.PI;
+        2 * Math.PI; //3*pi
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically
@@ -291,6 +291,8 @@ public final class Constants {
     public static final double kPXController = 1.25;
     public static final double kPYController = 1.25;
     public static final double kPThetaController = 3;
+
+    public static final int fiveBallAutoOffset = -90;
 
     // Constraint for the motion profiled robot angle controller
     public static final TrapezoidProfile.Constraints kThetaControllerConstraints =

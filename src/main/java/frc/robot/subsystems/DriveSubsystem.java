@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
@@ -171,7 +172,7 @@ public class DriveSubsystem extends SubsystemBase {
         SwerveModuleState[] swerveModuleStates =
                 DriveConstants.kDriveKinematics.toSwerveModuleStates(
                         fieldRelative
-                                ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d())
+                                ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, Rotation2d.fromDegrees(getHeading()))
                                 : new ChassisSpeeds(xSpeed, ySpeed, rot));
         SwerveDriveKinematics.desaturateWheelSpeeds(
                 swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
@@ -210,9 +211,15 @@ public class DriveSubsystem extends SubsystemBase {
      *
      * @return the robot's heading in degrees, from -180 to 180
      */
-//  public double getHeading() {
-//    return m_gyro.getRotation2d().getDegrees();
-//  }
+     public double getHeading() {
+        double currentHeading = m_gyro.getRotation2d().getDegrees() + gyroOffset;
+        if (currentHeading > 180) {
+                currentHeading -= 360;
+        } else if (currentHeading < -180) {
+                currentHeading += 360;
+        }
+        return currentHeading;
+     }
 
 //  /**
 //   * Returns the turn rate of the robot.

@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.PathWeaverConstants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.commands.intake.IntakeWithTower;
@@ -62,12 +63,13 @@ public class FiveBallAutoCommand extends SequentialCommandGroup {
             ))
         ).withTimeout(2.5),
 
-        // 6. Shoots the two balls gotten from the human player and corner
+        // 6. Sets the gyro offset
+        new InstantCommand(() -> driveSubsystem.setGyroOffset(AutoConstants.fiveBallAutoOffset)),
+
+        // 7. Shoots the two balls gotten from the human player and corner
         new AutoShoot(shooterSubsystem, towerSubsystem, LimelightSubsystem.getInstance(),
             driveSubsystem, ledsSubsystem)
 
-        // 7. Sets the gyro offset
-        // new InstantCommand(() -> driveSubsystem.setGyroOffset(90))
     );
 
   }
