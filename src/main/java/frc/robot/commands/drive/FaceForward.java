@@ -13,7 +13,7 @@ import java.util.function.DoubleSupplier;
 
 public class FaceForward extends CommandBase {
     private final ProfiledPIDController turnProfiledPIDController = new ProfiledPIDController(
-            0.0,
+            0.1,
             ShooterConstants.turnkI,
             ShooterConstants.turnkD,
             new TrapezoidProfile.Constraints(

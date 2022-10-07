@@ -74,9 +74,9 @@ public final class Constants {
 
 
     // Values to scale joystick inputs to desired states.
-    public static final double kMaxSpeedMetersPerSecond = 2.0; // LOCKED IN TA 4.5
+    public static final double kMaxSpeedMetersPerSecond = 2.5; // LOCKED IN AT 4.5
     public static final double kMaxRotationalSpeed =
-        2 * Math.PI; //3*pi
+        3 * Math.PI; //3*pi
 
     // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
     // These characterization values MUST be determined either experimentally or theoretically

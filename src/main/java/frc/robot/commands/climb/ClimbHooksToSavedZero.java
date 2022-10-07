@@ -35,7 +35,7 @@ public class ClimbHooksToSavedZero extends CommandBase {
     // double currentLeftHeight = climbSubsystem.getLeftHookHeightNoLimits();
     // double currentRightHeight = climbSubsystem.getRightHookHeightNoLimits();
 
-    double neededLeftHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.09;
+    double neededLeftHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.03;
     double neededRightHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.09;
 
     climbSubsystem.setDesiredLeftHookHeight(neededLeftHeight);
