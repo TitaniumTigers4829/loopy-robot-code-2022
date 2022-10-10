@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.ClimbConstants;
 import frc.robot.subsystems.ClimbSubsystem;
 
-public class ClimbHooksToSavedZero extends CommandBase {
+public class ClimbHooksToMax extends CommandBase {
 
   private final ClimbSubsystem climbSubsystem;
 
   /** Creates a new ClimbHooksToSavedZero. */
-  public ClimbHooksToSavedZero(ClimbSubsystem climbSubsystem) {
+  public ClimbHooksToMax(ClimbSubsystem climbSubsystem) {
     this.climbSubsystem = climbSubsystem;
     addRequirements(this.climbSubsystem);
   }
@@ -35,8 +35,8 @@ public class ClimbHooksToSavedZero extends CommandBase {
     // double currentLeftHeight = climbSubsystem.getLeftHookHeightNoLimits();
     // double currentRightHeight = climbSubsystem.getRightHookHeightNoLimits();
 
-    double neededLeftHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.03;
-    double neededRightHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.09;
+    double neededLeftHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.0;
+    double neededRightHeight = ClimbConstants.kClimbMaxHeight + (ClimbConstants.kClimbMaxHeight - ClimbConstants.kClimbMinHeight) + 0.04;
 
     climbSubsystem.setDesiredLeftHookHeight(neededLeftHeight);
     climbSubsystem.setDesiredRightHookHeight(neededRightHeight);

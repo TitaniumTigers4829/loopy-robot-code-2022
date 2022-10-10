@@ -26,7 +26,7 @@ import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldTwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbCommand;
-import frc.robot.commands.climb.ClimbHooksToSavedZero;
+import frc.robot.commands.climb.ClimbHooksToMax;
 import frc.robot.commands.climb.ClimbNextBar;
 import frc.robot.commands.climb.ClimbSetPos;
 import frc.robot.commands.climb.ClimbWithButtons;
@@ -314,7 +314,7 @@ public class RobotContainer {
     JoystickButton goToZeroButton = new JoystickButton(m_extraButtons, 2);
     JoystickButton autoClimbButton = new JoystickButton(m_extraButtons, 4);
 
-    goToZeroButton.whileHeld(new ClimbHooksToSavedZero(m_climbSubsystem));
+    goToZeroButton.whileHeld(new ClimbHooksToMax(m_climbSubsystem));
     autoClimbButton.whileHeld(new ClimbCommand(m_climbSubsystem));
 
     // new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));

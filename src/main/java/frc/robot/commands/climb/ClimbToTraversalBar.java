@@ -22,10 +22,10 @@ public class ClimbToTraversalBar extends SequentialCommandGroup {
         // Extends the arms to above the bar
         new ClimbSetPos(climbSubsystem, ClimbConstants.kClimbMaxHeight + ClimbConstants.kClimbMaxPosConfirmationExtraHeight),
         // Brings the arms back to the bar
-        new WaitCommand(.2),
+        // new WaitCommand(.2),
         new ClimbVertical(climbSubsystem),
         // Waits a little bit
-        new WaitCommand(.4),
+        new WaitCommand(.2),
         // Pulls the robot up to the traversal bar
         new ClimbSetPos(climbSubsystem, ClimbConstants.kTraversalBarFinalHeight - ClimbConstants.kClimbMaxPosConfirmationExtraHeight)
         // Ends with the robot hanging on the traversal bar with the telescoping arms, doesn't use static hooks
