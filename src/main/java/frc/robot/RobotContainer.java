@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Constants.PathPlannerConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
 import frc.robot.commands.autonomous.FollowTrajectoryPathPlanner;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
