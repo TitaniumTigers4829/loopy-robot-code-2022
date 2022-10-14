@@ -15,20 +15,15 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
-import frc.robot.Constants.ClimbConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
-import frc.robot.Constants.PathPlannerConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
-import frc.robot.commands.autonomous.FollowTrajectoryPathPlanner;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldTwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbCommand;
 import frc.robot.commands.climb.ClimbHooksToMax;
-import frc.robot.commands.climb.ClimbNextBar;
-import frc.robot.commands.climb.ClimbSetPos;
 import frc.robot.commands.climb.ClimbWithButtons;
 import frc.robot.commands.drive.FaceForward;
 import frc.robot.commands.intake.IntakeWithTower;
@@ -53,7 +48,7 @@ import java.util.function.DoubleSupplier;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
-
+// test
 public class RobotContainer {
 
   // The robot's subsystems
