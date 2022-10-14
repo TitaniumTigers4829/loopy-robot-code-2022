@@ -199,7 +199,7 @@ public final class Constants {
     public static double ksTurning = 0.0;
     public static double kvTurning = 0.0;
 
-    public static double ksClimbLineup = 100.0;
+    public static double ksClimbLineup = 10.0;
     public static double kvClimbLineup = 0.0;
 
     public static double topkP = 0.08; // 0.0015 // 0.003 // 0.0045
@@ -254,7 +254,7 @@ public final class Constants {
 
     // Climb Height Constants
     public static final double kSlightlyAboveBar = 1.1;
-    public static final double kSlightlyAboveHighBar = 1.17;
+    public static final double kSlightlyAboveHighBar = 1.15;
     public static final double kTraversalBarFinalHeight = 1.3;
     public static final double kSlightlyBelowBar = 0.75;
     public static final double kClimbMaxHeight = 1.6081375; // in meters

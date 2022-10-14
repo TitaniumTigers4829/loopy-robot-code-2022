@@ -20,18 +20,18 @@ import frc.robot.subsystems.DriveSubsystem;
 public class FollowTrajectoryPathPlanner extends CommandBase {
 
   private DriveSubsystem driveSubsystem;
-  private String filePath;
+  private String pathName;
   private boolean zeroInitialPose;
 
   PPSwerveControllerCommand followTrajectoryPathPlannerCommand;
   private boolean done = false;
 
   /** Creates a new FollowTrajectoryPathPlanner. */
-  public FollowTrajectoryPathPlanner(DriveSubsystem driveSubsystem, String filePath, boolean zeroInitialPose) {
+  public FollowTrajectoryPathPlanner(DriveSubsystem driveSubsystem, String pathName, boolean zeroInitialPose) {
     this.driveSubsystem = driveSubsystem;
     addRequirements(driveSubsystem);
     
-    this.filePath = filePath;
+    this.pathName = pathName;
     this.zeroInitialPose = zeroInitialPose;
   }
 
@@ -39,9 +39,9 @@ public class FollowTrajectoryPathPlanner extends CommandBase {
   @Override
   public void initialize() {
     // Makes a trajectory                                                     
-    PathPlannerTrajectory trajectoryToFollow = PathPlanner.loadPath(filePath, PathPlannerConstants.autoMaxVelocity, PathPlannerConstants.autoMaxAcceleration);
+    PathPlannerTrajectory trajectoryToFollow = PathPlanner.loadPath(pathName, PathPlannerConstants.autoMaxVelocity, PathPlannerConstants.autoMaxAcceleration);
 
-    // Resets the pose of the robot if true
+    // Resets the pose of the robot if true (should generally only be true for the first path of an auto)
     if (zeroInitialPose) {
       driveSubsystem.resetOdometry(trajectoryToFollow.getInitialPose());
     }

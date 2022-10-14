@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Decent Changes" />
+    <list default="true" id="2cba656b-0875-4993-8864-34528a70bc39" name="Changes" comment="Decent Changes">
+      <change afterPath="$PROJECT_DIR$/.idea/google-java-format.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectoryPathPlanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/commands/autonomous/FollowTrajectoryPathPlanner.java" afterDir="false" />
+    </list>
     <list id="be6ecede-5820-491c-8c48-71048fa5dbff" name="Changes by jackg" comment="Changes by jackg" />
     <list id="e1d5bcda-b3fe-4d50-bdf4-42ab21fea961" name="Changes by Ryan" comment="" />
     <list id="22b4c1c0-8530-4f35-9a5d-6f552df0d4ad" name="Changes by titan" comment="" />
@@ -97,14 +103,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jackg/Desktop/2021-2022 Robot Code/loopy-robot-code-2022&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/jackg/Desktop/2021-2022 Robot Code/loopy-robot-code-2022",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Users\jackg\Desktop\Robot Code\zuntue\src\main\deploy\output" />
@@ -116,7 +123,7 @@
       <recent name="frc.robot.commands.shooter" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Gradle.zuntue2022 [build]">
     <configuration name="zuntue2022 [ShuffleBoard]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -668,5 +675,9 @@
     <MESSAGE value="Decent Changes" />
     <MESSAGE value="Made a new 3 ball auto" />
     <option name="LAST_COMMIT_MESSAGE" value="Made a new 3 ball auto" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

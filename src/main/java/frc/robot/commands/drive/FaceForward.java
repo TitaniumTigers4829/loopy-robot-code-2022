@@ -45,11 +45,23 @@ public class FaceForward extends CommandBase {
 
     @Override
     public void execute() {
-        double headingOffset = drive.heading();
-//        headingOffset = (Math.abs(headingOffset) < 1 ? 0 : headingOffset);
-        double turnOutput = -1 * (turnProfiledPIDController.calculate(headingOffset, 0) + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity));
-        drive.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnOutput, isFieldRelative.getAsBoolean());
-        SmartDashboard.putNumber("Output", turnOutput);
+        // double headingOffset = drive.heading() % 360;
+        // headingOffset = (Math.abs(headingOffset) < 1 ? 0 : headingOffset);
+        // double turnOutput = -1 * (turnProfiledPIDController.calculate(headingOffset, 0) + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity));
+        // drive.drive(leftStickY.getAsDouble(), leftStickX.getAsDouble(), turnOutput, isFieldRelative.getAsBoolean());
+        // SmartDashboard.putNumber("Output", turnOutput);
+        
+        double headingError = drive.heading() % 360;
+
+        // If heading error isn't off by much, it won't move
+        if (Math.abs(headingError) < 1) headingError = 0;
+    
+        double turnRobotOutput =
+            -1 * 
+            turnProfiledPIDController.calculate(headingError, 0)
+                + turnFeedforward.calculate(turnProfiledPIDController.getSetpoint().velocity);
+    
+        drive.drive(leftStickX.getAsDouble(), leftStickY.getAsDouble(), turnRobotOutput, false);
     }
 
     @Override
