@@ -74,7 +74,7 @@ public final class Constants {
 
 
     // Values to scale joystick inputs to desired states.
-    public static final double kMaxSpeedMetersPerSecond = 2.5; // LOCKED IN AT 4.5
+    public static final double kMaxSpeedMetersPerSecond = 4.5; // LOCKED IN AT 4.5
     public static final double kMaxRotationalSpeed =
         3 * Math.PI; //3*pi
 
@@ -253,7 +253,7 @@ public final class Constants {
     public static final int kClimbAngledSolenoidPort = 5;
 
     // Climb Height Constants
-    public static final double kSlightlyAboveBar = 1.1;
+    public static final double kSlightlyAboveBar = 1.06;
     public static final double kSlightlyAboveHighBar = 1.15;
     public static final double kTraversalBarFinalHeight = 1.3;
     public static final double kSlightlyBelowBar = 0.75;
@@ -345,6 +345,19 @@ public final class Constants {
 
     // Test Auto File Paths
     public static final String firstTestPath = "testPath1";
+
+  }
+
+  public static final class AIRobotConstants {
+
+    public static final double cargoDiameterMeters = .2413;
+
+    // This table is used for getting the distance of cargo from the robot
+    public static final double[][] heightDistanceTable = {
+        // {pxHeight, distance}
+        { 0.0, 0.0 },
+        { 0.0, 0.0 }
+    };
 
   }
 

@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
+import frc.robot.commands.autonomous.FollowPiTrajectory;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
@@ -38,6 +39,7 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.LEDsSubsystem;
 import frc.robot.subsystems.LimelightSubsystem;
+import frc.robot.subsystems.PiSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TowerSubsystem;
 import java.util.function.DoubleSupplier;
@@ -60,6 +62,7 @@ public class RobotContainer {
   private final TowerSubsystem m_tower = new TowerSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
+  private final PiSubsystem m_piSubsystem = new PiSubsystem();
 
   private final Command fiveBallAuto = new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive,
       m_LEDs,
@@ -272,6 +275,8 @@ public class RobotContainer {
 //    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
 //    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
   
+JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
+
   RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
 //    A_BUTTON.whileHeld(new ShooterPIDtesting(m_shooter));
@@ -357,7 +362,7 @@ public class RobotContainer {
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
-
+B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem.generateTrajectory(0, 1, 0), true));
    Y_BUTTON.whenPressed(
        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
     // While held for ejecting ball
