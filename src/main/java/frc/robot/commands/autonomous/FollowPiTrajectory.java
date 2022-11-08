@@ -28,6 +28,8 @@ public class FollowPiTrajectory extends CommandBase {
 
   @Override
   public void initialize() {
+    drive.resetOdometry(trajectory.getInitialPose());
+
     final ProfiledPIDController thetaController =
         new ProfiledPIDController(
             AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);

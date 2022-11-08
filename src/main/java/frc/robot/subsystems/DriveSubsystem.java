@@ -24,36 +24,12 @@ import frc.robot.Constants.DriveConstants;
 public class DriveSubsystem extends SubsystemBase {
 
     // The gyro sensor
-    private final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
+    public final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
 
     private int gyroOffset = 0;
 
-    // Don't really know why this is necessary
-//  private NetworkTableEntry xSpeedEntry =
-//      swerveTab.add("xBox xSpeed", 0)
-//          .getEntry();
-//
-//  private NetworkTableEntry ySpeedEntry =
-//      swerveTab.add("xBox ySpeed", 0)
-//          .getEntry();
-//
-//  private NetworkTableEntry rotEntry =
-//      swerveTab.add("xBox rot", 0)
-//          .getEntry();
-//
-//  private NetworkTableEntry frontLeftStateEntry =
-//      swerveTab.add("FL State v", 0)
-//          .getEntry();
-//
-//  private NetworkTableEntry frontRightStateEntry =
-//      swerveTab.add("FR State v", 0)
-//          .getEntry();
-//
-//  private NetworkTableEntry gyroEntry =
-//      swerveTab.add("Gyro Heading", 0)
-//          .getEntry();
     // Odometry class for tracking robot pose
-    SwerveDriveOdometry m_odometry =
+    public SwerveDriveOdometry m_odometry =
             new SwerveDriveOdometry(DriveConstants.kDriveKinematics, m_gyro.getRotation2d());
     private final ShuffleboardTab moduleTab = Shuffleboard.getTab("Module Info");
     private final SwerveModule m_frontLeft =
@@ -125,7 +101,9 @@ public class DriveSubsystem extends SubsystemBase {
 //    SmartDashboard.putString("m_rearLeft", m_rearLeft.getState().toString());
 //    SmartDashboard.putString("m_frontRight", m_frontRight.getState().toString());
 //    SmartDashboard.putString("m_rearRight", m_rearRight.getState().toString());
-        // SmartDashboard.putString("odometry", m_odometry.getPoseMeters().toString());
+        SmartDashboard.putString("odometry", m_odometry.getPoseMeters().toString());
+        SmartDashboard.putString("rotation2d", m_gyro.getRotation2d().toString());
+        SmartDashboard.putNumber("angle", m_gyro.getAngle());
         // m_frontLeft.periodic_func();
         // m_rearRight.periodic_func();
         // m_rearLeft.periodic_func();
@@ -231,5 +209,6 @@ public class DriveSubsystem extends SubsystemBase {
 ////    return m_gyro.getRate() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
 //    return m_gyro.getRate();
 //  }
+
 
 }

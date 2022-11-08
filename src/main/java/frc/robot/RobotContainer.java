@@ -62,7 +62,7 @@ public class RobotContainer {
   private final TowerSubsystem m_tower = new TowerSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
-  private final PiSubsystem m_piSubsystem = new PiSubsystem();
+  private final PiSubsystem m_piSubsystem = new PiSubsystem(m_robotDrive.m_odometry, m_robotDrive.m_gyro);
 
   private final Command fiveBallAuto = new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive,
       m_LEDs,

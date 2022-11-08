@@ -24,15 +24,19 @@ import frc.robot.Constants.DriveConstants;
 
 public class PiSubsystem extends SubsystemBase {
 
+  private SwerveDriveOdometry m_odometry;
+  private Gyro m_gyro;
   private double cargoPixelHeight = -1;
   private double cargoPixelXOffset = -1;
 
-  private static final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
-  private static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
-      m_gyro.getRotation2d());
+  // private static final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
+  // private static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
+  //     m_gyro.getRotation2d());
 
   /** Creates a new Jetson object */
-  public PiSubsystem() {
+  public PiSubsystem(SwerveDriveOdometry m_odometry, Gyro m_gyro) {
+    this.m_odometry = m_odometry;
+    this.m_gyro = m_gyro;
   }
 
   @Override
@@ -40,6 +44,7 @@ public class PiSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     cargoPixelHeight = SmartDashboard.getNumber(AIRobotConstants.cargoPixelHeightKey, -1);
     cargoPixelXOffset = SmartDashboard.getNumber(AIRobotConstants.cargoPixelXOffsetKey, -1);
+    SmartDashboard.putNumber("error s", m_odometry.getPoseMeters().getRotation().getDegrees() + m_gyro.getAngle());
   }
 
   /**
@@ -59,7 +64,7 @@ public class PiSubsystem extends SubsystemBase {
     // double rotation = 0;
 
     double x = 0.01;
-    double y = 1;
+    double y = 2.5;
     double rotation = 0;
 
     // if (cargoPixelHeight != -1) {
@@ -79,12 +84,15 @@ public class PiSubsystem extends SubsystemBase {
             .setStartVelocity(0)
             .setEndVelocity(0);
 
+    // This accounts for the gyro and odometry returning different thetas
+    double odometryDegreeOffset = m_odometry.getPoseMeters().getRotation().getDegrees() + m_gyro.getAngle();
+    
     // TODO: BET $20 over whether initial pose needs to be current pos or 0
     // Lori gets $20 if initial pose is current pos, Jack gets $20 if otherwise
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(curX, curY, m_gyro.getRotation2d()),
+        new Pose2d(curY, curX, Rotation2d.fromDegrees(odometryDegreeOffset)),
         List.of(),
-        new Pose2d(curX + x, curY + y, Rotation2d.fromDegrees((m_gyro.getAngle() + rotation) % 360)),
+        new Pose2d(curY + y, curX + x, Rotation2d.fromDegrees(odometryDegreeOffset + rotation)),
         config
     );
 
