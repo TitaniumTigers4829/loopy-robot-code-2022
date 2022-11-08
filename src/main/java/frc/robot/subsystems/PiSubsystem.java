@@ -16,12 +16,16 @@ import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.AIRobotConstants;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 
 public class PiSubsystem extends SubsystemBase {
+
+  private double cargoPixelHeight = -1;
+  private double cargoPixelXOffset = -1;
 
   private static final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
   private static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
@@ -34,6 +38,8 @@ public class PiSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    cargoPixelHeight = SmartDashboard.getNumber(AIRobotConstants.cargoPixelHeightKey, -1);
+    cargoPixelXOffset = SmartDashboard.getNumber(AIRobotConstants.cargoPixelXOffsetKey, -1);
   }
 
   /**
@@ -46,7 +52,21 @@ public class PiSubsystem extends SubsystemBase {
    *                 center of the camera.
    * @return
    */
-  public Trajectory generateTrajectory(double x, double y, double rotation) {
+  public Trajectory generateTrajectory() {
+
+    // double x = 0.01;
+    // double y = 0.01;
+    // double rotation = 0;
+
+    double x = 0.01;
+    double y = 1;
+    double rotation = 0;
+
+    // if (cargoPixelHeight != -1) {
+    //   x = getCargoXPos(cargoPixelHeight, cargoPixelXOffset);
+    //   y = getCargoYPos(x, getCargoDistance(cargoPixelHeight));
+    //   rotation = 0;
+    // }
 
     double curX = m_odometry.getPoseMeters().getX();
     double curY = m_odometry.getPoseMeters().getY();
@@ -62,12 +82,12 @@ public class PiSubsystem extends SubsystemBase {
     // TODO: BET $20 over whether initial pose needs to be current pos or 0
     // Lori gets $20 if initial pose is current pos, Jack gets $20 if otherwise
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(curX, curY, new Rotation2d((m_gyro.getAngle() * 180 / Math.PI) % 360)),
+        new Pose2d(curX, curY, m_gyro.getRotation2d()),
         List.of(),
-        new Pose2d(curX + x, curY + y, new Rotation2d((m_gyro.getAngle() * 180 / Math.PI) % 360)),
-        config);
+        new Pose2d(curX + x, curY + y, Rotation2d.fromDegrees((m_gyro.getAngle() + rotation) % 360)),
+        config
+    );
 
-        // new Pose2d(curX + x, curY + y, new Rotation2d(rotation * 180 / Math.PI)), config)
     return trajectory;
   }
 

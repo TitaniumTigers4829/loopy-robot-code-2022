@@ -362,7 +362,7 @@ JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
-B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem.generateTrajectory(0, 1, 0), true));
+B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem.generateTrajectory()));
    Y_BUTTON.whenPressed(
        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
     // While held for ejecting ball

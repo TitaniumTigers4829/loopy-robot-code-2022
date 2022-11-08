@@ -355,9 +355,13 @@ public final class Constants {
     // This table is used for getting the distance of cargo from the robot
     public static final double[][] heightDistanceTable = {
         // {pxHeight, distance}
-        { 0.0, 0.0 },
-        { 0.0, 0.0 }
+        { 0, 0.0 },
+        { 50, .5 },
+        { 500, 1 }
     };
+
+    public static final String cargoPixelHeightKey = "Cargo offset";
+    public static final String cargoPixelXOffsetKey = "Cargo height";
 
   }
 

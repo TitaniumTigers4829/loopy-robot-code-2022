@@ -137,7 +137,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void setGyroOffset(int gyroOffset) {
-        this.gyroOffset = gyroOffset;
+        // this.gyroOffset = gyroOffset;
     }
 
     /**
