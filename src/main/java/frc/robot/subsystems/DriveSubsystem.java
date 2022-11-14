@@ -101,9 +101,9 @@ public class DriveSubsystem extends SubsystemBase {
 //    SmartDashboard.putString("m_rearLeft", m_rearLeft.getState().toString());
 //    SmartDashboard.putString("m_frontRight", m_frontRight.getState().toString());
 //    SmartDashboard.putString("m_rearRight", m_rearRight.getState().toString());
-        SmartDashboard.putString("odometry", m_odometry.getPoseMeters().toString());
-        SmartDashboard.putString("rotation2d", m_gyro.getRotation2d().toString());
-        SmartDashboard.putNumber("angle", m_gyro.getAngle());
+        // SmartDashboard.putString("odometry", m_odometry.getPoseMeters().toString());
+        // SmartDashboard.putString("rotation2d", m_gyro.getRotation2d().toString());
+        // SmartDashboard.putNumber("angle", m_gyro.getAngle());
         // m_frontLeft.periodic_func();
         // m_rearRight.periodic_func();
         // m_rearLeft.periodic_func();

@@ -58,14 +58,9 @@ public class PiSubsystem extends SubsystemBase {
    * @return
    */
   public Trajectory generateTrajectory() {
-
-    // double x = 0.01;
-    // double y = 0.01;
-    // double rotation = 0;
-
-    double x = 0.01;
-    double y = 2.5;
-    double rotation = 0;
+    double x = 1.;  // + = left
+    double y = 1.;  // + = forward
+    double rotation = 180;  // + = counterclockwise
 
     // if (cargoPixelHeight != -1) {
     //   x = getCargoXPos(cargoPixelHeight, cargoPixelXOffset);
@@ -83,16 +78,15 @@ public class PiSubsystem extends SubsystemBase {
             // .setKinematics(SwerveDriveConstants.kDriveKinematics)
             .setStartVelocity(0)
             .setEndVelocity(0);
-
-    // This accounts for the gyro and odometry returning different thetas
-    double odometryDegreeOffset = m_odometry.getPoseMeters().getRotation().getDegrees() + m_gyro.getAngle();
     
+    Pose2d start = new Pose2d(curY, curX, m_odometry.getPoseMeters().getRotation());
+    Pose2d end = new Pose2d(curY + y, curX + x, Rotation2d.fromDegrees(m_odometry.getPoseMeters().getRotation().getDegrees() + rotation));
     // TODO: BET $20 over whether initial pose needs to be current pos or 0
     // Lori gets $20 if initial pose is current pos, Jack gets $20 if otherwise
     Trajectory trajectory = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(curY, curX, Rotation2d.fromDegrees(odometryDegreeOffset)),
+        start,
         List.of(),
-        new Pose2d(curY + y, curX + x, Rotation2d.fromDegrees(odometryDegreeOffset + rotation)),
+        end,
         config
     );
 

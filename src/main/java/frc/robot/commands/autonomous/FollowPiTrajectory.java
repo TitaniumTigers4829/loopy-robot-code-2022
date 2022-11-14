@@ -19,7 +19,7 @@ public class FollowPiTrajectory extends CommandBase {
   private final Trajectory trajectory;
   private boolean toReset;
 
-  public FollowPiTrajectory(DriveSubsystem drive, Trajectory trajectory) {
+  public FollowPiTrajectory(DriveSubsystem drive, Trajectory trajectory, boolean toReset) {
     this.drive = drive;
     this.trajectory = trajectory;
     this.toReset = toReset;
@@ -28,7 +28,9 @@ public class FollowPiTrajectory extends CommandBase {
 
   @Override
   public void initialize() {
-    drive.resetOdometry(trajectory.getInitialPose());
+    if (toReset) {
+      drive.resetOdometry(trajectory.getInitialPose());
+    }
 
     final ProfiledPIDController thetaController =
         new ProfiledPIDController(

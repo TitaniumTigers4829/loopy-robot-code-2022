@@ -178,7 +178,7 @@ public class RobotContainer {
 //        JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
 //    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 //    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
-    JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
+    // JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
 //
     /*
      * Sets the default command and joystick bindings for the drive train.
@@ -201,12 +201,12 @@ public class RobotContainer {
            () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
            m_LEDs), true);
 
-    Y_BUTTON.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
-              * DriveConstants.kMaxSpeedMetersPerSecond,
-          ()->modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
-              * DriveConstants.kMaxSpeedMetersPerSecond,
-          ()->!RIGHT_BUMPER.get())
-    );
+    // Y_BUTTON.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
+    //           * DriveConstants.kMaxSpeedMetersPerSecond,
+    //       ()->modifyAxisCubed(LEFT_STICK_X) * -1 // yAxis
+    //           * DriveConstants.kMaxSpeedMetersPerSecond,
+    //       ()->!RIGHT_BUMPER.get())
+    // );
 //    LEFT_BUMPER.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisQuartic(LEFT_STICK_Y),
 //        () -> modifyAxisQuartic(LEFT_STICK_X), () -> !RIGHT_BUMPER.get()));
 //
@@ -238,8 +238,8 @@ public class RobotContainer {
 //      new InstantCommand(m_robotDrive::zeroHeading).schedule();
 //    }
 
-    
-
+    // Resets Odometry On Startup
+    m_robotDrive.m_odometry.resetPosition(new Pose2d(), new Rotation2d());
   }
 
   /**
@@ -362,7 +362,7 @@ JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
-B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem.generateTrajectory()));
+B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem.generateTrajectory(), true));
    Y_BUTTON.whenPressed(
        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
     // While held for ejecting ball
