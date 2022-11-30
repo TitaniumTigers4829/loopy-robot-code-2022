@@ -19,6 +19,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
 import frc.robot.commands.autonomous.FollowPiTrajectory;
+import frc.robot.commands.autonomous.PickupCargo;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
@@ -62,7 +63,7 @@ public class RobotContainer {
   private final TowerSubsystem m_tower = new TowerSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
   private final LEDsSubsystem m_LEDs = new LEDsSubsystem();
-  private final PiSubsystem m_piSubsystem = new PiSubsystem(m_robotDrive.m_odometry, m_robotDrive.m_gyro);
+  private final PiSubsystem m_piSubsystem = new PiSubsystem(m_robotDrive.m_odometry);
 
   private final Command fiveBallAuto = new FiveBallAutoCommand(m_shooter, m_tower, m_robotDrive,
       m_LEDs,
@@ -362,7 +363,7 @@ JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
-B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem.generateTrajectory(), true));
+B_BUTTON.whileHeld(new PickupCargo(m_robotDrive, m_piSubsystem));
    Y_BUTTON.whenPressed(
        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
     // While held for ejecting ball
