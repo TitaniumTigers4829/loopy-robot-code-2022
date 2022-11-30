@@ -54,7 +54,12 @@
     <remote-repository>
       <option name="id" value="WPILocal" />
       <option name="name" value="WPILocal" />
-      <option name="url" value="file:/C:/Users/Public/wpilib/2022/maven/" />
+      <option name="url" value="file:/$PROJECT_DIR$/../../../../Public/wpilib/2022/maven/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="WPI1b42324f-17c6-4875-8e77-1c312bc8c786_0Release" />
+      <option name="name" value="WPI1b42324f-17c6-4875-8e77-1c312bc8c786_0Release" />
+      <option name="url" value="https://3015rangerrobotics.github.io/pathplannerlib/repo" />
     </remote-repository>
   </component>
 </project>

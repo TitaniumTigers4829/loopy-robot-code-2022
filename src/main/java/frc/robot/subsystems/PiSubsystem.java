@@ -25,26 +25,28 @@ import frc.robot.Constants.DriveConstants;
 public class PiSubsystem extends SubsystemBase {
 
   private SwerveDriveOdometry m_odometry;
-  private Gyro m_gyro;
-  private double cargoPixelHeight = -1;
-  private double cargoPixelXOffset = -1;
+
+  public double cargoPxHeightNetworkTable = -1;
+  public double cargoPxOffsetNetworkTable = -1;
 
   // private static final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
   // private static final SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(DriveConstants.kDriveKinematics,
   //     m_gyro.getRotation2d());
 
   /** Creates a new Jetson object */
-  public PiSubsystem(SwerveDriveOdometry m_odometry, Gyro m_gyro) {
+  public PiSubsystem(SwerveDriveOdometry m_odometry) {
     this.m_odometry = m_odometry;
-    this.m_gyro = m_gyro;
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    cargoPixelHeight = SmartDashboard.getNumber(AIRobotConstants.cargoPixelHeightKey, -1);
-    cargoPixelXOffset = SmartDashboard.getNumber(AIRobotConstants.cargoPixelXOffsetKey, -1);
-    SmartDashboard.putNumber("error s", m_odometry.getPoseMeters().getRotation().getDegrees() + m_gyro.getAngle());
+    cargoPxHeightNetworkTable = SmartDashboard.getNumber(AIRobotConstants.cargoPixelHeightKey, -1);
+    cargoPxOffsetNetworkTable = SmartDashboard.getNumber(AIRobotConstants.cargoPixelXOffsetKey, -1);
+  }
+
+  public boolean cargoInView() {
+    return (cargoPxHeightNetworkTable != -1 && cargoPxOffsetNetworkTable != -1);
   }
 
   /**
@@ -57,17 +59,7 @@ public class PiSubsystem extends SubsystemBase {
    *                 center of the camera.
    * @return
    */
-  public Trajectory generateTrajectory() {
-    double x = 1.;  // + = left
-    double y = 1.;  // + = forward
-    double rotation = 180;  // + = counterclockwise
-
-    // if (cargoPixelHeight != -1) {
-    //   x = getCargoXPos(cargoPixelHeight, cargoPixelXOffset);
-    //   y = getCargoYPos(x, getCargoDistance(cargoPixelHeight));
-    //   rotation = 0;
-    // }
-
+  public Trajectory generateTrajectory(double x, double y, double rotation) {
     double curX = m_odometry.getPoseMeters().getX();
     double curY = m_odometry.getPoseMeters().getY();
 
@@ -101,7 +93,7 @@ public class PiSubsystem extends SubsystemBase {
    *                      by the camera.
    * @return The distance in meters of the cargo from the robot.
    */
-  public static double getCargoDistance(double cargoPxHeight) {
+  public double getCargoDistance() {
 
     double table[][] = AIRobotConstants.heightDistanceTable;
 
@@ -123,20 +115,20 @@ public class PiSubsystem extends SubsystemBase {
     double cargoDistance = 0;
 
     // Handles if the cargo is less than the table's least distance
-    if (cargoPxHeight < firstPxHeight) {
+    if (cargoPxHeightNetworkTable < firstPxHeight) {
       // Uses slope from first 2 points to get distance
       double slope = (secondDistance - firstDistance) / (secondPxHeight - firstPxHeight);
-      cargoDistance = slope * (firstPxHeight - cargoPxHeight) + firstDistance;
+      cargoDistance = slope * (firstPxHeight - cargoPxHeightNetworkTable) + firstDistance;
       // Handles if the cargo is greater than the table's max distance
-    } else if (cargoPxHeight > lastPxHeight) {
+    } else if (cargoPxHeightNetworkTable > lastPxHeight) {
       // Uses slope from last 2 points to get distance
       double slope = (lastDistance - secondTolastDistance) / (lastPxHeight - secondTolastPxHeight);
-      cargoDistance = slope * (cargoPxHeight - lastPxHeight) + lastDistance;
+      cargoDistance = slope * (cargoPxHeightNetworkTable - lastPxHeight) + lastDistance;
     } else {
       // Gets the closest values below and above the desired value
       for (int i = 0; i < table.length; i++) {
         // Checks if the height is in between 2 points in the table
-        if (table[i][0] <= cargoPxHeight && table[i + 1][0] > cargoPxHeight) {
+        if (table[i][0] <= cargoPxHeightNetworkTable && table[i + 1][0] > cargoPxHeightNetworkTable) {
           lowerHeight = table[i][0];
           lowerDistance = table[i][1];
           higherHeight = table[i + 1][0];
@@ -147,7 +139,7 @@ public class PiSubsystem extends SubsystemBase {
 
       // Gets slope connecting points
       double slope = (higherDistance - lowerDistance) / (higherHeight - lowerHeight);
-      cargoDistance = (slope * (cargoPxHeight - lowerHeight) + lowerDistance);
+      cargoDistance = (slope * (cargoPxHeightNetworkTable - lowerHeight) + lowerDistance);
 
     }
 
@@ -167,10 +159,10 @@ public class PiSubsystem extends SubsystemBase {
    *                                        for the cargo seen by the camera.
    * @return The x position of the cargo in meters relative to the robot.
    */
-  public static double getCargoXPos(double cargoPxHeight, double pxFromCameraCenterToCargoCenter) {
+  public double getCargoXPos() {
     // Converts px to meters based on the size of the cargo
-    double pxToMeters = AIRobotConstants.cargoDiameterMeters / cargoPxHeight;
-    double x = pxFromCameraCenterToCargoCenter * pxToMeters;
+    double pxToMeters = AIRobotConstants.cargoDiameterMeters / cargoPxHeightNetworkTable;
+    double x = cargoPxOffsetNetworkTable * pxToMeters;
     return x;
   }
 
@@ -183,7 +175,7 @@ public class PiSubsystem extends SubsystemBase {
    * @param cargoDistance The distance in meters of the cargo from the robot.
    * @return The x position of the cargo in meters relative to the robot.
    */
-  public static double getCargoYPos(double cargoXPos, double cargoDistance) {
+  public double getCargoYPos(double cargoXPos, double cargoDistance) {
     // Uses trig to get the y pos
     double theta = Math.acos(cargoXPos / cargoDistance);
     double y = Math.sin(theta) * cargoDistance;
@@ -198,7 +190,7 @@ public class PiSubsystem extends SubsystemBase {
    * @param cargoDistance The distance in meters of the cargo from the robot.
    * @return The theta of the cargo in radians.
    */
-  public static double getCargoTheta(double cargoXPos, double cargoDistance) {
+  public double getCargoTheta(double cargoXPos, double cargoDistance) {
     // Uses trig to get theta
     double cargoTheta = Math.asin(cargoXPos / cargoDistance);
     return cargoTheta;
