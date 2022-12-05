@@ -26,6 +26,7 @@ public class PiSubsystem extends SubsystemBase {
 
   private SwerveDriveOdometry m_odometry;
 
+  private boolean canSeeCargo = false;
   public double cargoPxHeightNetworkTable = -1;
   public double cargoPxOffsetNetworkTable = -1;
 
@@ -43,10 +44,11 @@ public class PiSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     cargoPxHeightNetworkTable = SmartDashboard.getNumber(AIRobotConstants.cargoPixelHeightKey, -1);
     cargoPxOffsetNetworkTable = SmartDashboard.getNumber(AIRobotConstants.cargoPixelXOffsetKey, -1);
+    canSeeCargo = (cargoPxHeightNetworkTable != -1 && cargoPxOffsetNetworkTable != -1);
   }
 
   public boolean cargoInView() {
-    return (cargoPxHeightNetworkTable != -1 && cargoPxOffsetNetworkTable != -1);
+    return canSeeCargo;
   }
 
   /**

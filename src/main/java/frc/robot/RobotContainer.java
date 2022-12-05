@@ -363,8 +363,9 @@ JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
-B_BUTTON.whileHeld(new PickupCargo(m_robotDrive, m_piSubsystem));
-   Y_BUTTON.whenPressed(
+    B_BUTTON.whileHeld(new PickupCargo(m_robotDrive, m_piSubsystem));
+
+    Y_BUTTON.whenPressed(
        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
     // While held for ejecting ball
 //    Y_BUTTON.whileHeld(new EjectCommand(m_tower)); // FIXME: Get the button they want

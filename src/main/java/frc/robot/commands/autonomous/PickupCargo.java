@@ -15,6 +15,7 @@ public class PickupCargo extends CommandBase {
   private final PiSubsystem piSubsystem;
   
   public Trajectory trajectoryToCargo = null;
+  public FollowPiTrajectory followPiTrajectory;
 
   /** Creates a new PickupCargo. */
   public PickupCargo(DriveSubsystem driveSubsystem, PiSubsystem piSubsystem) {
@@ -31,8 +32,9 @@ public class PickupCargo extends CommandBase {
       double x = piSubsystem.getCargoXPos();
       double y = piSubsystem.getCargoYPos(x, cargoDistance);
       double theta = piSubsystem.getCargoTheta(x, cargoDistance);
-      trajectoryToCargo = piSubsystem.generateTrajectory(x, y, theta);
-      new FollowPiTrajectory(driveSubsystem, trajectoryToCargo, true).schedule();
+      trajectoryToCargo = piSubsystem.generateTrajectory(0, 1, 0);
+      FollowPiTrajectory followPiTrajectory = new FollowPiTrajectory(driveSubsystem, trajectoryToCargo, true);
+      followPiTrajectory.schedule();
     } else {
       trajectoryToCargo = null;
     }
@@ -44,7 +46,9 @@ public class PickupCargo extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    followPiTrajectory.cancel();
+  }
 
   // Returns true when the command should end.
   @Override
