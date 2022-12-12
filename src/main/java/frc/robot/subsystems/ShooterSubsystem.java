@@ -107,12 +107,6 @@ public class ShooterSubsystem extends SubsystemBase {
   public void setShooterRPMNotImproved(double bottomMotorRPM, double topMotorRPM) {
     topMotorTargetRPM = topMotorRPM;
     bottomMotorTargetRPM = bottomMotorRPM;
-//
-    SmartDashboard.putNumber("i Bot target RPM", bottomMotorTargetRPM);
-    SmartDashboard.putNumber("i BOT error", bottomMotorTargetRPM - getBottomRPM());
-
-    SmartDashboard.putNumber("i TOP target RPM", topMotorTargetRPM);
-    SmartDashboard.putNumber("i TOP error", topMotorTargetRPM - getTopRPM());
 
 
     // Attempt at BangBang control did not go well
@@ -166,12 +160,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-   SmartDashboard.putNumber("Top RPM", getTopRPM());
-   SmartDashboard.putNumber("Bottom RPM", getBottomRPM());
-   SmartDashboard.putNumber("Top Target RPM", topMotorTargetRPM);
-   SmartDashboard.putNumber("Bottom Target RPM", bottomMotorTargetRPM);
-   SmartDashboard.putNumber("Top Error: ", topMotorTargetRPM-getTopRPM());
-   SmartDashboard.putNumber("Bottom Error: ", bottomMotorTargetRPM-getBottomRPM());
+
     // SmartDashboard.putBoolean("RPM within range", isShooterWithinAcceptableError());
   }
 }

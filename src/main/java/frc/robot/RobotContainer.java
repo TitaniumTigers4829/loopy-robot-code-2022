@@ -19,7 +19,6 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
 import frc.robot.commands.autonomous.FollowPiTrajectory;
-import frc.robot.commands.autonomous.PickupCargo;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
@@ -363,7 +362,7 @@ JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
-    B_BUTTON.whileHeld(new PickupCargo(m_robotDrive, m_piSubsystem));
+    B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem));
 
     Y_BUTTON.whenPressed(
        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));

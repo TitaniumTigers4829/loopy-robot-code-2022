@@ -45,6 +45,16 @@ public class PiSubsystem extends SubsystemBase {
     cargoPxHeightNetworkTable = SmartDashboard.getNumber(AIRobotConstants.cargoPixelHeightKey, -1);
     cargoPxOffsetNetworkTable = SmartDashboard.getNumber(AIRobotConstants.cargoPixelXOffsetKey, -1);
     canSeeCargo = (cargoPxHeightNetworkTable != -1 && cargoPxOffsetNetworkTable != -1);
+    
+    double cargoDistance = getCargoDistance();
+    double x = getCargoXPos();
+    double y = getCargoYPos(x, cargoDistance);
+    double theta = getCargoTheta(x, cargoDistance);
+
+    SmartDashboard.putNumber("cargoDistance", cargoDistance);
+    SmartDashboard.putNumber("x", x);
+    SmartDashboard.putNumber("y", y);
+    SmartDashboard.putNumber("theta", theta);
   }
 
   public boolean cargoInView() {
@@ -62,6 +72,8 @@ public class PiSubsystem extends SubsystemBase {
    * @return
    */
   public Trajectory generateTrajectory(double x, double y, double rotation) {
+    x = -1 * x;  // goes left when supposed to go right. positive = right
+    rotation = -1 * rotation;  // positive = clockwise
     double curX = m_odometry.getPoseMeters().getX();
     double curY = m_odometry.getPoseMeters().getY();
 

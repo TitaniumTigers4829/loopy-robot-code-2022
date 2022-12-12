@@ -8,7 +8,6 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveSubsystem;
@@ -17,29 +16,24 @@ import frc.robot.subsystems.PiSubsystem;
 public class FollowPiTrajectory extends CommandBase {
 
   private final DriveSubsystem drive;
-  private final Trajectory trajectory;
-  private boolean toReset;
+  private final PiSubsystem piSubsystem;
 
-  public FollowPiTrajectory(DriveSubsystem drive, Trajectory trajectory, boolean toReset) {
+  public FollowPiTrajectory(DriveSubsystem drive, PiSubsystem piSubsystem) {
     this.drive = drive;
-    this.trajectory = trajectory;
-    this.toReset = toReset;
-    addRequirements(drive);
+    this.piSubsystem = piSubsystem;
   }
 
   @Override
   public void initialize() {
-    if (toReset) {
-      drive.resetOdometry(trajectory.getInitialPose());
-    }
 
     final ProfiledPIDController thetaController =
         new ProfiledPIDController(
             AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    new SwerveControllerCommand(
-        trajectory,
+    new RealTimeSwerveControllerCommand(
+        drive,
+        piSubsystem,
         drive::getPose, // Functional interface to feed supplier
         DriveConstants.kDriveKinematics,
 
@@ -47,8 +41,7 @@ public class FollowPiTrajectory extends CommandBase {
         new PIDController(AutoConstants.kPXController, 0, 0),
         new PIDController(AutoConstants.kPYController, 0, 0),
         thetaController,
-        drive::setModuleStates,
-        drive).andThen(() -> drive.drive(0, 0, 0, false)).schedule(); // Stops the robot
+        drive::setModuleStates).andThen(() -> drive.drive(0, 0, 0, false)).schedule(); // Stops the robot
 
     // Reset odometry to the starting pose of the trajectory.
     // drive.resetOdometry(trajectory.getInitialPose());

@@ -345,6 +345,8 @@ public final class Constants {
 
     // Test Auto File Paths
     public static final String firstTestPath = "testPath1";
+    public static final String secondTestPath = "my path";
+
 
   }
 
@@ -355,10 +357,10 @@ public final class Constants {
     // This table is used for getting the distance of cargo from the robot
     public static final double[][] heightDistanceTable = {
         // {pxHeight, distance (meters)}
-        { 400, 0.889  },
-        { 300, 1.2192 },
-        { 240, 1.6256 },
         { 180, 2.2098 },
+        { 240, 1.6256 },
+        { 300, 1.2192 },
+        { 400, 0.889  },
     };
 
     public static final String cargoPixelHeightKey = "Cargo offset";
