@@ -176,8 +176,7 @@ public class PiSubsystem extends SubsystemBase {
   public double getCargoXPos() {
     // Converts px to meters based on the size of the cargo
     double pxToMeters = AIRobotConstants.cargoDiameterMeters / cargoPxHeightNetworkTable;
-    double x = cargoPxOffsetNetworkTable * pxToMeters;
-    return x;
+    return cargoPxOffsetNetworkTable * pxToMeters;
   }
 
   /**
@@ -192,8 +191,7 @@ public class PiSubsystem extends SubsystemBase {
   public double getCargoYPos(double cargoXPos, double cargoDistance) {
     // Uses trig to get the y pos
     double theta = Math.acos(cargoXPos / cargoDistance);
-    double y = Math.sin(theta) * cargoDistance;
-    return y;
+    return Math.sin(theta) * cargoDistance;
   }
 
   /**
@@ -202,12 +200,11 @@ public class PiSubsystem extends SubsystemBase {
    * @param cargoXPos     The x position of the cargo in meters relative to the
    *                      robot.
    * @param cargoDistance The distance in meters of the cargo from the robot.
-   * @return The theta of the cargo in radians.
+   * @return The theta of the cargo in degrees.
    */
   public double getCargoTheta(double cargoXPos, double cargoDistance) {
     // Uses trig to get theta
-    double cargoTheta = Math.asin(cargoXPos / cargoDistance);
-    return cargoTheta;
+    return Math.asin(cargoXPos / cargoDistance) * 180 / Math.PI;
   }
 
 }
