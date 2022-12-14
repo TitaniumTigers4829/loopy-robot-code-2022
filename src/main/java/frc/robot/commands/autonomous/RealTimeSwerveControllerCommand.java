@@ -139,7 +139,7 @@ public class RealTimeSwerveControllerCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    // return false;
-    return m_timer.hasElapsed(m_trajectory.getTotalTimeSeconds()); // TODO: This probably has to be changed
+    // return m_timer.hasElapsed(m_trajectory.getTotalTimeSeconds()); // TODO: This probably has to be changed
+    return false;
   }
 }

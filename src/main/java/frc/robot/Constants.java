@@ -363,8 +363,8 @@ public final class Constants {
         { 400, 0.889  },
     };
 
-    public static final String cargoPixelHeightKey = "Cargo offset";
-    public static final String cargoPixelXOffsetKey = "Cargo height";
+    public static final String cargoPixelHeightKey = "Cargo height";
+    public static final String cargoPixelXOffsetKey = "Cargo offset";
 
   }
 

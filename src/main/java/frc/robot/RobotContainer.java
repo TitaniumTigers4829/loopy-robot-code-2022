@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.Joystick;
@@ -12,13 +14,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
-import frc.robot.commands.autonomous.FollowPiTrajectory;
+import frc.robot.commands.autonomous.RealTimeSwerveControllerCommand;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
 import frc.robot.commands.autonomous.deprecated.OldThreeBallAutoCommand;
@@ -275,7 +279,8 @@ public class RobotContainer {
 //    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
 //    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
   
-JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
+  JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
+  JoystickButton X_BUTTON = new JoystickButton(m_driverController, 3);
 
   RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
@@ -362,7 +367,32 @@ JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 
 //    new JoystickButton(m_buttonController, 8).whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter,
 //        -1));
-    B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem));
+    // B_BUTTON.whileHeld(new FollowPiTrajectory(m_robotDrive, m_piSubsystem));
+
+    final ProfiledPIDController thetaController =
+        new ProfiledPIDController(
+            AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+    B_BUTTON.whileHeld(
+      new ParallelCommandGroup(
+        new RealTimeSwerveControllerCommand(
+          m_robotDrive,
+          m_piSubsystem,
+          m_robotDrive::getPose, // Functional interface to feed supplier
+          DriveConstants.kDriveKinematics,
+
+          // Position controllers
+          new PIDController(AutoConstants.kPXController, 0, 0),
+          new PIDController(AutoConstants.kPYController, 0, 0),
+          thetaController,
+          m_robotDrive::setModuleStates),
+
+          new IntakeWithTower(m_intakeSubsystem, m_tower)
+      )
+    );
+    X_BUTTON.whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, -0.5));
+
 
     Y_BUTTON.whenPressed(
        new InstantCommand(() -> m_robotDrive.resetOdometry(new Pose2d(0, 0, new Rotation2d(0)))));
