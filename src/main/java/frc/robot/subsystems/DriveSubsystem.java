@@ -25,6 +25,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     // The gyro sensor
     public final Gyro m_gyro = new AHRS(SPI.Port.kMXP);
+    public final AHRS m_ahrs = new AHRS(SPI.Port.kMXP);
 
     private int gyroOffset = 0;
 
@@ -116,6 +117,10 @@ public class DriveSubsystem extends SubsystemBase {
 
     public void setGyroOffset(int gyroOffset) {
         // this.gyroOffset = gyroOffset;
+    }
+
+    public double getPitch() {
+        return (double) m_ahrs.getPitch();
     }
 
     /**

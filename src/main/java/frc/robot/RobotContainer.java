@@ -30,6 +30,7 @@ import frc.robot.commands.autonomous.deprecated.OldTwoBallAutoCommand;
 import frc.robot.commands.climb.ClimbCommand;
 import frc.robot.commands.climb.ClimbHooksToMax;
 import frc.robot.commands.climb.ClimbWithButtons;
+import frc.robot.commands.drive.Balance;
 import frc.robot.commands.drive.FaceForward;
 import frc.robot.commands.intake.IntakeWithTower;
 import frc.robot.commands.shooter.Eject;
@@ -178,6 +179,7 @@ public class RobotContainer {
 //        JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
    JoystickButton A_BUTTON = new JoystickButton(m_driverController, 1);
 //        JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 8);
+  JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
 //        JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
 //    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
@@ -204,6 +206,12 @@ public class RobotContainer {
        new RevAndAim(m_shooter, m_Limelight, m_robotDrive,
            () -> modifyAxisCubed(LEFT_STICK_Y), () -> modifyAxisCubed(LEFT_STICK_X),
            m_LEDs), true);
+
+    B_BUTTON.whileHeld(new Balance(m_robotDrive, 
+      () -> modifyAxisCubed(LEFT_STICK_Y), 
+      () -> modifyAxisCubed(LEFT_STICK_X), 
+      () -> modifyAxisCubed(RIGHT_STICK_X))
+    );
 
     // Y_BUTTON.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
     //           * DriveConstants.kMaxSpeedMetersPerSecond,
@@ -374,23 +382,23 @@ public class RobotContainer {
             AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);
 
-    B_BUTTON.whileHeld(
-      new ParallelCommandGroup(
-        new RealTimeSwerveControllerCommand(
-          m_robotDrive,
-          m_piSubsystem,
-          m_robotDrive::getPose, // Functional interface to feed supplier
-          DriveConstants.kDriveKinematics,
+    // B_BUTTON.whileHeld(
+    //   new ParallelCommandGroup(
+    //     new RealTimeSwerveControllerCommand(
+    //       m_robotDrive,
+    //       m_piSubsystem,
+    //       m_robotDrive::getPose, // Functional interface to feed supplier
+    //       DriveConstants.kDriveKinematics,
 
-          // Position controllers
-          new PIDController(AutoConstants.kPXController, 0, 0),
-          new PIDController(AutoConstants.kPYController, 0, 0),
-          thetaController,
-          m_robotDrive::setModuleStates),
+    //       // Position controllers
+    //       new PIDController(AutoConstants.kPXController, 0, 0),
+    //       new PIDController(AutoConstants.kPYController, 0, 0),
+    //       thetaController,
+    //       m_robotDrive::setModuleStates),
 
-          new IntakeWithTower(m_intakeSubsystem, m_tower)
-      )
-    );
+    //       new IntakeWithTower(m_intakeSubsystem, m_tower)
+    //   )
+    // );
     X_BUTTON.whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, -0.5));
 
 
