@@ -7,7 +7,7 @@ package frc.robot.commands.drive;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.DriveSubsystem;
@@ -19,7 +19,7 @@ public class Balance extends CommandBase {
   private final DoubleSupplier leftStickX;
   private final DoubleSupplier rightStickX;
   
-  private final PIDController balancePIDController = new PIDController(0, 0, 0);
+  private final PIDController balancePIDController = new PIDController(.003, 0, 0);
 
   /** Creates a new Balance. */
   public Balance(DriveSubsystem driveSubsystem, DoubleSupplier leftStickY, DoubleSupplier leftStickX, DoubleSupplier rightStickX) {
@@ -32,7 +32,8 @@ public class Balance extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override

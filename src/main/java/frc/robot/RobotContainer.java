@@ -22,6 +22,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.autonomous.FiveBallAutoCommand;
+import frc.robot.commands.autonomous.FollowRealTimeTrajectory;
 import frc.robot.commands.autonomous.RealTimeSwerveControllerCommand;
 import frc.robot.commands.autonomous.ThreeBallAutoCommand;
 import frc.robot.commands.autonomous.TwoBallAutoCommand;
@@ -59,10 +60,10 @@ import java.util.function.DoubleSupplier;
 public class RobotContainer {
 
   // The robot's subsystems
-  private final DriveSubsystem m_robotDrive = new DriveSubsystem();
+  public final DriveSubsystem m_robotDrive = new DriveSubsystem();
   private final IntakeSubsystem m_intakeSubsystem = new IntakeSubsystem();
   //  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
+  // private final ClimbSubsystem m_climbSubsystem = new ClimbSubsystem();
   private final LimelightSubsystem m_Limelight = LimelightSubsystem.getInstance();
   private final TowerSubsystem m_tower = new TowerSubsystem();
   private final ShooterSubsystem m_shooter = new ShooterSubsystem();
@@ -92,9 +93,9 @@ public class RobotContainer {
 //  private final SendableChooser<Command> chooser = new SendableChooser<Command>();
 
   // The driver's controller
-//    private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
-  private final XboxController m_driverController = new XboxController(
-      OIConstants.kDriverControllerPort);
+   private final Joystick m_driverController = new Joystick(OIConstants.kDriverControllerPort);
+  // private final XboxController m_driverController = new XboxController(
+      // OIConstants.kDriverControllerPort);
   private final Joystick m_buttonController = new Joystick(OIConstants.kButtonControllerPort);
   private final Joystick m_extraButtons = new Joystick(2); // FIXME:make a constant
   // private final Joystick m_buttonController = new Joystick(0);
@@ -168,20 +169,20 @@ public class RobotContainer {
 
   public void teleopInitFunc() {
 
-//        DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
-   DoubleSupplier LEFT_STICK_X = m_driverController::getLeftX;
-//        DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
-   DoubleSupplier LEFT_STICK_Y = m_driverController::getLeftY;
-//        DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
-   DoubleSupplier RIGHT_STICK_X = m_driverController::getRightX;
-//        DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
-   DoubleSupplier RIGHT_STICK_Y = m_driverController::getRightY;
+       DoubleSupplier LEFT_STICK_X = () -> m_driverController.getRawAxis(0);
+  //  DoubleSupplier LEFT_STICK_X = m_driverController::getLeftX;
+       DoubleSupplier LEFT_STICK_Y = () -> m_driverController.getRawAxis(1);
+  //  DoubleSupplier LEFT_STICK_Y = m_driverController::getLeftY;
+       DoubleSupplier RIGHT_STICK_X = () -> m_driverController.getRawAxis(2);
+  //  DoubleSupplier RIGHT_STICK_X = m_driverController::getRightX;
+       DoubleSupplier RIGHT_STICK_Y = () -> m_driverController.getRawAxis(3);
+  //  DoubleSupplier RIGHT_STICK_Y = m_driverController::getRightY;
 //        JoystickButton A_BUTTON = new JoystickButton(m_driverController, 2);
    JoystickButton A_BUTTON = new JoystickButton(m_driverController, 1);
 //        JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 8);
-  JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
+  // JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
    JoystickButton RIGHT_BUMPER = new JoystickButton(m_driverController, 6);
-//        JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
+       JoystickButton B_BUTTON = new JoystickButton(m_driverController, 3);
 //    JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
 //    JoystickButton LEFT_BUMPER = new JoystickButton(m_driverController, 5);
     // JoystickButton Y_BUTTON = new JoystickButton(m_driverController, 4);
@@ -212,6 +213,8 @@ public class RobotContainer {
       () -> modifyAxisCubed(LEFT_STICK_X), 
       () -> modifyAxisCubed(RIGHT_STICK_X))
     );
+
+    // B_BUTTON.whileHeld(new FollowRealTimeTrajectory(m_robotDrive, () -> !B_BUTTON.get()));
 
     // Y_BUTTON.whileHeld(new FaceForward(m_robotDrive, () -> modifyAxisCubed(LEFT_STICK_Y) * -1 // xAxis
     //           * DriveConstants.kMaxSpeedMetersPerSecond,
@@ -287,8 +290,8 @@ public class RobotContainer {
 //    X_BUTTON.toggleWhenPressed(new setClimbToPos(m_climbSubsystem));
 //    B_BUTTON.whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
   
-  JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
-  JoystickButton X_BUTTON = new JoystickButton(m_driverController, 3);
+  // JoystickButton B_BUTTON = new JoystickButton(m_driverController, 2);
+  // JoystickButton X_BUTTON = new JoystickButton(m_driverController, 3);
 
   RIGHT_DIRECTION_PAD.whenPressed(new InstantCommand(m_robotDrive::zeroHeading));
 
@@ -314,11 +317,11 @@ public class RobotContainer {
 
     // followPathPlannerPath.whenPressed(new FollowTrajectoryPathPlanner(m_robotDrive, PathPlannerConstants.firstTestPath, true));
 
-    new JoystickButton(m_buttonController, 9).toggleWhenPressed(
-        new ClimbWithButtons(m_climbSubsystem,
-            LClimbUp::get, LClimbDown::get, RClimbUp::get,
-            RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
-            is75Percent::get, m_LEDs)); // This works
+    // new JoystickButton(m_buttonController, 9).toggleWhenPressed(
+    //     new ClimbWithButtons(m_climbSubsystem,
+    //         LClimbUp::get, LClimbDown::get, RClimbUp::get,
+    //         RClimbDown::get, PneumaticsVertical::get, PneumaticsDown::get,
+    //         is75Percent::get, m_LEDs)); // This works
 
     // new JoystickButton(m_buttonController, 11).whenPressed(new InstantCommand(m_climbSubsystem::resetEncoders));
 
@@ -327,8 +330,8 @@ public class RobotContainer {
     JoystickButton goToZeroButton = new JoystickButton(m_extraButtons, 2);
     JoystickButton autoClimbButton = new JoystickButton(m_extraButtons, 4);
 
-    goToZeroButton.whileHeld(new ClimbHooksToMax(m_climbSubsystem));
-    autoClimbButton.whileHeld(new ClimbCommand(m_climbSubsystem));
+    // goToZeroButton.whileHeld(new ClimbHooksToMax(m_climbSubsystem));
+    // autoClimbButton.whileHeld(new ClimbCommand(m_climbSubsystem));
 
     // new JoystickButton(m_buttonController, 8).whileHeld(new ClimbSetPos(m_climbSubsystem, ClimbConstants.kClimbMinHeight));
     // new JoystickButton(m_buttonController, 10).toggleWhenPressed(new ClimbCommand(m_climbSubsystem));
@@ -399,7 +402,7 @@ public class RobotContainer {
     //       new IntakeWithTower(m_intakeSubsystem, m_tower)
     //   )
     // );
-    X_BUTTON.whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, -0.5));
+    // X_BUTTON.whileHeld(new SetTowerMotorSpeed(m_tower, m_shooter, -0.5));
 
 
     Y_BUTTON.whenPressed(
